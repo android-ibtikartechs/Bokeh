@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ColorWhite"
+    tools:context=".ui.activities.country.CountrySelectionActivity">
+
+
+    <LinearLayout
+        android:id="@+id/lout_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="32dp"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/small_logo"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Where do you want to send your gift?"
+            android:layout_marginTop="32dp"
+            />
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
+            android:textCursorDrawable="@null"
+            android:textColorHint="@color/ColorFoshiac"
+            android:hint="Country"
+            android:layout_marginTop="32dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/ColorFoshiac"
+            android:layout_marginTop="2dp"
+            ></LinearLayout>
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
+            android:textCursorDrawable="@null"
+            android:textColorHint="@color/ColorFoshiac"
+            android:hint="Area"
+            android:layout_marginTop="32dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/ColorFoshiac"
+            android:layout_marginTop="2dp"
+            ></LinearLayout>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/flowers_footer"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="-30dp"
+        android:alpha="0.4"
+        />
+
+
+    <Button
+        android:id="@+id/btn_continue"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/shape_rounded_button"
+        android:layout_below="@id/lout_edit"
+        android:textColor="@color/ColorWhite"
+        android:text="Continue"
+        android:textAllCaps="false"
+        />
+
+</RelativeLayout>
