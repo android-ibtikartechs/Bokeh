@@ -1,12 +1,16 @@
 package com.ibtikar.app.bokeh.ui.fragments.home;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,11 +22,18 @@ import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.adapters.AdapterCategoriesList;
 import com.ibtikar.app.bokeh.data.adapters.AdapterFeaturedItems;
+import com.ibtikar.app.bokeh.data.adapters.AdapterShopsList;
+import com.ibtikar.app.bokeh.data.adapters.AdapterSliderHome;
 import com.ibtikar.app.bokeh.data.models.CategoryItemModel;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
+import com.ibtikar.app.bokeh.data.models.ModelShopItem;
+import com.ibtikar.app.bokeh.ui.activities.products_list.ProductsListActivity;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +43,7 @@ import butterknife.ButterKnife;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCategoriesList.ContainerClickListener, AdapterFeaturedItems.ContainerFeaturedItemsClickListener {
+public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCategoriesList.ContainerClickListener, AdapterFeaturedItems.ContainerFeaturedItemsClickListener, AdapterShopsList.ContainerClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -48,18 +59,34 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
     @BindView(R.id.rv_featured_items)
     RecyclerView rvFeaturedItems;
 
+    @BindView(R.id.rv_shops)
+    RecyclerView rvShopsItem;
+
     AdapterCategoriesList adapterCategoriesList;
 
     AdapterFeaturedItems adapterFeaturedItems;
+
+    AdapterShopsList adapterShopsList;
 
     private ArrayList<CategoryItemModel> arrayList;
 
     private ArrayList<ModelProductItem> productItemArrayList;
 
+    private ArrayList<ModelShopItem> shopItemArrayList;
+
     HomePresenter presenter;
     Handler mHandler;
 
+    AdapterSliderHome sliderPagerAdapter;
+    @BindView(R.id.image_page_slider)
+    ViewPager images_slider;
 
+    @BindView(R.id.image_page_dots)
+    TabLayout pages_dots;
+
+    int page_position = 0, slider_size = 0;
+    Timer timer;
+    CountDownTimer cdt;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -104,16 +131,41 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
         ButterKnife.bind(this, rootView);
         arrayList = new ArrayList<>();
         productItemArrayList = new ArrayList<>();
+        shopItemArrayList = new ArrayList<>();
         rvCategories.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
         rvFeaturedItems.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
+        rvShopsItem.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
         populatRecyclerView();
         return rootView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        images_slider.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //cancelSlidingforSomeTime();
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        timer = new Timer();
+        scheduleSlider();
+
+        presenter.loadSlider();
         presenter.loadCategories();
         presenter.loadFeaturedItems();
+        presenter.loadShopsItems();
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -127,8 +179,45 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
         adapterFeaturedItems.setCustomButtonListner(this);
         rvFeaturedItems.setAdapter(adapterFeaturedItems);
         adapterFeaturedItems.notifyDataSetChanged();
+
+        adapterShopsList = new AdapterShopsList(shopItemArrayList,getActivity());
+        adapterShopsList.setCustomButtonListner(this);
+        rvShopsItem.setAdapter(adapterShopsList);
+        adapterShopsList.notifyDataSetChanged();
+
+
     }
 
+    public void scheduleSlider() {
+
+        final Handler handler = new Handler();
+
+        final Runnable update = new Runnable() {
+            public void run() {
+                if (page_position == slider_size) {
+                    page_position = 0;
+                } else {
+                    page_position = page_position + 1;
+                }
+                images_slider.setCurrentItem(page_position, true);
+            }
+        };
+
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                handler.post(update);
+            }
+        }, 500, 3000);
+    }
+
+
+    @Override
+    public void onPause() {
+        timer.cancel();
+        super.onPause();
+    }
 
 
     @Override
@@ -152,12 +241,38 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
     }
 
     @Override
+    public void addMoreToShopsAdapter(final ArrayList<ModelShopItem> list) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                adapterShopsList.addAll(list);
+            }
+        });
+    }
+
+    @Override
+    public void addListToSlider(List<ModelProductItem> products) {
+        sliderPagerAdapter = new AdapterSliderHome(getActivity(), products);
+        images_slider.setAdapter(sliderPagerAdapter);
+       /* images_slider.setClipToPadding(false);
+        images_slider.setPadding(60, 0, 60, 0);
+        images_slider.setPageMargin(24);*/
+        pages_dots.setupWithViewPager(images_slider);
+        slider_size = products.size();
+    }
+
+    @Override
     public void onItemClickListener(String id, String title) {
 
     }
 
     @Override
     public void onItemClickListener(String id, String title, String imUrl, String price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description) {
+        startActivity(new Intent(getActivity(), ProductsListActivity.class));
+    }
+
+    @Override
+    public void onItemShopClickListener(String id, String title) {
 
     }
 }

@@ -5,8 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="ColorWhite">#ffffff</color>
     <color name="ColorFoshiac">#F2929A</color>
-    <color name="ColorBackground">#F2F2F2</color>
+    <color name="ColorBackground">#F3F3F3</color>
     <color name="ColorBadge">#CE2A4C</color>
     <color name="ColorTextBlack">#494949</color>
     <color name="ColorGrayLine">#C7C7C7</color>
+    <color name="ColorGrayDivider">#9B9B9B</color>
 </resources>
