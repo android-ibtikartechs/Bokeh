@@ -95,7 +95,7 @@ public class AdapterFeaturedItems extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public interface ContainerFeaturedItemsClickListener {
-        public void onItemClickListener(String id, String title, String imUrl, String price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description);
+        public void onItemClickListener(String id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description);
     }
     public void setCustomButtonListner(ContainerFeaturedItemsClickListener listener) {
         this.customListener = listener;

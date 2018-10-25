@@ -263,12 +263,12 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
     @Override
     public void onItemClickListener(String id, String title) {
-
+        startActivity(new Intent(getActivity(), ProductsListActivity.class));
     }
 
     @Override
-    public void onItemClickListener(String id, String title, String imUrl, String price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description) {
-        startActivity(new Intent(getActivity(), ProductsListActivity.class));
+    public void onItemClickListener(String id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description) {
+
     }
 
     @Override

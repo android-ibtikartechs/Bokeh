@@ -4,13 +4,13 @@ public class ModelProductItem {
     private String id;
     private String title;
     private String imUrl;
-    private String price;
+    private Integer price;
     private boolean isSameDayDelivery;
     private String sellerName;
     private boolean isLiked;
     private String description;
 
-    public ModelProductItem(String id, String title, String imUrl, String price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description) {
+    public ModelProductItem(String id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description) {
         this.id = id;
         this.title = title;
         this.imUrl = imUrl;
@@ -27,7 +27,7 @@ public class ModelProductItem {
         this.imUrl = imUrl;
     }
 
-    public ModelProductItem(String id, String title, String imUrl, String price, boolean isSameDayDelivery) {
+    public ModelProductItem(String id, String title, String imUrl, Integer price, boolean isSameDayDelivery) {
         this.id = id;
         this.title = title;
         this.imUrl = imUrl;
@@ -47,7 +47,7 @@ public class ModelProductItem {
         return imUrl;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
