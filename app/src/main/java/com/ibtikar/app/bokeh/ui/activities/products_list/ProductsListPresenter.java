@@ -13,7 +13,7 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
 
     @Override
     public void loadFirstPage() {
-        ArrayList<ModelProductItem> list = new ArrayList<>();
+       /* ArrayList<ModelProductItem> list = new ArrayList<>();
         ModelProductItem modelProductItem = new ModelProductItem("1",
                 "Blushing Bella Blooms",
                 "https://i9.fnp.com/images/pr/l/vibrant-lilies-bouquet_1.jpg",
@@ -115,6 +115,7 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
         list.add(modelProductItem);
 
         getMvpView().addMoreToAdapter(list);
+        */
     }
 
     @Override

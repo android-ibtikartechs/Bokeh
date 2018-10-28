@@ -1,9 +1,7 @@
 package com.ibtikar.app.bokeh.ui.fragments.home;
 
-import android.graphics.BitmapFactory;
-
 import com.ibtikar.app.bokeh.data.DataManager;
-import com.ibtikar.app.bokeh.data.models.CategoryItemModel;
+import com.ibtikar.app.bokeh.data.models.OccasionItemModel;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.ModelShopItem;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
@@ -19,20 +17,20 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
     @Override
     public void loadCategories() {
 
-        ArrayList<CategoryItemModel> list = new ArrayList<>();
-        CategoryItemModel categoryModel = new CategoryItemModel("1", "https://i.imgur.com/NgAAeSN.png","Suits all occasions");
+        ArrayList<OccasionItemModel> list = new ArrayList<>();
+        OccasionItemModel categoryModel = new OccasionItemModel(1, "https://i.imgur.com/NgAAeSN.png","Suits all occasions");
         list.add(categoryModel);
 
-        categoryModel = new CategoryItemModel("1", "https://i.imgur.com/u1EcZMc.png","Wedding");
+        categoryModel = new OccasionItemModel(1, "https://i.imgur.com/u1EcZMc.png","Wedding");
         list.add(categoryModel);
 
-        categoryModel = new CategoryItemModel("1", "https://i.imgur.com/CgOtADr.png","Hajj");
+        categoryModel = new OccasionItemModel(1, "https://i.imgur.com/CgOtADr.png","Hajj");
         list.add(categoryModel);
 
-        categoryModel = new CategoryItemModel("1", "https://i.imgur.com/d7Tjint.png","Birthday");
+        categoryModel = new OccasionItemModel(1, "https://i.imgur.com/d7Tjint.png","Birthday");
         list.add(categoryModel);
 
-        categoryModel = new CategoryItemModel("1", "https://i.imgur.com/1SnKPb2.png","Love");
+        categoryModel = new OccasionItemModel(1, "https://i.imgur.com/1SnKPb2.png","Love");
         list.add(categoryModel);
 
         getMvpView().addMoreToCategoryAdapter(list);
@@ -41,8 +39,8 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
 
     @Override
     public void loadFeaturedItems() {
-        ArrayList<ModelProductItem> list = new ArrayList<>();
-        ModelProductItem modelProductItem = new ModelProductItem("1",
+       /* ArrayList<ModelProductItem> list = new ArrayList<>();
+        ModelProductItem modelProductItem = new ModelProductItem(1,
                 null,
                 "https://images.unsplash.com/photo-1512056495345-913a0c261dc8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=56076c6afbca70b55a3b1d053c58f40a&auto=format&fit=crop&w=750&q=80",
                 null,
@@ -88,13 +86,13 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
         list.add(modelProductItem);
 
         getMvpView().addMoreToFeaturedItemAdapter(list);
-
+*/
 
     }
 
     @Override
     public void loadShopsItems() {
-
+/*
         ArrayList<ModelShopItem> list = new ArrayList<>();
         ModelShopItem modelShopItem = new ModelShopItem("1", "Green City","https://images.unsplash.com/photo-1505295146617-869b5ad0fff8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=aef047aff8b1dbdd785c871506392871&auto=format&fit=crop&w=750&q=80");
         list.add(modelShopItem);
@@ -111,11 +109,13 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
 
 
         getMvpView().addMoreToShopsAdapter(list);
+        */
 
     }
 
     @Override
     public void loadSlider() {
+        /*
         List<ModelProductItem> list = new ArrayList<>();
         ModelProductItem modelProductItem = new ModelProductItem("1",
                 null,
@@ -163,6 +163,7 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
         list.add(modelProductItem);
 
         getMvpView().addListToSlider(list);
+        */
     }
 
 

@@ -48,19 +48,19 @@ public class AdapterShopsList extends RecyclerView.Adapter<RecyclerView.ViewHold
         final ModelShopItem shopsListItem = arrayList.get(position);
         final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
 
-        if (!(shopsListItem.getImgUrl().equals("") || shopsListItem.getImgUrl() == null ))
+        if (!(shopsListItem.getImage().equals("") || shopsListItem.getImage() == null ))
         {
             Glide.with(context)
-                    .load(shopsListItem.getImgUrl()).diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .load(shopsListItem.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(itemViewHolder.imShop);
         }
 
 
-        itemViewHolder.tvTitle.setText(shopsListItem.getTitle());
+        itemViewHolder.tvTitle.setText(shopsListItem.getName());
         itemViewHolder.loutContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customListener.onItemShopClickListener(shopsListItem.getId(),shopsListItem.getTitle());
+                customListener.onItemShopClickListener(shopsListItem.getId(),shopsListItem.getName());
             }
         });
 
@@ -102,7 +102,7 @@ public class AdapterShopsList extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public interface ContainerClickListener {
-        public void onItemShopClickListener(String id, String title);
+        public void onItemShopClickListener(Integer id, String title);
     }
     public void setCustomButtonListner(ContainerClickListener listener) {
         this.customListener = listener;

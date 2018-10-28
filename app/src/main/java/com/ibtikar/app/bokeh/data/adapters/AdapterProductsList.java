@@ -75,14 +75,14 @@ public class AdapterProductsList  extends CustomRecyclerView.Adapter<RecyclerVie
         switch (getItemViewType(position)) {
             case ITEM:
                 final ItemVH itemVH = (ItemVH) holder;
-                itemVH.tvProductName.setText(modelProductItem.getTitle());
-                if (modelProductItem.isSameDayDelivery())
+                itemVH.tvProductName.setText(modelProductItem.getName());
+                if (modelProductItem.getIsSameDayDelivery())
                     itemVH.loutIsSameDayDelivery.setVisibility(View.VISIBLE);
 
-                if (!(modelProductItem.getImUrl().equals("") || modelProductItem.getImUrl() == null ))
+                if (!(modelProductItem.getImage().equals("") || modelProductItem.getImage() == null ))
                 {
                     Glide.with(context)
-                            .load(modelProductItem.getImUrl()).diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .load(modelProductItem.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(itemVH.imProduct);
                 }
 
@@ -92,13 +92,13 @@ public class AdapterProductsList  extends CustomRecyclerView.Adapter<RecyclerVie
                     @Override
                     public void onClick(View v) {
                         customListener.onItemClickListener(modelProductItem.getId(),
-                                modelProductItem.getTitle(),
-                                modelProductItem.getImUrl(),
+                                modelProductItem.getName(),
+                                modelProductItem.getImage(),
                                 modelProductItem.getPrice(),
-                                modelProductItem.isSameDayDelivery(),
-                                modelProductItem.getSellerName(),
-                                modelProductItem.isLiked(),
-                                modelProductItem.getDescription());
+                                modelProductItem.getIsSameDayDelivery(),
+                                modelProductItem.getSellername(),
+                                modelProductItem.getIsLiked(),
+                                modelProductItem.getDetails());
                     }
                 });
                 break;
@@ -234,7 +234,7 @@ public class AdapterProductsList  extends CustomRecyclerView.Adapter<RecyclerVie
 
 
     public interface ContainerProductsItemsClickListener {
-        public void onItemClickListener(String id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description);
+        public void onItemClickListener(Integer id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description);
     }
     public void setCustomButtonListner(ContainerProductsItemsClickListener listener) {
         this.customListener = listener;

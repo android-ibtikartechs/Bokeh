@@ -31,7 +31,7 @@ public class AdapterSliderHome extends PagerAdapter {
 
         View view = layoutInflater.inflate(R.layout.slider_home_layout, container, false);
         ImageView im_slider = view.findViewById(R.id.im_slider);
-        Glide.with(context).load(products.get(position).getImUrl()).asBitmap().into(im_slider);
+        Glide.with(context).load(products.get(position).getImage()).asBitmap().into(im_slider);
         //im_slider.setScaleType(ImageView.ScaleType.FIT_XY);
         container.addView(view);
 

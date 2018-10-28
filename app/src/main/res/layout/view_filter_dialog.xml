@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ColorTextBlack"
+                android:text="Filter"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                />
+
+            <Button
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rounded_button"
+                android:text="Apply"
+                android:textAllCaps="false"
+                android:textColor="@color/ColorWhite"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/ColorGrayDivider"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ColorTextBlack"
+            android:text="Price"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="2dp"
+            >
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:textCursorDrawable="@null"
+                    android:hint="From"
+                    android:textColorHint="#B4B4B4"
+                    android:maxLines="1"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.75dp"
+                    android:background="@color/ColorGrayDivider"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                ></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:textCursorDrawable="@null"
+                    android:hint="to"
+                    android:textColorHint="#B4B4B4"
+                    android:maxLines="1"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.75dp"
+                    android:background="@color/ColorGrayDivider"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/ColorGrayDivider"
+            />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layoutDirection="ltr"
+            >
+
+        <RadioButton
+            android:id="@+id/rbtn_any"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:buttonTint="@color/ColorFoshiac"
+            android:checked="true"
+            android:text="any"
+            android:textColor="@color/ColorTextBlack"
+            android:textSize="18sp" />
+
+            <RadioButton
+                android:id="@+id/rbtn_cash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:buttonTint="@color/ColorFoshiac"
+                android:text="same day delivery"
+                android:textColor="@color/ColorTextBlack"
+                android:textSize="18sp" />
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</android.support.v7.widget.CardView>

@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ibtikar.app.bokeh.R;
-import com.ibtikar.app.bokeh.data.models.CategoryItemModel;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 
 import java.util.ArrayList;
@@ -46,17 +45,17 @@ public class AdapterFeaturedItems extends RecyclerView.Adapter<RecyclerView.View
         final ModelProductItem modelProductItem = arrayList.get(position);
         final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
 
-        if (!(modelProductItem.getImUrl().equals("") || modelProductItem.getImUrl() == null ))
+        if (!(modelProductItem.getImage().equals("") || modelProductItem.getImage() == null ))
         {
             Glide.with(context)
-                    .load(modelProductItem.getImUrl()).diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .load(modelProductItem.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(itemViewHolder.imItem);
         }
 
         itemViewHolder.loutContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customListener.onItemClickListener(modelProductItem.getId(),modelProductItem.getTitle(),modelProductItem.getImUrl(),modelProductItem.getPrice(),modelProductItem.isSameDayDelivery(),modelProductItem.getSellerName(), modelProductItem.isLiked(), modelProductItem.getDescription());
+                customListener.onItemClickListener(modelProductItem.getId(),modelProductItem.getName(),modelProductItem.getImage(),modelProductItem.getPrice(),modelProductItem.getIsSameDayDelivery(),modelProductItem.getSellername(), modelProductItem.getIsLiked(), modelProductItem.getDetails());
             }
         });
 
@@ -95,7 +94,7 @@ public class AdapterFeaturedItems extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public interface ContainerFeaturedItemsClickListener {
-        public void onItemClickListener(String id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description);
+        public void onItemClickListener(Integer id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description);
     }
     public void setCustomButtonListner(ContainerFeaturedItemsClickListener listener) {
         this.customListener = listener;

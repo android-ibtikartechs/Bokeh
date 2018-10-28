@@ -1,69 +1,256 @@
 package com.ibtikar.app.bokeh.data.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ModelProductItem {
-    private String id;
-    private String title;
-    private String imUrl;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("image")
+    @Expose
+    private String image;
+    @SerializedName("sellerid")
+    @Expose
+    private Integer sellerid;
+    @SerializedName("sellername")
+    @Expose
+    private String sellername;
+    @SerializedName("categoryid")
+    @Expose
+    private Integer categoryid;
+    @SerializedName("category")
+    @Expose
+    private String category;
+    @SerializedName("details")
+    @Expose
+    private String details;
+    @SerializedName("hasoffer")
+    @Expose
+    private Boolean hasoffer;
+    @SerializedName("price")
+    @Expose
     private Integer price;
-    private boolean isSameDayDelivery;
-    private String sellerName;
-    private boolean isLiked;
-    private String description;
+    @SerializedName("oprice")
+    @Expose
+    private Integer oprice;
+    @SerializedName("offer_start_date")
+    @Expose
+    private String offerStartDate;
+    @SerializedName("offer_start_time")
+    @Expose
+    private String offerStartTime;
+    @SerializedName("offer_end_date")
+    @Expose
+    private String offerEndDate;
+    @SerializedName("offer_end_time")
+    @Expose
+    private String offerEndTime;
+    @SerializedName("discount_percentage")
+    @Expose
+    private String discountPercentage;
+    @SerializedName("isSameDayDelivery")
+    @Expose
+    private Boolean isSameDayDelivery;
+    @SerializedName("isLiked")
+    @Expose
+    private Boolean isLiked;
 
-    public ModelProductItem(String id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description) {
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public ModelProductItem() {
+    }
+
+    /**
+     *
+     * @param offerEndTime
+     * @param hasoffer
+     * @param image
+     * @param oprice
+     * @param isSameDayDelivery
+     * @param sellerid
+     * @param id
+     * @param categoryid
+     * @param category
+     * @param price
+     * @param details
+     * @param offerStartDate
+     * @param discountPercentage
+     * @param name
+     * @param offerEndDate
+     * @param isLiked
+     * @param sellername
+     * @param offerStartTime
+     */
+    public ModelProductItem(Integer id, String name, String image, Integer sellerid, String sellername, Integer categoryid, String category, String details, Boolean hasoffer, Integer price, Integer oprice, String offerStartDate, String offerStartTime, String offerEndDate, String offerEndTime, String discountPercentage, Boolean isSameDayDelivery, Boolean isLiked) {
+        super();
         this.id = id;
-        this.title = title;
-        this.imUrl = imUrl;
+        this.name = name;
+        this.image = image;
+        this.sellerid = sellerid;
+        this.sellername = sellername;
+        this.categoryid = categoryid;
+        this.category = category;
+        this.details = details;
+        this.hasoffer = hasoffer;
         this.price = price;
+        this.oprice = oprice;
+        this.offerStartDate = offerStartDate;
+        this.offerStartTime = offerStartTime;
+        this.offerEndDate = offerEndDate;
+        this.offerEndTime = offerEndTime;
+        this.discountPercentage = discountPercentage;
         this.isSameDayDelivery = isSameDayDelivery;
-        this.sellerName = sellerName;
         this.isLiked = isLiked;
-        this.description = description;
     }
 
-    public ModelProductItem(String id, String title, String imUrl) {
-        this.id = id;
-        this.title = title;
-        this.imUrl = imUrl;
-    }
-
-    public ModelProductItem(String id, String title, String imUrl, Integer price, boolean isSameDayDelivery) {
-        this.id = id;
-        this.title = title;
-        this.imUrl = imUrl;
-        this.price = price;
-        this.isSameDayDelivery = isSameDayDelivery;
-    }
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getImUrl() {
-        return imUrl;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Integer getSellerid() {
+        return sellerid;
+    }
+
+    public void setSellerid(Integer sellerid) {
+        this.sellerid = sellerid;
+    }
+
+    public String getSellername() {
+        return sellername;
+    }
+
+    public void setSellername(String sellername) {
+        this.sellername = sellername;
+    }
+
+    public Integer getCategoryid() {
+        return categoryid;
+    }
+
+    public void setCategoryid(Integer categoryid) {
+        this.categoryid = categoryid;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public Boolean getHasoffer() {
+        return hasoffer;
+    }
+
+    public void setHasoffer(Boolean hasoffer) {
+        this.hasoffer = hasoffer;
     }
 
     public Integer getPrice() {
         return price;
     }
 
-    public boolean isSameDayDelivery() {
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getOprice() {
+        return oprice;
+    }
+
+    public void setOprice(Integer oprice) {
+        this.oprice = oprice;
+    }
+
+    public String getOfferStartDate() {
+        return offerStartDate;
+    }
+
+    public void setOfferStartDate(String offerStartDate) {
+        this.offerStartDate = offerStartDate;
+    }
+
+    public String getOfferStartTime() {
+        return offerStartTime;
+    }
+
+    public void setOfferStartTime(String offerStartTime) {
+        this.offerStartTime = offerStartTime;
+    }
+
+    public String getOfferEndDate() {
+        return offerEndDate;
+    }
+
+    public void setOfferEndDate(String offerEndDate) {
+        this.offerEndDate = offerEndDate;
+    }
+
+    public String getOfferEndTime() {
+        return offerEndTime;
+    }
+
+    public void setOfferEndTime(String offerEndTime) {
+        this.offerEndTime = offerEndTime;
+    }
+
+    public String getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(String discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
+
+    public Boolean getIsSameDayDelivery() {
         return isSameDayDelivery;
     }
 
-    public String getSellerName() {
-        return sellerName;
+    public void setIsSameDayDelivery(Boolean isSameDayDelivery) {
+        this.isSameDayDelivery = isSameDayDelivery;
     }
 
-    public boolean isLiked() {
+    public Boolean getIsLiked() {
         return isLiked;
     }
 
-    public String getDescription() {
-        return description;
+    public void setIsLiked(Boolean isLiked) {
+        this.isLiked = isLiked;
     }
+
 }

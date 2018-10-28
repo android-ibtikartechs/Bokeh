@@ -11,6 +11,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
@@ -18,6 +19,8 @@ import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.adapters.AdapterProductsList;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
+import com.ibtikar.app.bokeh.ui.fragments.dialog_filter.FilterDialogFragment;
+import com.ibtikar.app.bokeh.ui.fragments.dialog_sort_by.SortByDialogFragment;
 import com.ibtikar.app.bokeh.ui_utilities.CustomRecyclerView;
 import com.ibtikar.app.bokeh.ui_utilities.paginationStaggardScrollListener;
 import com.ibtikar.app.bokeh.utils.NetworkChangeReceiver;
@@ -33,6 +36,9 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.btn_filter)
+    LinearLayout btnFilter;
+
 
     NetworkChangeReceiver networkChangeReceiver;
 
@@ -41,6 +47,9 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
 
     @BindView(R.id.rv_products)
     CustomRecyclerView rvProductsList;
+
+    @BindView(R.id.btn_sort)
+    LinearLayout btnSortBy;
 
     ProductsListPresenter presenter;
 
@@ -64,6 +73,23 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
         ButterKnife.bind(this);
         mHandler = new Handler(Looper.getMainLooper());
         setupActionBar();
+        btnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilterDialogFragment filterDialogFragment = new FilterDialogFragment();
+                filterDialogFragment.show(getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
+            }
+        });
+
+        btnSortBy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SortByDialogFragment sortByDialogFragment = new SortByDialogFragment();
+                sortByDialogFragment.show(getSupportFragmentManager(), "Bottom Sheet sort Dialog Fragment");
+            }
+        });
+
+
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         intentFilter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
@@ -169,7 +195,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     }
 
     @Override
-    public void onItemClickListener(String id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description) {
+    public void onItemClickListener(Integer id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description) {
 
     }
 

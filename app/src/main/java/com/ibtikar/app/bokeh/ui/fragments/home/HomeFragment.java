@@ -24,7 +24,7 @@ import com.ibtikar.app.bokeh.data.adapters.AdapterCategoriesList;
 import com.ibtikar.app.bokeh.data.adapters.AdapterFeaturedItems;
 import com.ibtikar.app.bokeh.data.adapters.AdapterShopsList;
 import com.ibtikar.app.bokeh.data.adapters.AdapterSliderHome;
-import com.ibtikar.app.bokeh.data.models.CategoryItemModel;
+import com.ibtikar.app.bokeh.data.models.OccasionItemModel;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.ModelShopItem;
 import com.ibtikar.app.bokeh.ui.activities.products_list.ProductsListActivity;
@@ -68,7 +68,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
     AdapterShopsList adapterShopsList;
 
-    private ArrayList<CategoryItemModel> arrayList;
+    private ArrayList<OccasionItemModel> arrayList;
 
     private ArrayList<ModelProductItem> productItemArrayList;
 
@@ -221,7 +221,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
 
     @Override
-    public void addMoreToCategoryAdapter(final ArrayList<CategoryItemModel> list) {
+    public void addMoreToCategoryAdapter(final ArrayList<OccasionItemModel> list) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -262,17 +262,17 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
     }
 
     @Override
-    public void onItemClickListener(String id, String title) {
+    public void onItemClickListener(Integer id, String title) {
         startActivity(new Intent(getActivity(), ProductsListActivity.class));
     }
 
     @Override
-    public void onItemClickListener(String id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description) {
+    public void onItemClickListener(Integer id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description) {
 
     }
 
     @Override
-    public void onItemShopClickListener(String id, String title) {
+    public void onItemShopClickListener(Integer id, String title) {
 
     }
 }
