@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -15,6 +16,7 @@ import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +54,8 @@ public class AdapterFeaturedItems extends RecyclerView.Adapter<RecyclerView.View
                     .into(itemViewHolder.imItem);
         }
 
+        Toast.makeText(context, modelProductItem.getName(), Toast.LENGTH_SHORT).show();
+
         itemViewHolder.loutContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +75,7 @@ public class AdapterFeaturedItems extends RecyclerView.Adapter<RecyclerView.View
         notifyItemInserted(arrayList.size()-1 );
     }
 
-    public void addAll(ArrayList<ModelProductItem> opResults) {
+    public void addAll(List<ModelProductItem> opResults) {
         for (ModelProductItem result : opResults) {
             add(result);
         }

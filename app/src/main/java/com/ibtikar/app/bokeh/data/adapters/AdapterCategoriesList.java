@@ -16,17 +16,18 @@ import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.models.OccasionItemModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AdapterCategoriesList extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private ArrayList<OccasionItemModel> arrayList;
+    private List<OccasionItemModel> arrayList;
     private Context context;
     private ContainerClickListener customListener;
 
-    public AdapterCategoriesList(ArrayList<OccasionItemModel> arrayList, Context context) {
+    public AdapterCategoriesList(List<OccasionItemModel> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -80,7 +81,7 @@ public class AdapterCategoriesList extends RecyclerView.Adapter<RecyclerView.Vie
         notifyItemInserted(arrayList.size()-1 );
     }
 
-    public void addAll(ArrayList<OccasionItemModel> opResults) {
+    public void addAll(List<OccasionItemModel> opResults) {
         for (OccasionItemModel result : opResults) {
             add(result);
         }

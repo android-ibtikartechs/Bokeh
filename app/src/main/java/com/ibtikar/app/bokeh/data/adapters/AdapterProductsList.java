@@ -21,6 +21,7 @@ import com.ibtikar.app.bokeh.ui_utilities.CustomRecyclerView;
 import com.ibtikar.app.bokeh.utils.PaginationAdapterCallback;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +31,7 @@ public class AdapterProductsList  extends CustomRecyclerView.Adapter<RecyclerVie
     private static final int ITEM = 0;
     private static final int LOADING = 1;
 
-    private ArrayList<ModelProductItem> arrayList;
+    private List<ModelProductItem> arrayList;
     private Context context;
     private ContainerProductsItemsClickListener customListener;
 
@@ -41,7 +42,7 @@ public class AdapterProductsList  extends CustomRecyclerView.Adapter<RecyclerVie
 
 
     public AdapterProductsList(Context context,
-                                ArrayList<ModelProductItem> arrayList) {
+                                List<ModelProductItem> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }

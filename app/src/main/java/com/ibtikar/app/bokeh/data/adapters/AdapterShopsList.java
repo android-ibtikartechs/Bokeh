@@ -17,17 +17,18 @@ import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.models.ModelShopItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AdapterShopsList extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private ArrayList<ModelShopItem> arrayList;
+    private List<ModelShopItem> arrayList;
     private Context context;
     private ContainerClickListener customListener;
 
 
-    public AdapterShopsList(ArrayList<ModelShopItem> arrayList, Context context) {
+    public AdapterShopsList(List<ModelShopItem> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -77,7 +78,7 @@ public class AdapterShopsList extends RecyclerView.Adapter<RecyclerView.ViewHold
         notifyItemInserted(arrayList.size()-1 );
     }
 
-    public void addAll(ArrayList<ModelShopItem> opResults) {
+    public void addAll(List<ModelShopItem> opResults) {
         for (ModelShopItem result : opResults) {
             add(result);
         }

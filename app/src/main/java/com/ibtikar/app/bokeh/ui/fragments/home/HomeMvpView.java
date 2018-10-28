@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface HomeMvpView extends MvpView {
-    void addMoreToCategoryAdapter(ArrayList<OccasionItemModel> list);
-    void addMoreToFeaturedItemAdapter(ArrayList<ModelProductItem>list);
-    void addMoreToShopsAdapter(ArrayList<ModelShopItem>list);
+    void addMoreToCategoryAdapter(List<OccasionItemModel> list);
+    void addMoreToFeaturedItemAdapter(List<ModelProductItem>list);
+    void addMoreToShopsAdapter(List<ModelShopItem>list);
     void addListToSlider(List<ModelProductItem> products);
 }

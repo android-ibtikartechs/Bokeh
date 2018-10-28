@@ -162,10 +162,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
         timer = new Timer();
         scheduleSlider();
 
-        presenter.loadSlider();
-        presenter.loadCategories();
-        presenter.loadFeaturedItems();
-        presenter.loadShopsItems();
+        presenter.loadHomeData(30.0659632, 31.2021518);
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -221,7 +218,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
 
     @Override
-    public void addMoreToCategoryAdapter(final ArrayList<OccasionItemModel> list) {
+    public void addMoreToCategoryAdapter(final List<OccasionItemModel> list) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -231,7 +228,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
     }
 
     @Override
-    public void addMoreToFeaturedItemAdapter(final ArrayList<ModelProductItem> list) {
+    public void addMoreToFeaturedItemAdapter(final List<ModelProductItem> list) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -241,7 +238,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
     }
 
     @Override
-    public void addMoreToShopsAdapter(final ArrayList<ModelShopItem> list) {
+    public void addMoreToShopsAdapter(final List<ModelShopItem> list) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
