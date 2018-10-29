@@ -13,4 +13,8 @@ public interface HomeMvpView extends MvpView {
     void addMoreToFeaturedItemAdapter(List<ModelProductItem>list);
     void addMoreToShopsAdapter(List<ModelShopItem>list);
     void addListToSlider(List<ModelProductItem> products);
+
+    void showErrorConnectionView();
+    void showLoadingView();
+    void showContent();
 }

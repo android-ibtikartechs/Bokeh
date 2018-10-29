@@ -15,7 +15,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.models.OccasionItemModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,10 +25,17 @@ public class AdapterCategoriesList extends RecyclerView.Adapter<RecyclerView.Vie
     private List<OccasionItemModel> arrayList;
     private Context context;
     private ContainerClickListener customListener;
+    private boolean isGrid;
 
     public AdapterCategoriesList(List<OccasionItemModel> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
+    }
+
+    public AdapterCategoriesList(List<OccasionItemModel> arrayList, Context context, boolean isGrid) {
+        this.arrayList = arrayList;
+        this.context = context;
+        this.isGrid = isGrid;
     }
 
     @NonNull
@@ -37,7 +43,12 @@ public class AdapterCategoriesList extends RecyclerView.Adapter<RecyclerView.Vie
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View viewItem = inflater.inflate(R.layout.view_categorie_item, parent, false);
+        View viewItem;
+        if (isGrid)
+            viewItem = inflater.inflate(R.layout.view_categories_item_grid, parent, false);
+        else
+            viewItem = inflater.inflate(R.layout.view_categorie_item_horizontal, parent, false);
+
         viewHolder = new ItemViewHolder(viewItem);
         return viewHolder;
     }

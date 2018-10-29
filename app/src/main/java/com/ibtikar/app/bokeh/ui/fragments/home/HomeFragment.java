@@ -2,6 +2,9 @@ package com.ibtikar.app.bokeh.ui.fragments.home;
 
 
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -29,6 +32,7 @@ import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.ModelShopItem;
 import com.ibtikar.app.bokeh.ui.activities.products_list.ProductsListActivity;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
+import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +65,9 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
     @BindView(R.id.rv_shops)
     RecyclerView rvShopsItem;
+
+    @BindView(R.id.progressActivity)
+    ProgressLinearLayout progressLinearLayout;
 
     AdapterCategoriesList adapterCategoriesList;
 
@@ -162,6 +169,8 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
         timer = new Timer();
         scheduleSlider();
 
+
+
         presenter.loadHomeData(30.0659632, 31.2021518);
         super.onViewCreated(view, savedInstanceState);
     }
@@ -259,6 +268,29 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
     }
 
     @Override
+    public void showErrorConnectionView() {
+        progressLinearLayout.showError(getActivity().getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), "No Connection",
+                "We could not establish a connection with our servers. Try again when you are connected to the interne.",
+                "Try Again", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        presenter.loadHomeData(30.0659632, 31.2021518);
+                    }
+                });
+
+    }
+
+    @Override
+    public void showLoadingView() {
+        progressLinearLayout.showLoading();
+    }
+
+    @Override
+    public void showContent() {
+        progressLinearLayout.showContent();
+    }
+
+    @Override
     public void onItemClickListener(Integer id, String title) {
         startActivity(new Intent(getActivity(), ProductsListActivity.class));
     }
@@ -270,6 +302,8 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
     @Override
     public void onItemShopClickListener(Integer id, String title) {
-
     }
+
+
+
 }

@@ -28,9 +28,13 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="7b7b7b" />
-                            <entry key="outputName" value="ic_close" />
-                            <entry key="sourceFile" value="C:\Users\Ibtikar100\Downloads\add_to_cart.svg" />
+                            <entry key="height" value="120" />
+                            <entry key="outputName" value="ic_if_icon_131_cloud_error_314829" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="C:\Users\Ibtikar100\Downloads\if_icon-131-cloud-error_314829.svg" />
+                            <entry key="width" value="120" />
                           </map>
                         </option>
                       </PersistentState>

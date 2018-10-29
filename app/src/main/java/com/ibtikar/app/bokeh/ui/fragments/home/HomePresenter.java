@@ -27,6 +27,7 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
     @Override
     public void loadHomeData(double latitude, double longitude) {
 
+        getMvpView().showLoadingView();
         Log.d("", "loadItem: ");
 
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
@@ -35,16 +36,16 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
             @Override
             public void onResponse(Call<ResponseHomeModel> call, Response<ResponseHomeModel> response) {
                 //getMvpView().addMoreToFeaturedItemAdapter(response.body().getItems());
+                getMvpView().showContent();
                 loadCategories(response.body().getOccasions());
                 loadFeaturedItems(response.body().getItems());
                 loadShopsItems(response.body().getShops());
                 loadSlider(response.body().getSpecialoffers());
-
             }
 
             @Override
             public void onFailure(Call<ResponseHomeModel> call, Throwable t) {
-                Log.d("", "onFailure: ");
+                getMvpView().showErrorConnectionView();
             }
         });
 
@@ -52,32 +53,12 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
 
 
     public void loadCategories(List<OccasionItemModel>list) {
-/*
-        ArrayList<OccasionItemModel> list = new ArrayList<>();
-        OccasionItemModel categoryModel = new OccasionItemModel(1, "https://i.imgur.com/NgAAeSN.png","Suits all occasions");
-        list.add(categoryModel);
-
-        categoryModel = new OccasionItemModel(1, "https://i.imgur.com/u1EcZMc.png","Wedding");
-        list.add(categoryModel);
-
-        categoryModel = new OccasionItemModel(1, "https://i.imgur.com/CgOtADr.png","Hajj");
-        list.add(categoryModel);
-
-        categoryModel = new OccasionItemModel(1, "https://i.imgur.com/d7Tjint.png","Birthday");
-        list.add(categoryModel);
-
-        categoryModel = new OccasionItemModel(1, "https://i.imgur.com/1SnKPb2.png","Love");
-        list.add(categoryModel);
-*/
         getMvpView().addMoreToCategoryAdapter(list);
-
     }
 
 
     public void loadFeaturedItems(List<ModelProductItem> list) {
-
         getMvpView().addMoreToFeaturedItemAdapter(list);
-
     }
 
 
@@ -88,7 +69,6 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
 
     public void loadSlider(List<ModelProductItem>list) {
         getMvpView().addListToSlider(list);
-
     }
 
 

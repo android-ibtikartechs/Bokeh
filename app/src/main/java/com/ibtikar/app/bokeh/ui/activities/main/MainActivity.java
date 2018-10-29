@@ -1,5 +1,6 @@
 package com.ibtikar.app.bokeh.ui.activities.main;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.StaticValues;
+import com.ibtikar.app.bokeh.ui.activities.categories_search.CategorySearchActivity;
 import com.ibtikar.app.bokeh.ui.fragments.account.AccountFragment;
 import com.ibtikar.app.bokeh.ui.fragments.cart.CartFragment;
 import com.ibtikar.app.bokeh.ui.fragments.categories.CategoriesFragment;
@@ -158,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_search :
                 //startActivity(ShoppingCartActivity.getStartIntent(this));
-                Toast.makeText(this, "search", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, CategorySearchActivity.class));
                /* FragmentManager fm = getSupportFragmentManager();
                 SearchDialogFragment searchDialogFragment = new SearchDialogFragment();
                 searchDialogFragment.show(fm, "alert"); */
