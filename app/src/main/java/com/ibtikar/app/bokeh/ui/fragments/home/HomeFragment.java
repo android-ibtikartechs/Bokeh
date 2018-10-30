@@ -30,8 +30,10 @@ import com.ibtikar.app.bokeh.data.adapters.AdapterSliderHome;
 import com.ibtikar.app.bokeh.data.models.OccasionItemModel;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.ModelShopItem;
+import com.ibtikar.app.bokeh.ui.activities.product_details.ProductDetailsActivity;
 import com.ibtikar.app.bokeh.ui.activities.products_list.ProductsListActivity;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
+import com.ibtikar.app.bokeh.utils.RxBus;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
@@ -296,8 +298,9 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
     }
 
     @Override
-    public void onItemClickListener(Integer id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description) {
-
+    public void onFeaturedItemClickListener(ModelProductItem productItem) {
+        RxBus.publish(productItem);
+        startActivity(new Intent(getActivity(), ProductDetailsActivity.class));
     }
 
     @Override

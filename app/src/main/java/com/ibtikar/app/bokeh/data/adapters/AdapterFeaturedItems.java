@@ -75,7 +75,7 @@ public class AdapterFeaturedItems extends RecyclerView.Adapter<RecyclerView.View
         itemViewHolder.loutContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customListener.onItemClickListener(modelProductItem.getId(),modelProductItem.getName(),modelProductItem.getImage(),modelProductItem.getPrice(),modelProductItem.getIsSameDayDelivery(),modelProductItem.getSellername(), modelProductItem.getIsLiked(), modelProductItem.getDetails());
+                customListener.onFeaturedItemClickListener(modelProductItem);
             }
         });
 
@@ -122,7 +122,7 @@ public class AdapterFeaturedItems extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public interface ContainerFeaturedItemsClickListener {
-        public void onItemClickListener(Integer id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description);
+        public void onFeaturedItemClickListener(ModelProductItem productItem);
     }
     public void setCustomButtonListner(ContainerFeaturedItemsClickListener listener) {
         this.customListener = listener;

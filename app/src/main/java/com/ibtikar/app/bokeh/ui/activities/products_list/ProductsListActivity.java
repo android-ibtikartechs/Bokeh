@@ -30,6 +30,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.disposables.Disposable;
 
 public class ProductsListActivity extends BaseActivity implements ProductsListMvpView, AdapterProductsList.ContainerProductsItemsClickListener, PaginationAdapterCallback {
 
@@ -64,7 +65,6 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
 
     private ArrayList<ModelProductItem> arrayList;
     private Handler mHandler;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
