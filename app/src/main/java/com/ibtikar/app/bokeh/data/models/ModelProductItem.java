@@ -3,6 +3,8 @@ package com.ibtikar.app.bokeh.data.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class ModelProductItem {
     @SerializedName("id")
     @Expose
@@ -58,6 +60,9 @@ public class ModelProductItem {
     @SerializedName("isLiked")
     @Expose
     private Boolean isLiked;
+    @SerializedName("Gallery")
+    @Expose
+    private List<GalleryProductImage> gallery = null;
 
     /**
      * No args constructor for use in serialization
@@ -87,7 +92,7 @@ public class ModelProductItem {
      * @param sellername
      * @param offerStartTime
      */
-    public ModelProductItem(Integer id, String name, String image, Integer sellerid, String sellername, Integer categoryid, String category, String details, Boolean hasoffer, Integer price, Integer oprice, String offerStartDate, String offerStartTime, String offerEndDate, String offerEndTime, String discountPercentage, Boolean isSameDayDelivery, Boolean isLiked) {
+    public ModelProductItem(Integer id, String name, String image, Integer sellerid, String sellername, Integer categoryid, String category, String details, Boolean hasoffer, Integer price, Integer oprice, String offerStartDate, String offerStartTime, String offerEndDate, String offerEndTime, String discountPercentage, Boolean isSameDayDelivery, Boolean isLiked, List<GalleryProductImage> gallery) {
         super();
         this.id = id;
         this.name = name;
@@ -107,6 +112,7 @@ public class ModelProductItem {
         this.discountPercentage = discountPercentage;
         this.isSameDayDelivery = isSameDayDelivery;
         this.isLiked = isLiked;
+        this.gallery = gallery;
     }
 
     public Integer getId() {
@@ -251,6 +257,14 @@ public class ModelProductItem {
 
     public void setIsLiked(Boolean isLiked) {
         this.isLiked = isLiked;
+    }
+
+    public List<GalleryProductImage> getGallery() {
+        return gallery;
+    }
+
+    public void setGallery(List<GalleryProductImage> gallery) {
+        this.gallery = gallery;
     }
 
 }
