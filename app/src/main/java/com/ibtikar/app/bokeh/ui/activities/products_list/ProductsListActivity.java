@@ -1,5 +1,6 @@
 package com.ibtikar.app.bokeh.ui.activities.products_list;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
@@ -16,8 +17,11 @@ import android.widget.LinearLayout;
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
+import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.adapters.AdapterProductsList;
+import com.ibtikar.app.bokeh.data.models.LocationLatLong;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
+import com.ibtikar.app.bokeh.data.models.SortByBottomSheetPassingData;
 import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
 import com.ibtikar.app.bokeh.ui.fragments.dialog_filter.FilterDialogFragment;
 import com.ibtikar.app.bokeh.ui.fragments.dialog_sort_by.SortByDialogFragment;
@@ -25,20 +29,25 @@ import com.ibtikar.app.bokeh.ui_utilities.CustomRecyclerView;
 import com.ibtikar.app.bokeh.ui_utilities.paginationStaggardScrollListener;
 import com.ibtikar.app.bokeh.utils.NetworkChangeReceiver;
 import com.ibtikar.app.bokeh.utils.PaginationAdapterCallback;
+import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.disposables.Disposable;
 
-public class ProductsListActivity extends BaseActivity implements ProductsListMvpView, AdapterProductsList.ContainerProductsItemsClickListener, PaginationAdapterCallback {
+public class ProductsListActivity extends BaseActivity implements ProductsListMvpView, AdapterProductsList.ContainerProductsItemsClickListener, PaginationAdapterCallback, SortByDialogFragment.ApplyClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @BindView(R.id.btn_filter)
     LinearLayout btnFilter;
+
+    @BindView(R.id.progressActivity)
+    ProgressLinearLayout progressLinearLayout;
 
 
     NetworkChangeReceiver networkChangeReceiver;
@@ -66,13 +75,18 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     private ArrayList<ModelProductItem> arrayList;
     private Handler mHandler;
 
+    LocationLatLong locationLatLong;
+    Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products_list);
         ButterKnife.bind(this);
+        intent = getIntent();
+        locationLatLong = new LocationLatLong(30.0659632,31.2021518);
         mHandler = new Handler(Looper.getMainLooper());
-        setupActionBar();
+        setupActionBar(intent.getStringExtra(StaticValues.KEY_CATEGORY_TITLE));
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +99,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
             @Override
             public void onClick(View v) {
                 SortByDialogFragment sortByDialogFragment = new SortByDialogFragment();
+                sortByDialogFragment.setCustomButtonListner(ProductsListActivity.this);
                 sortByDialogFragment.show(getSupportFragmentManager(), "Bottom Sheet sort Dialog Fragment");
             }
         });
@@ -112,7 +127,8 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
         presenter = new ProductsListPresenter(dataManager);
         presenter.onAttach(this);
 
-        presenter.loadFirstPage();
+
+        presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_CATEGORY_ID, 0),false,null);
 
     }
 
@@ -180,7 +196,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
         return super.onOptionsItemSelected(item);
     }
 
-    public void setupActionBar() {
+    public void setupActionBar(String title) {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -191,7 +207,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
         actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
 
         // TODO : Dummies data
-        actionBar.setTitle("Category Name");
+        actionBar.setTitle(title);
     }
 
     @Override
@@ -210,7 +226,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     }
 
     @Override
-    public void addMoreToAdapter(final ArrayList<ModelProductItem> list) {
+    public void addMoreToAdapter(final List<ModelProductItem> list) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -252,5 +268,34 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     @Override
     public void setIsLoadingFalse() {
         isLoading = false;
+    }
+
+    @Override
+    public void showErrorConnectionView() {
+        progressLinearLayout.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), "No Connection",
+                "We could not establish a connection with our servers. Try again when you are connected to the interne.",
+                "Try Again", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_CATEGORY_ID, 0), false, null);
+                    }
+                });
+
+    }
+
+    @Override
+    public void showLoadingView() {
+        progressLinearLayout.showLoading();
+    }
+
+    @Override
+    public void showContent() {
+        progressLinearLayout.showContent();
+    }
+
+    @Override
+    public void onApplyClickListener(SortByBottomSheetPassingData sortByBottomSheetPassingData) {
+        adapterProductsList.clear();
+        presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_CATEGORY_ID, 0), true, sortByBottomSheetPassingData);
     }
 }

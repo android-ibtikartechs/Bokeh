@@ -1,10 +1,25 @@
 package com.ibtikar.app.bokeh.ui.activities.products_list;
 
 import com.ibtikar.app.bokeh.data.DataManager;
+import com.ibtikar.app.bokeh.data.StaticValues;
+import com.ibtikar.app.bokeh.data.models.LocationLatLong;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
+import com.ibtikar.app.bokeh.data.models.SortByBottomSheetPassingData;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseHomeModel;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseProductList;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
+import com.ibtikar.app.bokeh.utils.AscendingComparator;
+import com.ibtikar.app.bokeh.utils.DeascendingComparator;
+import com.ibtikar.app.bokeh.utils.retrofit.GetDataService;
+import com.ibtikar.app.bokeh.utils.retrofit.RetrofitClientInstance;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProductsListPresenter <V extends ProductsListMvpView> extends BasePresenter<V> implements ProductsListMvpPresenter<V> {
     public ProductsListPresenter(DataManager dataManager) {
@@ -12,7 +27,56 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
     }
 
     @Override
-    public void loadFirstPage() {
+    public void loadFirstPage(LocationLatLong locationLatLong, Integer categoryId, final boolean isSort, final SortByBottomSheetPassingData sortByBottomSheetPassingData) {
+
+
+        getMvpView().showLoadingView();
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        Call<ResponseProductList> call = service.getProductListForCategory(categoryId,locationLatLong.getLat(),locationLatLong.getLongitude());
+        call.enqueue(new Callback<ResponseProductList>() {
+            @Override
+            public void onResponse(Call<ResponseProductList> call, Response<ResponseProductList> response) {
+                if (response.body().getStatus()) {
+                    AscendingComparator ascendingComparator;
+                    DeascendingComparator deascendingComparator;
+                    List<ModelProductItem> list = response.body().getProducts();
+                    if (isSort)
+                    {
+                        if (sortByBottomSheetPassingData.getAscendingDeascending() == StaticValues.SORT_ASCEND)
+                        {
+                            if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_TITLE)
+                            {
+                                ascendingComparator = new AscendingComparator(StaticValues.SORT_TYPE_TITLE);
+                                Collections.sort(list, ascendingComparator);
+                            }
+
+                        }
+
+                        if (sortByBottomSheetPassingData.getAscendingDeascending() == StaticValues.SORT_DEASCEND)
+                        {
+                            if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_TITLE)
+                            {
+                                deascendingComparator = new DeascendingComparator(StaticValues.SORT_TYPE_TITLE);
+                                Collections.sort(list, deascendingComparator);
+                            }
+
+                        }
+                    }
+
+                    getMvpView().addMoreToAdapter(list);
+                    getMvpView().showContent();
+                }
+                else
+                    getMvpView().showErrorConnectionView();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseProductList> call, Throwable t) {
+                getMvpView().showErrorConnectionView();
+            }
+        });
+
+
        /* ArrayList<ModelProductItem> list = new ArrayList<>();
         ModelProductItem modelProductItem = new ModelProductItem("1",
                 "Blushing Bella Blooms",

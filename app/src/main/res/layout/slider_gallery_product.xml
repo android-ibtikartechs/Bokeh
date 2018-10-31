@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="230dp">
+    android:layout_width="match_parent" android:layout_height="300dp"
+    android:background="@color/ColorWhite"
+    >
 
     <ImageView
         android:id="@+id/im_slider"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:src="@drawable/test_flowers"
-        android:scaleType="centerCrop"
-        />
+        android:layout_height="300dp"
+        android:src="@drawable/test_bouquet"
 
+        />
 </RelativeLayout>

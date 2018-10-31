@@ -132,7 +132,7 @@ public class AdapterProductsList  extends CustomRecyclerView.Adapter<RecyclerVie
         notifyItemInserted(arrayList.size()-1 );
     }
 
-    public void addAll(ArrayList<ModelProductItem> opResults) {
+    public void addAll(List<ModelProductItem> opResults) {
         for (ModelProductItem result : opResults) {
             add(result);
         }
@@ -151,6 +151,7 @@ public class AdapterProductsList  extends CustomRecyclerView.Adapter<RecyclerVie
         while (getItemCount() > 0) {
             remove(getItem(0));
         }
+        notifyItemRangeRemoved(0, arrayList.size());
     }
     public ModelProductItem getItem(int position) {
         return arrayList.get(position);

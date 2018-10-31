@@ -19,6 +19,7 @@
                 >
 
                 <ImageView
+                    android:id="@+id/btnClose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_close"
@@ -28,12 +29,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/ColorTextBlack"
-                    android:text="Filter"
+                    android:text="Sort"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
                     />
 
                 <Button
+                    android:id="@+id/btnApply"
                     android:layout_width="55dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_rounded_button"
@@ -62,6 +64,7 @@
                 android:gravity="center_horizontal"
                 >
             <RadioGroup
+                android:id="@+id/radioGroupAscendDeascend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layoutDirection="ltr"
@@ -72,7 +75,7 @@
                 >
 
                 <RadioButton
-                    android:id="@+id/radio0"
+                    android:id="@+id/radioAscending"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -86,7 +89,7 @@
                     />
 
                 <RadioButton
-                    android:id="@+id/radio01"
+                    android:id="@+id/radiodeascending"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:layout_width="wrap_content"
@@ -104,6 +107,7 @@
 
 
             <RadioGroup
+                android:id="@+id/radioGroupSortType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layoutDirection="ltr"
@@ -140,7 +144,7 @@
                     />
 
                 <RadioButton
-                    android:id="@+id/radio_nearest"
+                    android:id="@+id/radio_newest"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:padding="4dp"

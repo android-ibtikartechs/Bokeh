@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
+import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.adapters.AdapterCategoriesList;
 import com.ibtikar.app.bokeh.data.adapters.AdapterFeaturedItems;
 import com.ibtikar.app.bokeh.data.adapters.AdapterShopsList;
@@ -294,7 +295,10 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
     @Override
     public void onItemClickListener(Integer id, String title) {
-        startActivity(new Intent(getActivity(), ProductsListActivity.class));
+        Intent intent = new Intent(getActivity(), ProductsListActivity.class);
+        intent.putExtra(StaticValues.KEY_CATEGORY_ID, id);
+        intent.putExtra(StaticValues.KEY_CATEGORY_TITLE, title);
+        startActivity(intent);
     }
 
     @Override
