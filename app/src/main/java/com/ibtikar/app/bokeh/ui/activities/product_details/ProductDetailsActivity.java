@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -25,6 +26,7 @@ import com.ibtikar.app.bokeh.data.adapters.AdapterSliderGalleryProduct;
 import com.ibtikar.app.bokeh.data.adapters.AdapterSliderHome;
 import com.ibtikar.app.bokeh.data.models.GalleryProductImage;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
+import com.ibtikar.app.bokeh.ui.fragments.dialog_buy_options.DialogBuyOptionsFragment;
 import com.ibtikar.app.bokeh.utils.RxBus;
 
 import java.io.UnsupportedEncodingException;
@@ -86,6 +88,14 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
         presenter.onAttach(this);
 
         presenter.loadData();
+
+        btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogBuyOptionsFragment dialogBuyOptionsFragment = new DialogBuyOptionsFragment();
+                dialogBuyOptionsFragment.show(getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
+            }
+        });
 
     }
 
@@ -262,6 +272,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
             btnLike.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_like_liked));
         else
             btnLike.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_like_normal));
+
 
 
 
