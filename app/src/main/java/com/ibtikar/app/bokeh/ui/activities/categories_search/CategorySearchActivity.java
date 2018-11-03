@@ -8,20 +8,26 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.ui.fragments.categories.CategoriesFragment;
 import com.ibtikar.app.bokeh.ui.fragments.search.SearchFragment;
+import com.ibtikar.app.bokeh.utils.RxBus;
+import com.jakewharton.rxbinding.widget.RxTextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +38,7 @@ public class CategorySearchActivity extends AppCompatActivity {
     LinearLayout loutSearch;
 
     @BindView(R.id.acomp_tv_search)
-    AutoCompleteTextView aCompTvSearch;
+    EditText aCompTvSearch;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -47,6 +53,31 @@ public class CategorySearchActivity extends AppCompatActivity {
         setupActionBar();
 
         //aCompTvSearch.setHint("\uD83D\uDD0D   Search on Bokeh");
+        setupRxListener();
+
+        aCompTvSearch.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+
+
+
+
+                if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                        actionId == EditorInfo.IME_ACTION_DONE ||
+                        actionId == EditorInfo.IME_ACTION_NEXT ||
+                        keyEvent.getAction() == KeyEvent.ACTION_DOWN ||
+                        keyEvent.getAction() == KeyEvent.KEYCODE_ENTER)
+                {
+                    ((MvpApp) getApplication())
+                            .bus()
+                            .send(new String(aCompTvSearch.getText().toString()));
+                    return true;
+                }
+
+
+                return false;
+            }
+        });
 
 /*
         aCompTvSearch.setOnFocusChangeListener(new View.OnFocusChangeListener()
@@ -93,13 +124,7 @@ public class CategorySearchActivity extends AppCompatActivity {
             }
         });
 
-        aCompTvSearch.setOnEditorActionListener(new EditText.OnEditorActionListener() {
 
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                return false;
-            }
-        });
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -139,6 +164,7 @@ public class CategorySearchActivity extends AppCompatActivity {
                     hideKeyboard();
                     aCompTvSearch.setFocusableInTouchMode(false);
                     aCompTvSearch.clearFocus();
+                    aCompTvSearch.getText().clear();
                     Log.d("", "onBackStackChanged: ");
                 }
             }
@@ -177,5 +203,34 @@ public class CategorySearchActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+    private void setupRxListener() {
+        RxTextView.textChanges(aCompTvSearch).subscribe(text -> {
+            ((MvpApp) getApplication())
+                    .bus()
+                    .send(new String(text.toString()));
+        });
+    }
+
+    private void setupSimpleListener() {
+        aCompTvSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                ((MvpApp) getApplication())
+                        .bus()
+                        .send(new String(s.toString()));
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
 
 }

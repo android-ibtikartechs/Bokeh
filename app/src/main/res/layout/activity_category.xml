@@ -36,7 +36,7 @@
 
 
 
-                <AutoCompleteTextView
+                <EditText
                     android:id="@+id/acomp_tv_search"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -50,6 +50,8 @@
                     android:focusable="false"
                     android:drawableLeft="@drawable/ic_search"
                     android:drawablePadding="8dp"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
                     />
             </LinearLayout>
 

@@ -11,11 +11,13 @@ import android.util.DisplayMetrics;
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.SharedPreferenceHelper;
 import com.ibtikar.app.bokeh.data.db_helper.SQLiteHandler;
+import com.ibtikar.app.bokeh.utils.RxBus;
 
 import java.util.Locale;
 
 public class MvpApp extends Application {
     DataManager dataManager;
+    private RxBus bus;
 
 
 
@@ -25,6 +27,7 @@ public class MvpApp extends Application {
         SharedPreferenceHelper sharedPrefsHelper = new SharedPreferenceHelper(getApplicationContext());
         SQLiteHandler sqliteHandler = new SQLiteHandler(getApplicationContext());
         dataManager = new DataManager(sqliteHandler, sharedPrefsHelper);
+        bus = new RxBus();
         //setLocale("ar");
         //changeLang(getApplicationContext(), "ar");
     }
@@ -32,6 +35,10 @@ public class MvpApp extends Application {
 
     public DataManager getDataManager() {
         return dataManager;
+    }
+
+    public RxBus bus() {
+        return bus;
     }
 
 
