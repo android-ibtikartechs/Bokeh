@@ -2,23 +2,54 @@ package com.ibtikar.app.bokeh.ui.fragments.cart;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.data.DataManager;
+import com.ibtikar.app.bokeh.data.adapters.AdapterCartList;
+import com.ibtikar.app.bokeh.data.models.ModelCartItem;
+import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
+import com.vlonjatg.progressactivity.ProgressLinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CartFragment extends Fragment {
+public class CartFragment extends BaseFragment implements CartMvpView, AdapterCartList.ContainerCartItemsClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    @BindView(R.id.progressActivity)
+    ProgressLinearLayout progressLinearLayout;
+
+    @BindView(R.id.rv_cart_items)
+    RecyclerView rvCartItems;
+
+    AdapterCartList adapterCartList;
+    private ArrayList<ModelCartItem> arrayList;
+
+    CartPresenter presenter;
+
+    Handler mHandler;
+
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -54,13 +85,60 @@ public class CartFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        DataManager dataManager = ((MvpApp) getActivity().getApplication()).getDataManager();
+        presenter = new CartPresenter(dataManager);
+        presenter.onAttach(this);
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_cart, container, false);
+        ButterKnife.bind(this, rootView);
+        arrayList = new ArrayList<>();
+        rvCartItems.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
+        populatRecyclerView();
+        presenter.loadCartList();
+        return rootView;
     }
 
+    private void populatRecyclerView() {
+        adapterCartList = new AdapterCartList(arrayList, getActivity());
+        adapterCartList.setCustomButtonListner(this);
+        rvCartItems.setAdapter(adapterCartList);
+        adapterCartList.notifyDataSetChanged();
+    }
+
+    @Override
+    public void addMoreToCartListAdapter(final List<ModelCartItem> list) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                adapterCartList.addAll(list);
+            }
+        });
+    }
+
+    @Override
+    public void showErrorConnectionView() {
+
+    }
+
+    @Override
+    public void showLoadingView() {
+
+    }
+
+    @Override
+    public void showContent() {
+
+    }
+
+    @Override
+    public void onCartItemClickListener(ModelCartItem productItem) {
+
+    }
 }

@@ -3,6 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lout_container"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -11,12 +12,29 @@
         android:orientation="vertical"
         android:paddingBottom="16dp"
         >
-        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp">
         <ImageView
+            android:id="@+id/im_product"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:src="@drawable/test_bouquet"
             />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,6 +47,7 @@
 
 
         <TextView
+            android:id="@+id/tv_product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Product Name"
@@ -42,6 +61,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_seller_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Shop Name"
@@ -67,6 +87,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_delivery_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
@@ -91,6 +112,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_delivery_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
@@ -109,6 +131,7 @@
                     >
 
                     <ImageView
+                        android:id="@+id/btn_remove_quantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_remove_quantity"
@@ -121,6 +144,7 @@
                         android:layout_marginStart="8dp"
                         >
                         <TextView
+                            android:id="@+id/tv_quantity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -130,6 +154,7 @@
                     </RelativeLayout>
 
                     <ImageView
+                        android:id="@+id/btn_add_quantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_add_black_24dp"
@@ -145,12 +170,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_alignParentEnd="true"
-
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
                 >
 
                 <TextView
+                    android:id="@+id/tv_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#ff5c8d"
@@ -170,6 +195,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/btn_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:background="@drawable/shape_rounded_button"

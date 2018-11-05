@@ -15,16 +15,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+
+        <com.vlonjatg.progressactivity.ProgressLinearLayout
+            android:id="@+id/progressActivity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
     >
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_featured_items"
+        android:id="@+id/rv_cart_items"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginBottom="16dp"
@@ -121,6 +128,7 @@
         />
 
 </LinearLayout>
+        </com.vlonjatg.progressactivity.ProgressLinearLayout>
     </android.support.v4.widget.NestedScrollView>
     <include
         layout="@layout/view_add_to_cart_fixed_button"

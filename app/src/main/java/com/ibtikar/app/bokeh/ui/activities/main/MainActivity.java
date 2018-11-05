@@ -1,5 +1,7 @@
 package com.ibtikar.app.bokeh.ui.activities.main;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBar;
@@ -11,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    private Animation animShow, animHide;
+
     ViewPagerAdapter viewPagerAdapter;
 
     private int[] tabIcons = {R.drawable.logo_tab_layout, R.drawable.ic_shops, R.drawable.ic_categories, R.drawable.ic_account, R.drawable.ic_cart_tab_layout};
@@ -53,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         //toolbar.setLogo(R.drawable.logo_toolbar);
 
         setupActionBar();
+        initAnimation();
 
         viewPager.setOffscreenPageLimit(5);
         setupViewPager(viewPager);
@@ -127,6 +135,12 @@ public class MainActivity extends AppCompatActivity {
                 {
 
                 }
+
+                if (tab.getPosition() == 4) {
+                    tabLayout.startAnimation( animHide );
+                    tabLayout.setVisibility(View.GONE);
+                }
+
             }
             //}
 
@@ -173,6 +187,36 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         if (tabLayout.getSelectedTabPosition() != 0) {
+            if (tabLayout.getSelectedTabPosition() == 4)
+            {
+
+                /*tabLayout.clearAnimation();
+                tabLayout.setVisibility(View.VISIBLE);
+                tabLayout.startAnimation(animShow);*/
+
+                TranslateAnimation animate = new TranslateAnimation(0,0,tabLayout.getHeight(),0);
+                animate.setDuration(500);
+
+                animate.setFillAfter(true);
+
+                tabLayout.clearAnimation();
+                tabLayout.startAnimation(animate);
+                tabLayout.setVisibility(View.VISIBLE);
+
+            /*   tabLayout.animate()
+                        .translationY(tabLayout.getHeight())
+                        .alpha(0.0f)
+                        .setDuration(300)
+                        .setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                tabLayout.clearAnimation();
+                                tabLayout.setVisibility(View.VISIBLE);
+                            }
+                        });*/
+
+            }
             viewPager.setCurrentItem(0);
         } else
             super.onBackPressed();
@@ -204,5 +248,26 @@ public class MainActivity extends AppCompatActivity {
         //StaticValues.changeLang(getApplicationContext(),"ar");
     }
 
+    public void slideToBottom(View view){
+        TranslateAnimation animate = new TranslateAnimation(0,0,0,view.getHeight());
+        animate.setDuration(500);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+        view.setVisibility(View.GONE);
+    }
+
+    public void slideToTop(View view){
+        TranslateAnimation animate = new TranslateAnimation(0,0,0,-view.getHeight());
+        animate.setDuration(500);
+        animate.setFillAfter(true);
+        view.startAnimation(animate);
+        view.setVisibility(View.VISIBLE);
+    }
+
+    private void initAnimation()
+    {
+        animShow = AnimationUtils.loadAnimation( this, R.anim.slide_up_tab_layout);
+        animHide = AnimationUtils.loadAnimation( this, R.anim.slide_down_tab_layout);
+    }
 
 }
