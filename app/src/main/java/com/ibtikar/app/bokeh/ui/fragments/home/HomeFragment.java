@@ -19,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
@@ -31,6 +32,7 @@ import com.ibtikar.app.bokeh.data.adapters.AdapterSliderHome;
 import com.ibtikar.app.bokeh.data.models.OccasionItemModel;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.ModelShopItem;
+import com.ibtikar.app.bokeh.ui.activities.categories_search.CategorySearchActivity;
 import com.ibtikar.app.bokeh.ui.activities.product_details.ProductDetailsActivity;
 import com.ibtikar.app.bokeh.ui.activities.products_list.ProductsListActivity;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
@@ -62,6 +64,9 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
     @BindView(R.id.rv_categories)
     RecyclerView rvCategories;
+
+    @BindView(R.id.lout_more)
+    LinearLayout loutMore;
 
     @BindView(R.id.rv_featured_items)
     RecyclerView rvFeaturedItems;
@@ -151,6 +156,14 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        loutMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CategorySearchActivity.class));
+            }
+        });
+
 
         images_slider.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

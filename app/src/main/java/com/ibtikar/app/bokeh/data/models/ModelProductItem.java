@@ -33,6 +33,9 @@ public class ModelProductItem {
     @SerializedName("hasoffer")
     @Expose
     private Boolean hasoffer;
+    @SerializedName("offerimage")
+    @Expose
+    private String offerImage;
     @SerializedName("price")
     @Expose
     private Integer price;
@@ -92,7 +95,7 @@ public class ModelProductItem {
      * @param sellername
      * @param offerStartTime
      */
-    public ModelProductItem(Integer id, String name, String image, Integer sellerid, String sellername, Integer categoryid, String category, String details, Boolean hasoffer, Integer price, Integer oprice, String offerStartDate, String offerStartTime, String offerEndDate, String offerEndTime, String discountPercentage, Boolean isSameDayDelivery, Boolean isLiked, List<GalleryProductImage> gallery) {
+    public ModelProductItem(Integer id, String name, String image, Integer sellerid, String sellername, Integer categoryid, String category, String details, Boolean hasoffer, String offerImage, Integer price, Integer oprice, String offerStartDate, String offerStartTime, String offerEndDate, String offerEndTime, String discountPercentage, Boolean isSameDayDelivery, Boolean isLiked, List<GalleryProductImage> gallery) {
         super();
         this.id = id;
         this.name = name;
@@ -103,6 +106,7 @@ public class ModelProductItem {
         this.category = category;
         this.details = details;
         this.hasoffer = hasoffer;
+        this.offerImage = offerImage;
         this.price = price;
         this.oprice = oprice;
         this.offerStartDate = offerStartDate;
@@ -113,6 +117,14 @@ public class ModelProductItem {
         this.isSameDayDelivery = isSameDayDelivery;
         this.isLiked = isLiked;
         this.gallery = gallery;
+    }
+
+    public void setOfferImage(String offerImage) {
+        this.offerImage = offerImage;
+    }
+
+    public String getOfferImage() {
+        return offerImage;
     }
 
     public Integer getId() {

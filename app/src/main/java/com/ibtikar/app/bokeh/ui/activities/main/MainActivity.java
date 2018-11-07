@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (tab.getPosition() == 4) {
-                    tabLayout.startAnimation( animHide );
+                    //tabLayout.startAnimation( animHide );
                     tabLayout.setVisibility(View.GONE);
                 }
 
@@ -194,13 +194,13 @@ public class MainActivity extends AppCompatActivity {
                 tabLayout.setVisibility(View.VISIBLE);
                 tabLayout.startAnimation(animShow);*/
 
-                TranslateAnimation animate = new TranslateAnimation(0,0,tabLayout.getHeight(),0);
+                /*TranslateAnimation animate = new TranslateAnimation(0,0,tabLayout.getHeight(),0);
                 animate.setDuration(500);
 
                 animate.setFillAfter(true);
 
                 tabLayout.clearAnimation();
-                tabLayout.startAnimation(animate);
+                tabLayout.startAnimation(animate);*/
                 tabLayout.setVisibility(View.VISIBLE);
 
             /*   tabLayout.animate()

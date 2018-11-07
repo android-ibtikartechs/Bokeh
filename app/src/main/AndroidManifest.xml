@@ -36,7 +36,8 @@
         </receiver>
 
         <activity android:name=".ui.activities.categories_search.CategorySearchActivity" />
-        <activity android:name=".ui.activities.product_details.ProductDetailsActivity"></activity>
+        <activity android:name=".ui.activities.product_details.ProductDetailsActivity" />
+        <activity android:name=".ui.activities.PaymentActivity"></activity>
     </application>
 
 </manifest>

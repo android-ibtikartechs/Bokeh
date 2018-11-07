@@ -31,7 +31,12 @@ public class AdapterSliderHome extends PagerAdapter {
 
         View view = layoutInflater.inflate(R.layout.slider_home_layout, container, false);
         ImageView im_slider = view.findViewById(R.id.im_slider);
-        Glide.with(context).load(products.get(position).getImage()).asBitmap().into(im_slider);
+        if (position == 0)
+            Glide.with(context).load("https://i.imgur.com/oOtzK7F.jpg").asBitmap().into(im_slider);
+        else if (position ==1)
+            Glide.with(context).load("https://i.imgur.com/s9FLtEA.jpg").asBitmap().into(im_slider);
+
+        //Glide.with(context).load(products.get(position).getOfferImage()).asBitmap().into(im_slider);
         //im_slider.setScaleType(ImageView.ScaleType.FIT_XY);
         container.addView(view);
 
