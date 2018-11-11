@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.activities.registration.RegistrationActivity"></activity>
         <activity android:name=".ui.activities.main.MainActivity" />
         <activity android:name=".ui.activities.splash.SplashActivity">
             <intent-filter>
@@ -37,7 +38,7 @@
 
         <activity android:name=".ui.activities.categories_search.CategorySearchActivity" />
         <activity android:name=".ui.activities.product_details.ProductDetailsActivity" />
-        <activity android:name=".ui.activities.PaymentActivity"></activity>
+        <activity android:name=".ui.activities.PaymentActivity" />
     </application>
 
 </manifest>

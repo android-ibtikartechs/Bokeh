@@ -3,6 +3,9 @@ package com.ibtikar.app.bokeh.data.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ModelProductItem {
@@ -67,6 +70,10 @@ public class ModelProductItem {
     @Expose
     private List<GalleryProductImage> gallery = null;
 
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+
     /**
      * No args constructor for use in serialization
      *
@@ -95,7 +102,7 @@ public class ModelProductItem {
      * @param sellername
      * @param offerStartTime
      */
-    public ModelProductItem(Integer id, String name, String image, Integer sellerid, String sellername, Integer categoryid, String category, String details, Boolean hasoffer, String offerImage, Integer price, Integer oprice, String offerStartDate, String offerStartTime, String offerEndDate, String offerEndTime, String discountPercentage, Boolean isSameDayDelivery, Boolean isLiked, List<GalleryProductImage> gallery) {
+    public ModelProductItem(Integer id, String name, String image, Integer sellerid, String sellername, Integer categoryid, String category, String details, Boolean hasoffer, String offerImage, Integer price, Integer oprice, String offerStartDate, String offerStartTime, String offerEndDate, String offerEndTime, String discountPercentage, Boolean isSameDayDelivery, Boolean isLiked, List<GalleryProductImage> gallery, String createdAt) {
         super();
         this.id = id;
         this.name = name;
@@ -117,6 +124,15 @@ public class ModelProductItem {
         this.isSameDayDelivery = isSameDayDelivery;
         this.isLiked = isLiked;
         this.gallery = gallery;
+        this.createdAt = createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
     }
 
     public void setOfferImage(String offerImage) {
@@ -277,6 +293,13 @@ public class ModelProductItem {
 
     public void setGallery(List<GalleryProductImage> gallery) {
         this.gallery = gallery;
+    }
+
+    public Long getTimeOfProductAdditionInMilliSecond() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String dateInString = getCreatedAt();
+        Date date = sdf.parse(dateInString);
+        return date.getTime();
     }
 
 }

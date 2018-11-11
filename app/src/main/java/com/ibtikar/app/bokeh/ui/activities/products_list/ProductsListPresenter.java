@@ -56,6 +56,12 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
                                 Collections.sort(list, ascendingComparator);
                             }
 
+                            else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_NEWEST)
+                            {
+                                ascendingComparator = new AscendingComparator(StaticValues.SORT_TYPE_NEWEST);
+                                Collections.sort(list, ascendingComparator);
+                            }
+
                         }
 
                         if (sortByBottomSheetPassingData.getAscendingDeascending() == StaticValues.SORT_DEASCEND)
@@ -69,6 +75,12 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
                             else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_PRICE)
                             {
                                 deascendingComparator = new DeascendingComparator(StaticValues.SORT_TYPE_PRICE);
+                                Collections.sort(list, deascendingComparator);
+                            }
+
+                            else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_NEWEST)
+                            {
+                                deascendingComparator = new DeascendingComparator(StaticValues.SORT_TYPE_NEWEST);
                                 Collections.sort(list, deascendingComparator);
                             }
                         }
