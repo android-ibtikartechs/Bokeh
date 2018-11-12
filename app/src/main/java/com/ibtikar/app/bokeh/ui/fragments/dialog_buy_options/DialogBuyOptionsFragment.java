@@ -7,10 +7,18 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.data.adapters.AdapterAreaSpinner;
+import com.ibtikar.app.bokeh.data.adapters.AdapterCitySpinner;
+import com.ibtikar.app.bokeh.data.models.ModelArea;
+import com.ibtikar.app.bokeh.data.models.ModelCity;
 import com.ibtikar.app.bokeh.ui.fragments.dialog_after_add_to_cart.DialogAfterBuyFragment;
 
 import java.text.SimpleDateFormat;
@@ -30,6 +38,21 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment {
 
     @BindView(R.id.btnApply)
     Button btnApply;
+
+    @BindView(R.id.area_spinner)
+    Spinner areaSpinner;
+
+    @BindView(R.id.city_spinner)
+    Spinner citySpinner;
+
+    @BindView(R.id.rgroup_delivery)
+    RadioGroup radioGroupDelivery;
+
+    @BindView(R.id.rbtn_pickup)
+    RadioButton rbtnPickup;
+
+    @BindView(R.id.rbtn_Delivery)
+    RadioButton rbtnDelivery;
 
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
@@ -56,6 +79,8 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment {
         dialog.setContentView(contentView);
         ButterKnife.bind(this,contentView);
 
+        setupAreasSpinner();
+        setupRadioGroup();
         setupTabs();
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +98,92 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment {
         if (behavior != null && behavior instanceof BottomSheetBehavior) {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
         }
+    }
+
+    private void setupRadioGroup() {
+        radioGroupDelivery.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.rbtn_Delivery)
+                    enableDeliverySpinners();
+
+
+                else if (checkedId == R.id.rbtn_pickup)
+                    disableDeliverySpinners();
+            }
+        });
+    }
+
+    private void disableDeliverySpinners() {
+        areaSpinner.setEnabled(false);
+        citySpinner.setEnabled(false);
+    }
+
+    private void enableDeliverySpinners() {
+        areaSpinner.setEnabled(true);
+        citySpinner.setEnabled(true);
+    }
+
+    private void setupAreasSpinner() {
+        List<ModelArea> list = new ArrayList<>();
+        List<ModelCity> cairoCities = new ArrayList<>();
+
+        cairoCities.add(new ModelCity(1, "Nasr City"));
+        cairoCities.add(new ModelCity(2, "El-Manial"));
+        cairoCities.add(new ModelCity(3, "Alf Maskan"));
+
+        List<ModelCity> gizaCities = new ArrayList<>();
+
+        gizaCities.add(new ModelCity(1, "6th of October"));
+        gizaCities.add(new ModelCity(2, "Maady"));
+        gizaCities.add(new ModelCity(3, "Mohandseen"));
+
+
+        List<ModelCity> alexandriaCities = new ArrayList<>();
+
+        alexandriaCities.add(new ModelCity(1, "El-Agamy"));
+        alexandriaCities.add(new ModelCity(2, "Sedy Beshr"));
+        alexandriaCities.add(new ModelCity(3, "Al-Asafra"));
+
+        list.add(new ModelArea(1, "Cairo", cairoCities));
+        list.add(new ModelArea(2, "Giza", gizaCities));
+        list.add(new ModelArea(3, "Alexandria", alexandriaCities));
+
+        AdapterAreaSpinner adapterAreaSpinner = new AdapterAreaSpinner(getContext(), 0, list);
+        areaSpinner.setAdapter(adapterAreaSpinner);
+
+        areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setupCitiesSpinner(list.get(position).getCities());
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void setupCitiesSpinner(List<ModelCity> list) {
+
+        AdapterCitySpinner adapterCitySpinner = new AdapterCitySpinner(getContext(), 0, list);
+        citySpinner.setAdapter(adapterCitySpinner);
+
+
+        citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(), list.get(position).getName(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
 

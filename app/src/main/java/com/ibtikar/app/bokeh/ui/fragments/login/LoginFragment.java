@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.ui.fragments.forget_password.ForgetPasswordFragment;
 import com.ibtikar.app.bokeh.ui.fragments.signup.SignupFragment;
 
 import butterknife.BindView;
@@ -35,6 +36,9 @@ public class LoginFragment extends Fragment {
 
     @BindView(R.id.btn_sign_up)
     TextView btnSignUp;
+
+    @BindView(R.id.btn_forget_password)
+    TextView btnForgetPassword;
 
 
     public LoginFragment() {
@@ -87,6 +91,17 @@ public class LoginFragment extends Fragment {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.setCustomAnimations(0, 0);
                 transaction.replace(R.id.registration_fragment_container, new SignupFragment());
+                transaction.commit();
+            }
+        });
+
+        btnForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(0, 0);
+                transaction.replace(R.id.registration_fragment_container, new ForgetPasswordFragment());
+                transaction.addToBackStack(null);
                 transaction.commit();
             }
         });

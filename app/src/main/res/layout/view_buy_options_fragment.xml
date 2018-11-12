@@ -54,13 +54,165 @@
             />
 
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/truck"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shipping options"
+                android:layout_marginStart="4dp"
+                />
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/rgroup_delivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="ltr"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            >
+
+            <RadioButton
+                android:id="@+id/rbtn_Delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/ColorFoshiac"
+                android:checked="true"
+                android:text="Delivery"
+                android:textColor="@color/ColorTextBlack"
+                 />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shipping to"
+                    android:layout_marginStart="48dp"
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="Area: "
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+
+                        >
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_tab_date_black"
+                            android:gravity="center"
+                            >
+                            <Spinner
+                                android:id="@+id/area_spinner"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                />
+                        </LinearLayout>
+
+
+
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="City: "
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+
+                        >
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_tab_date_black"
+                            android:gravity="center"
+                            >
+                            <Spinner
+                                android:id="@+id/city_spinner"
+                                android:layout_width="wrap_content"
+                                android:layout_height="30dp"
+                                />
+                        </LinearLayout>
+
+
+
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <RadioButton
+                android:id="@+id/rbtn_pickup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/ColorFoshiac"
+                android:checked="false"
+                android:text="Pickup"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/ColorTextBlack"
+                 />
+
+        </RadioGroup>
+
+
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
             >
