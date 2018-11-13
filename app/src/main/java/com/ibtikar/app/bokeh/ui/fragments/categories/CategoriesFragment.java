@@ -1,6 +1,7 @@
 package com.ibtikar.app.bokeh.ui.fragments.categories;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -16,8 +17,10 @@ import android.view.ViewGroup;
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
+import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.adapters.AdapterCategoriesList;
 import com.ibtikar.app.bokeh.data.models.OccasionItemModel;
+import com.ibtikar.app.bokeh.ui.activities.products_list.ProductsListActivity;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
@@ -150,6 +153,9 @@ public class CategoriesFragment extends BaseFragment implements CategoriesMvpVie
 
     @Override
     public void onItemClickListener(Integer id, String title) {
-
+        Intent intent = new Intent(getActivity(), ProductsListActivity.class);
+        intent.putExtra(StaticValues.KEY_CATEGORY_ID, id);
+        intent.putExtra(StaticValues.KEY_CATEGORY_TITLE, title);
+        startActivity(intent);
     }
 }

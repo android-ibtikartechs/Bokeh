@@ -1,6 +1,8 @@
 package com.ibtikar.app.bokeh.ui.fragments.dialog_buy_options;
 
 import android.app.Dialog;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
@@ -14,11 +16,14 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.adapters.AdapterAreaSpinner;
 import com.ibtikar.app.bokeh.data.adapters.AdapterCitySpinner;
 import com.ibtikar.app.bokeh.data.models.ModelArea;
 import com.ibtikar.app.bokeh.data.models.ModelCity;
+import com.ibtikar.app.bokeh.ui.fragments.cart.CartPresenter;
 import com.ibtikar.app.bokeh.ui.fragments.dialog_after_add_to_cart.DialogAfterBuyFragment;
 
 import java.text.SimpleDateFormat;
@@ -31,7 +36,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DialogBuyOptionsFragment extends BottomSheetDialogFragment {
+public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implements DialogBuyOptionsMvpView {
 
     @BindView(R.id.tab_layout_date)
     TabLayout tabLayout;
@@ -53,6 +58,11 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment {
 
     @BindView(R.id.rbtn_Delivery)
     RadioButton rbtnDelivery;
+
+    DialogBuyOptionsPresenter presenter;
+
+    Handler mHandler;
+
 
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
@@ -79,12 +89,18 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment {
         dialog.setContentView(contentView);
         ButterKnife.bind(this,contentView);
 
+        DataManager dataManager = ((MvpApp) getActivity().getApplication()).getDataManager();
+        presenter = new DialogBuyOptionsPresenter(dataManager);
+        presenter.onAttach(this);
+        mHandler = new Handler(Looper.getMainLooper());
+
         setupAreasSpinner();
         setupRadioGroup();
         setupTabs();
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                presenter.submitAndAddItem();
                 dismiss();
                 DialogAfterBuyFragment dialogAfterBuyFragment = new DialogAfterBuyFragment();
                 dialogAfterBuyFragment.show(getFragmentManager(), "Bottom Sheet after buy Dialog Fragment");
@@ -252,4 +268,13 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment {
         return datesInRange;
     }
 
+    @Override
+    public void showAreaListSpinner(List<ModelArea> list) {
+
+    }
+
+    @Override
+    public void showCityListSpinner(List<ModelCity> list) {
+
+    }
 }

@@ -23,12 +23,14 @@ import com.ibtikar.app.bokeh.data.models.LocationLatLong;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.SortByBottomSheetPassingData;
 import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
+import com.ibtikar.app.bokeh.ui.activities.product_details.ProductDetailsActivity;
 import com.ibtikar.app.bokeh.ui.fragments.dialog_filter.FilterDialogFragment;
 import com.ibtikar.app.bokeh.ui.fragments.dialog_sort_by.SortByDialogFragment;
 import com.ibtikar.app.bokeh.ui_utilities.CustomRecyclerView;
 import com.ibtikar.app.bokeh.ui_utilities.paginationStaggardScrollListener;
 import com.ibtikar.app.bokeh.utils.NetworkChangeReceiver;
 import com.ibtikar.app.bokeh.utils.PaginationAdapterCallback;
+import com.ibtikar.app.bokeh.utils.RxBus;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
@@ -211,8 +213,9 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     }
 
     @Override
-    public void onItemClickListener(Integer id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description) {
-
+    public void onItemClickListener(ModelProductItem modelProductItem) {
+        RxBus.publish(modelProductItem);
+        startActivity(new Intent(ProductsListActivity.this, ProductDetailsActivity.class));
     }
 
     @Override

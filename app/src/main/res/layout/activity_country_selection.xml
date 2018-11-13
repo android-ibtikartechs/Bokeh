@@ -28,15 +28,12 @@
             android:layout_marginTop="32dp"
             />
 
-        <AutoCompleteTextView
+        <Spinner
+            android:id="@+id/country_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:maxLines="1"
-            android:textCursorDrawable="@null"
-            android:textColorHint="@color/ColorFoshiac"
-            android:hint="Country"
+            android:layout_height="35dp"
             android:layout_marginTop="32dp"
+            android:overlapAnchor="false"
             />
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,22 +42,7 @@
             android:layout_marginTop="2dp"
             ></LinearLayout>
 
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:maxLines="1"
-            android:textCursorDrawable="@null"
-            android:textColorHint="@color/ColorFoshiac"
-            android:hint="Area"
-            android:layout_marginTop="32dp"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/ColorFoshiac"
-            android:layout_marginTop="2dp"
-            ></LinearLayout>
+
 
     </LinearLayout>
 

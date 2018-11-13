@@ -53,6 +53,10 @@ public class SearchFragment extends BaseFragment implements SearchMvpView, Adapt
 
     SearchPresenter presenter;
 
+
+
+
+
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -91,6 +95,8 @@ public class SearchFragment extends BaseFragment implements SearchMvpView, Adapt
         DataManager dataManager = ((MvpApp) getActivity().getApplication()).getDataManager();
         presenter = new SearchPresenter(dataManager);
         presenter.onAttach(this);
+
+
     }
 
     @SuppressLint("CheckResult")

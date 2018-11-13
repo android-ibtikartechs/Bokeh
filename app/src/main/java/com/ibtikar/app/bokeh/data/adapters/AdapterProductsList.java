@@ -92,14 +92,7 @@ public class AdapterProductsList  extends CustomRecyclerView.Adapter<RecyclerVie
                 itemVH.loutCont.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        customListener.onItemClickListener(modelProductItem.getId(),
-                                modelProductItem.getName(),
-                                modelProductItem.getImage(),
-                                modelProductItem.getPrice(),
-                                modelProductItem.getIsSameDayDelivery(),
-                                modelProductItem.getSellername(),
-                                modelProductItem.getIsLiked(),
-                                modelProductItem.getDetails());
+                        customListener.onItemClickListener(modelProductItem);
                     }
                 });
                 break;
@@ -236,7 +229,7 @@ public class AdapterProductsList  extends CustomRecyclerView.Adapter<RecyclerVie
 
 
     public interface ContainerProductsItemsClickListener {
-        public void onItemClickListener(Integer id, String title, String imUrl, Integer price, boolean isSameDayDelivery, String sellerName, boolean isLiked, String description);
+        public void onItemClickListener(ModelProductItem modelProductItem);
     }
     public void setCustomButtonListner(ContainerProductsItemsClickListener listener) {
         this.customListener = listener;

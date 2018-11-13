@@ -26,6 +26,7 @@ public class AdapterShopsList extends RecyclerView.Adapter<RecyclerView.ViewHold
     private List<ModelShopItem> arrayList;
     private Context context;
     private ContainerClickListener customListener;
+    private boolean isFullList;
 
 
     public AdapterShopsList(List<ModelShopItem> arrayList, Context context) {
@@ -33,12 +34,22 @@ public class AdapterShopsList extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.context = context;
     }
 
+    public AdapterShopsList(List<ModelShopItem> arrayList, Context context, boolean isFullList) {
+        this.arrayList = arrayList;
+        this.context = context;
+        this.isFullList = isFullList;
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View viewItem = inflater.inflate(R.layout.view_featured_shops_item, parent, false);
+        View viewItem;
+        if (isFullList)
+            viewItem = inflater.inflate(R.layout.view_shop_list, parent, false);
+        else
+            viewItem = inflater.inflate(R.layout.view_featured_shops_item, parent, false);
         viewHolder = new ItemViewHolder(viewItem);
         return viewHolder;
     }

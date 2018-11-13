@@ -21,8 +21,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.StaticValues;
+import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
 import com.ibtikar.app.bokeh.ui.activities.categories_search.CategorySearchActivity;
 import com.ibtikar.app.bokeh.ui.fragments.account.AccountFragment;
 import com.ibtikar.app.bokeh.ui.fragments.cart.CartFragment;
@@ -34,8 +37,9 @@ import com.ibtikar.app.bokeh.ui_utilities.ViewPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.functions.Consumer;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity implements MainMvpView {
 
     @BindView(R.id.relativeLayout)
     TabLayout tabLayout;
@@ -45,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     private Animation animShow, animHide;
+
+    MainPresenter presenter;
+
 
     ViewPagerAdapter viewPagerAdapter;
 
@@ -58,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         //toolbar.setLogo(R.drawable.logo_toolbar);
+
+        DataManager dataManager = ((MvpApp) getApplication()).getDataManager();
+        presenter = new MainPresenter(dataManager);
+        presenter.onAttach(this);
 
         setupActionBar();
         initAnimation();
@@ -136,10 +147,10 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-                if (tab.getPosition() == 4) {
+              /*  if (tab.getPosition() == 4) {
                     //tabLayout.startAnimation( animHide );
                     tabLayout.setVisibility(View.GONE);
-                }
+                }*/
 
             }
             //}
@@ -160,6 +171,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        ((TextView)((ViewGroup) tabLayout.getChildAt(0)).getChildAt(4).findViewById(R.id.badge)).setText(presenter.getCartItem().toString());
+
+        ((MvpApp) getApplication())
+                .bus()
+                .toObservable()
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object object) throws Exception {
+                        if (object instanceof Integer) {
+                            //tvSearch.setText((String)object);
+                            ((TextView)((ViewGroup) tabLayout.getChildAt(0)).getChildAt(4).findViewById(R.id.badge)).setText(((Integer)object).toString());
+                        }
+                    }
+                });
 
     }
 

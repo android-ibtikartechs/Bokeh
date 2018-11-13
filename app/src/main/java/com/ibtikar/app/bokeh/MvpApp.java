@@ -26,8 +26,9 @@ public class MvpApp extends Application {
         super.onCreate();
         SharedPreferenceHelper sharedPrefsHelper = new SharedPreferenceHelper(getApplicationContext());
         SQLiteHandler sqliteHandler = new SQLiteHandler(getApplicationContext());
-        dataManager = new DataManager(sqliteHandler, sharedPrefsHelper);
         bus = new RxBus();
+        dataManager = new DataManager(sqliteHandler, sharedPrefsHelper, bus);
+
         //setLocale("ar");
         //changeLang(getApplicationContext(), "ar");
     }

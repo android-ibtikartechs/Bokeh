@@ -7,4 +7,9 @@ public class DialogBuyOptionsPresenter <V extends DialogBuyOptionsMvpView> exten
     public DialogBuyOptionsPresenter(DataManager dataManager) {
         super(dataManager);
     }
+
+    @Override
+    public void submitAndAddItem() {
+        getDataManager().plusOneCartItems();
+    }
 }
