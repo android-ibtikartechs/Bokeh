@@ -1,13 +1,10 @@
 package com.ibtikar.app.bokeh.ui.activities.products_list;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -38,7 +35,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.disposables.Disposable;
 
 public class ProductsListActivity extends BaseActivity implements ProductsListMvpView, AdapterProductsList.ContainerProductsItemsClickListener, PaginationAdapterCallback, SortByDialogFragment.ApplyClickListener {
 
@@ -88,7 +84,9 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
         intent = getIntent();
         locationLatLong = new LocationLatLong(30.0659632,31.2021518);
         mHandler = new Handler(Looper.getMainLooper());
-        setupActionBar(intent.getStringExtra(StaticValues.KEY_CATEGORY_TITLE));
+
+        setupActionBar(intent.getStringExtra(StaticValues.KEY_SHOP_OR_CATEGORY_TITLE));
+
         btnFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,12 +105,6 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
         });
 
 
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        intentFilter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
-        intentFilter.setPriority(100);
-        networkChangeReceiver = new NetworkChangeReceiver();
-        registerReceiver(networkChangeReceiver, intentFilter);
 
 
         arrayList = new ArrayList<>();
@@ -130,7 +122,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
         presenter.onAttach(this);
 
 
-        presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_CATEGORY_ID, 0),false,null);
+        presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0),false,null, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE) );
 
     }
 
@@ -280,7 +272,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
                 "Try Again", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_CATEGORY_ID, 0), false, null);
+                        presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0), false, null, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
                     }
                 });
 
@@ -299,6 +291,6 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     @Override
     public void onApplyClickListener(SortByBottomSheetPassingData sortByBottomSheetPassingData) {
         adapterProductsList.clear();
-        presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_CATEGORY_ID, 0), true, sortByBottomSheetPassingData);
+        presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0), true, sortByBottomSheetPassingData, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
     }
 }

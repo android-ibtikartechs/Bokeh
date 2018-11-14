@@ -27,12 +27,17 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
     }
 
     @Override
-    public void loadFirstPage(LocationLatLong locationLatLong, Integer categoryId, final boolean isSort, final SortByBottomSheetPassingData sortByBottomSheetPassingData) {
+    public void loadFirstPage(LocationLatLong locationLatLong, Integer categoryId, final boolean isSort, final SortByBottomSheetPassingData sortByBottomSheetPassingData, int listType) {
 
 
         getMvpView().showLoadingView();
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<ResponseProductList> call = service.getProductListForCategory(categoryId,locationLatLong.getLat(),locationLatLong.getLongitude());
+        Call<ResponseProductList> call = null;
+        if (listType == StaticValues.CATEGORY_TYPE)
+            call = service.getProductListForCategory(categoryId,locationLatLong.getLat(),locationLatLong.getLongitude());
+        else if (listType == StaticValues.SHOPS_TYPE)
+            call = service.getProductListForCategory(categoryId,locationLatLong.getLat(),locationLatLong.getLongitude());
+
         call.enqueue(new Callback<ResponseProductList>() {
             @Override
             public void onResponse(Call<ResponseProductList> call, Response<ResponseProductList> response) {

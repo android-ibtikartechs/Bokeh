@@ -21,7 +21,7 @@ public class ShopsPresenter <V extends ShopsMvpView> extends BasePresenter<V> im
 
 
         List<ModelShopItem> list = new ArrayList<>();
-        list.add(new ModelShopItem(1,
+        list.add(new ModelShopItem(34 ,
                 "Bouquet",
                 "https://images.unsplash.com/photo-1531058240690-006c446962d8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d7c5c05b9ee9d344821207bfcf9b7a2d&auto=format&fit=crop&w=750&q=80",
                 "",

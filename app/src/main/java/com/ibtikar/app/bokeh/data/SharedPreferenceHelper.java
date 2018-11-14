@@ -26,6 +26,7 @@ public class SharedPreferenceHelper {
 
     public void setCartItemsCount(int cartItemsCount) {
         mSharedPreferences.edit().putInt(CART_ITEMS_COUNT, cartItemsCount).apply();
+        passNewCartCount(getCartItemsCount());
     }
 
     public int getCartItemsCount (){
@@ -35,11 +36,18 @@ public class SharedPreferenceHelper {
     public void plusOneCartItems()
     {
         mSharedPreferences.edit().putInt(CART_ITEMS_COUNT, getCartItemsCount()+1).apply();
+        passNewCartCount(getCartItemsCount());
     }
 
     public void removeOneCartItem()
     {
         mSharedPreferences.edit().putInt(CART_ITEMS_COUNT, getCartItemsCount()-1).apply();
+        passNewCartCount(getCartItemsCount());
+    }
+
+    private void passNewCartCount(Integer newCartCount)
+    {
+        ((MvpApp) context.getApplicationContext()).bus().send(newCartCount);
     }
 
 

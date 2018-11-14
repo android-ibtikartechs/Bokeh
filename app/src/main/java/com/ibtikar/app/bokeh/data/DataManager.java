@@ -7,17 +7,16 @@ import com.ibtikar.app.bokeh.utils.RxBus;
 public class DataManager {
     private SharedPreferenceHelper sharedPrefsHelper;
     private SQLiteHandler mSQLiteHandler;
-    RxBus rxBus;
 
-    public DataManager(SQLiteHandler mSQLiteHandler, SharedPreferenceHelper sharedPrefsHelper, RxBus rxBus) {
+    public DataManager(SQLiteHandler mSQLiteHandler, SharedPreferenceHelper sharedPrefsHelper) {
         this.sharedPrefsHelper = sharedPrefsHelper;
         this.mSQLiteHandler = mSQLiteHandler;
-        this.rxBus = rxBus;
+
     }
 
     public void setCartItemsCount(int cartItemsCount) {
         sharedPrefsHelper.setCartItemsCount(cartItemsCount);
-        passNewCartCount(getCartItemsCount());
+        //passNewCartCount(getCartItemsCount());
     }
 
     public int getCartItemsCount (){
@@ -27,17 +26,17 @@ public class DataManager {
     public void plusOneCartItems()
     {
         sharedPrefsHelper.plusOneCartItems();
-        passNewCartCount(getCartItemsCount());
+        //passNewCartCount(getCartItemsCount());
     }
 
     public void removeOneCartItem()
     {
         sharedPrefsHelper.removeOneCartItem();
-        passNewCartCount(getCartItemsCount());
+        //passNewCartCount(getCartItemsCount());
     }
 
-    private void passNewCartCount(Integer newCartCount)
+   /* private void passNewCartCount(Integer newCartCount)
     {
         rxBus.send(newCartCount);
-    }
+    }*/
 }

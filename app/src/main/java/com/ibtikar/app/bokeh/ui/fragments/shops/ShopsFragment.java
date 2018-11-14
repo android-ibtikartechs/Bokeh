@@ -1,6 +1,7 @@
 package com.ibtikar.app.bokeh.ui.fragments.shops;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,6 +20,7 @@ import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.adapters.AdapterProductsList;
 import com.ibtikar.app.bokeh.data.adapters.AdapterShopsList;
 import com.ibtikar.app.bokeh.data.models.ModelShopItem;
+import com.ibtikar.app.bokeh.ui.activities.products_list.ProductsListActivity;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
 import com.ibtikar.app.bokeh.ui_utilities.CustomRecyclerView;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
@@ -165,6 +167,10 @@ public class ShopsFragment extends BaseFragment implements ShopsMvpView, Adapter
 
     @Override
     public void onItemShopClickListener(Integer id, String title) {
-
+        Intent intent = new Intent(getActivity(), ProductsListActivity.class);
+        intent.putExtra(StaticValues.KEY_LIST_TYPE, StaticValues.SHOPS_TYPE);
+        intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, id);
+        intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_TITLE, title);
+        startActivity(intent);
     }
 }

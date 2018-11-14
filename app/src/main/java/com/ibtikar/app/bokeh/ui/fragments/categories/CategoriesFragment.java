@@ -154,8 +154,9 @@ public class CategoriesFragment extends BaseFragment implements CategoriesMvpVie
     @Override
     public void onItemClickListener(Integer id, String title) {
         Intent intent = new Intent(getActivity(), ProductsListActivity.class);
-        intent.putExtra(StaticValues.KEY_CATEGORY_ID, id);
-        intent.putExtra(StaticValues.KEY_CATEGORY_TITLE, title);
+        intent.putExtra(StaticValues.KEY_LIST_TYPE, StaticValues.CATEGORY_TYPE);
+        intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, id);
+        intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_TITLE, title);
         startActivity(intent);
     }
 }

@@ -2,9 +2,6 @@ package com.ibtikar.app.bokeh.ui.fragments.home;
 
 
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -309,8 +306,8 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
     @Override
     public void onItemClickListener(Integer id, String title) {
         Intent intent = new Intent(getActivity(), ProductsListActivity.class);
-        intent.putExtra(StaticValues.KEY_CATEGORY_ID, id);
-        intent.putExtra(StaticValues.KEY_CATEGORY_TITLE, title);
+        intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, id);
+        intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_TITLE, title);
         startActivity(intent);
     }
 

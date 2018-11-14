@@ -76,6 +76,14 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
         itemViewHolder.tvDeliveryTime.setText(modelProductItem.getDeliveryTime());
         itemViewHolder.tvSellerName.setText(modelProductItem.getSellername());
         itemViewHolder.tvPrice.setText(modelProductItem.getPrice().toString());
+        itemViewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                arrayList.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, arrayList.size());
+            }
+        });
 
     }
 
