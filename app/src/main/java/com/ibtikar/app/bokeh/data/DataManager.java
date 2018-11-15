@@ -35,6 +35,16 @@ public class DataManager {
         //passNewCartCount(getCartItemsCount());
     }
 
+    public void setCountryId(int countryId)
+    {
+        sharedPrefsHelper.setCountryId(countryId);
+    }
+
+    public int getCountryId()
+    {
+        return sharedPrefsHelper.getCountryId();
+    }
+
    /* private void passNewCartCount(Integer newCartCount)
     {
         rxBus.send(newCartCount);

@@ -13,14 +13,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ibtikar.app.bokeh.R;
-import com.ibtikar.app.bokeh.data.models.CountryModel;
-import com.ibtikar.app.bokeh.data.models.ModelArea;
+import com.ibtikar.app.bokeh.data.models.ModelCountry;
 
 import java.util.List;
 
-public class AdapterCountrySpinner extends ArrayAdapter<CountryModel> {
+public class AdapterCountrySpinner extends ArrayAdapter<ModelCountry> {
     private final Context mContext;
-    private final List<CountryModel> items;
+    private final List<ModelCountry> items;
 
     public AdapterCountrySpinner(@NonNull Context context, int resource, @NonNull List objects) {
         super(context, resource, objects);
@@ -45,15 +44,15 @@ public class AdapterCountrySpinner extends ArrayAdapter<CountryModel> {
         TextView tvCity = view.findViewById(R.id.tv_title_country);
         ImageView imFlag = view.findViewById(R.id.im_flag);
 
-        CountryModel country = items.get(position);
+        ModelCountry country = items.get(position);
 
-        if (!(country.getImgUrl().equals("") || country.getImgUrl() == null ))
+        if (!(country.getImage().equals("") || country.getImage() == null ))
         {
             Glide.with(mContext)
-                    .load(country.getImgUrl()).diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .load(country.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imFlag);
         }
-        tvCity.setText(country.getName());
+        tvCity.setText(country.getTitle());
 
 
         return view;

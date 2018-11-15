@@ -34,12 +34,35 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="8dp"
+            android:layout_above="@id/lout_area"
+            android:layout_marginStart="8dp"
             android:text="Bouquet"
             android:textColor="@color/ColorWhite"
             android:textSize="24sp"
             android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/lout_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ColorWhite"
+                android:text="Cairo, Nasr City"
+                android:drawableStart="@drawable/ic_location_city"
+                android:drawablePadding="3dp"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

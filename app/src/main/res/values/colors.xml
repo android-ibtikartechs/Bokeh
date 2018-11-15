@@ -11,4 +11,5 @@
     <color name="ColorGrayLine">#C7C7C7</color>
     <color name="ColorGrayDivider">#9B9B9B</color>
     <color name="ColorFaceBook">#3F51B5</color>
+    <color name="ColorRed">#f44336</color>
 </resources>

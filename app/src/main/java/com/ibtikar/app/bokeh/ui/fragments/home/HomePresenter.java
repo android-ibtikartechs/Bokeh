@@ -25,13 +25,13 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
 
 
     @Override
-    public void loadHomeData(double latitude, double longitude) {
+    public void loadHomeData() {
 
         getMvpView().showLoadingView();
         Log.d("", "loadItem: ");
 
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<ResponseHomeModel> call = service.getHomeData(30.0659632,31.2021518);
+        Call<ResponseHomeModel> call = service.getHomeData(getDataManager().getCountryId());
         call.enqueue(new Callback<ResponseHomeModel>() {
             @Override
             public void onResponse(Call<ResponseHomeModel> call, Response<ResponseHomeModel> response) {

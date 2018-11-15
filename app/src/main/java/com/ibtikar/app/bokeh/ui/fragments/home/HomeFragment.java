@@ -184,7 +184,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
 
 
-        presenter.loadHomeData(30.0659632, 31.2021518);
+        presenter.loadHomeData();
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -287,7 +287,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
                 "Try Again", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        presenter.loadHomeData(30.0659632, 31.2021518);
+                        presenter.loadHomeData();
                     }
                 });
 

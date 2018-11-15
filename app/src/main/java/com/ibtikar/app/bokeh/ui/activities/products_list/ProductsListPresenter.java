@@ -34,9 +34,9 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<ResponseProductList> call = null;
         if (listType == StaticValues.CATEGORY_TYPE)
-            call = service.getProductListForCategory(categoryId,locationLatLong.getLat(),locationLatLong.getLongitude());
+            call = service.getProductListForCategory(categoryId,getDataManager().getCountryId());
         else if (listType == StaticValues.SHOPS_TYPE)
-            call = service.getProductListForCategory(categoryId,locationLatLong.getLat(),locationLatLong.getLongitude());
+            call = service.getProductListForCategory(categoryId,getDataManager().getCountryId());
 
         call.enqueue(new Callback<ResponseProductList>() {
             @Override

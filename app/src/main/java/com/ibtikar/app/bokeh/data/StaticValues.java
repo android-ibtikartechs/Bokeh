@@ -17,4 +17,5 @@ public class StaticValues {
 
     public static final int CATEGORY_TYPE = 100;
     public static final int SHOPS_TYPE = 101;
+    public static final String KEY_COUNTRY_ID = "KEY_COUNTRY_ID";
 }

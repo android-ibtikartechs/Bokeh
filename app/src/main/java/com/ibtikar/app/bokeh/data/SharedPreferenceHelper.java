@@ -11,6 +11,7 @@ public class SharedPreferenceHelper {
     public static final String MY_PREFS = "MY_PREFS";
     SharedPreferences mSharedPreferences;
     private static final String CART_ITEMS_COUNT = "CART_ITEMS_COUNT";
+    private static final String KEY_COUNTRY_ID = "KEY_COUNTRY_ID";
     private Context context;
 
     public SharedPreferenceHelper(Context context) {
@@ -27,6 +28,16 @@ public class SharedPreferenceHelper {
     public void setCartItemsCount(int cartItemsCount) {
         mSharedPreferences.edit().putInt(CART_ITEMS_COUNT, cartItemsCount).apply();
         passNewCartCount(getCartItemsCount());
+    }
+
+    public void setCountryId(int countryId)
+    {
+        mSharedPreferences.edit().putInt(KEY_COUNTRY_ID, countryId).apply();
+    }
+
+    public int getCountryId()
+    {
+        return mSharedPreferences.getInt(KEY_COUNTRY_ID,64);
     }
 
     public int getCartItemsCount (){
