@@ -76,6 +76,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
 
 
     int page_position = 0, slider_size = 0;
+    ModelProductItem modelProductItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RxBus.publish(modelProductItem);
                 DialogBuyOptionsFragment dialogBuyOptionsFragment = new DialogBuyOptionsFragment();
                 dialogBuyOptionsFragment.show(getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
             }
@@ -127,6 +129,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
 
     @Override
     public void populateData(ModelProductItem modelProductItem) {
+        this.modelProductItem = modelProductItem;
         setupActionBar(modelProductItem.getName());
         if (modelProductItem.getGallery().size() == 0 || modelProductItem.getGallery() == null) {
             List<GalleryProductImage> list = new List<GalleryProductImage>() {

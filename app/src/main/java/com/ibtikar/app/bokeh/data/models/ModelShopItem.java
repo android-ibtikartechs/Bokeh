@@ -13,6 +13,19 @@ public class ModelShopItem {
     @SerializedName("image")
     @Expose
     private String image;
+
+    @SerializedName("country")
+    @Expose
+    private String country;
+    @SerializedName("city")
+    @Expose
+    private String city;
+    @SerializedName("area")
+    @Expose
+    private String area;
+    @SerializedName("address")
+    @Expose
+    private String address;
     @SerializedName("email")
     @Expose
     private String email;
@@ -43,7 +56,7 @@ public class ModelShopItem {
      * @param image
      * @param longitude
      */
-    public ModelShopItem(Integer id, String name, String image, String email, String phone, String lattitude, String longitude) {
+    public ModelShopItem(Integer id, String name, String image,String country,String city,String area,String address, String email, String phone, String lattitude, String longitude) {
         super();
         this.id = id;
         this.name = name;
@@ -52,6 +65,42 @@ public class ModelShopItem {
         this.phone = phone;
         this.lattitude = lattitude;
         this.longitude = longitude;
+        this.country = country;
+        this.city = city;
+        this.area = area;
+        this.address = address;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Integer getId() {

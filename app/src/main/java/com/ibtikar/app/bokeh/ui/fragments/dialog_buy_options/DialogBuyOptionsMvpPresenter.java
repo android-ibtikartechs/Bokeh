@@ -4,4 +4,5 @@ import com.ibtikar.app.bokeh.ui.activities.base.MvpPresenter;
 
 public interface DialogBuyOptionsMvpPresenter <V extends DialogBuyOptionsMvpView> extends MvpPresenter<V> {
     void submitAndAddItem();
+    void loadAreasSpinner();
 }

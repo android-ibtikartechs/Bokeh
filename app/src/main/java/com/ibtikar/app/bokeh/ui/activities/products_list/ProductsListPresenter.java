@@ -36,7 +36,7 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
         if (listType == StaticValues.CATEGORY_TYPE)
             call = service.getProductListForCategory(categoryId,getDataManager().getCountryId());
         else if (listType == StaticValues.SHOPS_TYPE)
-            call = service.getProductListForCategory(categoryId,getDataManager().getCountryId());
+            call = service.getProductListForShop(categoryId);
 
         call.enqueue(new Callback<ResponseProductList>() {
             @Override
@@ -45,46 +45,33 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
                     AscendingComparator ascendingComparator;
                     DeascendingComparator deascendingComparator;
                     List<ModelProductItem> list = response.body().getProducts();
-                    if (isSort)
+                    if (list.size() == 0)
+                        getMvpView().showEmptyView(listType);
+                    else
                     {
-                        if (sortByBottomSheetPassingData.getAscendingDeascending() == StaticValues.SORT_ASCEND)
-                        {
-                            if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_TITLE)
-                            {
+                        if (isSort) {
+                        if (sortByBottomSheetPassingData.getAscendingDeascending() == StaticValues.SORT_ASCEND) {
+                            if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_TITLE) {
                                 ascendingComparator = new AscendingComparator(StaticValues.SORT_TYPE_TITLE);
                                 Collections.sort(list, ascendingComparator);
-                            }
-
-                            else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_PRICE)
-                            {
+                            } else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_PRICE) {
                                 ascendingComparator = new AscendingComparator(StaticValues.SORT_TYPE_PRICE);
                                 Collections.sort(list, ascendingComparator);
-                            }
-
-                            else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_NEWEST)
-                            {
+                            } else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_NEWEST) {
                                 ascendingComparator = new AscendingComparator(StaticValues.SORT_TYPE_NEWEST);
                                 Collections.sort(list, ascendingComparator);
                             }
 
                         }
 
-                        if (sortByBottomSheetPassingData.getAscendingDeascending() == StaticValues.SORT_DEASCEND)
-                        {
-                            if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_TITLE)
-                            {
+                        if (sortByBottomSheetPassingData.getAscendingDeascending() == StaticValues.SORT_DEASCEND) {
+                            if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_TITLE) {
                                 deascendingComparator = new DeascendingComparator(StaticValues.SORT_TYPE_TITLE);
                                 Collections.sort(list, deascendingComparator);
-                            }
-
-                            else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_PRICE)
-                            {
+                            } else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_PRICE) {
                                 deascendingComparator = new DeascendingComparator(StaticValues.SORT_TYPE_PRICE);
                                 Collections.sort(list, deascendingComparator);
-                            }
-
-                            else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_NEWEST)
-                            {
+                            } else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_NEWEST) {
                                 deascendingComparator = new DeascendingComparator(StaticValues.SORT_TYPE_NEWEST);
                                 Collections.sort(list, deascendingComparator);
                             }
@@ -93,6 +80,7 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
 
                     getMvpView().addMoreToAdapter(list);
                     getMvpView().showContent();
+                }
                 }
                 else
                     getMvpView().showErrorConnectionView();

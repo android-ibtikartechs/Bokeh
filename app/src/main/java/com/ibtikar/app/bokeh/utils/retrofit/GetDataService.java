@@ -5,6 +5,7 @@ import com.ibtikar.app.bokeh.data.models.responses.ResponseCountriesList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseHomeModel;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseProductList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseSearchResultList;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseShopsList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -27,5 +28,11 @@ public interface GetDataService {
 
     @GET("/rcountries")
     Call<ResponseCountriesList> getCountriesList();
+
+    @GET("/sellers/{country_id}")
+    Call<ResponseShopsList> getShopsList(@Path("country_id") Integer countryId);
+
+    @GET("/seller_products/{seller_id}")
+    Call<ResponseProductList> getProductListForShop(@Path("seller_id") Integer sellerId);
 
 }

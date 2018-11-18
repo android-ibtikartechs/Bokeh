@@ -94,7 +94,8 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         presenter.onAttach(this);
         mHandler = new Handler(Looper.getMainLooper());
 
-        setupAreasSpinner();
+        //setupAreasSpinner();
+        presenter.loadAreasSpinner();
         setupRadioGroup();
         setupTabs();
         btnApply.setOnClickListener(new View.OnClickListener() {
@@ -276,5 +277,24 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
     @Override
     public void showCityListSpinner(List<ModelCity> list) {
 
+    }
+
+    @Override
+    public void setaupAreasSpinner(List<ModelArea> list) {
+        AdapterAreaSpinner adapterAreaSpinner = new AdapterAreaSpinner(getContext(), 0, list);
+        areaSpinner.setAdapter(adapterAreaSpinner);
+
+        areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setupCitiesSpinner(list.get(position).getCities());
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }

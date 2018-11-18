@@ -306,6 +306,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
     @Override
     public void onItemClickListener(Integer id, String title) {
         Intent intent = new Intent(getActivity(), ProductsListActivity.class);
+        intent.putExtra(StaticValues.KEY_LIST_TYPE, StaticValues.CATEGORY_TYPE);
         intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, id);
         intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_TITLE, title);
         startActivity(intent);
@@ -319,6 +320,11 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
     @Override
     public void onItemShopClickListener(Integer id, String title) {
+        Intent intent = new Intent(getActivity(), ProductsListActivity.class);
+        intent.putExtra(StaticValues.KEY_LIST_TYPE, StaticValues.SHOPS_TYPE);
+        intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, id);
+        intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_TITLE, title);
+        startActivity(intent);
     }
 
 

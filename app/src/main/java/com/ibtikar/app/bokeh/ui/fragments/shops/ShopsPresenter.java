@@ -2,10 +2,17 @@ package com.ibtikar.app.bokeh.ui.fragments.shops;
 
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.models.ModelShopItem;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseShopsList;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
+import com.ibtikar.app.bokeh.utils.retrofit.GetDataService;
+import com.ibtikar.app.bokeh.utils.retrofit.RetrofitClientInstance;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ShopsPresenter <V extends ShopsMvpView> extends BasePresenter<V> implements ShopsMvpPresenter<V> {
 
@@ -16,14 +23,41 @@ public class ShopsPresenter <V extends ShopsMvpView> extends BasePresenter<V> im
 
     @Override
     public void loadShops() {
+
         getMvpView().showLoadingView();
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        Call<ResponseShopsList> call = null;
+        call = service.getShopsList(getDataManager().getCountryId());
+        call.enqueue(new Callback<ResponseShopsList>() {
+            @Override
+            public void onResponse(Call<ResponseShopsList> call, Response<ResponseShopsList> response) {
+                if (response.body().getStatus())
+                {
+                    getMvpView().addMoreToAdapter(response.body().getList());
+                    getMvpView().showContent();
+                }
+                else
+                {
+                    getMvpView().showErrorConnectionView();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseShopsList> call, Throwable t) {
+                getMvpView().showErrorConnectionView();
+            }
+        });
 
 
-
+        /*
         List<ModelShopItem> list = new ArrayList<>();
         list.add(new ModelShopItem(34 ,
                 "Bouquet",
                 "https://images.unsplash.com/photo-1531058240690-006c446962d8?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d7c5c05b9ee9d344821207bfcf9b7a2d&auto=format&fit=crop&w=750&q=80",
+                "",
+                "",
+                "",
+                "",
                 "",
                 "",
                 "",
@@ -35,11 +69,19 @@ public class ShopsPresenter <V extends ShopsMvpView> extends BasePresenter<V> im
                 "",
                 "",
                 "",
+                "",
+                "",
+                "",
+                "",
                 ""));
 
         list.add(new ModelShopItem(1,
                 "Elshrouk Ward",
                 "https://images.unsplash.com/photo-1487070183336-b863922373d4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6d34026de28fc574bcd9fb3d230be17f&auto=format&fit=crop&w=750&q=80",
+                "",
+                "",
+                "",
+                "",
                 "",
                 "",
                 "",
@@ -51,10 +93,14 @@ public class ShopsPresenter <V extends ShopsMvpView> extends BasePresenter<V> im
                 "",
                 "",
                 "",
+                "",
+                "",
+                "",
+                "",
                 ""));
 
         getMvpView().addMoreToAdapter(list);
         getMvpView().showContent();
-
+        */
     }
 }

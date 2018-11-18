@@ -13,7 +13,7 @@ public class ModelArea {
     @Expose
     private String name;
 
-    @SerializedName("Cities")
+    @SerializedName("AreasList")
     @Expose
     private List<ModelCity> cities = null;
 

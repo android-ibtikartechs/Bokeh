@@ -273,19 +273,39 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
                     @Override
                     public void onClick(View v) {
                         presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0), false, null, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
+                        btnFilter.setEnabled(true);
+                        btnSortBy.setEnabled(true);
                     }
                 });
+
+        btnFilter.setEnabled(false);
+        btnSortBy.setEnabled(false);
 
     }
 
     @Override
     public void showLoadingView() {
         progressLinearLayout.showLoading();
+        btnFilter.setEnabled(false);
+        btnSortBy.setEnabled(false);
     }
 
     @Override
     public void showContent() {
         progressLinearLayout.showContent();
+        btnFilter.setEnabled(true);
+        btnSortBy.setEnabled(true);
+    }
+
+    @Override
+    public void showEmptyView(int categoryOrShop) {
+        if (categoryOrShop == StaticValues.CATEGORY_TYPE)
+            progressLinearLayout.showEmpty(R.drawable.category_empty_icon, "No items yet", "No Items in this category yet.");
+        else
+            progressLinearLayout.showEmpty(R.drawable.coming_soon_icon, "No items yet", "this shop have no items yet.");
+
+        btnFilter.setEnabled(false);
+        btnSortBy.setEnabled(false);
     }
 
     @Override

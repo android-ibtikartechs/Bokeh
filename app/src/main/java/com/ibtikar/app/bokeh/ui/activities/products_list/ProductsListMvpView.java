@@ -17,5 +17,6 @@ public interface ProductsListMvpView extends MvpView {
     void showErrorConnectionView();
     void showLoadingView();
     void showContent();
+    void showEmptyView(int categoryOrShop);
 
 }

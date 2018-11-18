@@ -46,36 +46,62 @@ public class AdapterShopsList extends RecyclerView.Adapter<RecyclerView.ViewHold
         RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View viewItem;
-        if (isFullList)
+        if (isFullList) {
             viewItem = inflater.inflate(R.layout.view_shop_list, parent, false);
-        else
+            viewHolder = new LinearListItemViewHolder(viewItem);
+        }
+        else {
             viewItem = inflater.inflate(R.layout.view_featured_shops_item, parent, false);
-        viewHolder = new ItemViewHolder(viewItem);
+            viewHolder = new ItemViewHolder(viewItem);
+        }
+
         return viewHolder;
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        final ModelShopItem shopsListItem = arrayList.get(position);
-        final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-
-        if (!(shopsListItem.getImage().equals("") || shopsListItem.getImage() == null ))
+        if (isFullList)
         {
-            Glide.with(context)
-                    .load(shopsListItem.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(itemViewHolder.imShop);
+            final LinearListItemViewHolder itemViewHolder;
+            final ModelShopItem shopsListItem = arrayList.get(position);
+            itemViewHolder = (LinearListItemViewHolder) holder;
+            if (!(shopsListItem.getImage().equals("") || shopsListItem.getImage() == null)) {
+                Glide.with(context)
+                        .load(shopsListItem.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(itemViewHolder.imShop);
+            }
+
+            itemViewHolder.tvTitle.setText(shopsListItem.getName());
+            String address = shopsListItem.getCity() + ", " + shopsListItem.getArea();
+            itemViewHolder.tvAddress.setText(address);
+            itemViewHolder.loutContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    customListener.onItemShopClickListener(shopsListItem.getId(), shopsListItem.getName());
+                }
+            });
+
         }
 
-
-        itemViewHolder.tvTitle.setText(shopsListItem.getName());
-        itemViewHolder.loutContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                customListener.onItemShopClickListener(shopsListItem.getId(),shopsListItem.getName());
+        else {
+            final ItemViewHolder itemViewHolder;
+            final ModelShopItem shopsListItem = arrayList.get(position);
+            itemViewHolder = (ItemViewHolder) holder;
+            if (!(shopsListItem.getImage().equals("") || shopsListItem.getImage() == null)) {
+                Glide.with(context)
+                        .load(shopsListItem.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(itemViewHolder.imShop);
             }
-        });
 
+            itemViewHolder.tvTitle.setText(shopsListItem.getName());
+            itemViewHolder.loutContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    customListener.onItemShopClickListener(shopsListItem.getId(), shopsListItem.getName());
+                }
+            });
+        }
     }
 
 
@@ -107,11 +133,34 @@ public class AdapterShopsList extends RecyclerView.Adapter<RecyclerView.ViewHold
         ConstraintLayout loutContainer;
 
 
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
         }
     }
+
+    protected class LinearListItemViewHolder extends RecyclerView.ViewHolder{
+        @BindView(R.id.imageView)
+        ImageView imShop;
+
+        @BindView(R.id.tv_title)
+        TextView tvTitle;
+
+        @BindView(R.id.lout_cont)
+        ConstraintLayout loutContainer;
+
+        @BindView(R.id.tv_address)
+        TextView tvAddress;
+
+
+        public LinearListItemViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this,itemView);
+        }
+    }
+
+
 
     public interface ContainerClickListener {
         public void onItemShopClickListener(Integer id, String title);
