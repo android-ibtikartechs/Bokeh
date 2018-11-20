@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/progressActivity"
     tools:context=".ui.fragments.my_orders.MyOrdersFragment">
 
-    <com.ibtikar.app.bokeh.ui_utilities.CustomRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:id="@+id/rv_my_orders_list"
         />
 
 </com.vlonjatg.progressactivity.ProgressLinearLayout>

@@ -30,10 +30,17 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private ArrayList<ModelCartItem> arrayList;
     private Context context;
     private ContainerCartItemsClickListener customListener;
+    private boolean isApartOfLastOrder;
 
     public AdapterCartList(ArrayList<ModelCartItem> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
+    }
+
+    public AdapterCartList(ArrayList<ModelCartItem> arrayList, Context context, boolean isApartOfLastOrder) {
+        this.arrayList = arrayList;
+        this.context = context;
+        this.isApartOfLastOrder = isApartOfLastOrder;
     }
 
 
@@ -42,7 +49,12 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View viewItem = inflater.inflate(R.layout.view_card_cart, parent, false);
+        View viewItem;
+        if (isApartOfLastOrder)
+            viewItem = inflater.inflate(R.layout.view_item_order_list_of_items, parent, false);
+        else
+            viewItem = inflater.inflate(R.layout.view_card_cart, parent, false);
+
         viewHolder = new ItemViewHolder(viewItem);
 
         return viewHolder;

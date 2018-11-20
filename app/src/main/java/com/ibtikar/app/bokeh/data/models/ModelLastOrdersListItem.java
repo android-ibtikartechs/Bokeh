@@ -3,6 +3,10 @@ package com.ibtikar.app.bokeh.data.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ModelLastOrdersListItem {
@@ -79,5 +83,26 @@ public class ModelLastOrdersListItem {
 
     public List<ModelCartItem> getItemsList() {
         return itemsList;
+    }
+
+    public String getDayOfMonth(String date)
+    {
+        Timestamp timestamp = Timestamp.valueOf(date);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timestamp.getTime());
+        return String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+    }
+
+    public String getMonth(String date)
+    {
+        Timestamp timestamp = Timestamp.valueOf(date);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timestamp.getTime());
+        Date dat = calendar.getTime();
+        SimpleDateFormat daymonthsimpleDataFormat = new SimpleDateFormat("MMM");
+
+        return daymonthsimpleDataFormat.format(dat);
     }
 }
