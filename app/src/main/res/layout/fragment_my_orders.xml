@@ -8,6 +8,7 @@
     <com.ibtikar.app.bokeh.ui_utilities.CustomRecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         />
 
 </com.vlonjatg.progressactivity.ProgressLinearLayout>

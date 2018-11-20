@@ -25,6 +25,8 @@ public class EditProfileFragment extends Fragment {
     private String mParam2;
 
 
+
+
     public EditProfileFragment() {
         // Required empty public constructor
     }

@@ -49,6 +49,7 @@ public class ModelLastOrdersListItem {
 
     public void setPrice(Integer price) {
         this.price = price;
+
     }
 
     public void setNumOfItems(Integer numOfItems) {
