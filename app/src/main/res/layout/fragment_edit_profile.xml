@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.signup.SignupFragment"
+    android:fillViewport="true"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/test_bg_d"
+            android:scaleType="center"
+            android:alpha="0.2"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:layout_marginTop="32dp"
+                android:hint="First Name"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:inputType="textPersonName"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:layout_marginTop="16dp"
+                android:hint="Last Name"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:inputType="textPersonName"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:layout_marginTop="16dp"
+                android:hint="Email address"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:inputType="textEmailAddress"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                >
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    >
+                </Spinner>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/ColorGrayLine"
+                    />
+
+
+
+            </LinearLayout>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:layout_marginTop="16dp"
+                android:hint="Date of Birth"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:inputType="textEmailAddress"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+
+                >
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textCursorDrawable="@null"
+                    android:freezesText="true"
+                    android:text="+2"
+                    android:inputType="number"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textCursorDrawable="@null"
+                    android:hint="Mobile number"
+                    android:layout_marginStart="16dp"
+                    android:inputType="textPassword"
+                    />
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_rounded_button"
+                android:textColor="@color/ColorWhite"
+                android:textAllCaps="false"
+                android:text="update"
+                android:layout_marginTop="64dp"
+
+
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                />
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

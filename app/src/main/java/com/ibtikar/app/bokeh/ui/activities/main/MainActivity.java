@@ -31,6 +31,7 @@ import com.ibtikar.app.bokeh.ui.fragments.account.AccountFragment;
 import com.ibtikar.app.bokeh.ui.fragments.cart.CartFragment;
 import com.ibtikar.app.bokeh.ui.fragments.categories.CategoriesFragment;
 import com.ibtikar.app.bokeh.ui.fragments.home.HomeFragment;
+import com.ibtikar.app.bokeh.ui.fragments.my_orders.MyOrdersFragment;
 import com.ibtikar.app.bokeh.ui.fragments.shops.ShopsFragment;
 import com.ibtikar.app.bokeh.ui_utilities.NonSwipeableViewPager;
 import com.ibtikar.app.bokeh.ui_utilities.ViewPagerAdapter;
@@ -263,7 +264,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         viewPagerAdapter.addFragment(HomeFragment.newInstance("",""),"Home Fragment");
         viewPagerAdapter.addFragment(ShopsFragment.newInstance("",""), "Shops Fragment");
         viewPagerAdapter.addFragment(CategoriesFragment.newInstance("",""),"Categories Fragment");
-        viewPagerAdapter.addFragment(AccountFragment.newInstance("",""), "Account Fragment");
+        viewPagerAdapter.addFragment(MyOrdersFragment.newInstance("",""), "Account Fragment");
         viewPagerAdapter.addFragment(CartFragment.newInstance("",""), "Cart Fragment");
         viewPager.setAdapter(viewPagerAdapter);
     }

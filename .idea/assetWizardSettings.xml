@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_location_city_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/hardware/ic_keyboard_arrow_right_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -34,9 +34,12 @@
                         <option name="values">
                           <map>
                             <entry key="autoMirrored" value="true" />
-                            <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_location_city" />
+                            <entry key="color" value="f2929a" />
+                            <entry key="height" value="32" />
+                            <entry key="outputName" value="ic_keyboard_arrow_right" />
+                            <entry key="overrideSize" value="true" />
                             <entry key="sourceFile" value="C:\Users\Ibtikar100" />
+                            <entry key="width" value="32" />
                           </map>
                         </option>
                       </PersistentState>
