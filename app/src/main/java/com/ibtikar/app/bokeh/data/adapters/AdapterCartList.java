@@ -44,6 +44,7 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View viewItem = inflater.inflate(R.layout.view_card_cart, parent, false);
         viewHolder = new ItemViewHolder(viewItem);
+
         return viewHolder;
     }
 
