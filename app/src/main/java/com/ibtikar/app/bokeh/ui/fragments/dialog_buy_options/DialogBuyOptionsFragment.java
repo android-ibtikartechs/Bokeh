@@ -161,6 +161,7 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         cairoCities.add(new ModelCity(2, "El-Manial"));
         cairoCities.add(new ModelCity(3, "Alf Maskan"));
 
+
         List<ModelCity> gizaCities = new ArrayList<>();
 
         gizaCities.add(new ModelCity(1, "6th of October"));
