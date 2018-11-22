@@ -17,7 +17,9 @@ public class DialogBuyOptionsPresenter <V extends DialogBuyOptionsMvpView> exten
     }
 
     @Override
-    public void submitAndAddItem() {
+    public void submitAndAddItem(Integer deliveryOrPickup, Integer areaId, Integer cityId, String textAddress, String deliveryDate, String deliveryTime) {
+        getMvpView().showLoadingProgress();
+
         getDataManager().plusOneCartItems();
     }
 

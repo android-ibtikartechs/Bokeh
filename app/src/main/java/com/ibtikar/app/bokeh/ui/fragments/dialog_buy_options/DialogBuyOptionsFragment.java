@@ -11,6 +11,7 @@ import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -59,6 +60,9 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
     @BindView(R.id.rbtn_Delivery)
     RadioButton rbtnDelivery;
 
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+
     DialogBuyOptionsPresenter presenter;
 
     Handler mHandler;
@@ -89,6 +93,12 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         dialog.setContentView(contentView);
         ButterKnife.bind(this,contentView);
 
+        if (progressBar != null) {
+            progressBar.setIndeterminate(true);
+            progressBar.getIndeterminateDrawable().setColorFilter(getActivity().getResources().getColor(R.color.ColorFoshiac), android.graphics.PorterDuff.Mode.MULTIPLY);
+            progressBar.setVisibility(View.GONE);
+        }
+
         DataManager dataManager = ((MvpApp) getActivity().getApplication()).getDataManager();
         presenter = new DialogBuyOptionsPresenter(dataManager);
         presenter.onAttach(this);
@@ -101,12 +111,14 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.submitAndAddItem();
+                //presenter.submitAndAddItem();
                 dismiss();
                 DialogAfterBuyFragment dialogAfterBuyFragment = new DialogAfterBuyFragment();
                 dialogAfterBuyFragment.show(getFragmentManager(), "Bottom Sheet after buy Dialog Fragment");
             }
         });
+
+
 
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) contentView.getParent()).getLayoutParams();
         CoordinatorLayout.Behavior behavior = params.getBehavior();
@@ -148,6 +160,7 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         cairoCities.add(new ModelCity(1, "Nasr City"));
         cairoCities.add(new ModelCity(2, "El-Manial"));
         cairoCities.add(new ModelCity(3, "Alf Maskan"));
+
 
         List<ModelCity> gizaCities = new ArrayList<>();
 
@@ -294,6 +307,28 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+    }
+
+    @Override
+    public void showLoadingProgress() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                btnApply.setVisibility(View.GONE);
+               progressBar.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    @Override
+    public void hideLoadingProgress() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                btnApply.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
         });
     }

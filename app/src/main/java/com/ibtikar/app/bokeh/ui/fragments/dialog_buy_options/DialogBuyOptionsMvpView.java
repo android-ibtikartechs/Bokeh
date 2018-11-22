@@ -10,4 +10,7 @@ public interface DialogBuyOptionsMvpView extends MvpView {
     void showAreaListSpinner(List<ModelArea> list);
     void showCityListSpinner(List<ModelCity> list);
     void setaupAreasSpinner(List<ModelArea> list);
+
+    void showLoadingProgress();
+    void hideLoadingProgress();
 }
