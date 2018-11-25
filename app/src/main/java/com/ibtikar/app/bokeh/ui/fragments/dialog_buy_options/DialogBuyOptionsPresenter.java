@@ -29,6 +29,7 @@ public class DialogBuyOptionsPresenter <V extends DialogBuyOptionsMvpView> exten
         getMvpView().showLoadingProgress();
 
         Call<ResponseAddToCart> call;
+
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         call = service.addToCart(27,modelProductItem.getId(),deliveryDate,deliveryTime,deliveryOrPickup,areaId,cityId, textAddress);
 
