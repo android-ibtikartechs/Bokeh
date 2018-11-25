@@ -11,6 +11,8 @@ import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -63,9 +65,30 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
+    @BindView(R.id.delivery_lout)
+    LinearLayout loutDelivery;
+
+    @BindView(R.id.radioGroupTime)
+    RadioGroup radioGroupTime;
+
+    @BindView(R.id.radio_time_one)
+    RadioButton radioButtonTimeOne;
+
+    @BindView(R.id.radio_time_two)
+    RadioButton radioButtonTimeTwo;
+
+    @BindView(R.id.et_text_address)
+    EditText editTextAddress;
+
     DialogBuyOptionsPresenter presenter;
 
     Handler mHandler;
+
+    String selectedDate;
+    Integer selectedTime = 1;
+    Integer deliveryOrPickup = 1;
+    Integer selectedAreaId;
+    Integer selectedCityId;
 
 
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
@@ -106,15 +129,15 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
 
         //setupAreasSpinner();
         presenter.loadAreasSpinner();
+        setupRadioGroupTime();
         setupRadioGroup();
         setupTabs();
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //presenter.submitAndAddItem();
-                dismiss();
-                DialogAfterBuyFragment dialogAfterBuyFragment = new DialogAfterBuyFragment();
-                dialogAfterBuyFragment.show(getFragmentManager(), "Bottom Sheet after buy Dialog Fragment");
+                presenter.submitAndAddItem(deliveryOrPickup, selectedAreaId, selectedCityId, editTextAddress.getText().toString(), selectedDate, selectedTime);
+
             }
         });
 
@@ -129,16 +152,34 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         }
     }
 
+    private void setupRadioGroupTime()
+    {
+        radioGroupTime.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.radio_time_one)
+                    selectedTime = 1;
+
+                else if (checkedId == R.id.radio_time_two)
+                    selectedTime = 2;
+            }
+        });
+    }
+
     private void setupRadioGroup() {
         radioGroupDelivery.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.rbtn_Delivery)
+                if (checkedId == R.id.rbtn_Delivery) {
                     enableDeliverySpinners();
+                    deliveryOrPickup = 1;
+                }
 
 
-                else if (checkedId == R.id.rbtn_pickup)
+                else if (checkedId == R.id.rbtn_pickup) {
                     disableDeliverySpinners();
+                    deliveryOrPickup = 2;
+                }
             }
         });
     }
@@ -146,11 +187,14 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
     private void disableDeliverySpinners() {
         areaSpinner.setEnabled(false);
         citySpinner.setEnabled(false);
+        loutDelivery.setVisibility(View.GONE);
+
     }
 
     private void enableDeliverySpinners() {
         areaSpinner.setEnabled(true);
         citySpinner.setEnabled(true);
+        loutDelivery.setVisibility(View.VISIBLE);
     }
 
     private void setupAreasSpinner() {
@@ -206,7 +250,7 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getActivity(), list.get(position).getName(), Toast.LENGTH_SHORT).show();
-
+                selectedCityId = list.get(position).getId();
             }
 
             @Override
@@ -228,16 +272,22 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
             tabLayout.addTab(tabLayout.newTab());
             calendar.setTime(dates.get(i));
             tabLayout.getTabAt(i).setText(simpleDateformat.format(dates.get(i)) + "\n" + daymonthsimpleDataFormat.format(dates.get(i)));
-            if (i==0)
+            /*if (i==0)
             {
                 tabLayout.getTabAt(i).select();
-            }
+            }*/
         }
+        SimpleDateFormat simpleDateformatForDate = new SimpleDateFormat("y-MM-d");
+        Toast.makeText(getActivity(), simpleDateformatForDate.format(dates.get(0)), Toast.LENGTH_SHORT).show();
+
+        selectedDate = simpleDateformatForDate.format(dates.get(0));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Toast.makeText(getActivity(), tab.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), simpleDateformatForDate.format(dates.get(tab.getPosition())), Toast.LENGTH_SHORT).show();
+                //selectedDate = dates.get(tab.getPosition())
+                selectedDate = simpleDateformatForDate.format(dates.get(tab.getPosition()));
             }
 
             @Override
@@ -247,7 +297,8 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                SimpleDateFormat simpleDateformat = new SimpleDateFormat("y-MM-d");
+                Toast.makeText(getActivity(), simpleDateformat.format(dates.get(tab.getPosition())), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -301,7 +352,7 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 setupCitiesSpinner(list.get(position).getCities());
-
+                selectedAreaId = list.get(position).getId();
             }
 
             @Override
@@ -331,5 +382,12 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    @Override
+    public void finishSubmitting() {
+        dismiss();
+        DialogAfterBuyFragment dialogAfterBuyFragment = new DialogAfterBuyFragment();
+        dialogAfterBuyFragment.show(getFragmentManager(), "Bottom Sheet after buy Dialog Fragment");
     }
 }

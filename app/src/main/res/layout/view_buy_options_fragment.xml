@@ -113,16 +113,17 @@
 
 
             <LinearLayout
+                android:id="@+id/delivery_lout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginEnd="32dp"
+                android:layout_marginStart="48dp"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Shipping to"
-                    android:layout_marginStart="48dp"
 
                     />
 
@@ -130,7 +131,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginStart="48dp"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     >
@@ -170,7 +170,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginStart="48dp"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     >
@@ -208,17 +207,18 @@
                 </LinearLayout>
 
                 <EditText
+                    android:id="@+id/et_text_address"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:background="@drawable/shape_tab_date_black"
                     android:textCursorDrawable="@null"
-                    android:layout_marginStart="48dp"
                     android:layout_marginTop="8dp"
                     android:hint="Address"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     android:maxLines="1"
                     />
+
 
             </LinearLayout>
 
@@ -233,29 +233,28 @@
                 android:textColor="@color/ColorTextBlack"
                  />
 
+
         </RadioGroup>
-
-
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
+            android:layout_marginStart="32dp"
             >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_date"
-            />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_date"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delivery date"
+                android:text="Delivery / pickup date"
                 android:layout_marginStart="4dp"
                 />
         </LinearLayout>
@@ -274,8 +273,8 @@
             app:tabTextColor="@color/ColorTextBlack"
             app:tabIndicatorHeight="0dp"
             app:tabMode="scrollable"
-            android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             />
 
@@ -284,9 +283,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="32dp"
             android:gravity="center_vertical"
             >
             <ImageView
@@ -298,25 +297,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delivery time between:"
+                android:text="Delivery / pickup time between:"
                 android:layout_marginStart="4dp"
                 />
         </LinearLayout>
 
         <RadioGroup
-            android:id="@+id/radioGroupAscendDeascend"
+            android:id="@+id/radioGroupTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layoutDirection="ltr"
             android:orientation="horizontal"
             android:padding="0.5dp"
-            android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginTop="8dp"
+            android:layout_marginStart="32dp"
             >
 
             <RadioButton
-                android:id="@+id/radioAscending"
+                android:id="@+id/radio_time_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -330,7 +329,7 @@
                 />
 
             <RadioButton
-                android:id="@+id/radiodeascending"
+                android:id="@+id/radio_time_two"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_width="wrap_content"
@@ -344,6 +343,8 @@
                 />
 
         </RadioGroup>
+
+
 
     </LinearLayout>
 

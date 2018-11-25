@@ -1,5 +1,6 @@
 package com.ibtikar.app.bokeh.utils.retrofit;
 
+import com.ibtikar.app.bokeh.data.models.responses.ResponseAddToCart;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCategoriesModel;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCountriesList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseHomeModel;
@@ -34,5 +35,9 @@ public interface GetDataService {
 
     @GET("/seller_products/{seller_id}")
     Call<ResponseProductList> getProductListForShop(@Path("seller_id") Integer sellerId);
+
+
+    @POST("/addtocart")
+    Call<ResponseAddToCart> addToCart(@Query("user") Integer userId, @Query("product") Integer productId, @Query("pdate") String deliveryDate, @Query("ptime") Integer deliveryTime, @Query("delivary") Integer deliveryOrPickup, @Query("pcity") Integer cityId, @Query("parea") Integer parea, @Query("paddress") String adderss);
 
 }
