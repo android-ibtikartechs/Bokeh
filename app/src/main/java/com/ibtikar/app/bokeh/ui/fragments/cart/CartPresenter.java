@@ -3,6 +3,8 @@ package com.ibtikar.app.bokeh.ui.fragments.cart;
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.models.GalleryProductImage;
 import com.ibtikar.app.bokeh.data.models.ModelCartItem;
+import com.ibtikar.app.bokeh.data.models.ModelProductItemReciptList;
+import com.ibtikar.app.bokeh.data.models.ModelReciptList;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
 
 import java.util.ArrayList;
@@ -81,6 +83,22 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
                 "10:00 am - 2:00 pm",
                 1
         ));
+
+
+        List<ModelProductItemReciptList> reciptListList = new ArrayList<>();
+        reciptListList.add(new ModelProductItemReciptList(50,"بوكيه ورد طبيعي أحمر"));
+        reciptListList.add(new ModelProductItemReciptList(30,"Loloa Bouquet"));
+        reciptListList.add(new ModelProductItemReciptList(25,"بوكيه ورد طبيعي أصفر"));
+        reciptListList.add(new ModelProductItemReciptList(80,"Khoshah"));
+        reciptListList.add(new ModelProductItemReciptList(200,"Lotus"));
+
+        List<ModelReciptList> reciptList = new ArrayList<>();
+        reciptList.add(new ModelReciptList(50, 500, reciptListList));
+        reciptList.add(new ModelReciptList(40, 300, reciptListList));
+        reciptList.add(new ModelReciptList(53, 852, reciptListList));
+        reciptList.add(new ModelReciptList(30, 963, reciptListList));
+
+        getMvpView().addMoreToReceiptList(reciptList);
 
         getMvpView().addMoreToCartListAdapter(cartItems);
     }

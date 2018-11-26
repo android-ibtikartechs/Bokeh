@@ -3,11 +3,18 @@ package com.ibtikar.app.bokeh.ui.fragments.account_content;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.ui.fragments.account.AccountFragment;
+import com.ibtikar.app.bokeh.ui.fragments.my_orders.MyOrdersFragment;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +25,8 @@ public class FragmentAccountContent extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
 
 
+    @BindView(R.id.lout_my_orders)
+    LinearLayout btnMyOrders;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -62,7 +71,31 @@ public class FragmentAccountContent extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account_content, container, false);
+        View view = inflater.inflate(R.layout.fragment_account_content, container, false);
+        ButterKnife.bind(this,view);
+
+        btnMyOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction trans = getFragmentManager().beginTransaction();
+                /*
+                 * IMPORTANT: We use the "root frame" defined in
+                 * "root_fragment.xml" as the reference to replace fragment
+                 */
+                trans.replace(R.id.account_fragment_container, new MyOrdersFragment());
+
+                /*
+                 * IMPORTANT: The following lines allow us to add the fragment
+                 * to the stack and return to it later, by pressing back
+                 */
+                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                trans.addToBackStack(null);
+
+                trans.commit();
+            }
+        });
+
+        return view;
     }
 
 }
