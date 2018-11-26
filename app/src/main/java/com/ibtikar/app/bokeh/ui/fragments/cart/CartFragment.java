@@ -15,7 +15,9 @@ import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.adapters.AdapterCartList;
+import com.ibtikar.app.bokeh.data.adapters.AdapterReciptList;
 import com.ibtikar.app.bokeh.data.models.ModelCartItem;
+import com.ibtikar.app.bokeh.data.models.ModelReciptList;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
@@ -41,6 +43,12 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
 
     @BindView(R.id.rv_cart_items)
     RecyclerView rvCartItems;
+
+    @BindView(R.id.rv_receipt_list)
+    RecyclerView rvReceiptList;
+
+    AdapterReciptList adapterReciptList;
+    ArrayList<ModelReciptList> reciptListArrayList;
 
     AdapterCartList adapterCartList;
     private ArrayList<ModelCartItem> arrayList;
@@ -99,7 +107,9 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
         View rootView = inflater.inflate(R.layout.fragment_cart, container, false);
         ButterKnife.bind(this, rootView);
         arrayList = new ArrayList<>();
+        reciptListArrayList = new ArrayList<>();
         rvCartItems.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
+        rvReceiptList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false));
         populatRecyclerView();
         presenter.loadCartList();
         return rootView;
@@ -110,6 +120,10 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
         adapterCartList.setCustomButtonListner(this);
         rvCartItems.setAdapter(adapterCartList);
         adapterCartList.notifyDataSetChanged();
+
+        adapterReciptList = new AdapterReciptList(reciptListArrayList, getActivity());
+        rvReceiptList.setAdapter(adapterReciptList);
+        adapterReciptList.notifyDataSetChanged();
     }
 
     @Override
@@ -118,6 +132,16 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
             @Override
             public void run() {
                 adapterCartList.addAll(list);
+            }
+        });
+    }
+
+    @Override
+    public void addMoreToReceiptList(List<ModelReciptList> list) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                adapterReciptList.addAll(list);
             }
         });
     }

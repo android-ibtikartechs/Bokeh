@@ -2,8 +2,10 @@ package com.ibtikar.app.bokeh.ui.activities.main;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,7 +29,9 @@ import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
 import com.ibtikar.app.bokeh.ui.activities.categories_search.CategorySearchActivity;
+import com.ibtikar.app.bokeh.ui.fragments.AccountFragmentContainer;
 import com.ibtikar.app.bokeh.ui.fragments.account.AccountFragment;
+import com.ibtikar.app.bokeh.ui.fragments.account_content.FragmentAccountContent;
 import com.ibtikar.app.bokeh.ui.fragments.cart.CartFragment;
 import com.ibtikar.app.bokeh.ui.fragments.categories.CategoriesFragment;
 import com.ibtikar.app.bokeh.ui.fragments.home.HomeFragment;
@@ -48,6 +52,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     NonSwipeableViewPager viewPager;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    AccountFragmentContainer accountFragmentContainer =AccountFragmentContainer.newInstance("","");
 
     private Animation animShow, animHide;
 
@@ -213,7 +219,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void onBackPressed() {
 
-        if (tabLayout.getSelectedTabPosition() != 0) {
+        if (tabLayout.getSelectedTabPosition() != 0 && tabLayout.getSelectedTabPosition()!=3) {
             if (tabLayout.getSelectedTabPosition() == 4)
             {
 
@@ -260,13 +266,38 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     }
 
     private void setupViewPager(NonSwipeableViewPager viewPager) {
+       /* viewPagerAdapter.getItem(3).getFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                Fragment currentBackStackFragment = getSupportFragmentManager().findFragmentByTag("FragmentAccountContent");
+                if(currentBackStackFragment instanceof FragmentAccountContent){
+                    MainActivity.super.onBackPressed();
+                    Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });*/
+
+
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(HomeFragment.newInstance("",""),"Home Fragment");
         viewPagerAdapter.addFragment(ShopsFragment.newInstance("",""), "Shops Fragment");
         viewPagerAdapter.addFragment(CategoriesFragment.newInstance("",""),"Categories Fragment");
-        viewPagerAdapter.addFragment(MyOrdersFragment.newInstance("",""), "Account Fragment");
+        viewPagerAdapter.addFragment(accountFragmentContainer, "Account Fragment");
         viewPagerAdapter.addFragment(CartFragment.newInstance("",""), "Cart Fragment");
         viewPager.setAdapter(viewPagerAdapter);
+
+/*
+        viewPagerAdapter.getItem(3).getFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                Fragment currentBackStackFragment = getSupportFragmentManager().findFragmentByTag("FragmentAccountContent");
+                if(currentBackStackFragment instanceof FragmentAccountContent){
+                    MainActivity.super.onBackPressed();
+                    Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        */
     }
 
     @Override

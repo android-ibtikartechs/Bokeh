@@ -390,4 +390,10 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         DialogAfterBuyFragment dialogAfterBuyFragment = new DialogAfterBuyFragment();
         dialogAfterBuyFragment.show(getFragmentManager(), "Bottom Sheet after buy Dialog Fragment");
     }
+
+    @Override
+    public void onDestroy() {
+        presenter.disposeRxSubscriber();
+        super.onDestroy();
+    }
 }
