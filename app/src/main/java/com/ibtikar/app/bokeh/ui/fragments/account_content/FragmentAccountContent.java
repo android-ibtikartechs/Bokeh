@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.ui.fragments.account.AccountFragment;
+import com.ibtikar.app.bokeh.ui.fragments.edit_profile.EditProfileFragment;
 import com.ibtikar.app.bokeh.ui.fragments.my_orders.MyOrdersFragment;
 
 import butterknife.BindView;
@@ -27,6 +28,10 @@ public class FragmentAccountContent extends Fragment {
 
     @BindView(R.id.lout_my_orders)
     LinearLayout btnMyOrders;
+
+    @BindView(R.id.lout_edit)
+    LinearLayout btnEdit;
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -73,6 +78,29 @@ public class FragmentAccountContent extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account_content, container, false);
         ButterKnife.bind(this,view);
+
+
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction trans = getFragmentManager().beginTransaction();
+                /*
+                 * IMPORTANT: We use the "root frame" defined in
+                 * "root_fragment.xml" as the reference to replace fragment
+                 */
+                trans.replace(R.id.account_fragment_container, new EditProfileFragment());
+
+                /*
+                 * IMPORTANT: The following lines allow us to add the fragment
+                 * to the stack and return to it later, by pressing back
+                 */
+                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                trans.addToBackStack(null);
+
+                trans.commit();
+            }
+        });
+
 
         btnMyOrders.setOnClickListener(new View.OnClickListener() {
             @Override

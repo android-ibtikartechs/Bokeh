@@ -12,6 +12,9 @@ public class SharedPreferenceHelper {
     SharedPreferences mSharedPreferences;
     private static final String CART_ITEMS_COUNT = "CART_ITEMS_COUNT";
     private static final String KEY_COUNTRY_ID = "KEY_COUNTRY_ID";
+    private static final String KEY_USER_NAME = "KEY_USER_NAME";
+    private static final String KEY_USER_EMAIL = "KEY_USER_EMAIL";
+    private static final String KEY_USER_MOB_NUM = "KEY_USER_MOB_NUM";
     private Context context;
 
     public SharedPreferenceHelper(Context context) {
@@ -25,10 +28,27 @@ public class SharedPreferenceHelper {
     }
 
 
+    public void setUserName(String userName) {
+        mSharedPreferences.edit().putString(KEY_USER_NAME, userName).apply();
+    }
+
+    public void setUserEmail(String userEmail) {
+        mSharedPreferences.edit().putString(KEY_USER_EMAIL, userEmail).apply();
+    }
+
+    public void setUserMobNum(String userMobNum) {
+        mSharedPreferences.edit().putString(KEY_USER_MOB_NUM, userMobNum).apply();
+    }
+
+
+
     public void setCartItemsCount(int cartItemsCount) {
         mSharedPreferences.edit().putInt(CART_ITEMS_COUNT, cartItemsCount).apply();
         passNewCartCount(getCartItemsCount());
     }
+
+
+
 
     public void setCountryId(int countryId)
     {
@@ -43,6 +63,19 @@ public class SharedPreferenceHelper {
     public int getCartItemsCount (){
         return mSharedPreferences.getInt(CART_ITEMS_COUNT,0);
     }
+
+    public String getUserName (){
+        return mSharedPreferences.getString(KEY_USER_NAME,"");
+    }
+
+    public String getUserEmail(){
+        return mSharedPreferences.getString(KEY_USER_EMAIL,"");
+    }
+
+    public String getUserMobNum(){
+        return mSharedPreferences.getString(KEY_USER_MOB_NUM,"");
+    }
+
 
     public void plusOneCartItems()
     {

@@ -83,6 +83,8 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
 
     }
 
+
+
     @Override
     public void populateCountriesListSpinner(List<ModelCountry> countriesList) {
         AdapterCountrySpinner adapterCountrySpinner = new AdapterCountrySpinner(this, 0, countriesList);

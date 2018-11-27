@@ -11,14 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/test_bg_d"
-            android:scaleType="center"
-            android:alpha="0.2"
-            />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -68,6 +60,7 @@
                 android:layout_marginTop="24dp"
                 >
                 <Spinner
+                    android:id="@+id/gender_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -86,6 +79,8 @@
 
 
             <EditText
+                android:id="@+id/et_date_birth"
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@null"

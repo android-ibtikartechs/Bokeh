@@ -39,16 +39,6 @@
         />
 
 
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/ColorGrayLine"
-        android:layout_marginTop="4dp"
-        />
-
-
             <com.vlonjatg.progressactivity.ProgressLinearLayout
                 android:id="@+id/progressLoutRecipt"
                 android:layout_width="match_parent"
