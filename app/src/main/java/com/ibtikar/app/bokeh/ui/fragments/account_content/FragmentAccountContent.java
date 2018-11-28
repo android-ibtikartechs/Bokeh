@@ -13,6 +13,7 @@ import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.ui.fragments.account.AccountFragment;
 import com.ibtikar.app.bokeh.ui.fragments.edit_profile.EditProfileFragment;
 import com.ibtikar.app.bokeh.ui.fragments.my_orders.MyOrdersFragment;
+import com.ibtikar.app.bokeh.ui.fragments.wishlist.WishlistFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +32,9 @@ public class FragmentAccountContent extends Fragment {
 
     @BindView(R.id.lout_edit)
     LinearLayout btnEdit;
+
+    @BindView(R.id.lout_wish_list)
+    LinearLayout btnWishList;
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -111,6 +115,27 @@ public class FragmentAccountContent extends Fragment {
                  * "root_fragment.xml" as the reference to replace fragment
                  */
                 trans.replace(R.id.account_fragment_container, new MyOrdersFragment());
+
+                /*
+                 * IMPORTANT: The following lines allow us to add the fragment
+                 * to the stack and return to it later, by pressing back
+                 */
+                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                trans.addToBackStack(null);
+
+                trans.commit();
+            }
+        });
+
+        btnWishList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction trans = getFragmentManager().beginTransaction();
+                /*
+                 * IMPORTANT: We use the "root frame" defined in
+                 * "root_fragment.xml" as the reference to replace fragment
+                 */
+                trans.replace(R.id.account_fragment_container, new WishlistFragment());
 
                 /*
                  * IMPORTANT: The following lines allow us to add the fragment

@@ -45,6 +45,42 @@ public class DataManager {
         return sharedPrefsHelper.getCountryId();
     }
 
+
+    public void setUserName(String userName) {
+        sharedPrefsHelper.setUserName(userName);
+    }
+
+    public void setUserEmail(String userEmail) {
+        sharedPrefsHelper.setUserEmail(userEmail);
+    }
+
+    public void setUserMobNum(String userMobNum) {
+        sharedPrefsHelper.setUserMobNum(userMobNum);
+    }
+
+    public void setLoginStatus(boolean status)
+    {
+        sharedPrefsHelper.setLoginStatus(status);
+    }
+
+    public String getUserName (){
+        return sharedPrefsHelper.getUserName();
+    }
+
+    public String getUserEmail(){
+        return sharedPrefsHelper.getUserEmail();
+    }
+
+    public String getUserMobNum(){
+        return sharedPrefsHelper.getUserMobNum();
+    }
+
+    public boolean getLoginStausus(){
+        return sharedPrefsHelper.getLoginStatus();
+    }
+
+
+
    /* private void passNewCartCount(Integer newCartCount)
     {
         rxBus.send(newCartCount);

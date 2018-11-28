@@ -1,6 +1,7 @@
 package com.ibtikar.app.bokeh.ui.fragments.cart;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
@@ -18,6 +20,7 @@ import com.ibtikar.app.bokeh.data.adapters.AdapterCartList;
 import com.ibtikar.app.bokeh.data.adapters.AdapterReciptList;
 import com.ibtikar.app.bokeh.data.models.ModelCartItem;
 import com.ibtikar.app.bokeh.data.models.ModelReciptList;
+import com.ibtikar.app.bokeh.ui.activities.PaymentActivity;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
@@ -46,6 +49,9 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
 
     @BindView(R.id.rv_receipt_list)
     RecyclerView rvReceiptList;
+
+    @BindView(R.id.btn_add_to_cart)
+    Button btnBuy;
 
     AdapterReciptList adapterReciptList;
     ArrayList<ModelReciptList> reciptListArrayList;
@@ -112,6 +118,14 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
         rvReceiptList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false));
         populatRecyclerView();
         presenter.loadCartList();
+
+        btnBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), PaymentActivity.class));
+            }
+        });
+
         return rootView;
     }
 

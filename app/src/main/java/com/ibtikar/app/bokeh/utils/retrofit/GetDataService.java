@@ -25,7 +25,7 @@ public interface GetDataService {
     Call<ResponseProductList> getProductListForCategory(@Path("product_id")Integer id, @Path("country_id") Integer countryId);
 
     @POST("/productslike")
-    Call<ResponseSearchResultList> getSearchResultFor(@Query("keyword") String keyWord);
+    Call<ResponseSearchResultList> getSearchResultFor(@Query("keyword") String keyWord, @Query("country") Integer countryId);
 
     @GET("/rcountries")
     Call<ResponseCountriesList> getCountriesList();

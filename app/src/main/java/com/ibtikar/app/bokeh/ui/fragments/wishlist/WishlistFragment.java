@@ -10,6 +10,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
@@ -53,6 +54,7 @@ public class WishlistFragment extends BaseFragment implements WishListMvpView, A
 
     @BindView(R.id.rv_products)
     CustomRecyclerView rvProductsList;
+
 
 
     private static final int PAGE_START = 1;
@@ -197,46 +199,74 @@ public class WishlistFragment extends BaseFragment implements WishListMvpView, A
 
     @Override
     public void addMoreToAdapter(List<ModelProductItem> list) {
-
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                adapterProductsList.addAll(list);
+            }
+        });
     }
 
     @Override
     public void addLoadingFooter() {
-
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                adapterProductsList.addLoadingFooter();
+            }
+        });
     }
 
     @Override
     public void removeLoadingFooter() {
-
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                adapterProductsList.removeLoadingFooter();
+            }
+        });
     }
 
     @Override
     public void showRetryAdapter() {
-
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                adapterProductsList.showRetry(true);
+            }
+        });
     }
 
     @Override
     public void setIsLoadingFalse() {
-
+        isLoading = false;
     }
 
     @Override
     public void showErrorConnectionView() {
+        progressLinearLayout.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), "No Connection",
+                "We could not establish a connection with our servers. Try again when you are connected to the interne.",
+                "Try Again", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        presenter.loadFirstPage();
+                    }
+                });
 
     }
 
     @Override
     public void showLoadingView() {
-
+        progressLinearLayout.showLoading();
     }
 
     @Override
     public void showContent() {
-
+        progressLinearLayout.showContent();
     }
 
     @Override
     public void showEmptyView() {
-
+        progressLinearLayout.showEmpty(R.drawable.ic_favorite_emp, "No items yet", "No Items in this category yet.");
     }
 }

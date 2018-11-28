@@ -15,6 +15,7 @@ public class SharedPreferenceHelper {
     private static final String KEY_USER_NAME = "KEY_USER_NAME";
     private static final String KEY_USER_EMAIL = "KEY_USER_EMAIL";
     private static final String KEY_USER_MOB_NUM = "KEY_USER_MOB_NUM";
+    private static final String KEY_IS_USER_LOGED_IN = "KEY_IS_USER_LOGED_IN";
     private Context context;
 
     public SharedPreferenceHelper(Context context) {
@@ -40,6 +41,13 @@ public class SharedPreferenceHelper {
         mSharedPreferences.edit().putString(KEY_USER_MOB_NUM, userMobNum).apply();
     }
 
+    public void setLoginStatus(boolean status)
+    {
+        mSharedPreferences.edit().putBoolean(KEY_IS_USER_LOGED_IN, status).apply();
+    }
+
+
+
 
 
     public void setCartItemsCount(int cartItemsCount) {
@@ -55,6 +63,11 @@ public class SharedPreferenceHelper {
         mSharedPreferences.edit().putInt(KEY_COUNTRY_ID, countryId).apply();
     }
 
+    public boolean getLoginStatus()
+    {
+        return mSharedPreferences.getBoolean(KEY_IS_USER_LOGED_IN,false);
+    }
+
     public int getCountryId()
     {
         return mSharedPreferences.getInt(KEY_COUNTRY_ID,64);
@@ -63,6 +76,8 @@ public class SharedPreferenceHelper {
     public int getCartItemsCount (){
         return mSharedPreferences.getInt(CART_ITEMS_COUNT,0);
     }
+
+
 
     public String getUserName (){
         return mSharedPreferences.getString(KEY_USER_NAME,"");
