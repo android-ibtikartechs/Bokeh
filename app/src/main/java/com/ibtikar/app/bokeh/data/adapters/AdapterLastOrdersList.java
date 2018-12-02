@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.models.ModelCartItem;
+import com.ibtikar.app.bokeh.data.models.ModelCartListItem;
 import com.ibtikar.app.bokeh.data.models.ModelLastOrdersListItem;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class AdapterLastOrdersList extends RecyclerView.Adapter<RecyclerView.Vie
     private ArrayList<ModelLastOrdersListItem> arrayList;
     private Context context;
     AdapterCartList adapterCartList;
-    ArrayList<ModelCartItem> cartItemArrayList;
+    ArrayList<ModelCartListItem> cartItemArrayList;
 
     public AdapterLastOrdersList(ArrayList<ModelLastOrdersListItem> arrayList, Context context) {
         this.arrayList = arrayList;
@@ -91,7 +92,7 @@ public class AdapterLastOrdersList extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
 
-    public void addMoreToCartListAdapter(final List<ModelCartItem> list) {
+    public void addMoreToCartListAdapter(final List<ModelCartListItem> list) {
         adapterCartList.addAll(list);
     }
 

@@ -6,41 +6,24 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class ModelReciptList  {
-    @SerializedName("delivery")
+    @SerializedName("OrderInfo")
     @Expose
-    private Integer delivery;
-    @SerializedName("subtotal")
-    @Expose
-    private Integer subtotal;
+    private OrderInfo orderInfo;
 
-    @SerializedName("Products")
+    @SerializedName("OrderItems")
     @Expose
     private List<ModelProductItemReciptList> products = null;
 
     public ModelReciptList() {
     }
 
-    public ModelReciptList(Integer delivery, Integer subtotal, List<ModelProductItemReciptList> products) {
-        this.delivery = delivery;
-        this.subtotal = subtotal;
+    public ModelReciptList(List<ModelProductItemReciptList> products, OrderInfo orderInfo) {
         this.products = products;
+        this.orderInfo = orderInfo;
     }
 
-    public void setDelivery(Integer delivery) {
-        this.delivery = delivery;
-    }
 
-    public void setSubtotal(Integer subtotal) {
-        this.subtotal = subtotal;
-    }
 
-    public Integer getDelivery() {
-        return delivery;
-    }
-
-    public Integer getSubtotal() {
-        return subtotal;
-    }
 
     public void setProducts(List<ModelProductItemReciptList> products) {
         this.products = products;
@@ -48,5 +31,13 @@ public class ModelReciptList  {
 
     public List<ModelProductItemReciptList> getProducts() {
         return products;
+    }
+
+    public OrderInfo getOrderInfo() {
+        return orderInfo;
+    }
+
+    public void setOrderInfo(OrderInfo orderInfo) {
+        this.orderInfo = orderInfo;
     }
 }

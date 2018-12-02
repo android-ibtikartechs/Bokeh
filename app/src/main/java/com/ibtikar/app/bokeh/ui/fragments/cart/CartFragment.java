@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
@@ -19,6 +20,7 @@ import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.adapters.AdapterCartList;
 import com.ibtikar.app.bokeh.data.adapters.AdapterReciptList;
 import com.ibtikar.app.bokeh.data.models.ModelCartItem;
+import com.ibtikar.app.bokeh.data.models.ModelCartListItem;
 import com.ibtikar.app.bokeh.data.models.ModelReciptList;
 import com.ibtikar.app.bokeh.ui.activities.PaymentActivity;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
@@ -53,11 +55,14 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     @BindView(R.id.btn_add_to_cart)
     Button btnBuy;
 
+    @BindView(R.id.tvOrderTotal)
+    TextView tvOrderTotal;
+
     AdapterReciptList adapterReciptList;
     ArrayList<ModelReciptList> reciptListArrayList;
 
     AdapterCartList adapterCartList;
-    private ArrayList<ModelCartItem> arrayList;
+    private ArrayList<ModelCartListItem> arrayList;
 
     CartPresenter presenter;
 
@@ -141,7 +146,7 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     }
 
     @Override
-    public void addMoreToCartListAdapter(final List<ModelCartItem> list) {
+    public void addMoreToCartListAdapter(final List<ModelCartListItem> list) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -156,6 +161,16 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
             @Override
             public void run() {
                 adapterReciptList.addAll(list);
+            }
+        });
+    }
+
+    @Override
+    public void setOrderTotalTxtView(String total) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                tvOrderTotal.setText(total);
             }
         });
     }

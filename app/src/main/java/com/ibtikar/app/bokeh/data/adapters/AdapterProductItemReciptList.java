@@ -47,7 +47,7 @@ public class AdapterProductItemReciptList extends RecyclerView.Adapter<RecyclerV
         final ModelProductItemReciptList modelProductItemReciptList = arrayList.get(position);
         ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
 
-        itemViewHolder.tvProductName.setText(modelProductItemReciptList.getName());
+        itemViewHolder.tvProductName.setText(modelProductItemReciptList.getProductname());
         itemViewHolder.tvPrice.setText(modelProductItemReciptList.getPrice().toString());
 
     }

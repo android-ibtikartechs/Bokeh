@@ -195,4 +195,5 @@ public class ModelCartItem {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
 }

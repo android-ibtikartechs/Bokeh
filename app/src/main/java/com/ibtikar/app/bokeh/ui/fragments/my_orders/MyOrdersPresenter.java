@@ -16,7 +16,7 @@ public class MyOrdersPresenter <V extends MyOrdersMvpView> extends BasePresenter
 
     @Override
     public void loadOrdersList() {
-        List<ModelLastOrdersListItem> ordersListItems = new ArrayList<>();
+      /*  List<ModelLastOrdersListItem> ordersListItems = new ArrayList<>();
 
         List<ModelCartItem> cartItems = new ArrayList<>();
         List<GalleryProductImage> galleryProductImages = new ArrayList<>();
@@ -89,7 +89,7 @@ public class MyOrdersPresenter <V extends MyOrdersMvpView> extends BasePresenter
         ordersListItems.add(new ModelLastOrdersListItem(2,"2018-9-1 13:00:00", 300,10,cartItems));
         ordersListItems.add(new ModelLastOrdersListItem(3,"2018-10-30 13:00:00", 82,2,cartItems));
 
-        getMvpView().addMoreToOrdresListAdapter(ordersListItems);
+        getMvpView().addMoreToOrdresListAdapter(ordersListItems);*/
     }
 
 

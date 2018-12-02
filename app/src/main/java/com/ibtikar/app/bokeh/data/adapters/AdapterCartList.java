@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.models.ModelCartItem;
+import com.ibtikar.app.bokeh.data.models.ModelCartListItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,17 +28,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private ArrayList<ModelCartItem> arrayList;
+    private ArrayList<ModelCartListItem> arrayList;
     private Context context;
     private ContainerCartItemsClickListener customListener;
     private boolean isApartOfLastOrder;
 
-    public AdapterCartList(ArrayList<ModelCartItem> arrayList, Context context) {
+    public AdapterCartList(ArrayList<ModelCartListItem> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
 
-    public AdapterCartList(ArrayList<ModelCartItem> arrayList, Context context, boolean isApartOfLastOrder) {
+    public AdapterCartList(ArrayList<ModelCartListItem> arrayList, Context context, boolean isApartOfLastOrder) {
         this.arrayList = arrayList;
         this.context = context;
         this.isApartOfLastOrder = isApartOfLastOrder;
@@ -62,13 +63,13 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        final ModelCartItem modelProductItem = arrayList.get(position);
+        final ModelCartListItem modelCartItem = arrayList.get(position);
         final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
 
-        if (!(modelProductItem.getImage().equals("") || modelProductItem.getImage() == null ))
+        if (!(modelCartItem.getProductInfo().getImage().equals("") || modelCartItem.getProductInfo().getImage() == null ))
         {
             Glide.with(context)
-                    .load(modelProductItem.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .load(modelCartItem.getProductInfo().getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
                         public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -84,11 +85,18 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     .into(itemViewHolder.imProduct);
         }
 
-        itemViewHolder.tvProductName.setText(modelProductItem.getName());
-        itemViewHolder.tvDeliveryDate.setText(modelProductItem.getBookingDate());
-        itemViewHolder.tvDeliveryTime.setText(modelProductItem.getDeliveryTime());
-        itemViewHolder.tvSellerName.setText(modelProductItem.getSellername());
-        itemViewHolder.tvPrice.setText(modelProductItem.getPrice().toString());
+        itemViewHolder.tvProductName.setText(modelCartItem.getProductInfo().getName());
+        itemViewHolder.tvDeliveryDate.setText(modelCartItem.getDelivary().getDate());
+        //itemViewHolder.tvDeliveryTime.setText(modelCartItem.getDeliveryTime());
+
+        if (modelCartItem.getDelivary().getTime()==1)
+            itemViewHolder.tvDeliveryTime.setText("1:00 am - 2:00 pm");
+
+        else
+            itemViewHolder.tvDeliveryTime.setText("4:00 pm - 11:30 pm");
+
+        itemViewHolder.tvSellerName.setText(modelCartItem.getProductInfo().getSellername());
+        itemViewHolder.tvPrice.setText(modelCartItem.getProductInfo().getPrice().toString());
         itemViewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,13 +114,13 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return arrayList == null ? 0 : arrayList.size();
     }
 
-    public void add(ModelCartItem r) {
+    public void add(ModelCartListItem r) {
         arrayList.add(r);
         notifyItemInserted(arrayList.size()-1 );
     }
 
-    public void addAll(List<ModelCartItem> opResults) {
-        for (ModelCartItem result : opResults) {
+    public void addAll(List<ModelCartListItem> opResults) {
+        for (ModelCartListItem result : opResults) {
             add(result);
         }
     }

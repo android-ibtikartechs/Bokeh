@@ -28,13 +28,13 @@ public class ModelLastOrdersListItem {
 
     @SerializedName("itemsList")
     @Expose
-    private List<ModelCartItem> itemsList = null;
+    private List<ModelCartListItem> itemsList = null;
 
 
     public ModelLastOrdersListItem() {
     }
 
-    public ModelLastOrdersListItem(Integer id, String date, Integer price, Integer numOfItems, List<ModelCartItem> itemsList) {
+    public ModelLastOrdersListItem(Integer id, String date, Integer price, Integer numOfItems, List<ModelCartListItem> itemsList) {
         this.id = id;
         this.date = date;
         this.price = price;
@@ -60,7 +60,7 @@ public class ModelLastOrdersListItem {
         this.numOfItems = numOfItems;
     }
 
-    public void setItemsList(List<ModelCartItem> itemsList) {
+    public void setItemsList(List<ModelCartListItem> itemsList) {
         this.itemsList = itemsList;
     }
 
@@ -81,7 +81,7 @@ public class ModelLastOrdersListItem {
         return numOfItems;
     }
 
-    public List<ModelCartItem> getItemsList() {
+    public List<ModelCartListItem> getItemsList() {
         return itemsList;
     }
 
