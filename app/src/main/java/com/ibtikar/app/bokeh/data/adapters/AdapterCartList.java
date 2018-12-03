@@ -33,6 +33,7 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private ContainerCartItemsClickListener customListener;
     private boolean isApartOfLastOrder;
 
+
     public AdapterCartList(ArrayList<ModelCartListItem> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
@@ -94,6 +95,12 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         else
             itemViewHolder.tvDeliveryTime.setText("4:00 pm - 11:30 pm");
+
+        if (modelCartItem.getDelivary().getType() == 1)
+            itemViewHolder.tvDeliveryOrPickup.setText("Delivery");
+
+        else
+            itemViewHolder.tvDeliveryOrPickup.setText("Pickup");
 
         itemViewHolder.tvSellerName.setText(modelCartItem.getProductInfo().getSellername());
         itemViewHolder.tvPrice.setText(modelCartItem.getProductInfo().getPrice().toString());
@@ -168,6 +175,9 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         @BindView(R.id.progressBar)
         ProgressBar progressBar;
+
+        @BindView(R.id.tv_delivery_or_pickup)
+        TextView tvDeliveryOrPickup;
 
         public ItemViewHolder(View itemView) {
             super(itemView);

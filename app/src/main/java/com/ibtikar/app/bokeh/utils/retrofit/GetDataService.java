@@ -5,9 +5,11 @@ import com.ibtikar.app.bokeh.data.models.responses.ResponseCartDetails;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCategoriesModel;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCountriesList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseHomeModel;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseLikeButton;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseProductList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseSearchResultList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseShopsList;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseWishList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -44,6 +46,14 @@ public interface GetDataService {
 
     @POST("/cartitems")
     Call<ResponseCartDetails> getCartDetails(@Query("user") Integer userId);
+
+    @POST("/wishlist")
+    Call<ResponseWishList> getWishList(@Query("user") Integer userId);
+
+    @POST("/addtowish")
+    Call<ResponseLikeButton> addToWish(@Query("user") Integer userId, @Query("product") Integer productId);
+
+
 
 
 }

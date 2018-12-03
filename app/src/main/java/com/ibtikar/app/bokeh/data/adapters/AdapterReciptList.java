@@ -48,7 +48,14 @@ public class AdapterReciptList extends RecyclerView.Adapter<RecyclerView.ViewHol
         final ModelReciptList modelReciptList = arrayList.get(position);
         final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
 
-        itemViewHolder.tvDeliveryFees.setText(modelReciptList.getOrderInfo().getDelivaryFees()+" EGP");
+        if (modelReciptList.getOrderInfo().getType()==1)
+            itemViewHolder.tvDeliveryFees.setText(modelReciptList.getOrderInfo().getDelivaryFees()+" EGP");
+
+        else {
+            itemViewHolder.tvDeliveryFees.setText("Pickup");
+            itemViewHolder.tvDeliveryFees.setTextColor(context.getResources().getColor(R.color.ColorGrayLine));
+        }
+
         itemViewHolder.tvSubtotalPrice.setText(modelReciptList.getOrderInfo().getTotal() + " EGP");
 
 

@@ -3,6 +3,7 @@ package com.ibtikar.app.bokeh.ui.fragments.wishlist;
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseProductList;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseWishList;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
 import com.ibtikar.app.bokeh.utils.retrofit.GetDataService;
 import com.ibtikar.app.bokeh.utils.retrofit.RetrofitClientInstance;
@@ -24,15 +25,15 @@ public class WishListPresenter <V extends WishListMvpView> extends BasePresenter
         getMvpView().showLoadingView();
 
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<ResponseProductList> call = null;
+        Call<ResponseWishList> call = null;
 
-        call = service.getProductListForCategory(34,getDataManager().getCountryId());
+        call = service.getWishList(27);
 
-        call.enqueue(new Callback<ResponseProductList>() {
+        call.enqueue(new Callback<ResponseWishList>() {
             @Override
-            public void onResponse(Call<ResponseProductList> call, Response<ResponseProductList> response) {
+            public void onResponse(Call<ResponseWishList> call, Response<ResponseWishList> response) {
                 if (response.body().getStatus()) {
-                    List<ModelProductItem> list = response.body().getProducts();
+                    List<ModelProductItem> list = response.body().getList();
                     if (list.size() == 0)
                         getMvpView().showEmptyView();
 
@@ -47,7 +48,7 @@ public class WishListPresenter <V extends WishListMvpView> extends BasePresenter
             }
 
             @Override
-            public void onFailure(Call<ResponseProductList> call, Throwable t) {
+            public void onFailure(Call<ResponseWishList> call, Throwable t) {
 
             }
         });

@@ -72,6 +72,8 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
     @BindView(R.id.btn_add_to_cart)
     Button btnAddToCart;
 
+    boolean likeSwitch;
+
     ProductDetailsPresenter presenter;
 
 
@@ -96,6 +98,13 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
                 RxBus.publish(modelProductItem);
                 DialogBuyOptionsFragment dialogBuyOptionsFragment = new DialogBuyOptionsFragment();
                 dialogBuyOptionsFragment.show(getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
+            }
+        });
+
+        btnLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.changeLikeStaus(modelProductItem.getId());
             }
         });
 
@@ -271,16 +280,32 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
         }
         tvPrice.setText(String.format(Locale.UK,"%d",modelProductItem.getPrice()));
 
-        if (modelProductItem.getIsLiked())
+        if (modelProductItem.getIsLiked()) {
+            likeSwitch = true;
             btnLike.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_like_liked));
-        else
-            btnLike.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_like_normal));
-
+        }
+            else {
+                likeSwitch = false;
+                btnLike.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_like_normal));
+        }
 
 
 
     }
 
+    @Override
+    public void changeBtnLikeStatus() {
+        if (likeSwitch)
+        {
+            likeSwitch = false;
+            btnLike.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_like_normal));
+        }
+        else
+        {
+            likeSwitch = true;
+            btnLike.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_like_liked));
+        }
+    }
 
 
     public void populateWebViewDescription(String description)

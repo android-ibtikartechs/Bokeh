@@ -8,4 +8,5 @@ import java.util.List;
 public interface ProductDetailsMvpPresenter <V extends ProductDetailsMvpView> extends MvpPresenter<V> {
 
     void loadData();
+    void changeLikeStaus(Integer productId);
 }
