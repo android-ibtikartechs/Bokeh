@@ -3,17 +3,12 @@ package com.ibtikar.app.bokeh.ui.fragments.cart;
 import android.util.Log;
 
 import com.ibtikar.app.bokeh.data.DataManager;
-import com.ibtikar.app.bokeh.data.models.GalleryProductImage;
-import com.ibtikar.app.bokeh.data.models.ModelCartItem;
-import com.ibtikar.app.bokeh.data.models.ModelProductItemReciptList;
-import com.ibtikar.app.bokeh.data.models.ModelReciptList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCartDetails;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseDecreaseCartItemQuantity;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseIncreaseCartItemQuantity;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
 import com.ibtikar.app.bokeh.utils.retrofit.GetDataService;
 import com.ibtikar.app.bokeh.utils.retrofit.RetrofitClientInstance;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -134,5 +129,60 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
             }
         });
 
+    }
+
+    @Override
+    public void increaseCartItemQuantityPresenter(int cartItemId, int position, Integer currentQuantity) {
+        getMvpView().showLoadingViewOrdersInfo();
+        Call<ResponseIncreaseCartItemQuantity> call;
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        call = service.increaseCartItemQuantity(cartItemId);
+        call.enqueue(new Callback<ResponseIncreaseCartItemQuantity>() {
+            @Override
+            public void onResponse(Call<ResponseIncreaseCartItemQuantity> call, Response<ResponseIncreaseCartItemQuantity> response) {
+                if (response.body().getStatus())
+                {
+                    if (response.body().getIncreased()) {
+                        getMvpView().increaseCartItemQuantity(position, currentQuantity);
+                    }
+                    else
+                        getMvpView().showAlertDialogExcedeMaximumQuantityOfCartItem(position,response.body().getMaximum(), response.body().getProductName());
+
+                    getMvpView().reloadOrdersInformation(response.body().getGrandTtoal(),response.body().getOrders());
+                    getMvpView().showContentOrdersInfo();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseIncreaseCartItemQuantity> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void decreaseCartItemQuantityPresenter(int cartItemId, int position, Integer currentQuantity) {
+        getMvpView().showLoadingViewOrdersInfo();
+        Call<ResponseDecreaseCartItemQuantity> call;
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        call = service.decreaseCartItemQuantity(cartItemId);
+        call.enqueue(new Callback<ResponseDecreaseCartItemQuantity>() {
+            @Override
+            public void onResponse(Call<ResponseDecreaseCartItemQuantity> call, Response<ResponseDecreaseCartItemQuantity> response) {
+                if (response.body().getStatus())
+                {
+                    if (response.body().getDecreased())
+                        getMvpView().decreaseCartItemQuantity(position,currentQuantity);
+
+                    getMvpView().reloadOrdersInformation(response.body().getGrandTtoal(),response.body().getOrders());
+                    getMvpView().showContentOrdersInfo();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseDecreaseCartItemQuantity> call, Throwable t) {
+
+            }
+        });
     }
 }

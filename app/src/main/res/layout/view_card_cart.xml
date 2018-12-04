@@ -161,6 +161,11 @@
                             android:textSize="12sp"
                             android:text="2"
                             />
+                        <ProgressBar
+                            android:visibility="gone"
+                            android:id="@+id/progress_bar_quantity"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp" />
                     </RelativeLayout>
 
                     <ImageView

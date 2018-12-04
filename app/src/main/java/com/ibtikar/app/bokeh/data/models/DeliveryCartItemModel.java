@@ -18,6 +18,11 @@ public class DeliveryCartItemModel {
     @Expose
     private Integer quantity;
 
+    @SerializedName("cartitemid")
+    @Expose
+    private Integer cartItemId;
+
+
     /**
      * No args constructor for use in serialization
      *
@@ -32,12 +37,21 @@ public class DeliveryCartItemModel {
      * @param type
      * @param date
      */
-    public DeliveryCartItemModel(String date, Integer time, Integer type, Integer quantity) {
+    public DeliveryCartItemModel(String date, Integer time, Integer type, Integer quantity, Integer cartItemId) {
         super();
         this.date = date;
         this.time = time;
         this.type = type;
         this.quantity = quantity;
+        this.cartItemId = cartItemId;
+    }
+
+    public void setCartItemId(Integer cartItemId) {
+        this.cartItemId = cartItemId;
+    }
+
+    public Integer getCartItemId() {
+        return cartItemId;
     }
 
     public String getDate() {

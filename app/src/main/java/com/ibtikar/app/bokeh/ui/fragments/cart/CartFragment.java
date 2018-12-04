@@ -1,22 +1,27 @@
 package com.ibtikar.app.bokeh.ui.fragments.cart;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
+import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.adapters.AdapterCartList;
 import com.ibtikar.app.bokeh.data.adapters.AdapterReciptList;
 import com.ibtikar.app.bokeh.data.models.ModelCartItem;
@@ -45,6 +50,9 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
 
     @BindView(R.id.progressActivity)
     ProgressLinearLayout progressLinearLayout;
+
+    @BindView(R.id.progressLoutRecipt)
+    ProgressLinearLayout progressLoutReceipt;
 
     @BindView(R.id.rv_cart_items)
     RecyclerView rvCartItems;
@@ -176,6 +184,46 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     }
 
     @Override
+    public void increaseCartItemQuantity(int position, Integer currentQuantity) {
+        ((ProgressBar)rvCartItems.findViewHolderForLayoutPosition(position).itemView.findViewById(R.id.progress_bar_quantity)).setVisibility(View.GONE);
+        ((TextView)rvCartItems.findViewHolderForLayoutPosition(position).itemView.findViewById(R.id.tv_quantity)).setText(String.valueOf(currentQuantity+1));
+    }
+
+    @Override
+    public void decreaseCartItemQuantity(int position, Integer currentQuantity) {
+        ((ProgressBar)rvCartItems.findViewHolderForLayoutPosition(position).itemView.findViewById(R.id.progress_bar_quantity)).setVisibility(View.GONE);
+        ((TextView)rvCartItems.findViewHolderForLayoutPosition(position).itemView.findViewById(R.id.tv_quantity)).setText(String.valueOf(currentQuantity-1));
+    }
+
+    @Override
+    public void showAlertDialogExcedeMaximumQuantityOfCartItem(int itemPosition, Integer maximumQuantity, String productName) {
+        ((ProgressBar)rvCartItems.findViewHolderForLayoutPosition(itemPosition).itemView.findViewById(R.id.progress_bar_quantity)).setVisibility(View.GONE);
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(getActivity());
+        }
+        builder.setMessage("Sorry ,you are only allowed to purchase a maximum " + maximumQuantity + " quantity of " + "\"" + productName + "\"" + ", during the current promotion")
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+
+                    }
+                })
+
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    @Override
+    public void reloadOrdersInformation(Integer OrderTotal, List<ModelReciptList> reciptList) {
+        adapterReciptList.clear();
+        addMoreToReceiptList(reciptList);
+        tvOrderTotal.setText(OrderTotal.toString());
+    }
+
+    @Override
     public void showErrorConnectionView() {
 
     }
@@ -191,7 +239,47 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     }
 
     @Override
+    public void showErrorConnectionViewOrdersInfo() {
+        progressLoutReceipt.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), "No Connection",
+                "We could not establish a connection with our servers. Try again when you are connected to the interne.",
+                "Try Again", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0), false, null, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
+                    }
+                });
+
+    }
+
+    @Override
+    public void showLoadingViewOrdersInfo() {
+        progressLoutReceipt.showLoading();
+    }
+
+    @Override
+    public void showContentOrdersInfo() {
+        progressLoutReceipt.showContent();
+    }
+
+    @Override
     public void onCartItemClickListener(ModelCartItem productItem) {
 
+    }
+
+    @Override
+    public void onIncreaseQuantity(int cartItemId, int position, Integer currentQuantity) {
+        ((ProgressBar)rvCartItems.findViewHolderForLayoutPosition(position).itemView.findViewById(R.id.progress_bar_quantity)).setVisibility(View.VISIBLE);
+        presenter.increaseCartItemQuantityPresenter(cartItemId, position, currentQuantity);
+        //increaseCartItemQuantity(position,currentQuantity);
+
+    }
+
+    @Override
+    public void onDecreaseQuantity(int cartItemId, int position, Integer currentQuantity) {
+        if (currentQuantity>=2) {
+            ((ProgressBar)rvCartItems.findViewHolderForLayoutPosition(position).itemView.findViewById(R.id.progress_bar_quantity)).setVisibility(View.VISIBLE);
+            presenter.decreaseCartItemQuantityPresenter(cartItemId, position, currentQuantity);
+            //decreaseCartItemQuantity(position, currentQuantity);
+        }
     }
 }

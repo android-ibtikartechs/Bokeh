@@ -91,6 +91,16 @@ public class AdapterLastOrdersList extends RecyclerView.Adapter<RecyclerView.Vie
 
     }
 
+    @Override
+    public void onIncreaseQuantity(int cartItemId, int position, Integer currentQuantity) {
+
+    }
+
+    @Override
+    public void onDecreaseQuantity(int cartItemId, int position, Integer currentQuantity) {
+
+    }
+
 
     public void addMoreToCartListAdapter(final List<ModelCartListItem> list) {
         adapterCartList.addAll(list);

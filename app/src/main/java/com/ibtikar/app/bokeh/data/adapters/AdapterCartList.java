@@ -104,12 +104,27 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         itemViewHolder.tvSellerName.setText(modelCartItem.getProductInfo().getSellername());
         itemViewHolder.tvPrice.setText(modelCartItem.getProductInfo().getPrice().toString());
+        itemViewHolder.tvQuantity.setText(modelCartItem.getDelivary().getQuantity().toString());
         itemViewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 arrayList.remove(position);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, arrayList.size());
+            }
+        });
+
+        itemViewHolder.btnAddQuantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customListener.onIncreaseQuantity(modelCartItem.getDelivary().getCartItemId(),position, Integer.valueOf(itemViewHolder.tvQuantity.getText().toString()));
+            }
+        });
+
+        itemViewHolder.btnRemoveQuantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customListener.onDecreaseQuantity(modelCartItem.getDelivary().getCartItemId(), position, Integer.valueOf(itemViewHolder.tvQuantity.getText().toString()));
             }
         });
 
@@ -179,6 +194,9 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @BindView(R.id.tv_delivery_or_pickup)
         TextView tvDeliveryOrPickup;
 
+        @BindView(R.id.progress_bar_quantity)
+        ProgressBar progressBarQuantity;
+
         public ItemViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
@@ -194,6 +212,8 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public interface ContainerCartItemsClickListener {
         public void onCartItemClickListener(ModelCartItem productItem);
+        public void onIncreaseQuantity(int cartItemId, int position, Integer currentQuantity);
+        public void onDecreaseQuantity(int cartItemId, int position, Integer currentQuantity);
     }
     public void setCustomButtonListner(ContainerCartItemsClickListener listener) {
         this.customListener = listener;

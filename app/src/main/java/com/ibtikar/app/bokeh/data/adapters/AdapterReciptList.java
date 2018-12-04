@@ -89,6 +89,25 @@ public class AdapterReciptList extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    public void clear() {
+        while (getItemCount() > 0) {
+            remove(getItem(0));
+        }
+        notifyItemRangeRemoved(0, arrayList.size());
+    }
+
+    public ModelReciptList getItem(int position) {
+        return arrayList.get(position);
+    }
+
+    public void remove(ModelReciptList r) {
+        int position = arrayList.indexOf(r);
+        if (position > -1) {
+            arrayList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
     public void addMoreToCartListAdapter(final List<ModelProductItemReciptList> list) {
         adapterProductItemReciptList.addAll(list);
     }
