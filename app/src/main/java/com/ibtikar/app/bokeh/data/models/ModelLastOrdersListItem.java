@@ -2,6 +2,7 @@ package com.ibtikar.app.bokeh.data.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.ibtikar.app.bokeh.data.models.responses.OrderInfoMyOrdersList;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -10,23 +11,15 @@ import java.util.Date;
 import java.util.List;
 
 public class ModelLastOrdersListItem {
-    @SerializedName("id")
+    @SerializedName("orderdate")
     @Expose
-    private Integer id;
+    private String orderdate;
 
-    @SerializedName("date")
+    @SerializedName("orderinfo")
     @Expose
-    private String date;
+    private OrderInfoMyOrdersList orderinfo;
 
-    @SerializedName("price")
-    @Expose
-    private Integer price;
-
-    @SerializedName("numOfItems")
-    @Expose
-    private Integer numOfItems;
-
-    @SerializedName("itemsList")
+    @SerializedName("List")
     @Expose
     private List<ModelCartListItem> itemsList = null;
 
@@ -34,75 +27,41 @@ public class ModelLastOrdersListItem {
     public ModelLastOrdersListItem() {
     }
 
-    public ModelLastOrdersListItem(Integer id, String date, Integer price, Integer numOfItems, List<ModelCartListItem> itemsList) {
-        this.id = id;
-        this.date = date;
-        this.price = price;
-        this.numOfItems = numOfItems;
-        this.itemsList = itemsList;
+    /**
+     *
+     * @param orderdate
+     * @param orderinfo
+     * @param list
+     */
+    public ModelLastOrdersListItem(String orderdate, List<ModelCartListItem> list, OrderInfoMyOrdersList orderinfo) {
+        super();
+        this.orderdate = orderdate;
+        this.itemsList = list;
+        this.orderinfo = orderinfo;
     }
 
-
-    public void setId(Integer id) {
-        this.id = id;
+    public String getOrderdate() {
+        return orderdate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setOrderdate(String orderdate) {
+        this.orderdate = orderdate;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
-
-    }
-
-    public void setNumOfItems(Integer numOfItems) {
-        this.numOfItems = numOfItems;
-    }
-
-    public void setItemsList(List<ModelCartListItem> itemsList) {
-        this.itemsList = itemsList;
-    }
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public Integer getNumOfItems() {
-        return numOfItems;
-    }
-
-    public List<ModelCartListItem> getItemsList() {
+    public List<ModelCartListItem> getList() {
         return itemsList;
     }
 
-    public String getDayOfMonth(String date)
-    {
-        Timestamp timestamp = Timestamp.valueOf(date);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(timestamp.getTime());
-        return String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+    public void setList(List<ModelCartListItem> list) {
+        this.itemsList = list;
     }
 
-    public String getMonth(String date)
-    {
-        Timestamp timestamp = Timestamp.valueOf(date);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(timestamp.getTime());
-        Date dat = calendar.getTime();
-        SimpleDateFormat daymonthsimpleDataFormat = new SimpleDateFormat("MMM");
-
-        return daymonthsimpleDataFormat.format(dat);
+    public OrderInfoMyOrdersList getOrderinfo() {
+        return orderinfo;
     }
+
+    public void setOrderinfo(OrderInfoMyOrdersList orderinfo) {
+        this.orderinfo = orderinfo;
+    }
+
 }

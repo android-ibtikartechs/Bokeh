@@ -4,10 +4,17 @@ import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.models.GalleryProductImage;
 import com.ibtikar.app.bokeh.data.models.ModelCartItem;
 import com.ibtikar.app.bokeh.data.models.ModelLastOrdersListItem;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseOrdersHistory;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
+import com.ibtikar.app.bokeh.utils.retrofit.GetDataService;
+import com.ibtikar.app.bokeh.utils.retrofit.RetrofitClientInstance;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyOrdersPresenter <V extends MyOrdersMvpView> extends BasePresenter<V> implements MyOrdersMvpPresenter<V> {
     public MyOrdersPresenter(DataManager dataManager) {
@@ -16,6 +23,30 @@ public class MyOrdersPresenter <V extends MyOrdersMvpView> extends BasePresenter
 
     @Override
     public void loadOrdersList() {
+
+        getMvpView().showLoadingView();
+
+        Call<ResponseOrdersHistory> call;
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        call = service.getOrdersHistory(27);
+
+        call.enqueue(new Callback<ResponseOrdersHistory>() {
+            @Override
+            public void onResponse(Call<ResponseOrdersHistory> call, Response<ResponseOrdersHistory> response) {
+                if (response.body().getStatus()) {
+                    getMvpView().addMoreToOrdresListAdapter(response.body().getList());
+                    getMvpView().showContent();
+                }
+                else
+                    getMvpView().showErrorConnectionView();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseOrdersHistory> call, Throwable t) {
+                getMvpView().showErrorConnectionView();
+            }
+        });
+
       /*  List<ModelLastOrdersListItem> ordersListItems = new ArrayList<>();
 
         List<ModelCartItem> cartItems = new ArrayList<>();

@@ -50,10 +50,10 @@ public class AdapterLastOrdersList extends RecyclerView.Adapter<RecyclerView.Vie
         final ModelLastOrdersListItem modelLastOrdersListItem = arrayList.get(position);
         final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
 
-        itemViewHolder.tvTotalPrice.setText(modelLastOrdersListItem.getPrice().toString());
-        itemViewHolder.tvNumOfItems.setText(modelLastOrdersListItem.getNumOfItems().toString());
-        itemViewHolder.tvDayDate.setText(modelLastOrdersListItem.getDayOfMonth(modelLastOrdersListItem.getDate()));
-        itemViewHolder.tvMonthDate.setText(modelLastOrdersListItem.getMonth(modelLastOrdersListItem.getDate()));
+        itemViewHolder.tvTotalPrice.setText(modelLastOrdersListItem.getOrderinfo().getOrdertotal().toString());
+        itemViewHolder.tvNumOfItems.setText(modelLastOrdersListItem.getOrderinfo().getTotalitems().toString());
+        itemViewHolder.tvDayDate.setText(modelLastOrdersListItem.getOrderdate());
+        //itemViewHolder.tvMonthDate.setText(modelLastOrdersListItem.getMonth(modelLastOrdersListItem.getDate()));
 
 
         cartItemArrayList = new ArrayList<>();
@@ -64,7 +64,7 @@ public class AdapterLastOrdersList extends RecyclerView.Adapter<RecyclerView.Vie
         itemViewHolder.rvOrderItems.setAdapter(adapterCartList);
         adapterCartList.notifyDataSetChanged();
 
-        addMoreToCartListAdapter(modelLastOrdersListItem.getItemsList());
+        addMoreToCartListAdapter(modelLastOrdersListItem.getList());
     }
 
 

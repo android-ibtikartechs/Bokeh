@@ -8,6 +8,7 @@ import com.ibtikar.app.bokeh.data.models.responses.ResponseDecreaseCartItemQuant
 import com.ibtikar.app.bokeh.data.models.responses.ResponseHomeModel;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseIncreaseCartItemQuantity;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseLikeButton;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseOrdersHistory;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseProductList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseSearchResultList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseShopsList;
@@ -60,6 +61,9 @@ public interface GetDataService {
 
     @POST("/decreasequantity")
     Call<ResponseDecreaseCartItemQuantity> decreaseCartItemQuantity(@Query("id") Integer cartItemId);
+
+    @POST("/ordershistory")
+    Call<ResponseOrdersHistory> getOrdersHistory(@Query("user") Integer userId);
 
 
 
