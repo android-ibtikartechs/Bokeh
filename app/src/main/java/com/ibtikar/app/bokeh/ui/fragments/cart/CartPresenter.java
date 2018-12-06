@@ -5,6 +5,7 @@ import android.util.Log;
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCartDetails;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseDecreaseCartItemQuantity;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseDeleteCartItem;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseIncreaseCartItemQuantity;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
 import com.ibtikar.app.bokeh.utils.retrofit.GetDataService;
@@ -184,5 +185,34 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
 
             }
         });
+    }
+
+    @Override
+    public void deleteItemFromCartList(int cartItemId, int position) {
+        getMvpView().showLoadingViewOrdersInfo();
+        Call<ResponseDeleteCartItem> call;
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        call = service.deleteCartItem(cartItemId);
+
+        call.enqueue(new Callback<ResponseDeleteCartItem>() {
+            @Override
+            public void onResponse(Call<ResponseDeleteCartItem> call, Response<ResponseDeleteCartItem> response) {
+                if (response.body().getStatus()) {
+                    if (response.body().getDeleted())
+                        getMvpView().deleteItemFromCartList(position);
+
+                    getMvpView().reloadOrdersInformation(response.body().getGrandTtoal(),response.body().getOrders());
+                    getMvpView().showContentOrdersInfo();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseDeleteCartItem> call, Throwable t) {
+
+            }
+        });
+
     }
 }

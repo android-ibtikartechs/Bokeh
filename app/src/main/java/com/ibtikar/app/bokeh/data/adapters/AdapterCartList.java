@@ -108,9 +108,11 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
         itemViewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                arrayList.remove(position);
+               /* arrayList.remove(position);
                 notifyItemRemoved(position);
-                notifyItemRangeChanged(position, arrayList.size());
+                notifyItemRangeChanged(position, arrayList.size());*/
+               //remove(position);
+               customListener.onDeleteItemClickListener(modelCartItem.getDelivary().getCartItemId(),position);
             }
         });
 
@@ -128,6 +130,12 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
         });
 
+    }
+
+    public void remove(int position) {
+            arrayList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, arrayList.size());
     }
 
 
@@ -212,6 +220,7 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public interface ContainerCartItemsClickListener {
         public void onCartItemClickListener(ModelCartItem productItem);
+        public void onDeleteItemClickListener(int cartItemId, int position);
         public void onIncreaseQuantity(int cartItemId, int position, Integer currentQuantity);
         public void onDecreaseQuantity(int cartItemId, int position, Integer currentQuantity);
     }

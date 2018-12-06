@@ -92,6 +92,11 @@ public class AdapterLastOrdersList extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     @Override
+    public void onDeleteItemClickListener(int cartItemId, int position) {
+
+    }
+
+    @Override
     public void onIncreaseQuantity(int cartItemId, int position, Integer currentQuantity) {
 
     }

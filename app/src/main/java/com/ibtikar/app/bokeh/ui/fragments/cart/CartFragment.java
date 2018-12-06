@@ -224,6 +224,11 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     }
 
     @Override
+    public void deleteItemFromCartList(int position) {
+        adapterCartList.remove(position);
+    }
+
+    @Override
     public void showErrorConnectionView() {
 
     }
@@ -264,6 +269,11 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     @Override
     public void onCartItemClickListener(ModelCartItem productItem) {
 
+    }
+
+    @Override
+    public void onDeleteItemClickListener(int cartItemId, int position) {
+        presenter.deleteItemFromCartList(cartItemId, position);
     }
 
     @Override
