@@ -1,6 +1,7 @@
 package com.ibtikar.app.bokeh.ui.fragments.cart;
 
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +26,7 @@ import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.adapters.AdapterCartList;
 import com.ibtikar.app.bokeh.data.adapters.AdapterReciptList;
+import com.ibtikar.app.bokeh.data.models.CartFragmentRefreshTrigger;
 import com.ibtikar.app.bokeh.data.models.ModelCartItem;
 import com.ibtikar.app.bokeh.data.models.ModelCartListItem;
 import com.ibtikar.app.bokeh.data.models.ModelReciptList;
@@ -36,6 +39,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.functions.Consumer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,6 +70,9 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     @BindView(R.id.tvOrderTotal)
     TextView tvOrderTotal;
 
+    @BindView(R.id.swipe_container)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     AdapterReciptList adapterReciptList;
     ArrayList<ModelReciptList> reciptListArrayList;
 
@@ -73,6 +80,8 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     private ArrayList<ModelCartListItem> arrayList;
 
     CartPresenter presenter;
+
+    SwipeRefreshLayout.OnRefreshListener swipeRefreshListner;
 
     Handler mHandler;
 
@@ -113,24 +122,28 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+
+
         DataManager dataManager = ((MvpApp) getActivity().getApplication()).getDataManager();
         presenter = new CartPresenter(dataManager);
         presenter.onAttach(this);
         mHandler = new Handler(Looper.getMainLooper());
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_cart, container, false);
         ButterKnife.bind(this, rootView);
-        arrayList = new ArrayList<>();
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+       /* arrayList = new ArrayList<>();
         reciptListArrayList = new ArrayList<>();
         rvCartItems.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
         rvReceiptList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false));
-        populatRecyclerView();
-        presenter.loadCartList();
+        populatRecyclerView();*/
+
 
         btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +152,67 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
             }
         });
 
+       /* swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.loadCartList();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });*/
+
+        swipeRefreshListner = new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                arrayList = new ArrayList<>();
+                reciptListArrayList = new ArrayList<>();
+                rvCartItems.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
+                rvReceiptList.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false));
+                populatRecyclerView();
+                presenter.loadCartList();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        };
+        swipeRefreshLayout.setOnRefreshListener(swipeRefreshListner);
+
+
+
+        ((MvpApp) getActivity().getApplication())
+                .bus()
+                .toObservable()
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object object) throws Exception {
+                        if (object instanceof CartFragmentRefreshTrigger) {
+                            //tvSearch.setText((String)object);
+                            swipeRefreshLayout.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    swipeRefreshLayout.setRefreshing(true);
+                                    swipeRefreshListner.onRefresh();
+                                }
+                            });
+                        }
+                    }
+                });
+
+
+
+
         return rootView;
+    }
+
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+                swipeRefreshListner.onRefresh();
+            }
+        });
     }
 
     private void populatRecyclerView() {
@@ -230,27 +303,43 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
 
     @Override
     public void showErrorConnectionView() {
-
+        progressLinearLayout.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), "No Connection",
+                "We could not establish a connection with our servers. Try again when you are connected to the interne.",
+                "Try Again", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        presenter.loadCartList();
+                    }
+                });
     }
 
     @Override
     public void showLoadingView() {
-
+        progressLinearLayout.showLoading();
     }
 
     @Override
     public void showContent() {
-
+        progressLinearLayout.showContent();
     }
+
+
+
+
 
     @Override
     public void showErrorConnectionViewOrdersInfo() {
+        for (int i = 0 ; i<arrayList.size() ; i++)
+        {
+            ((ProgressBar)rvCartItems.findViewHolderForLayoutPosition(i).itemView.findViewById(R.id.progress_bar_quantity)).setVisibility(View.GONE);
+        }
         progressLoutReceipt.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), "No Connection",
                 "We could not establish a connection with our servers. Try again when you are connected to the interne.",
                 "Try Again", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0), false, null, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
+                        presenter.loadReceitList();
                     }
                 });
 

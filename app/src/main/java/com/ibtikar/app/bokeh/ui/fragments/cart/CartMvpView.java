@@ -18,6 +18,8 @@ public interface CartMvpView extends MvpView {
     void deleteItemFromCartList(int position);
 
 
+
+
     void showErrorConnectionView();
     void showLoadingView();
     void showContent();

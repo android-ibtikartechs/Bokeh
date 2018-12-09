@@ -11,6 +11,7 @@ import com.ibtikar.app.bokeh.data.models.responses.ResponseIncreaseCartItemQuant
 import com.ibtikar.app.bokeh.data.models.responses.ResponseLikeButton;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseOrdersHistory;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseProductList;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseReceiteList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseSearchResultList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseShopsList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseWishList;
@@ -68,6 +69,9 @@ public interface GetDataService {
 
     @POST("/removecartitem")
     Call<ResponseDeleteCartItem> deleteCartItem(@Query("id") Integer cartItemId);
+
+    @POST("/getcartresetitems")
+    Call<ResponseReceiteList> getReceitList(@Query("user") Integer userId);
 
 
 

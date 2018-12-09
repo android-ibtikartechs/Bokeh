@@ -154,6 +154,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
                 }
 
+
+
               /*  if (tab.getPosition() == 4) {
                     //tabLayout.startAnimation( animHide );
                     tabLayout.setVisibility(View.GONE);

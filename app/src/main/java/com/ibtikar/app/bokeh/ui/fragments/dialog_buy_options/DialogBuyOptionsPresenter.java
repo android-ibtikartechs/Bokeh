@@ -2,6 +2,7 @@ package com.ibtikar.app.bokeh.ui.fragments.dialog_buy_options;
 
 import android.util.Log;
 
+import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.models.ModelArea;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
@@ -39,6 +40,7 @@ public class DialogBuyOptionsPresenter <V extends DialogBuyOptionsMvpView> exten
                 Log.d("", "onAddToCartResponse: "+ response.body().getExisted());
                 if (response.body().getStatus())
                 {
+
                     if (!response.body().getExisted())
                         getDataManager().plusOneCartItems();
                 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface CartMvpPresenter<V extends CartMvpView> extends MvpPresenter<V> {
     void loadCartList();
+    void loadReceitList();
     void increaseCartItemQuantityPresenter(int cartItemId, int position, Integer currentQuantity);
     void decreaseCartItemQuantityPresenter(int cartItemId, int position, Integer currentQuantity);
     void deleteItemFromCartList(int cartItemId, int position);

@@ -24,6 +24,7 @@ import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.adapters.AdapterAreaSpinner;
 import com.ibtikar.app.bokeh.data.adapters.AdapterCitySpinner;
+import com.ibtikar.app.bokeh.data.models.CartFragmentRefreshTrigger;
 import com.ibtikar.app.bokeh.data.models.ModelArea;
 import com.ibtikar.app.bokeh.data.models.ModelCity;
 import com.ibtikar.app.bokeh.ui.fragments.cart.CartPresenter;
@@ -386,6 +387,9 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
 
     @Override
     public void finishSubmitting() {
+        ((MvpApp) getActivity().getApplication())
+                .bus()
+                .send(new CartFragmentRefreshTrigger(1));
         dismiss();
         DialogAfterBuyFragment dialogAfterBuyFragment = new DialogAfterBuyFragment();
         dialogAfterBuyFragment.show(getFragmentManager(), "Bottom Sheet after buy Dialog Fragment");

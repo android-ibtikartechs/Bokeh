@@ -7,6 +7,7 @@ import com.ibtikar.app.bokeh.data.models.responses.ResponseCartDetails;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseDecreaseCartItemQuantity;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseDeleteCartItem;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseIncreaseCartItemQuantity;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseReceiteList;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
 import com.ibtikar.app.bokeh.utils.retrofit.GetDataService;
 import com.ibtikar.app.bokeh.utils.retrofit.RetrofitClientInstance;
@@ -133,6 +134,31 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
     }
 
     @Override
+    public void loadReceitList() {
+        getMvpView().showLoadingViewOrdersInfo();
+        Call<ResponseReceiteList> call;
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        call = service.getReceitList(27);
+        call.enqueue(new Callback<ResponseReceiteList>() {
+            @Override
+            public void onResponse(Call<ResponseReceiteList> call, Response<ResponseReceiteList> response) {
+                if (response.body().getStatus())
+                {
+                    getMvpView().reloadOrdersInformation(response.body().getGrandTtoal(), response.body().getOrders());
+                    getMvpView().showContentOrdersInfo();
+                }
+                else
+                    getMvpView().showErrorConnectionViewOrdersInfo();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseReceiteList> call, Throwable t) {
+                getMvpView().showErrorConnectionViewOrdersInfo();
+            }
+        });
+    }
+
+    @Override
     public void increaseCartItemQuantityPresenter(int cartItemId, int position, Integer currentQuantity) {
         getMvpView().showLoadingViewOrdersInfo();
         Call<ResponseIncreaseCartItemQuantity> call;
@@ -156,7 +182,7 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
 
             @Override
             public void onFailure(Call<ResponseIncreaseCartItemQuantity> call, Throwable t) {
-
+                getMvpView().showErrorConnectionViewOrdersInfo();
             }
         });
     }
@@ -182,7 +208,7 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
 
             @Override
             public void onFailure(Call<ResponseDecreaseCartItemQuantity> call, Throwable t) {
-
+                getMvpView().showErrorConnectionViewOrdersInfo();
             }
         });
     }
@@ -210,7 +236,7 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
 
             @Override
             public void onFailure(Call<ResponseDeleteCartItem> call, Throwable t) {
-
+                getMvpView().showErrorConnectionViewOrdersInfo();
             }
         });
 
