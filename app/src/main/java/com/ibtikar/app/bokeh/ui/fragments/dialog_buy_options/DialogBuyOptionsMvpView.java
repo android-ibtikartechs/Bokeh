@@ -14,5 +14,5 @@ public interface DialogBuyOptionsMvpView extends MvpView {
     void showLoadingProgress();
     void hideLoadingProgress();
 
-    void finishSubmitting();
+    void finishSubmitting(String message, String productName);
 }

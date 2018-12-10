@@ -44,7 +44,7 @@ public class DialogBuyOptionsPresenter <V extends DialogBuyOptionsMvpView> exten
                     if (!response.body().getExisted())
                         getDataManager().plusOneCartItems();
                 }
-                getMvpView().finishSubmitting();
+                getMvpView().finishSubmitting("has been added to cart", modelProductItem.getName());
 
             }
 

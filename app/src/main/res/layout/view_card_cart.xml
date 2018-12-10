@@ -187,6 +187,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="16dp"
                 android:gravity="center"
+
                 >
 
                 <TextView
@@ -201,8 +202,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="USD"
-                    android:layout_marginStart="4dp"
+                    android:text="EGP"
                     android:textSize="14sp"
                     android:textColor="@color/ColorGrayDivider"
                     />

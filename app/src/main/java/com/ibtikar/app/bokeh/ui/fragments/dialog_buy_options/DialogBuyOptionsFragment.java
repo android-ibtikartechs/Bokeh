@@ -386,12 +386,12 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
     }
 
     @Override
-    public void finishSubmitting() {
+    public void finishSubmitting(String message, String productName) {
         ((MvpApp) getActivity().getApplication())
                 .bus()
                 .send(new CartFragmentRefreshTrigger(1));
         dismiss();
-        DialogAfterBuyFragment dialogAfterBuyFragment = new DialogAfterBuyFragment();
+        DialogAfterBuyFragment dialogAfterBuyFragment = DialogAfterBuyFragment.newInstance(message, productName);
         dialogAfterBuyFragment.show(getFragmentManager(), "Bottom Sheet after buy Dialog Fragment");
     }
 
