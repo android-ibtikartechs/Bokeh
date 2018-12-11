@@ -2,6 +2,8 @@ package com.ibtikar.app.bokeh.ui.activities.main;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -56,6 +58,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     AccountFragmentContainer accountFragmentContainer =AccountFragmentContainer.newInstance("","");
 
     private Animation animShow, animHide;
+    private Handler mHandler;
 
     MainPresenter presenter;
 
@@ -69,6 +72,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mHandler = new Handler(Looper.getMainLooper());
         ButterKnife.bind(this);
 
         //toolbar.setLogo(R.drawable.logo_toolbar);
@@ -195,6 +199,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                         }
                     }
                 });
+
+        presenter.refreshCartItemCount();
 
     }
 
@@ -330,4 +336,13 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         animHide = AnimationUtils.loadAnimation( this, R.anim.slide_down_tab_layout);
     }
 
+    @Override
+    public void refreshCartCount(Integer cartItemsCount) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                ((TextView)((ViewGroup) tabLayout.getChildAt(0)).getChildAt(4).findViewById(R.id.badge)).setText(cartItemsCount.toString());
+            }
+        });
+    }
 }

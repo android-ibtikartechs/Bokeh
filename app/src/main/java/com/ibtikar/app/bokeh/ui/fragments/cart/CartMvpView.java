@@ -23,6 +23,7 @@ public interface CartMvpView extends MvpView {
     void showErrorConnectionView();
     void showLoadingView();
     void showContent();
+    void showEmptyView();
 
 
     void showErrorConnectionViewOrdersInfo();

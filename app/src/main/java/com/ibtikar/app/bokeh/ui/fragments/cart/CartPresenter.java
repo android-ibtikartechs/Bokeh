@@ -117,12 +117,16 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
         call.enqueue(new Callback<ResponseCartDetails>() {
             @Override
             public void onResponse(Call<ResponseCartDetails> call, Response<ResponseCartDetails> response) {
-                getMvpView().showContent();
-                Log.d("", "onResponse: "+response.body());
-                //System.out.println(response.body().getOrders().get(0).getProducts().get(0).getProductname());
-                getMvpView().addMoreToCartListAdapter(response.body().getList());
-                getMvpView().addMoreToReceiptList(response.body().getOrders());
-                getMvpView().setOrderTotalTxtView(response.body().getGrandTtoal().toString());
+                if (response.body().getList().size() > 0) {
+                    getMvpView().showContent();
+                    Log.d("", "onResponse: " + response.body());
+                    //System.out.println(response.body().getOrders().get(0).getProducts().get(0).getProductname());
+                    getMvpView().addMoreToCartListAdapter(response.body().getList());
+                    getMvpView().addMoreToReceiptList(response.body().getOrders());
+                    getMvpView().setOrderTotalTxtView(response.body().getGrandTtoal().toString());
+                }
+                else
+                    getMvpView().showEmptyView();
             }
 
             @Override
@@ -224,8 +228,12 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
             @Override
             public void onResponse(Call<ResponseDeleteCartItem> call, Response<ResponseDeleteCartItem> response) {
                 if (response.body().getStatus()) {
-                    if (response.body().getDeleted())
+                    if (response.body().getDeleted()) {
                         getMvpView().deleteItemFromCartList(position);
+                        getDataManager().removeOneCartItem();
+                        if (response.body().getOrders().size() == 0)
+                            getMvpView().showEmptyView();
+                    }
 
                     getMvpView().reloadOrdersInformation(response.body().getGrandTtoal(),response.body().getOrders());
                     getMvpView().showContentOrdersInfo();

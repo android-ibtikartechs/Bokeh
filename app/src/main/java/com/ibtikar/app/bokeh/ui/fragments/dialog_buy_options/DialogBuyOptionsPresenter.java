@@ -41,10 +41,20 @@ public class DialogBuyOptionsPresenter <V extends DialogBuyOptionsMvpView> exten
                 if (response.body().getStatus())
                 {
 
-                    if (!response.body().getExisted())
-                        getDataManager().plusOneCartItems();
+                    if (response.body().getExisted())
+                        getMvpView().finishSubmitting("is already existed in your cart", modelProductItem.getName());
+                    else {
+                        if (response.body().getAdded()) {
+                            getMvpView().finishSubmitting("has been added to cart", modelProductItem.getName());
+                            getDataManager().plusOneCartItems();
+                        }
+                        else
+                            getMvpView().finishSubmitting("Sorry, this bouquet is not available now", modelProductItem.getName());
+
+
+                    }
                 }
-                getMvpView().finishSubmitting("has been added to cart", modelProductItem.getName());
+
 
             }
 

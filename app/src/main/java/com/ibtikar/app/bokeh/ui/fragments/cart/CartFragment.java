@@ -323,8 +323,10 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
         progressLinearLayout.showContent();
     }
 
-
-
+    @Override
+    public void showEmptyView() {
+        progressLinearLayout.showEmpty(getResources().getDrawable(R.drawable.cart_empty),"No Items", "No Items in yor cart yet");
+    }
 
 
     @Override

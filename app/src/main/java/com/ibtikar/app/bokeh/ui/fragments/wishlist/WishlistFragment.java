@@ -267,6 +267,6 @@ public class WishlistFragment extends BaseFragment implements WishListMvpView, A
 
     @Override
     public void showEmptyView() {
-        progressLinearLayout.showEmpty(R.drawable.ic_favorite_emp, "No items yet", "No Items in this category yet.");
+        progressLinearLayout.showEmpty(R.drawable.wishlist_empty, "No items yet", "No Items in your wishes list yet");
     }
 }
