@@ -71,13 +71,7 @@ public class AccountFragmentContainer extends Fragment {
          * "real" fragment
          */
         transaction.replace(R.id.account_fragment_container, new FragmentAccountContent(),"FragmentAccountContent");
-
-
-
         transaction.commit();
-
-
-
         return view;
     }
 

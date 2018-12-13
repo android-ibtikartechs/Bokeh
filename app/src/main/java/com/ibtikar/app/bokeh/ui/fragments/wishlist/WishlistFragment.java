@@ -18,10 +18,12 @@ import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.adapters.AdapterProductsList;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
+import com.ibtikar.app.bokeh.ui.activities.product_details.ProductDetailsActivity;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
 import com.ibtikar.app.bokeh.ui_utilities.CustomRecyclerView;
 import com.ibtikar.app.bokeh.ui_utilities.paginationStaggardScrollListener;
 import com.ibtikar.app.bokeh.utils.PaginationAdapterCallback;
+import com.ibtikar.app.bokeh.utils.RxBus;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
@@ -184,7 +186,9 @@ public class WishlistFragment extends BaseFragment implements WishListMvpView, A
 
     @Override
     public void onItemClickListener(ModelProductItem modelProductItem) {
-
+        RxBus.publish(modelProductItem);
+        startActivity(new Intent(getActivity(), ProductDetailsActivity.class));
+        getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override

@@ -158,5 +158,6 @@ public class CategoriesFragment extends BaseFragment implements CategoriesMvpVie
         intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, id);
         intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_TITLE, title);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }

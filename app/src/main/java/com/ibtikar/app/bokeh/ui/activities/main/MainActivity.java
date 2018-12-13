@@ -2,6 +2,7 @@ package com.ibtikar.app.bokeh.ui.activities.main;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,7 @@ import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.StaticValues;
+import com.ibtikar.app.bokeh.data.models.BusAccountFragmentBackStack;
 import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
 import com.ibtikar.app.bokeh.ui.activities.categories_search.CategorySearchActivity;
 import com.ibtikar.app.bokeh.ui.fragments.AccountFragmentContainer;
@@ -55,6 +57,8 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    int accountFragmentBackStackCount;
+
     AccountFragmentContainer accountFragmentContainer =AccountFragmentContainer.newInstance("","");
 
     private Animation animShow, animHide;
@@ -68,6 +72,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     private int[] tabIcons = {R.drawable.logo_tab_layout, R.drawable.ic_shops, R.drawable.ic_categories, R.drawable.ic_account, R.drawable.ic_cart_tab_layout};
     private int[] tabIconsSelected = {R.drawable.logo_tab_layout, R.drawable.ic_shops_selected, R.drawable.ic_categories_selected, R.drawable.ic_account_selected, R.drawable.ic_cart_tab_layout_selected};
 
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -200,6 +205,19 @@ public class MainActivity extends BaseActivity implements MainMvpView {
                     }
                 });
 
+        ((MvpApp) getApplication())
+                .bus()
+                .toObservable()
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object object) throws Exception {
+                        if (object instanceof BusAccountFragmentBackStack) {
+                            //tvSearch.setText((String)object);
+                            accountFragmentBackStackCount = ((BusAccountFragmentBackStack) object).getTrigger();
+                        }
+                    }
+                });
+
         presenter.refreshCartItemCount();
 
     }
@@ -227,37 +245,7 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void onBackPressed() {
 
-        if (tabLayout.getSelectedTabPosition() != 0 && tabLayout.getSelectedTabPosition()!=3) {
-            if (tabLayout.getSelectedTabPosition() == 4)
-            {
-
-                /*tabLayout.clearAnimation();
-                tabLayout.setVisibility(View.VISIBLE);
-                tabLayout.startAnimation(animShow);*/
-
-                /*TranslateAnimation animate = new TranslateAnimation(0,0,tabLayout.getHeight(),0);
-                animate.setDuration(500);
-
-                animate.setFillAfter(true);
-
-                tabLayout.clearAnimation();
-                tabLayout.startAnimation(animate);*/
-                tabLayout.setVisibility(View.VISIBLE);
-
-            /*   tabLayout.animate()
-                        .translationY(tabLayout.getHeight())
-                        .alpha(0.0f)
-                        .setDuration(300)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                super.onAnimationEnd(animation);
-                                tabLayout.clearAnimation();
-                                tabLayout.setVisibility(View.VISIBLE);
-                            }
-                        });*/
-
-            }
+        if (tabLayout.getSelectedTabPosition() != 0 && accountFragmentBackStackCount == 0) {
             viewPager.setCurrentItem(0);
         } else
             super.onBackPressed();

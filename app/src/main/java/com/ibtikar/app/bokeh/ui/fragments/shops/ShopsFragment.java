@@ -172,5 +172,6 @@ public class ShopsFragment extends BaseFragment implements ShopsMvpView, Adapter
         intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, id);
         intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_TITLE, title);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }

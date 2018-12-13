@@ -310,12 +310,14 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
         intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, id);
         intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_TITLE, title);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
     public void onFeaturedItemClickListener(ModelProductItem productItem) {
         RxBus.publish(productItem);
         startActivity(new Intent(getActivity(), ProductDetailsActivity.class));
+        getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
@@ -325,6 +327,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
         intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, id);
         intent.putExtra(StaticValues.KEY_SHOP_OR_CATEGORY_TITLE, title);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
 

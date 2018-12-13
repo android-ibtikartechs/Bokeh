@@ -29,9 +29,12 @@ import com.ibtikar.app.bokeh.data.adapters.AdapterReciptList;
 import com.ibtikar.app.bokeh.data.models.CartFragmentRefreshTrigger;
 import com.ibtikar.app.bokeh.data.models.ModelCartItem;
 import com.ibtikar.app.bokeh.data.models.ModelCartListItem;
+import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.ModelReciptList;
 import com.ibtikar.app.bokeh.ui.activities.PaymentActivity;
+import com.ibtikar.app.bokeh.ui.activities.product_details.ProductDetailsActivity;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
+import com.ibtikar.app.bokeh.utils.RxBus;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
@@ -358,8 +361,9 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     }
 
     @Override
-    public void onCartItemClickListener(ModelCartItem productItem) {
-
+    public void onCartItemClickListener(ModelProductItem productItem) {
+        RxBus.publish(productItem);
+        startActivity(new Intent(getActivity(), ProductDetailsActivity.class));
     }
 
     @Override

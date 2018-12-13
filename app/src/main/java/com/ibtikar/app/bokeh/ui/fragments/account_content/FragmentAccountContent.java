@@ -3,13 +3,17 @@ package com.ibtikar.app.bokeh.ui.fragments.account_content;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.data.models.BusAccountFragmentBackStack;
 import com.ibtikar.app.bokeh.ui.fragments.account.AccountFragment;
 import com.ibtikar.app.bokeh.ui.fragments.edit_profile.EditProfileFragment;
 import com.ibtikar.app.bokeh.ui.fragments.my_orders.MyOrdersFragment;
@@ -145,6 +149,23 @@ public class FragmentAccountContent extends Fragment {
                 trans.addToBackStack(null);
 
                 trans.commit();
+            }
+        });
+
+        getFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+               /* Fragment currentBackStackFragment = getFragmentManager().findFragmentByTag("visible_fragment");
+                if(currentBackStackFragment instanceof TopFragment){
+//Add Code
+                }*/
+
+
+                ((MvpApp) getActivity().getApplication())
+                        .bus()
+                        .send(new BusAccountFragmentBackStack(getFragmentManager().getBackStackEntryCount()));
+
+                Log.d("", "onBackStackChanged: " + getFragmentManager().getBackStackEntryCount());
             }
         });
 

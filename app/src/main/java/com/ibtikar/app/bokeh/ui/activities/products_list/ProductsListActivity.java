@@ -208,6 +208,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     public void onItemClickListener(ModelProductItem modelProductItem) {
         RxBus.publish(modelProductItem);
         startActivity(new Intent(ProductsListActivity.this, ProductDetailsActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     @Override
@@ -312,5 +313,11 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     public void onApplyClickListener(SortByBottomSheetPassingData sortByBottomSheetPassingData) {
         adapterProductsList.clear();
         presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0), true, sortByBottomSheetPassingData, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }

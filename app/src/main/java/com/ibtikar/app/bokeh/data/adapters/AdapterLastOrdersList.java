@@ -14,6 +14,7 @@ import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.models.ModelCartItem;
 import com.ibtikar.app.bokeh.data.models.ModelCartListItem;
 import com.ibtikar.app.bokeh.data.models.ModelLastOrdersListItem;
+import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,7 @@ public class AdapterLastOrdersList extends RecyclerView.Adapter<RecyclerView.Vie
 
 
     @Override
-    public void onCartItemClickListener(ModelCartItem productItem) {
+    public void onCartItemClickListener(ModelProductItem productItem) {
 
     }
 

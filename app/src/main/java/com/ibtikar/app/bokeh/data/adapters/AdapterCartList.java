@@ -20,6 +20,7 @@ import com.bumptech.glide.request.target.Target;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.models.ModelCartItem;
 import com.ibtikar.app.bokeh.data.models.ModelCartListItem;
+import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,6 +106,14 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
         itemViewHolder.tvSellerName.setText(modelCartItem.getProductInfo().getSellername());
         itemViewHolder.tvPrice.setText(modelCartItem.getProductInfo().getPrice().toString());
         itemViewHolder.tvQuantity.setText(modelCartItem.getDelivary().getQuantity().toString());
+
+        itemViewHolder.loutContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customListener.onCartItemClickListener(modelCartItem.getProductInfo());
+            }
+        });
+
         itemViewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,6 +131,7 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 customListener.onIncreaseQuantity(modelCartItem.getDelivary().getCartItemId(),position, Integer.valueOf(itemViewHolder.tvQuantity.getText().toString()));
             }
         });
+
 
         itemViewHolder.btnRemoveQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,7 +229,7 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
     public interface ContainerCartItemsClickListener {
-        public void onCartItemClickListener(ModelCartItem productItem);
+        public void onCartItemClickListener(ModelProductItem productItem);
         public void onDeleteItemClickListener(int cartItemId, int position);
         public void onIncreaseQuantity(int cartItemId, int position, Integer currentQuantity);
         public void onDecreaseQuantity(int cartItemId, int position, Integer currentQuantity);
