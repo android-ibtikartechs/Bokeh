@@ -4,14 +4,30 @@
     android:layout_height="wrap_content"
 
     >
-    <Button
-        android:id="@+id/btn_add_to_cart"
+    <LinearLayout
+        android:id="@+id/btn_checkout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#263238"
-        android:textSize="18sp"
-        android:text="Checkout"
         android:textAllCaps="false"
-        android:textColor="@color/ColorWhite"
-        />
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:visibility="gone"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Checkout"
+            android:textSize="18sp"
+            android:textColor="@color/ColorWhite"
+            android:layout_marginStart="8dp"
+            />
+    </LinearLayout>
+
 </RelativeLayout>

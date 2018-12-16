@@ -3,6 +3,7 @@ package com.ibtikar.app.bokeh.utils.retrofit;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseAddToCart;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCartDetails;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCategoriesModel;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseChecout;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCountriesList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseDecreaseCartItemQuantity;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseDeleteCartItem;
@@ -72,6 +73,11 @@ public interface GetDataService {
 
     @POST("/getcartresetitems")
     Call<ResponseReceiteList> getReceitList(@Query("user") Integer userId);
+
+
+    @POST("/checkout")
+    Call<ResponseChecout> checoutOrder(@Query("user") Integer userId, @Query("paytype") Integer payType);
+
 
 
 

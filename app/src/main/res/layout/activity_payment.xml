@@ -23,10 +23,11 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            tools:context=".ui.activities.PaymentActivity"
+            tools:context=".ui.activities.payment.PaymentActivity"
             >
 
             <TextView
+                android:id="@+id/tv_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -39,7 +40,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="USD"
+                android:text="EGP"
                 android:textColor="@color/ColorFoshiac"
                 android:textSize="32sp"
                 android:textStyle="bold"
@@ -54,6 +55,7 @@
         >
 
                 <RadioGroup
+                    android:id="@+id/radio_group_pay_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -62,7 +64,7 @@
             >
 
                     <RadioButton
-                        android:id="@+id/rbtn_any"
+                        android:id="@+id/rbtn_cash"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -73,14 +75,17 @@
                         android:textSize="18sp" />
 
                     <RadioButton
-                        android:id="@+id/rbtn_cash"
+                        android:id="@+id/rbtn_payment_online"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:buttonTint="@color/ColorFoshiac"
+                        android:buttonTint="@color/ColorGrayLine"
                         android:text="Payment Online"
-                        android:textColor="@color/ColorTextBlack"
-                        android:textSize="18sp"/>
+                        android:textColor="@color/ColorGrayLine"
+                        android:textSize="18sp"
+                        android:enabled="false"
+
+                        />
 
                 </RadioGroup>
             </android.support.v7.widget.CardView>

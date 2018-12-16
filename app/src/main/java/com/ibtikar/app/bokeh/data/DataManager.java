@@ -40,7 +40,7 @@ public class DataManager {
         sharedPrefsHelper.setCountryId(countryId);
     }
 
-    public int getCountryId()
+    public Integer getCountryId()
     {
         return sharedPrefsHelper.getCountryId();
     }

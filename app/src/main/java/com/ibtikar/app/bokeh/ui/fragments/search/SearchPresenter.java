@@ -27,7 +27,9 @@ public class SearchPresenter <V extends SearchMvpView> extends BasePresenter<V> 
         call.enqueue(new Callback<ResponseSearchResultList>() {
             @Override
             public void onResponse(Call<ResponseSearchResultList> call, Response<ResponseSearchResultList> response) {
+                System.out.println(getDataManager().getCountryId().toString());
                 getMvpView().addMoreToSearchResultAdapter(response.body().getList());
+
             }
 
             @Override

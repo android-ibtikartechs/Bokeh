@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.ModelSearchResultItem;
 
 import java.util.ArrayList;
@@ -19,16 +20,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AdapterSearchResultList extends ArrayAdapter<ModelSearchResultItem> {
+public class AdapterSearchResultList extends ArrayAdapter<ModelProductItem> {
 
     Context context;
     ViewHolder viewHolder;
-    ArrayList<ModelSearchResultItem> items;
+    ArrayList<ModelProductItem> items;
 
     private CustomeListener customeListener;
 
 
-    public AdapterSearchResultList(Context context, ArrayList<ModelSearchResultItem> items)
+    public AdapterSearchResultList(Context context, ArrayList<ModelProductItem> items)
     {
         super(context,0,items);
         this.context = context;
@@ -38,7 +39,7 @@ public class AdapterSearchResultList extends ArrayAdapter<ModelSearchResultItem>
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        final ModelSearchResultItem searchResultItem = getItem(position);
+        final ModelProductItem searchResultItem = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_search_item_list, parent, false);
             viewHolder = new ViewHolder(convertView);
@@ -53,7 +54,7 @@ public class AdapterSearchResultList extends ArrayAdapter<ModelSearchResultItem>
         viewHolder.loutContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customeListener.onItemClickListener(searchResultItem.getId());
+                customeListener.onItemClickListener(searchResultItem);
             }
         });
 
@@ -62,16 +63,16 @@ public class AdapterSearchResultList extends ArrayAdapter<ModelSearchResultItem>
     }
 
 
-    public void add(ModelSearchResultItem r) {
+    public void add(ModelProductItem r) {
         items.add(r);
         //notifyItemInserted(arrayList.size()-1 );
         notifyDataSetChanged();
     }
 
-    public void addAll(List<ModelSearchResultItem> opResults) {
+    public void addAll(List<ModelProductItem> opResults) {
         items.clear();
         notifyDataSetChanged();
-        for (ModelSearchResultItem result : opResults) {
+        for (ModelProductItem result : opResults) {
             add(result);
         }
     }
@@ -97,7 +98,7 @@ public class AdapterSearchResultList extends ArrayAdapter<ModelSearchResultItem>
 
 
     public interface CustomeListener {
-        public void onItemClickListener(Integer productId);
+        public void onItemClickListener(ModelProductItem modelProductItem);
     }
     public void setCustomButtonListner(CustomeListener listener) {
         this.customeListener = listener;

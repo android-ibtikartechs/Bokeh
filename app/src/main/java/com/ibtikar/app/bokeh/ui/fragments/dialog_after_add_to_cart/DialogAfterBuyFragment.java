@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ibtikar.app.bokeh.R;
@@ -31,6 +32,8 @@ public class DialogAfterBuyFragment extends DialogFragment {
 
     @BindView(R.id.tv_message)
     TextView tvMessage;
+
+
 
     @BindView(R.id.tv_product_name)
     TextView tvProductName;
@@ -81,6 +84,7 @@ public class DialogAfterBuyFragment extends DialogFragment {
         //ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         setStyle(DialogFragment.STYLE_NO_FRAME, android.R.style.Theme);
+
         return rootView;
     }
 }

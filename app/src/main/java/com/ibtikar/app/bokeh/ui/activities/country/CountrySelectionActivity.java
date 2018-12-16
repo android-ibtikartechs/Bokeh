@@ -46,7 +46,7 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CountrySelectionActivity.this, MainActivity.class));
-
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             }
         });
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -44,6 +45,11 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
 
     @BindView(R.id.tab_layout_date)
     TabLayout tabLayout;
+
+    @BindView(R.id.btnClose)
+    ImageView btnClose;
+
+
 
     @BindView(R.id.btnApply)
     Button btnApply;
@@ -132,6 +138,14 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         presenter.loadAreasSpinner();
         setupRadioGroupTime();
         setupRadioGroup();
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
         setupTabs();
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override

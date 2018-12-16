@@ -249,4 +249,9 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
         });
 
     }
+
+    @Override
+    public void buy(Integer userId) {
+
+    }
 }

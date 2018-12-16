@@ -2,6 +2,7 @@ package com.ibtikar.app.bokeh.data.models.responses;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.ModelSearchResultItem;
 
 public class ResponseSearchResultList {
@@ -10,7 +11,7 @@ public class ResponseSearchResultList {
     private Boolean status;
     @SerializedName("List")
     @Expose
-    private java.util.List<ModelSearchResultItem> list = null;
+    private java.util.List<ModelProductItem> list = null;
 
     /**
      * No args constructor for use in serialization
@@ -23,7 +24,7 @@ public class ResponseSearchResultList {
      * @param status
      * @param list
      */
-    public ResponseSearchResultList(Boolean status, java.util.List<ModelSearchResultItem> list) {
+    public ResponseSearchResultList(Boolean status, java.util.List<ModelProductItem> list) {
         super();
         this.status = status;
         this.list = list;
@@ -37,11 +38,11 @@ public class ResponseSearchResultList {
         this.status = status;
     }
 
-    public java.util.List<ModelSearchResultItem> getList() {
+    public java.util.List<ModelProductItem> getList() {
         return list;
     }
 
-    public void setList(java.util.List<ModelSearchResultItem> list) {
+    public void setList(java.util.List<ModelProductItem> list) {
         this.list = list;
     }
 }

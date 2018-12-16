@@ -2,6 +2,8 @@ package com.ibtikar.app.bokeh.ui.fragments.search;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,8 +21,11 @@ import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.adapters.AdapterSearchResultList;
+import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.ModelSearchResultItem;
+import com.ibtikar.app.bokeh.ui.activities.product_details.ProductDetailsActivity;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
+import com.ibtikar.app.bokeh.utils.RxBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +54,7 @@ public class SearchFragment extends BaseFragment implements SearchMvpView, Adapt
 
     Handler mHandler;
 
-    ArrayList<ModelSearchResultItem> searchResultItemArrayList;
+    ArrayList<ModelProductItem> searchResultItemArrayList;
     AdapterSearchResultList adapterSearchResultList;
 
     SearchPresenter presenter;
@@ -135,17 +141,29 @@ public class SearchFragment extends BaseFragment implements SearchMvpView, Adapt
 
 
     @Override
-    public void addMoreToSearchResultAdapter(final List<ModelSearchResultItem> list) {
+    public void addMoreToSearchResultAdapter(final List<ModelProductItem> list) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
                 adapterSearchResultList.addAll(list);
+                System.out.println("search");
             }
         });
     }
 
     @Override
-    public void onItemClickListener(Integer productId) {
+    public void onItemClickListener(ModelProductItem modelProductItem) {
+        RxBus.publish(modelProductItem);
+        startActivity(new Intent(getActivity(), ProductDetailsActivity.class));
+        getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+        hideKeyboard();
+    }
 
+    public void hideKeyboard() {
+        View view = getActivity().findViewById(android.R.id.content);
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

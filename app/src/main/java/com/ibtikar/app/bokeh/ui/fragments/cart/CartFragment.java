@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -27,11 +28,10 @@ import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.adapters.AdapterCartList;
 import com.ibtikar.app.bokeh.data.adapters.AdapterReciptList;
 import com.ibtikar.app.bokeh.data.models.CartFragmentRefreshTrigger;
-import com.ibtikar.app.bokeh.data.models.ModelCartItem;
 import com.ibtikar.app.bokeh.data.models.ModelCartListItem;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.ModelReciptList;
-import com.ibtikar.app.bokeh.ui.activities.PaymentActivity;
+import com.ibtikar.app.bokeh.ui.activities.payment.PaymentActivity;
 import com.ibtikar.app.bokeh.ui.activities.product_details.ProductDetailsActivity;
 import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
 import com.ibtikar.app.bokeh.utils.RxBus;
@@ -83,6 +83,8 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     private ArrayList<ModelCartListItem> arrayList;
 
     CartPresenter presenter;
+
+    String orderTotalPrice;
 
     SwipeRefreshLayout.OnRefreshListener swipeRefreshListner;
 
@@ -141,6 +143,7 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
         View rootView = inflater.inflate(R.layout.fragment_cart, container, false);
         ButterKnife.bind(this, rootView);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
+        btnBuy.setEnabled(false);
        /* arrayList = new ArrayList<>();
         reciptListArrayList = new ArrayList<>();
         rvCartItems.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL, false));
@@ -151,7 +154,10 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
         btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), PaymentActivity.class));
+                Intent intent = new Intent(getActivity(), PaymentActivity.class);
+                intent.putExtra(StaticValues.KEY_ORDER_TOTAL_PRICE, orderTotalPrice);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             }
         });
 
@@ -255,6 +261,7 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
             @Override
             public void run() {
                 tvOrderTotal.setText(total);
+                orderTotalPrice = total;
             }
         });
     }
@@ -324,11 +331,13 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     @Override
     public void showContent() {
         progressLinearLayout.showContent();
+        btnBuy.setEnabled(true);
     }
 
     @Override
     public void showEmptyView() {
         progressLinearLayout.showEmpty(getResources().getDrawable(R.drawable.cart_empty),"No Items", "No Items in yor cart yet");
+        btnBuy.setEnabled(false);
     }
 
 

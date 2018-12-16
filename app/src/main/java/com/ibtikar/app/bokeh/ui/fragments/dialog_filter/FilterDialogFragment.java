@@ -6,11 +6,16 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.ibtikar.app.bokeh.R;
 
-public class FilterDialogFragment extends BottomSheetDialogFragment {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
+public class FilterDialogFragment extends BottomSheetDialogFragment {
+    @BindView(R.id.btnClose)
+    ImageView btnClose;
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
         @Override
@@ -34,6 +39,14 @@ public class FilterDialogFragment extends BottomSheetDialogFragment {
         //Get the content View
         View contentView = View.inflate(getContext(), R.layout.view_filter_dialog, null);
         dialog.setContentView(contentView);
+        ButterKnife.bind(this, contentView);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
 
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) contentView.getParent()).getLayoutParams();
         CoordinatorLayout.Behavior behavior = params.getBehavior();

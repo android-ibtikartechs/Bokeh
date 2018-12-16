@@ -11,4 +11,7 @@ public interface CartMvpPresenter<V extends CartMvpView> extends MvpPresenter<V>
     void increaseCartItemQuantityPresenter(int cartItemId, int position, Integer currentQuantity);
     void decreaseCartItemQuantityPresenter(int cartItemId, int position, Integer currentQuantity);
     void deleteItemFromCartList(int cartItemId, int position);
+
+    void buy(Integer userId);
+
 }

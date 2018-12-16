@@ -7,6 +7,7 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -44,6 +45,9 @@ public class SortByDialogFragment extends BottomSheetDialogFragment {
     @BindView(R.id.btnApply)
     Button btnApply;
 
+    @BindView(R.id.btnClose)
+    ImageView btnClose;
+
     private ApplyClickListener customListener;
 
     SortByBottomSheetPassingData sortByBottomSheetPassingData;
@@ -71,6 +75,13 @@ public class SortByDialogFragment extends BottomSheetDialogFragment {
         View contentView = View.inflate(getContext(), R.layout.view_sort_dialog, null);
         dialog.setContentView(contentView);
         ButterKnife.bind(this, contentView);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
 
         sortByBottomSheetPassingData = new SortByBottomSheetPassingData(StaticValues.SORT_ASCEND,StaticValues.SORT_TYPE_TITLE);
 
