@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.StaticValues;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link AccountFragment.OnFragmentInteractionListener} interface
+
  * to handle interaction events.
  * Use the {@link AccountFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -42,6 +43,8 @@ public class AccountFragment extends Fragment {
 
     @BindView(R.id.btn_login)
     Button btnLogin;
+
+
 
 
 
@@ -95,8 +98,10 @@ public class AccountFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), RegistrationActivity.class);
                 intent.putExtra(StaticValues.KEY_SIGN_UP_OR_LOGIN, StaticValues.SIGN_UP_TYPE);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_from_down, R.anim.slide_to_top);
             }
         });
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +109,7 @@ public class AccountFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), RegistrationActivity.class);
                 intent.putExtra(StaticValues.KEY_SIGN_UP_OR_LOGIN, StaticValues.LOGIN_TYPE);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_from_down, R.anim.slide_to_top);
             }
         });
     }

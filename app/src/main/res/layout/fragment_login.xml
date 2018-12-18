@@ -7,94 +7,160 @@
     android:orientation="vertical"
     tools:context=".ui.fragments.login.LoginFragment">
 
+
+
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/test_bg_d"
-        android:scaleType="center"
-        android:alpha="0.2"
-        />
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".ui.fragments.login.LoginFragment">
-
-    <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/im_btn_close"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textCursorDrawable="@null"
+        android:layout_alignParentStart="true"
         android:layout_marginTop="16dp"
-        android:hint="Email address"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:inputType="textEmailAddress"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textCursorDrawable="@null"
-        android:layout_marginTop="16dp"
-        android:hint="Password"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:inputType="textPassword"
-        />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/shape_rounded_button"
-        android:textColor="@color/ColorWhite"
-        android:textAllCaps="false"
-        android:text="login"
-        android:layout_marginTop="64dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_close_screen"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/ColorTextBlack"
-            android:text="haven't account?"
-            android:textSize="16sp"
-            />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo_success"
+                />
 
-        <TextView
-            android:id="@+id/btn_sign_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/ColorFoshiac"
-            android:text="sign up"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginStart="8dp"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"
+                android:textColor="@color/ColorFoshiac"
+                android:text="BOKEH"
+                android:textStyle="bold"
+                />
 
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/ColorFoshiac"
+            tools:context=".ui.fragments.login.LoginFragment">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:layout_marginTop="16dp"
+                android:hint="Email address"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:inputType="textEmailAddress"
+                android:background="@null"
+                android:textColor="@color/ColorWhite"
+                android:textColorHint="@color/ColorWhite"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/ColorWhite"
+                android:layout_marginTop="2dp"
+                />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textCursorDrawable="@null"
+                android:layout_marginTop="16dp"
+                android:hint="Password"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:inputType="textPassword"
+                android:background="@null"
+                android:textColorHint="@color/ColorWhite"
+                android:textColor="@color/ColorWhite"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@color/ColorWhite"
+                android:layout_marginTop="2dp"
+                />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/shape_rounded_board_button"
+                android:textColor="@color/ColorWhite"
+                android:textAllCaps="false"
+                android:text="login"
+                android:textSize="16sp"
+                android:layout_marginTop="64dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/ColorTextBlack"
+                    android:text="haven't account?"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/btn_sign_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/ColorWhite"
+                    android:text="sign up"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginStart="8dp"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btn_forget_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ColorTextBlack"
+                android:text="Forget Password"
+                android:layout_marginTop="8dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/btn_forget_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/ColorTextBlack"
-        android:text="Forget Password"
-        android:layout_marginTop="8dp"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        />
 
-</LinearLayout>
 </RelativeLayout>

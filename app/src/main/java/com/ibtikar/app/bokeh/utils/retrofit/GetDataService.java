@@ -10,6 +10,7 @@ import com.ibtikar.app.bokeh.data.models.responses.ResponseDeleteCartItem;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseHomeModel;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseIncreaseCartItemQuantity;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseLikeButton;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseLogin;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseOrdersHistory;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseProductList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseReceiteList;
@@ -77,6 +78,9 @@ public interface GetDataService {
 
     @POST("/checkout")
     Call<ResponseChecout> checoutOrder(@Query("user") Integer userId, @Query("paytype") Integer payType);
+
+    @POST("/ulogin")
+    Call<ResponseLogin> loginUser(@Query("email") String email, @Query("password") String password);
 
 
 

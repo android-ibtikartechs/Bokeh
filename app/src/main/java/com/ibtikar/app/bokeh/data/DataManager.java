@@ -79,6 +79,43 @@ public class DataManager {
         return sharedPrefsHelper.getLoginStatus();
     }
 
+    public String getFirstName(){
+        return sharedPrefsHelper.getFirstName();
+    }
+    public String getLastName(){
+        return sharedPrefsHelper.getLastName();
+    }
+    public String getBirthDate(){
+        return sharedPrefsHelper.getBirthDate();
+    }
+    public int getGender(){
+        return sharedPrefsHelper.getGender();
+    }
+
+
+    public void setFirstName(String firstName) {
+        sharedPrefsHelper.setFirstName(firstName);
+    }
+
+    public void setLastName(String lastName) {
+        sharedPrefsHelper.setLastName(lastName);
+    }
+
+    public void setBirthDate(String birthDate) {
+        sharedPrefsHelper.setBirthDate(birthDate);
+    }
+
+    public void setGender(int gender) {
+        // if gender flag == 1 --> gender is man
+        // if gender flag == 2 --> gender is women
+        sharedPrefsHelper.setGender(gender);
+    }
+
+    public Integer getUserId(){return sharedPrefsHelper.getUserId();}
+
+    public void setUserId(Integer userId) {
+        sharedPrefsHelper.setUserId(userId);
+    }
 
 
    /* private void passNewCartCount(Integer newCartCount)

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ibtikar.app.bokeh.R;
@@ -24,7 +25,7 @@ import butterknife.ButterKnife;
  * Use the {@link LoginFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements LoginMvpView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,6 +40,9 @@ public class LoginFragment extends Fragment {
 
     @BindView(R.id.btn_forget_password)
     TextView btnForgetPassword;
+
+    @BindView(R.id.im_btn_close)
+    ImageView btnClose;
 
 
     public LoginFragment() {
@@ -78,7 +82,13 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         ButterKnife.bind(this, view);
-
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_down);
+            }
+        });
         return view;
     }
 
@@ -105,5 +115,40 @@ public class LoginFragment extends Fragment {
                 transaction.commit();
             }
         });
+    }
+
+    @Override
+    public void showProgressDialog(String title) {
+
+    }
+
+    @Override
+    public void hideProgressDialog() {
+
+    }
+
+    @Override
+    public void afterLoginSuccess() {
+
+    }
+
+    @Override
+    public void showDialogIfForgetPassword() {
+
+    }
+
+    @Override
+    public void showDialogInvalidData() {
+
+    }
+
+    @Override
+    public void showDialogRequestActivation() {
+
+    }
+
+    @Override
+    public void showDialogStatusOfSendingActivation() {
+
     }
 }

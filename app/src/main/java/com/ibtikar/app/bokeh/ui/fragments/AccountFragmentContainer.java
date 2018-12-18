@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.ui.fragments.account.AccountFragment;
 import com.ibtikar.app.bokeh.ui.fragments.account_content.FragmentAccountContent;
 
 /**
@@ -70,7 +71,7 @@ public class AccountFragmentContainer extends Fragment {
          * When this container fragment is created, we fill it with our first
          * "real" fragment
          */
-        transaction.replace(R.id.account_fragment_container, new FragmentAccountContent(),"FragmentAccountContent");
+        transaction.replace(R.id.account_fragment_container, new AccountFragment(),"FragmentAccountContent");
         transaction.commit();
         return view;
     }
