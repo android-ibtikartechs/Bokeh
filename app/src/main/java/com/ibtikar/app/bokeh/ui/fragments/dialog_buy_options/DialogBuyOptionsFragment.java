@@ -1,6 +1,9 @@
 package com.ibtikar.app.bokeh.ui.fragments.dialog_buy_options;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -8,6 +11,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -23,11 +27,13 @@ import android.widget.Toast;
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
+import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.adapters.AdapterAreaSpinner;
 import com.ibtikar.app.bokeh.data.adapters.AdapterCitySpinner;
 import com.ibtikar.app.bokeh.data.models.CartFragmentRefreshTrigger;
 import com.ibtikar.app.bokeh.data.models.ModelArea;
 import com.ibtikar.app.bokeh.data.models.ModelCity;
+import com.ibtikar.app.bokeh.ui.activities.registration.RegistrationActivity;
 import com.ibtikar.app.bokeh.ui.fragments.cart.CartPresenter;
 import com.ibtikar.app.bokeh.ui.fragments.dialog_after_add_to_cart.DialogAfterBuyFragment;
 
@@ -408,6 +414,7 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         DialogAfterBuyFragment dialogAfterBuyFragment = DialogAfterBuyFragment.newInstance(message, productName);
         dialogAfterBuyFragment.show(getFragmentManager(), "Bottom Sheet after buy Dialog Fragment");
     }
+
 
     @Override
     public void onDestroy() {

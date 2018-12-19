@@ -23,24 +23,26 @@ public class MainPresenter <V extends MainMvpView> extends BasePresenter<V> impl
 
     @Override
     public void refreshCartItemCount() {
-        Call<ResponseCartDetails> call;
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.getCartDetails(27);
-        call.enqueue(new Callback<ResponseCartDetails>() {
-            @Override
-            public void onResponse(Call<ResponseCartDetails> call, Response<ResponseCartDetails> response) {
-                if (response.body().getStatus()) {
-                    getMvpView().refreshCartCount(response.body().getList().size());
-                    getDataManager().setCartItemsCount(response.body().getList().size());
+        if (getDataManager().getLoginStausus()) {
+            Call<ResponseCartDetails> call;
+            GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+            call = service.getCartDetails(getDataManager().getUserId());
+            call.enqueue(new Callback<ResponseCartDetails>() {
+                @Override
+                public void onResponse(Call<ResponseCartDetails> call, Response<ResponseCartDetails> response) {
+                    if (response.body().getStatus()) {
+                        getMvpView().refreshCartCount(response.body().getList().size());
+                        getDataManager().setCartItemsCount(response.body().getList().size());
+                    }
+
                 }
 
-            }
+                @Override
+                public void onFailure(Call<ResponseCartDetails> call, Throwable t) {
 
-            @Override
-            public void onFailure(Call<ResponseCartDetails> call, Throwable t) {
-
-            }
-        });
+                }
+            });
+        }
     }
 
 

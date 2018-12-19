@@ -24,6 +24,7 @@ public class CountrySelectionPresenter <V extends CountrySelectionMvpView> exten
 
     @Override
     public void loadCountriesList() {
+
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<ResponseCountriesList> call = null;
         call = service.getCountriesList();

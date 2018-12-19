@@ -14,6 +14,11 @@ public class DataManager {
 
     }
 
+    public void clearSharedPreference()
+    {
+        sharedPrefsHelper.clear();
+    }
+
     public void setCartItemsCount(int cartItemsCount) {
         sharedPrefsHelper.setCartItemsCount(cartItemsCount);
         //passNewCartCount(getCartItemsCount());
@@ -70,6 +75,8 @@ public class DataManager {
     public String getUserEmail(){
         return sharedPrefsHelper.getUserEmail();
     }
+
+
 
     public String getUserMobNum(){
         return sharedPrefsHelper.getUserMobNum();

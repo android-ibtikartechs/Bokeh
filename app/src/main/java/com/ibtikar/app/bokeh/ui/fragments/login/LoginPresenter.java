@@ -17,53 +17,46 @@ public class LoginPresenter <V extends LoginMvpView> extends BasePresenter<V> im
 
     @Override
     public void login(String email, String password) {
-        getMvpView().showProgressDialog("Login ...");
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<ResponseLogin> call = null;
-        call = service.loginUser(email,password);
-        call.enqueue(new Callback<ResponseLogin>() {
-            @Override
-            public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
-                getMvpView().hideProgressDialog();
-                if (response.body().getStatus() && response.body().getCode() == 1)
-                {
-                    getDataManager().setFirstName(response.body().getInfo().getFirst());
-                    getDataManager().setLastName(response.body().getInfo().getLast());
-                    getDataManager().setUserEmail(response.body().getInfo().getEmail());
-                    getDataManager().setBirthDate(response.body().getInfo().getBirthdate());
-                    getDataManager().setGender(response.body().getInfo().getGender());
-                    getDataManager().setUserId(response.body().getInfo().getId());
-                    getDataManager().setUserMobNum(response.body().getInfo().getPhone());
+        /*if (email.isEmpty() || password.isEmpty())
+            getMvpView().showToast("please fill the empty fields");
+        else {*/
+            getMvpView().showProgressDialog("Login ...");
+            GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+
+            Call<ResponseLogin> call = service.loginUser(email, password);
+            call.enqueue(new Callback<ResponseLogin>() {
+                @Override
+                public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+                    getMvpView().hideProgressDialog();
+                    if (response.body().getStatus() && response.body().getCode() == 1) {
+                        getDataManager().setLoginStatus(true);
+                        getDataManager().setFirstName(response.body().getInfo().getFirst());
+                        getDataManager().setLastName(response.body().getInfo().getLast());
+                        getDataManager().setUserEmail(response.body().getInfo().getEmail());
+                        getDataManager().setBirthDate(response.body().getInfo().getBirthdate());
+                        getDataManager().setGender(response.body().getInfo().getGender());
+                        getDataManager().setUserId(response.body().getInfo().getId());
+                        getDataManager().setUserMobNum(response.body().getInfo().getPhone());
 
 
-                    getMvpView().afterLoginSuccess();
-                }
+                        getMvpView().afterLoginSuccess();
+                    } else if (response.body().getCode() == 0) {
+                        getMvpView().showDialogRequestActivation();
+                    } else if (response.body().getCode() == 2) {
+                        getMvpView().showDialogIfForgetPassword();
+                    } else if (response.body().getCode() == 3) {
+                        getMvpView().showDialogInvalidData();
+                    }
 
-                else if (response.body().getCode() == 0)
-                {
-                    getMvpView().showDialogRequestActivation();
-                }
-
-                else if (response.body().getCode() == 2)
-                {
-                    getMvpView().showDialogIfForgetPassword();
-                }
-
-                else if (response.body().getCode() == 3)
-                {
-                    getMvpView().showDialogInvalidData();
                 }
 
 
+                @Override
+                public void onFailure(Call<ResponseLogin> call, Throwable t) {
+                    System.out.println(t.toString());
+                }
+            });
 
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseLogin> call, Throwable t) {
-
-            }
-        });
     }
 
     @Override

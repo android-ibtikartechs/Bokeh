@@ -23,7 +23,7 @@ public class PaymentPresenter <V extends PaymentMvpView> extends BasePresenter<V
         getMvpView().showLoading();
         Call<ResponseChecout> call;
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.checoutOrder(27,payType);
+        call = service.checoutOrder(getDataManager().getUserId(),payType);
 
         call.enqueue(new Callback<ResponseChecout>() {
             @Override

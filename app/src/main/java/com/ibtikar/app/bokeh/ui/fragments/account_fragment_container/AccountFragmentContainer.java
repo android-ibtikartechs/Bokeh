@@ -1,15 +1,19 @@
-package com.ibtikar.app.bokeh.ui.fragments;
+package com.ibtikar.app.bokeh.ui.fragments.account_fragment_container;
 
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.data.DataManager;
+import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.ui.fragments.account.AccountFragment;
 import com.ibtikar.app.bokeh.ui.fragments.account_content.FragmentAccountContent;
 
@@ -18,7 +22,7 @@ import com.ibtikar.app.bokeh.ui.fragments.account_content.FragmentAccountContent
  * Use the {@link AccountFragmentContainer#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AccountFragmentContainer extends Fragment {
+public class AccountFragmentContainer extends Fragment implements AccountContainerMvpView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,6 +31,9 @@ public class AccountFragmentContainer extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    AccountContainerPresenter presenter;
+    Handler mHandler;
 
 
     public AccountFragmentContainer() {
@@ -58,6 +65,10 @@ public class AccountFragmentContainer extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        DataManager dataManager = ((MvpApp) getActivity().getApplication()).getDataManager();
+        presenter = new AccountContainerPresenter(dataManager);
+        presenter.onAttach(this);
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     @Override
@@ -65,17 +76,28 @@ public class AccountFragmentContainer extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account_fragment_container, container, false);
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-        /*
-         * When this container fragment is created, we fill it with our first
-         * "real" fragment
-         */
-        transaction.replace(R.id.account_fragment_container, new AccountFragment(),"FragmentAccountContent");
-        transaction.commit();
+        presenter.checkLoginStatus();
+
         return view;
     }
 
+    @Override
+    public void showLoginOrAccountFragment(int accountOrLoginFlag) {
+        if (accountOrLoginFlag == StaticValues.FLAG_ACCOUNT_SCREEN)
+        {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.account_fragment_container, new FragmentAccountContent(),"FragmentAccountContent");
+            transaction.commit();
+        }
+
+        else if (accountOrLoginFlag == StaticValues.FLAG_LOGIN_SCREEN)
+        {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.account_fragment_container, new AccountFragment(),"FragmentLogin");
+            transaction.commit();
+        }
+    }
 
 
     public interface OnViewSelected {

@@ -46,15 +46,18 @@ public class ProductDetailsPresenter <V extends ProductDetailsMvpView> extends B
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<ResponseLikeButton> call = null;
 
-        call = service.addToWish(27, productId);
+        call = service.addToWish(getDataManager().getUserId(), productId);
 
         call.enqueue(new Callback<ResponseLikeButton>() {
             @Override
             public void onResponse(Call<ResponseLikeButton> call, Response<ResponseLikeButton> response) {
-                if (response.body().getStatus())
+                if (response.body().getStatus() )
                 {
                     getMvpView().changeBtnLikeStatus();
                 }
+
+                else
+                    getMvpView().showYouAreNotLoggedInAlert();
             }
 
             @Override
@@ -62,6 +65,17 @@ public class ProductDetailsPresenter <V extends ProductDetailsMvpView> extends B
 
             }
         });
+    }
+
+    @Override
+    public void addToCart() {
+        if (!getDataManager().getLoginStausus())
+        {
+            getMvpView().showYouAreNotLoggedInAlert();
+        }
+        else
+            getMvpView().showDialogBuyOptions();
+
     }
 
 

@@ -27,42 +27,43 @@ public class DialogBuyOptionsPresenter <V extends DialogBuyOptionsMvpView> exten
 
     @Override
     public void submitAndAddItem(Integer deliveryOrPickup, Integer areaId, Integer cityId, String textAddress, String deliveryDate, Integer deliveryTime) {
-        getMvpView().showLoadingProgress();
+        if (getDataManager().getLoginStausus()) {
+            getMvpView().showLoadingProgress();
 
-        Call<ResponseAddToCart> call;
+            Call<ResponseAddToCart> call;
 
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.addToCart(27,modelProductItem.getId(),deliveryDate,deliveryTime,deliveryOrPickup,areaId,cityId, textAddress);
+            GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+            call = service.addToCart(getDataManager().getUserId(), modelProductItem.getId(), deliveryDate, deliveryTime, deliveryOrPickup, areaId, cityId, textAddress);
 
-        call.enqueue(new Callback<ResponseAddToCart>() {
-            @Override
-            public void onResponse(Call<ResponseAddToCart> call, Response<ResponseAddToCart> response) {
-                Log.d("", "onAddToCartResponse: "+ response.body().getExisted());
-                if (response.body().getStatus())
-                {
+            call.enqueue(new Callback<ResponseAddToCart>() {
+                @Override
+                public void onResponse(Call<ResponseAddToCart> call, Response<ResponseAddToCart> response) {
+                    Log.d("", "onAddToCartResponse: " + response.body().getExisted());
+                    if (response.body().getStatus()) {
 
-                    if (response.body().getExisted())
-                        getMvpView().finishSubmitting("is already existed in your cart", modelProductItem.getName());
-                    else {
-                        if (response.body().getAdded()) {
-                            getMvpView().finishSubmitting("has been added to cart", modelProductItem.getName());
-                            getDataManager().plusOneCartItems();
+                        if (response.body().getExisted())
+                            getMvpView().finishSubmitting("is already existed in your cart", modelProductItem.getName());
+                        else {
+                            if (response.body().getAdded()) {
+                                getMvpView().finishSubmitting("has been added to cart", modelProductItem.getName());
+                                getDataManager().plusOneCartItems();
+                            } else
+                                getMvpView().finishSubmitting("Sorry, this bouquet is not available now", modelProductItem.getName());
+
+
                         }
-                        else
-                            getMvpView().finishSubmitting("Sorry, this bouquet is not available now", modelProductItem.getName());
-
-
                     }
+
+
                 }
 
+                @Override
+                public void onFailure(Call<ResponseAddToCart> call, Throwable t) {
+                    getMvpView().hideLoadingProgress();
+                }
+            });
 
-            }
-
-            @Override
-            public void onFailure(Call<ResponseAddToCart> call, Throwable t) {
-                getMvpView().hideLoadingProgress();
-            }
-        });
+        }
 
 
     }

@@ -19,4 +19,6 @@ public class StaticValues {
     public static final int SHOPS_TYPE = 101;
     public static final String KEY_COUNTRY_ID = "KEY_COUNTRY_ID";
     public static final String KEY_ORDER_TOTAL_PRICE = "KEY_COUNTRY_ID";
+    public static final int FLAG_ACCOUNT_SCREEN = 1001;
+    public static final int FLAG_LOGIN_SCREEN = 1002;
 }

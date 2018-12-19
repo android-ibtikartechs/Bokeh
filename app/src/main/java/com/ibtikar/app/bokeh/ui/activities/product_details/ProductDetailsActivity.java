@@ -1,10 +1,15 @@
 package com.ibtikar.app.bokeh.ui.activities.product_details;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -22,10 +27,12 @@ import android.widget.TextView;
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
+import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.adapters.AdapterSliderGalleryProduct;
 import com.ibtikar.app.bokeh.data.adapters.AdapterSliderHome;
 import com.ibtikar.app.bokeh.data.models.GalleryProductImage;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
+import com.ibtikar.app.bokeh.ui.activities.registration.RegistrationActivity;
 import com.ibtikar.app.bokeh.ui.fragments.dialog_buy_options.DialogBuyOptionsFragment;
 import com.ibtikar.app.bokeh.utils.RxBus;
 
@@ -95,9 +102,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RxBus.publish(modelProductItem);
-                DialogBuyOptionsFragment dialogBuyOptionsFragment = new DialogBuyOptionsFragment();
-                dialogBuyOptionsFragment.show(getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
+                presenter.addToCart();
             }
         });
 
@@ -305,6 +310,43 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
             likeSwitch = true;
             btnLike.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_like_liked));
         }
+    }
+
+    @Override
+    public void showYouAreNotLoggedInAlert() {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(this);
+        }
+        builder.setMessage("you aren't login yet, do you want to login?")
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                        Intent intent = new Intent(ProductDetailsActivity.this, RegistrationActivity.class);
+                        intent.putExtra(StaticValues.KEY_SIGN_UP_OR_LOGIN, StaticValues.LOGIN_TYPE);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_from_down, R.anim.slide_to_top);
+                    }
+                })
+
+                .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    @Override
+    public void showDialogBuyOptions() {
+        RxBus.publish(modelProductItem);
+        DialogBuyOptionsFragment dialogBuyOptionsFragment = new DialogBuyOptionsFragment();
+        dialogBuyOptionsFragment.show(getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
     }
 
 

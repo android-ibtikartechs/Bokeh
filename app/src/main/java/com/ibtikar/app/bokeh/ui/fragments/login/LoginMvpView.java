@@ -13,4 +13,6 @@ public interface LoginMvpView extends MvpView {
     void showDialogRequestActivation();
     void showDialogStatusOfSendingActivation();
 
+    void showToast(String message);
+
 }

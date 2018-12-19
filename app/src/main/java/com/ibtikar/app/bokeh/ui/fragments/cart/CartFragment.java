@@ -128,7 +128,6 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
         }
 
 
-
         DataManager dataManager = ((MvpApp) getActivity().getApplication()).getDataManager();
         presenter = new CartPresenter(dataManager);
         presenter.onAttach(this);

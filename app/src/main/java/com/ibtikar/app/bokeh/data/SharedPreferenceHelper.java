@@ -41,7 +41,7 @@ public class SharedPreferenceHelper {
     }
 
     public void setUserId(Integer userId) {
-        mSharedPreferences.edit().putInt(KEY_USER_EMAIL, userId).apply();
+        mSharedPreferences.edit().putInt(KEY_USER_ID, userId).apply();
     }
 
     public void setUserEmail(String userEmail) {

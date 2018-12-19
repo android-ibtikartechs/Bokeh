@@ -67,6 +67,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/tv_user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Ahmed Yehya"
@@ -74,6 +75,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ahmedyehya1992@gmail.com"
@@ -82,6 +84,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_mob_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="+201150412349"
@@ -216,7 +219,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_sign_up"
+            android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_rounded_button"

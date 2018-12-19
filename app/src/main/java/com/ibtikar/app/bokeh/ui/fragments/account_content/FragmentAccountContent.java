@@ -1,7 +1,10 @@
 package com.ibtikar.app.bokeh.ui.fragments.account_content;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,12 +12,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.models.BusAccountFragmentBackStack;
+import com.ibtikar.app.bokeh.ui.activities.country.CountrySelectionActivity;
+import com.ibtikar.app.bokeh.ui.activities.main.MainActivity;
 import com.ibtikar.app.bokeh.ui.fragments.account.AccountFragment;
+import com.ibtikar.app.bokeh.ui.fragments.base.BaseFragment;
 import com.ibtikar.app.bokeh.ui.fragments.edit_profile.EditProfileFragment;
 import com.ibtikar.app.bokeh.ui.fragments.my_orders.MyOrdersFragment;
 import com.ibtikar.app.bokeh.ui.fragments.wishlist.WishlistFragment;
@@ -27,7 +36,7 @@ import butterknife.ButterKnife;
  * Use the {@link FragmentAccountContent#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentAccountContent extends Fragment {
+public class FragmentAccountContent extends BaseFragment implements AccountContentMvpView {
     // TODO: Rename parameter arguments, choose names that match
 
 
@@ -39,6 +48,22 @@ public class FragmentAccountContent extends Fragment {
 
     @BindView(R.id.lout_wish_list)
     LinearLayout btnWishList;
+
+    @BindView(R.id.tv_user_name)
+    TextView tvUserName;
+
+    @BindView(R.id.tv_email)
+    TextView tvEmail;
+
+    @BindView(R.id.tv_mob_num)
+    TextView tvMobNum;
+
+    AccountContentPresenter presenter;
+    Handler mHandler;
+
+    @BindView(R.id.btn_logout)
+    Button btnLogout;
+
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -78,6 +103,10 @@ public class FragmentAccountContent extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        DataManager dataManager = ((MvpApp) getActivity().getApplication()).getDataManager();
+        presenter = new AccountContentPresenter(dataManager);
+        presenter.onAttach(this);
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     @Override
@@ -86,7 +115,15 @@ public class FragmentAccountContent extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account_content, container, false);
         ButterKnife.bind(this,view);
+        presenter.getProfileData();
 
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.logout();
+            }
+        });
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,4 +209,17 @@ public class FragmentAccountContent extends Fragment {
         return view;
     }
 
+    @Override
+    public void setProfileData(String Name, String email, String mobileNumber) {
+        tvUserName.setText(Name);
+        tvEmail.setText(email);
+        tvMobNum.setText(mobileNumber);
+    }
+
+    @Override
+    public void afterLogout() {
+        Intent intent = new Intent(getActivity().getApplicationContext(), CountrySelectionActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

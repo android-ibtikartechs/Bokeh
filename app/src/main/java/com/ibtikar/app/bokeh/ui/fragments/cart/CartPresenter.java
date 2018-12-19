@@ -112,7 +112,7 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
 
         Call<ResponseCartDetails> call;
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.getCartDetails(27);
+        call = service.getCartDetails(getDataManager().getUserId());
 
         call.enqueue(new Callback<ResponseCartDetails>() {
             @Override
@@ -142,7 +142,7 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
         getMvpView().showLoadingViewOrdersInfo();
         Call<ResponseReceiteList> call;
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.getReceitList(27);
+        call = service.getReceitList(getDataManager().getUserId());
         call.enqueue(new Callback<ResponseReceiteList>() {
             @Override
             public void onResponse(Call<ResponseReceiteList> call, Response<ResponseReceiteList> response) {
