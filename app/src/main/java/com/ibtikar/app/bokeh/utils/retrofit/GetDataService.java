@@ -82,6 +82,11 @@ public interface GetDataService {
     @POST("/ulogin")
     Call<ResponseLogin> loginUser(@Query("email") String email, @Query("password") String password);
 
+    @POST("/resendactivation")
+    Call<ResponseLogin> resendActivationLink(@Query("email") String email);
+
+    @POST("/uregister")
+    Call<ResponseLogin> signupUser(@Query("fname") String firstName, @Query("lname") String lastName, @Query("phone") String mobNum, @Query("email") String email, @Query("gender") Integer gender, @Query("bdate") String birthDate,  @Query("password") String password);
 
 
 }

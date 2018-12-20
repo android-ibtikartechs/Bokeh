@@ -60,6 +60,7 @@
         >
 
         <EditText
+            android:id="@+id/et_firstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textCursorDrawable="@null"
@@ -83,6 +84,7 @@
             />
 
         <EditText
+            android:id="@+id/et_lastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textCursorDrawable="@null"
@@ -106,6 +108,7 @@
             />
 
         <EditText
+            android:id="@+id/et_email_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textCursorDrawable="@null"
@@ -130,6 +133,7 @@
 
 
         <EditText
+            android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textCursorDrawable="@null"
@@ -153,6 +157,7 @@
             />
 
         <EditText
+            android:id="@+id/et_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textCursorDrawable="@null"
@@ -192,18 +197,18 @@
                 android:orientation="vertical"
                 >
             <EditText
-                android:layout_width="32dp"
+                android:layout_width="34dp"
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@null"
                 android:freezesText="true"
-                android:text="+2"
+                android:text="+20"
                 android:inputType="number"
                 android:background="@null"
                 android:textColorHint="@color/ColorWhite"
                 android:textColor="@color/ColorWhite"
                 />
             <LinearLayout
-                android:layout_width="32dp"
+                android:layout_width="34dp"
                 android:layout_height="1dp"
                 android:background="@color/ColorWhite"
                 android:layout_marginTop="2dp"
@@ -217,6 +222,7 @@
                 android:layout_marginStart="16dp"
                 >
             <EditText
+                android:id="@+id/etMobNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@null"
@@ -240,6 +246,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_sign_up"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/shape_rounded_board_button"

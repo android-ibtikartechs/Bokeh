@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
+import com.ibtikar.app.bokeh.data.models.CartFragmentRefreshTrigger;
 import com.ibtikar.app.bokeh.ui.activities.main.MainActivity;
 import com.ibtikar.app.bokeh.ui.fragments.forget_password.ForgetPasswordFragment;
 import com.ibtikar.app.bokeh.ui.fragments.signup.SignupFragment;
@@ -257,14 +258,14 @@ public class LoginFragment extends Fragment implements LoginMvpView {
     }
 
     @Override
-    public void showDialogStatusOfSendingActivation() {
+    public void showDialogStatusOfSendingActivation(String msg) {
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
-        builder.setMessage("activation link has been sent to your email")
+        builder.setMessage(msg)
                 .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
