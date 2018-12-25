@@ -6,9 +6,13 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.data.FilterByPassingData;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,6 +20,20 @@ import butterknife.ButterKnife;
 public class FilterDialogFragment extends BottomSheetDialogFragment {
     @BindView(R.id.btnClose)
     ImageView btnClose;
+
+    @BindView(R.id.btnApply)
+    Button btnApply;
+
+    @BindView(R.id.et_price_from)
+    EditText etPriceFrom;
+
+    @BindView(R.id.et_price_to)
+    EditText etPriceTo;
+
+    private ApplyClickListener customListener;
+
+    FilterByPassingData filterByPassingData;
+
     private BottomSheetBehavior.BottomSheetCallback mBottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
 
         @Override
@@ -41,10 +59,27 @@ public class FilterDialogFragment extends BottomSheetDialogFragment {
         dialog.setContentView(contentView);
         ButterKnife.bind(this, contentView);
 
+        filterByPassingData = new FilterByPassingData();
+
+
+
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
+            }
+        });
+
+        btnApply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (etPriceFrom.getText().toString().isEmpty() || etPriceTo.getText().toString().isEmpty())
+                    Toast.makeText(getActivity(), "please enter price", Toast.LENGTH_SHORT).show();
+                else {
+                    customListener.onApplyClickListener(filterByPassingData);
+                    dismiss();
+                }
+
             }
         });
 
@@ -56,6 +91,14 @@ public class FilterDialogFragment extends BottomSheetDialogFragment {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
         }
     }
+
+    public interface ApplyClickListener {
+        public void onApplyClickListener(FilterByPassingData filterByPassingData);
+    }
+    public void setCustomButtonListner(ApplyClickListener listener) {
+        this.customListener = listener;
+    }
+
 
 
 }

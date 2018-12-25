@@ -34,6 +34,7 @@
                 />
 
             <Button
+                android:id="@+id/btnApply"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_rounded_button"
@@ -76,6 +77,7 @@
                 android:orientation="vertical"
                 >
                 <EditText
+                    android:id="@+id/et_price_from"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -83,6 +85,7 @@
                     android:hint="From"
                     android:textColorHint="#B4B4B4"
                     android:maxLines="1"
+                    android:inputType="number"
                     />
 
                 <LinearLayout
@@ -97,7 +100,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                ></LinearLayout>
+                />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -107,6 +110,7 @@
                 >
 
                 <EditText
+                    android:id="@+id/et_price_to"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
@@ -114,6 +118,7 @@
                     android:hint="to"
                     android:textColorHint="#B4B4B4"
                     android:maxLines="1"
+                    android:inputType="number"
                     />
 
                 <LinearLayout
@@ -137,6 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layoutDirection="ltr"
+            android:visibility="gone"
             >
 
         <RadioButton

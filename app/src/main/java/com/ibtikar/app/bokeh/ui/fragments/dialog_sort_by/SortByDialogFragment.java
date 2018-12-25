@@ -115,7 +115,6 @@ public class SortByDialogFragment extends BottomSheetDialogFragment {
             public void onClick(View v) {
                 dismiss();
                 customListener.onApplyClickListener(sortByBottomSheetPassingData);
-
             }
         });
 

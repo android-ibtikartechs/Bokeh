@@ -10,10 +10,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
+import com.ibtikar.app.bokeh.data.FilterByPassingData;
 import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.adapters.AdapterProductsList;
 import com.ibtikar.app.bokeh.data.models.LocationLatLong;
@@ -36,7 +38,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProductsListActivity extends BaseActivity implements ProductsListMvpView, AdapterProductsList.ContainerProductsItemsClickListener, PaginationAdapterCallback, SortByDialogFragment.ApplyClickListener {
+public class ProductsListActivity extends BaseActivity implements ProductsListMvpView, AdapterProductsList.ContainerProductsItemsClickListener, PaginationAdapterCallback, SortByDialogFragment.ApplyClickListener, FilterDialogFragment.ApplyClickListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -91,6 +93,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
             @Override
             public void onClick(View v) {
                 FilterDialogFragment filterDialogFragment = new FilterDialogFragment();
+                filterDialogFragment.setCustomButtonListner(ProductsListActivity.this::onApplyClickListener);
                 filterDialogFragment.show(getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
             }
         });
@@ -319,5 +322,10 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+    }
+
+    @Override
+    public void onApplyClickListener(FilterByPassingData filterByPassingData) {
+        Toast.makeText(this, "filter done", Toast.LENGTH_SHORT).show();
     }
 }
