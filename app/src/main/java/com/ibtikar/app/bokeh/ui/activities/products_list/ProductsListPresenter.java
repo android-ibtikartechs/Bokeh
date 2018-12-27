@@ -5,6 +5,7 @@ import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.models.LocationLatLong;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.SortByBottomSheetPassingData;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseFilter;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseHomeModel;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseProductList;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
@@ -200,6 +201,21 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
 
     @Override
     public void loadNextPage(int currentPage) {
+
+    }
+
+    @Override
+    public void loadFilteredData(List<ModelProductItem> list , int priceFrom, int priceTo) {
+        List<ModelProductItem> filteredList  = new ArrayList<>();
+        for (int i = 0 ; i<list.size() ; i++)
+        {
+            if (list.get(i).getPrice()>= priceFrom && list.get(i).getPrice()<= priceTo)
+            {
+                filteredList.add(list.get(i));
+            }
+        }
+
+        getMvpView().addMoreToAdapter(filteredList);
 
     }
 }

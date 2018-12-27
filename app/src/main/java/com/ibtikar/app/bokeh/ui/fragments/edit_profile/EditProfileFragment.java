@@ -2,20 +2,29 @@ package com.ibtikar.app.bokeh.ui.fragments.edit_profile;
 
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.adapters.AdapterGenderSpinner;
 import com.ibtikar.app.bokeh.data.models.ModelGender;
 import com.ibtikar.app.bokeh.ui_utilities.DatePickerFragment;
@@ -32,7 +41,7 @@ import butterknife.ButterKnife;
  * Use the {@link EditProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EditProfileFragment extends Fragment {
+public class EditProfileFragment extends Fragment implements EditProfileMvpView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -41,14 +50,33 @@ public class EditProfileFragment extends Fragment {
     @BindView(R.id.gender_spinner)
     Spinner spinnerGender;
 
+    @BindView(R.id.btn_update)
+    Button btnUpdate;
+
     @BindView(R.id.et_date_birth)
     EditText etDateOfBirth;
+
+    @BindView(R.id.et_firstName)
+    EditText etFirstName;
+
+    @BindView(R.id.et_last_name)
+    EditText etLastName;
+
+    @BindView(R.id.et_email_address)
+    EditText etEmailAddress;
+
+    @BindView(R.id.et_mob_num)
+    EditText etMobileNumber;
 
     int selectedGender = 0;
 
     final int DATE_DIALOG_ID = 999;
     int year, month, day;
     Calendar c;
+
+    Handler mHandler;
+    EditProfilePresenter presenter;
+    ProgressDialog progressDialog;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -86,6 +114,11 @@ public class EditProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        mHandler = new Handler(Looper.getMainLooper());
+        DataManager dataManager = ((MvpApp) getActivity().getApplication()).getDataManager();
+        presenter = new EditProfilePresenter<>(dataManager);
+        presenter.onAttach(this);
     }
 
     @Override
@@ -106,6 +139,15 @@ public class EditProfileFragment extends Fragment {
         month = c.get(Calendar.MONTH);
         day = c.get(Calendar.DAY_OF_MONTH);
 
+
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.ubdateData(etFirstName.getText().toString(), etLastName.getText().toString(), etMobileNumber.getText().toString(), etDateOfBirth.getText().toString(), selectedGender);
+            }
+        });
+
         etDateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,6 +155,8 @@ public class EditProfileFragment extends Fragment {
                 newFragment.show(getFragmentManager(),"Date Picker");
             }
         });
+
+        presenter.getUserLocalData();
 
     }
 
@@ -130,7 +174,7 @@ public class EditProfileFragment extends Fragment {
         spinnerGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), list.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), String.valueOf(position), Toast.LENGTH_SHORT).show();
                 selectedGender = list.get(position).getId();
             }
 
@@ -140,6 +184,64 @@ public class EditProfileFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void showProgressDialog(String title) {
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage(title);
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
+        });
+    }
+
+    @Override
+    public void afterUbdateSuccess() {
+
+    }
+
+    @Override
+    public void showDialogStatusOfUpdateProfile(String msg) {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(getActivity());
+        }
+        builder.setMessage(msg)
+                .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    @Override
+    public void showToast(String message) {
+
+    }
+
+    @Override
+    public void populateUserData(String emailAddress, String firstName, String lastName, String mobNum, String birthDate, Integer gender) {
+        if (!birthDate.equals("0000-00-00"))
+            etDateOfBirth.setText(birthDate);
+        etEmailAddress.setText(emailAddress);
+        etFirstName.setText(firstName);
+        etLastName.setText(lastName);
+        etMobileNumber.setText(mobNum);
+        spinnerGender.setSelection(gender);
     }
 
 

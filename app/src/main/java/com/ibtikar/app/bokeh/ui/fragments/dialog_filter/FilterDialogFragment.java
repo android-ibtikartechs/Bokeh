@@ -76,6 +76,8 @@ public class FilterDialogFragment extends BottomSheetDialogFragment {
                 if (etPriceFrom.getText().toString().isEmpty() || etPriceTo.getText().toString().isEmpty())
                     Toast.makeText(getActivity(), "please enter price", Toast.LENGTH_SHORT).show();
                 else {
+                    filterByPassingData.setPriceFrom(Integer.valueOf(etPriceFrom.getText().toString()));
+                    filterByPassingData.setPriceTo(Integer.valueOf(etPriceTo.getText().toString()));
                     customListener.onApplyClickListener(filterByPassingData);
                     dismiss();
                 }

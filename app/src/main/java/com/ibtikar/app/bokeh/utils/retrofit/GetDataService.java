@@ -7,6 +7,7 @@ import com.ibtikar.app.bokeh.data.models.responses.ResponseChecout;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCountriesList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseDecreaseCartItemQuantity;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseDeleteCartItem;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseFilter;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseHomeModel;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseIncreaseCartItemQuantity;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseLikeButton;
@@ -88,5 +89,8 @@ public interface GetDataService {
     @POST("/uregister")
     Call<ResponseLogin> signupUser(@Query("fname") String firstName, @Query("lname") String lastName, @Query("phone") String mobNum, @Query("email") String email, @Query("gender") Integer gender, @Query("bdate") String birthDate,  @Query("password") String password);
 
+
+    @POST("/search")
+    Call<ResponseFilter> filter(@Query("price_from") Integer priceFrom, @Query("price_to") Integer priceTo);
 
 }

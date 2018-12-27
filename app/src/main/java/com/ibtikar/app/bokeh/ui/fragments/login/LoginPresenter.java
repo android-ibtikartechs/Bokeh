@@ -1,5 +1,7 @@
 package com.ibtikar.app.bokeh.ui.fragments.login;
 
+import android.widget.Toast;
+
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseLogin;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
@@ -20,6 +22,8 @@ public class LoginPresenter <V extends LoginMvpView> extends BasePresenter<V> im
         /*if (email.isEmpty() || password.isEmpty())
             getMvpView().showToast("please fill the empty fields");
         else {*/
+
+        getMvpView().showToast(getDataManager().getBirthDate());
             getMvpView().showProgressDialog("Login ...");
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 

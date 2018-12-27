@@ -226,6 +226,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
 
     @Override
     public void addMoreToAdapter(final List<ModelProductItem> list) {
+        arrayList =  new ArrayList<>(list);
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -326,6 +327,8 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
 
     @Override
     public void onApplyClickListener(FilterByPassingData filterByPassingData) {
-        Toast.makeText(this, "filter done", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "filter done", Toast.LENGTH_SHORT).show();
+        adapterProductsList.clear();
+        presenter.loadFilteredData(arrayList,filterByPassingData.getPriceFrom(), filterByPassingData.getPriceTo());
     }
 }
