@@ -17,6 +17,7 @@ import com.ibtikar.app.bokeh.data.models.responses.ResponseProductList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseReceiteList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseSearchResultList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseShopsList;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseUpdateProfile;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseWishList;
 
 import retrofit2.Call;
@@ -93,4 +94,6 @@ public interface GetDataService {
     @POST("/search")
     Call<ResponseFilter> filter(@Query("price_from") Integer priceFrom, @Query("price_to") Integer priceTo);
 
+    @POST("/updateprofile")
+    Call<ResponseUpdateProfile> updateProfile(@Query("email") String emailAddress, @Query("fname") String firstName, @Query("lname") String lastName, @Query("phone") String phone, @Query("bdate") String birthDate, @Query("gender") Integer gender);
 }

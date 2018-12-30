@@ -4,6 +4,7 @@ package com.ibtikar.app.bokeh.ui.fragments.edit_profile;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.adapters.AdapterGenderSpinner;
 import com.ibtikar.app.bokeh.data.models.ModelGender;
+import com.ibtikar.app.bokeh.ui.activities.main.MainActivity;
 import com.ibtikar.app.bokeh.ui_utilities.DatePickerFragment;
 
 import java.util.ArrayList;
@@ -134,6 +137,7 @@ public class EditProfileFragment extends Fragment implements EditProfileMvpView 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupGinderSpinner();
+
         c = Calendar.getInstance();
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
@@ -217,12 +221,17 @@ public class EditProfileFragment extends Fragment implements EditProfileMvpView 
             builder = new AlertDialog.Builder(getActivity());
         }
         builder.setMessage(msg)
-                .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_down);
                     }
                 })
+
+
 
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
@@ -230,7 +239,7 @@ public class EditProfileFragment extends Fragment implements EditProfileMvpView 
 
     @Override
     public void showToast(String message) {
-
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
