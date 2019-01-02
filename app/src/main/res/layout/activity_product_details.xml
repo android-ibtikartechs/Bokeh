@@ -157,7 +157,7 @@
                 android:id="@+id/im_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_like_normal"
+                android:src="@drawable/icone_like_disabled"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 />

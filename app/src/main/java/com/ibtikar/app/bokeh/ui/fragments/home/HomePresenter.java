@@ -31,7 +31,7 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
         Log.d("", "loadItem: ");
 
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<ResponseHomeModel> call = service.getHomeData(getDataManager().getCountryId());
+        Call<ResponseHomeModel> call = service.getHomeData(getDataManager().getCountryId(), getDataManager().getUserId());
         call.enqueue(new Callback<ResponseHomeModel>() {
             @Override
             public void onResponse(Call<ResponseHomeModel> call, Response<ResponseHomeModel> response) {

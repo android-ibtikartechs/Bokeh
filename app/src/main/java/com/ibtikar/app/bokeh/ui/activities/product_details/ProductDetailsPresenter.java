@@ -1,5 +1,7 @@
 package com.ibtikar.app.bokeh.ui.activities.product_details;
 
+import android.util.Log;
+
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseLikeButton;
@@ -75,6 +77,32 @@ public class ProductDetailsPresenter <V extends ProductDetailsMvpView> extends B
         }
         else
             getMvpView().showDialogBuyOptions();
+
+    }
+
+    @Override
+    public void isProductLiked(int productId) {
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        Call<ResponseLikeButton> call = null;
+
+        call = service.isProductLiked(getDataManager().getUserId(), productId);
+
+        call.enqueue(new Callback<ResponseLikeButton>() {
+            @Override
+            public void onResponse(Call<ResponseLikeButton> call, Response<ResponseLikeButton> response) {
+                System.out.println(response.body().toString());
+                if (response.body().getStatus() )
+                {
+                    getMvpView().showLikeStatus(response.body().getIsLiked());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseLikeButton> call, Throwable t) {
+
+            }
+        });
+
 
     }
 

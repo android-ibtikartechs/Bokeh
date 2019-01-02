@@ -143,6 +143,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
 
     @Override
     public void populateData(ModelProductItem modelProductItem) {
+        presenter.isProductLiked(modelProductItem.getId());
         this.modelProductItem = modelProductItem;
         setupActionBar(modelProductItem.getName());
         if (modelProductItem.getGallery().size() == 0 || modelProductItem.getGallery() == null) {
@@ -284,7 +285,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
             e.printStackTrace();
         }
         tvPrice.setText(String.format(Locale.UK,"%d",modelProductItem.getPrice()));
-
+/*
         if (modelProductItem.getIsLiked()) {
             likeSwitch = true;
             btnLike.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_like_liked));
@@ -294,7 +295,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
                 btnLike.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_like_normal));
         }
 
-
+*/
 
     }
 
@@ -347,6 +348,19 @@ public class ProductDetailsActivity extends AppCompatActivity implements Product
         RxBus.publish(modelProductItem);
         DialogBuyOptionsFragment dialogBuyOptionsFragment = new DialogBuyOptionsFragment();
         dialogBuyOptionsFragment.show(getSupportFragmentManager(), "Bottom Sheet Dialog Fragment");
+    }
+
+    @Override
+    public void showLikeStatus(boolean likeStatus) {
+        likeSwitch = likeStatus;
+        if (!likeStatus)
+        {
+            btnLike.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_like_normal));
+        }
+        else
+        {
+            btnLike.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_like_liked));
+        }
     }
 
 

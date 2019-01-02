@@ -27,17 +27,17 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface GetDataService {
-    @GET("/front/{country_id}")
-    Call<ResponseHomeModel> getHomeData(@Path("country_id") int countryId);
+    @GET("/front/{country_id}/{user}")
+    Call<ResponseHomeModel> getHomeData(@Path("country_id") int countryId, @Path("user") int userId);
 
     @GET("/occasions")
     Call<ResponseCategoriesModel> getCategoriesList();
 
-    @GET("/occasion_products/{product_id}/{country_id}")
-    Call<ResponseProductList> getProductListForCategory(@Path("product_id")Integer id, @Path("country_id") Integer countryId);
+    @GET("/occasion_products/{product_id}/{country_id}/{user}")
+    Call<ResponseProductList> getProductListForCategory(@Path("product_id")Integer id, @Path("country_id") Integer countryId, @Path("user") Integer userId);
 
     @POST("/productslike")
-    Call<ResponseSearchResultList> getSearchResultFor(@Query("keyword") String keyWord, @Query("country") Integer countryId);
+    Call<ResponseSearchResultList> getSearchResultFor(@Query("keyword") String keyWord, @Query("country") Integer countryId, @Query("user") int userId);
 
     @GET("/rcountries")
     Call<ResponseCountriesList> getCountriesList();
@@ -45,8 +45,8 @@ public interface GetDataService {
     @GET("/sellers/{country_id}")
     Call<ResponseShopsList> getShopsList(@Path("country_id") Integer countryId);
 
-    @GET("/seller_products/{seller_id}")
-    Call<ResponseProductList> getProductListForShop(@Path("seller_id") Integer sellerId);
+    @GET("/seller_products/{seller_id}/{user_id}")
+    Call<ResponseProductList> getProductListForShop(@Path("seller_id") Integer sellerId, @Path("user_id") int userId);
 
 
     @POST("/addtocart")
@@ -92,8 +92,11 @@ public interface GetDataService {
 
 
     @POST("/search")
-    Call<ResponseFilter> filter(@Query("price_from") Integer priceFrom, @Query("price_to") Integer priceTo);
+    Call<ResponseFilter> filter(@Query("price_from") Integer priceFrom, @Query("price_to") Integer priceTo, @Query("user") int userId);
 
     @POST("/updateprofile")
     Call<ResponseUpdateProfile> updateProfile(@Query("email") String emailAddress, @Query("fname") String firstName, @Query("lname") String lastName, @Query("phone") String phone, @Query("bdate") String birthDate, @Query("gender") Integer gender);
+
+    @GET("/iswished/{user_id}/{product_id}")
+    Call<ResponseLikeButton> isProductLiked(@Path("user_id") int userId, @Path("product_id") int productId);
 }

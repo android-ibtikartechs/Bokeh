@@ -10,4 +10,6 @@ public interface ProductDetailsMvpPresenter <V extends ProductDetailsMvpView> ex
     void loadData();
     void changeLikeStaus(Integer productId);
     void addToCart();
+
+    void isProductLiked(int productId);
 }

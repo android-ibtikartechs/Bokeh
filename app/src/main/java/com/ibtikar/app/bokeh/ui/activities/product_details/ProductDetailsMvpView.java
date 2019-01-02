@@ -8,4 +8,5 @@ public interface ProductDetailsMvpView extends MvpView {
     void changeBtnLikeStatus();
     void showYouAreNotLoggedInAlert();
     void showDialogBuyOptions();
+    void showLikeStatus(boolean likeStatus);
 }
