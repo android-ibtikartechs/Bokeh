@@ -27,7 +27,7 @@ public class WishListPresenter <V extends WishListMvpView> extends BasePresenter
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<ResponseWishList> call = null;
 
-        call = service.getWishList(getDataManager().getUserId());
+        call = service.getWishList(getDataManager().getTokenKey(), getDataManager().getUserId());
 
         call.enqueue(new Callback<ResponseWishList>() {
             @Override

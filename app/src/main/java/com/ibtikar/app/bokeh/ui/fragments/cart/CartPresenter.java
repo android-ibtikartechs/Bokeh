@@ -112,7 +112,7 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
 
         Call<ResponseCartDetails> call;
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.getCartDetails(getDataManager().getUserId());
+        call = service.getCartDetails(getDataManager().getTokenKey(), getDataManager().getUserId());
 
         call.enqueue(new Callback<ResponseCartDetails>() {
             @Override
@@ -142,7 +142,7 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
         getMvpView().showLoadingViewOrdersInfo();
         Call<ResponseReceiteList> call;
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.getReceitList(getDataManager().getUserId());
+        call = service.getReceitList(getDataManager().getTokenKey(), getDataManager().getUserId());
         call.enqueue(new Callback<ResponseReceiteList>() {
             @Override
             public void onResponse(Call<ResponseReceiteList> call, Response<ResponseReceiteList> response) {
@@ -167,7 +167,7 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
         getMvpView().showLoadingViewOrdersInfo();
         Call<ResponseIncreaseCartItemQuantity> call;
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.increaseCartItemQuantity(cartItemId);
+        call = service.increaseCartItemQuantity(getDataManager().getTokenKey(), cartItemId);
         call.enqueue(new Callback<ResponseIncreaseCartItemQuantity>() {
             @Override
             public void onResponse(Call<ResponseIncreaseCartItemQuantity> call, Response<ResponseIncreaseCartItemQuantity> response) {
@@ -196,7 +196,7 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
         getMvpView().showLoadingViewOrdersInfo();
         Call<ResponseDecreaseCartItemQuantity> call;
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.decreaseCartItemQuantity(cartItemId);
+        call = service.decreaseCartItemQuantity(getDataManager().getTokenKey(), cartItemId);
         call.enqueue(new Callback<ResponseDecreaseCartItemQuantity>() {
             @Override
             public void onResponse(Call<ResponseDecreaseCartItemQuantity> call, Response<ResponseDecreaseCartItemQuantity> response) {
@@ -222,7 +222,7 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
         getMvpView().showLoadingViewOrdersInfo();
         Call<ResponseDeleteCartItem> call;
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.deleteCartItem(cartItemId);
+        call = service.deleteCartItem(getDataManager().getTokenKey(), cartItemId);
 
         call.enqueue(new Callback<ResponseDeleteCartItem>() {
             @Override

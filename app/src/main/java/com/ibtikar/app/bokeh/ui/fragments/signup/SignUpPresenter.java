@@ -24,7 +24,7 @@ public class SignUpPresenter <V extends SignupMvpView> extends BasePresenter<V> 
             getMvpView().showProgressDialog("sign up ...");
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 
-            Call<ResponseLogin> call = service.signupUser(firstName,lastName,mobNum,email, 0, "",password);
+            Call<ResponseLogin> call = service.signupUser(getDataManager().getTokenKey(), firstName,lastName,mobNum,email, 0, "",password);
             call.enqueue(new Callback<ResponseLogin>() {
                 @Override
                 public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
@@ -50,7 +50,7 @@ public class SignUpPresenter <V extends SignupMvpView> extends BasePresenter<V> 
         getMvpView().showProgressDialog("Sending activation link...");
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 
-        Call<ResponseLogin> call = service.resendActivationLink(Email);
+        Call<ResponseLogin> call = service.resendActivationLink(getDataManager().getTokenKey(), Email);
 
         call.enqueue(new Callback<ResponseLogin>() {
             @Override

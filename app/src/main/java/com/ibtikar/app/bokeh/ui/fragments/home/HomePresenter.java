@@ -36,11 +36,16 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
             @Override
             public void onResponse(Call<ResponseHomeModel> call, Response<ResponseHomeModel> response) {
                 //getMvpView().addMoreToFeaturedItemAdapter(response.body().getItems());
-                getMvpView().showContent();
-                loadCategories(response.body().getOccasions());
-                loadFeaturedItems(response.body().getItems());
-                loadShopsItems(response.body().getShops());
-                loadSlider(response.body().getSpecialoffers());
+                if (response.body().getStatus()) {
+                    getMvpView().showContent();
+                    getDataManager().setTokenKey(response.body().getToken());
+                    loadCategories(response.body().getOccasions());
+                    loadFeaturedItems(response.body().getItems());
+                    loadShopsItems(response.body().getShops());
+                    loadSlider(response.body().getSpecialoffers());
+                }
+                else
+                    getMvpView().showErrorConnectionView();
             }
 
             @Override

@@ -26,7 +26,7 @@ public class MainPresenter <V extends MainMvpView> extends BasePresenter<V> impl
         if (getDataManager().getLoginStausus()) {
             Call<ResponseCartDetails> call;
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-            call = service.getCartDetails(getDataManager().getUserId());
+            call = service.getCartDetails(getDataManager().getTokenKey(), getDataManager().getUserId());
             call.enqueue(new Callback<ResponseCartDetails>() {
                 @Override
                 public void onResponse(Call<ResponseCartDetails> call, Response<ResponseCartDetails> response) {

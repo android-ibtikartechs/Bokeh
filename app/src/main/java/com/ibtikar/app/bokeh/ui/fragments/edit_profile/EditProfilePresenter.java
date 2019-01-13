@@ -23,7 +23,7 @@ public class EditProfilePresenter <V extends EditProfileMvpView> extends BasePre
         {
             getMvpView().showProgressDialog("update profile...");
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-            Call<ResponseUpdateProfile> call = service.updateProfile(getDataManager().getUserEmail(), firstName,lastName,mobNum,birthDate, gender);
+            Call<ResponseUpdateProfile> call = service.updateProfile(getDataManager().getTokenKey(), getDataManager().getUserEmail(), firstName,lastName,mobNum,birthDate, gender);
 
             call.enqueue(new Callback<ResponseUpdateProfile>() {
                 @Override

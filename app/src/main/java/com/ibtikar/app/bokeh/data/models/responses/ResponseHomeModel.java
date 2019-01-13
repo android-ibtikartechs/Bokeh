@@ -13,6 +13,11 @@ public class ResponseHomeModel {
     @SerializedName("status")
     @Expose
     private Boolean status;
+
+    @SerializedName("token")
+    @Expose
+    private String token;
+
     @SerializedName("Specialoffers")
     @Expose
     private List<ModelProductItem> specialoffers = null;
@@ -41,13 +46,14 @@ public class ResponseHomeModel {
      * @param specialoffers
      * @param occasions
      */
-    public ResponseHomeModel(Boolean status, List<ModelProductItem> specialoffers, List<OccasionItemModel> occasions, List<ModelShopItem> shops, List<ModelProductItem> items) {
+    public ResponseHomeModel(Boolean status, String token, List<ModelProductItem> specialoffers, List<OccasionItemModel> occasions, List<ModelShopItem> shops, List<ModelProductItem> items) {
         super();
         this.status = status;
         this.specialoffers = specialoffers;
         this.occasions = occasions;
         this.shops = shops;
         this.items = items;
+        this.token = token;
     }
 
     public Boolean getStatus() {
@@ -90,5 +96,11 @@ public class ResponseHomeModel {
         this.items = items;
     }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
 
+    public String getToken() {
+        return token;
+    }
 }

@@ -37,7 +37,7 @@ public interface GetDataService {
     Call<ResponseProductList> getProductListForCategory(@Path("product_id")Integer id, @Path("country_id") Integer countryId, @Path("user") Integer userId);
 
     @POST("/productslike")
-    Call<ResponseSearchResultList> getSearchResultFor(@Query("keyword") String keyWord, @Query("country") Integer countryId, @Query("user") int userId);
+    Call<ResponseSearchResultList> getSearchResultFor(@Query("_token") String token, @Query("keyword") String keyWord, @Query("country") Integer countryId, @Query("user") int userId);
 
     @GET("/rcountries")
     Call<ResponseCountriesList> getCountriesList();
@@ -50,53 +50,54 @@ public interface GetDataService {
 
 
     @POST("/addtocart")
-    Call<ResponseAddToCart> addToCart(@Query("user") Integer userId, @Query("product") Integer productId, @Query("pdate") String deliveryDate, @Query("ptime") Integer deliveryTime, @Query("delivary") Integer deliveryOrPickup, @Query("pcity") Integer cityId, @Query("parea") Integer parea, @Query("paddress") String adderss);
+    Call<ResponseAddToCart> addToCart(@Query("_token") String token, @Query("user") Integer userId, @Query("product") Integer productId, @Query("pdate") String deliveryDate, @Query("ptime") Integer deliveryTime, @Query("delivary") Integer deliveryOrPickup, @Query("pcity") Integer cityId, @Query("parea") Integer parea, @Query("paddress") String adderss);
 
 
     @POST("/cartitems")
-    Call<ResponseCartDetails> getCartDetails(@Query("user") Integer userId);
+    Call<ResponseCartDetails> getCartDetails(@Query("_token") String token, @Query("user") Integer userId);
 
     @POST("/wishlist")
-    Call<ResponseWishList> getWishList(@Query("user") Integer userId);
+    Call<ResponseWishList> getWishList(@Query("_token") String token, @Query("user") Integer userId);
 
     @POST("/addtowish")
-    Call<ResponseLikeButton> addToWish(@Query("user") Integer userId, @Query("product") Integer productId);
+    Call<ResponseLikeButton> addToWish(@Query("_token") String token, @Query("user") Integer userId, @Query("product") Integer productId);
 
     @POST("/increasequantity")
-    Call<ResponseIncreaseCartItemQuantity> increaseCartItemQuantity(@Query("id") Integer cartItemId);
+    Call<ResponseIncreaseCartItemQuantity> increaseCartItemQuantity(@Query("_token") String token, @Query("id") Integer cartItemId);
 
     @POST("/decreasequantity")
-    Call<ResponseDecreaseCartItemQuantity> decreaseCartItemQuantity(@Query("id") Integer cartItemId);
+    Call<ResponseDecreaseCartItemQuantity> decreaseCartItemQuantity(@Query("_token") String token, @Query("id") Integer cartItemId);
 
     @POST("/ordershistory")
-    Call<ResponseOrdersHistory> getOrdersHistory(@Query("user") Integer userId);
+    Call<ResponseOrdersHistory> getOrdersHistory(@Query("_token") String token, @Query("user") Integer userId);
 
     @POST("/removecartitem")
-    Call<ResponseDeleteCartItem> deleteCartItem(@Query("id") Integer cartItemId);
+    Call<ResponseDeleteCartItem> deleteCartItem(@Query("_token") String token, @Query("id") Integer cartItemId);
 
     @POST("/getcartresetitems")
-    Call<ResponseReceiteList> getReceitList(@Query("user") Integer userId);
+    Call<ResponseReceiteList> getReceitList(@Query("_token") String token, @Query("user") Integer userId);
 
 
     @POST("/checkout")
-    Call<ResponseChecout> checoutOrder(@Query("user") Integer userId, @Query("paytype") Integer payType);
+    Call<ResponseChecout> checoutOrder(@Query("_token") String token, @Query("user") Integer userId, @Query("paytype") Integer payType);
 
     @POST("/ulogin")
-    Call<ResponseLogin> loginUser(@Query("email") String email, @Query("password") String password);
+    Call<ResponseLogin> loginUser(@Query("_token") String token, @Query("email") String email, @Query("password") String password);
 
     @POST("/resendactivation")
-    Call<ResponseLogin> resendActivationLink(@Query("email") String email);
+    Call<ResponseLogin> resendActivationLink(@Query("_token") String token, @Query("email") String email);
 
     @POST("/uregister")
-    Call<ResponseLogin> signupUser(@Query("fname") String firstName, @Query("lname") String lastName, @Query("phone") String mobNum, @Query("email") String email, @Query("gender") Integer gender, @Query("bdate") String birthDate,  @Query("password") String password);
+    Call<ResponseLogin> signupUser(@Query("_token") String token, @Query("fname") String firstName, @Query("lname") String lastName, @Query("phone") String mobNum, @Query("email") String email, @Query("gender") Integer gender, @Query("bdate") String birthDate,  @Query("password") String password);
 
 
     @POST("/search")
-    Call<ResponseFilter> filter(@Query("price_from") Integer priceFrom, @Query("price_to") Integer priceTo, @Query("user") int userId);
+    Call<ResponseFilter> filter(@Query("_token") String token, @Query("price_from") Integer priceFrom, @Query("price_to") Integer priceTo, @Query("user") int userId);
 
     @POST("/updateprofile")
-    Call<ResponseUpdateProfile> updateProfile(@Query("email") String emailAddress, @Query("fname") String firstName, @Query("lname") String lastName, @Query("phone") String phone, @Query("bdate") String birthDate, @Query("gender") Integer gender);
+    Call<ResponseUpdateProfile> updateProfile(@Query("_token") String token, @Query("email") String emailAddress, @Query("fname") String firstName, @Query("lname") String lastName, @Query("phone") String phone, @Query("bdate") String birthDate, @Query("gender") Integer gender);
 
     @GET("/iswished/{user_id}/{product_id}")
     Call<ResponseLikeButton> isProductLiked(@Path("user_id") int userId, @Path("product_id") int productId);
+
 }

@@ -13,6 +13,8 @@ public class SharedPreferenceHelper {
     private static final String CART_ITEMS_COUNT = "CART_ITEMS_COUNT";
     private static final String KEY_COUNTRY_ID = "KEY_COUNTRY_ID";
 
+    private static final String KEY_TOKEN = "KEY_TOKEN";
+
     private static final String KEY_USER_NAME = "KEY_USER_NAME";
     private static final String KEY_USER_EMAIL = "KEY_USER_EMAIL";
     private static final String KEY_USER_MOB_NUM = "KEY_USER_MOB_NUM";
@@ -38,6 +40,10 @@ public class SharedPreferenceHelper {
 
     public void setUserName(String userName) {
         mSharedPreferences.edit().putString(KEY_USER_NAME, userName).apply();
+    }
+
+    public void setToken(String tokenKey){
+        mSharedPreferences.edit().putString(KEY_TOKEN, tokenKey).apply();
     }
 
     public void setUserId(Integer userId) {
@@ -113,8 +119,13 @@ public class SharedPreferenceHelper {
 
 
 
+
     public String getUserName (){
         return mSharedPreferences.getString(KEY_USER_NAME,"");
+    }
+
+    public String getTokenKey(){
+        return mSharedPreferences.getString(KEY_TOKEN,"");
     }
 
     public Integer getUserId(){return mSharedPreferences.getInt(KEY_USER_ID,0);}

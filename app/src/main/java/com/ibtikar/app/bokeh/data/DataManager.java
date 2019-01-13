@@ -104,6 +104,11 @@ public class DataManager {
         sharedPrefsHelper.setFirstName(firstName);
     }
 
+    public void setTokenKey(String tokenKey)
+    {
+        sharedPrefsHelper.setToken(tokenKey);
+    }
+
     public void setLastName(String lastName) {
         sharedPrefsHelper.setLastName(lastName);
     }
@@ -119,6 +124,10 @@ public class DataManager {
     }
 
     public Integer getUserId(){return sharedPrefsHelper.getUserId();}
+
+    public String getTokenKey(){
+        return sharedPrefsHelper.getTokenKey();
+    }
 
     public void setUserId(Integer userId) {
         sharedPrefsHelper.setUserId(userId);

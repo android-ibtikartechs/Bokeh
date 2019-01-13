@@ -28,7 +28,7 @@ public class MyOrdersPresenter <V extends MyOrdersMvpView> extends BasePresenter
 
         Call<ResponseOrdersHistory> call;
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.getOrdersHistory(getDataManager().getUserId());
+        call = service.getOrdersHistory(getDataManager().getTokenKey(), getDataManager().getUserId());
 
         call.enqueue(new Callback<ResponseOrdersHistory>() {
             @Override

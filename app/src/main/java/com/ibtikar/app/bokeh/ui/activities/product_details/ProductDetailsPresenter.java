@@ -48,7 +48,7 @@ public class ProductDetailsPresenter <V extends ProductDetailsMvpView> extends B
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<ResponseLikeButton> call = null;
 
-        call = service.addToWish(getDataManager().getUserId(), productId);
+        call = service.addToWish(getDataManager().getTokenKey(), getDataManager().getUserId(), productId);
 
         call.enqueue(new Callback<ResponseLikeButton>() {
             @Override
