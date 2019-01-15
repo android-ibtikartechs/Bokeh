@@ -7,6 +7,13 @@
     android:background="@color/ColorWhite"
     tools:context=".ui.activities.country.CountrySelectionActivity">
 
+    <ProgressBar
+        android:id="@+id/load_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
 
     <LinearLayout
         android:id="@+id/lout_edit"
@@ -72,6 +79,7 @@
         android:textColor="@color/ColorWhite"
         android:text="Continue"
         android:textAllCaps="false"
+        android:enabled="false"
         />
 
 </RelativeLayout>

@@ -8,4 +8,7 @@ import java.util.List;
 public interface CountrySelectionMvpView extends MvpView {
     void populateCountriesListSpinner(List<ModelCountry> countriesList);
     void ToastOffline();
+    void showUpdateStaus(boolean isAppUpdated, boolean isForceUpdateRequired);
+    void showLoadingProgress();
+    void hideLoadingProgress(boolean isAllDone);
 }

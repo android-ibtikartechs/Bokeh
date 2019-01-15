@@ -3,6 +3,7 @@ package com.ibtikar.app.bokeh.utils.retrofit;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseAddToCart;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCartDetails;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCategoriesModel;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseCheckStatusUpdate;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseChecout;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCountriesList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseDecreaseCartItemQuantity;
@@ -100,4 +101,6 @@ public interface GetDataService {
     @GET("/iswished/{user_id}/{product_id}")
     Call<ResponseLikeButton> isProductLiked(@Path("user_id") int userId, @Path("product_id") int productId);
 
+    @GET("/checkappversion/{current_version}")
+    Call<ResponseCheckStatusUpdate> checkStatusUpdsate(@Path("current_version") int currentVersionCode);
 }
