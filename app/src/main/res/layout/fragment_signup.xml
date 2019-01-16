@@ -197,6 +197,7 @@
                 android:orientation="vertical"
                 >
             <EditText
+                android:id="@+id/et_country_key"
                 android:layout_width="34dp"
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@null"
@@ -206,6 +207,7 @@
                 android:background="@null"
                 android:textColorHint="@color/ColorWhite"
                 android:textColor="@color/ColorWhite"
+                android:focusable="false"
                 />
             <LinearLayout
                 android:layout_width="34dp"
@@ -228,7 +230,7 @@
                 android:textCursorDrawable="@null"
                 android:hint="Mobile number"
                 android:textColor="@color/ColorWhite"
-                android:inputType="textPassword"
+                android:inputType="phone"
                 android:background="@null"
                 android:textColorHint="@color/ColorWhite"
 

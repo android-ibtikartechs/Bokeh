@@ -66,6 +66,9 @@ public class SignupFragment extends BaseFragment implements SignupMvpView {
     @BindView(R.id.etMobNum)
     EditText etMobNumber;
 
+    @BindView(R.id.et_country_key)
+    EditText etCountryKey;
+
     ProgressDialog progressDialog;
 
     Handler mHandler;
@@ -122,7 +125,7 @@ public class SignupFragment extends BaseFragment implements SignupMvpView {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.signup(etFirstName.getText().toString(),ryLastName.getText().toString(),etMobNumber.getText().toString(), etEmailAddress.getText().toString(), etPassword.getText().toString(), etConfirmPassword.getText().toString());
+                presenter.signup(etFirstName.getText().toString(),ryLastName.getText().toString(),etCountryKey.getText().toString()+etMobNumber.getText().toString(), etEmailAddress.getText().toString(), etPassword.getText().toString(), etConfirmPassword.getText().toString());
             }
         });
         return view;

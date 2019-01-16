@@ -270,7 +270,7 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), list.get(position).getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), list.get(position).getName(), Toast.LENGTH_SHORT).show();
                 selectedCityId = list.get(position).getId();
             }
 
@@ -299,14 +299,14 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
             }*/
         }
         SimpleDateFormat simpleDateformatForDate = new SimpleDateFormat("y-MM-d");
-        Toast.makeText(getActivity(), simpleDateformatForDate.format(dates.get(0)), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), simpleDateformatForDate.format(dates.get(0)), Toast.LENGTH_SHORT).show();
 
         selectedDate = simpleDateformatForDate.format(dates.get(0));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Toast.makeText(getActivity(), simpleDateformatForDate.format(dates.get(tab.getPosition())), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), simpleDateformatForDate.format(dates.get(tab.getPosition())), Toast.LENGTH_SHORT).show();
                 //selectedDate = dates.get(tab.getPosition())
                 selectedDate = simpleDateformatForDate.format(dates.get(tab.getPosition()));
             }
@@ -319,7 +319,7 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 SimpleDateFormat simpleDateformat = new SimpleDateFormat("y-MM-d");
-                Toast.makeText(getActivity(), simpleDateformat.format(dates.get(tab.getPosition())), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), simpleDateformat.format(dates.get(tab.getPosition())), Toast.LENGTH_SHORT).show();
             }
         });
 

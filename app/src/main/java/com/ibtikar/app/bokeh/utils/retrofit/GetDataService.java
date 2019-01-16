@@ -9,6 +9,7 @@ import com.ibtikar.app.bokeh.data.models.responses.ResponseCountriesList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseDecreaseCartItemQuantity;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseDeleteCartItem;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseFilter;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseForgetPassword;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseHomeModel;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseIncreaseCartItemQuantity;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseLikeButton;
@@ -103,4 +104,8 @@ public interface GetDataService {
 
     @GET("/checkappversion/{current_version}")
     Call<ResponseCheckStatusUpdate> checkStatusUpdsate(@Path("current_version") int currentVersionCode);
+
+    @POST("/forgetpassword")
+    Call<ResponseForgetPassword> resendPassword(@Query("email") String emailAddress);
+
 }

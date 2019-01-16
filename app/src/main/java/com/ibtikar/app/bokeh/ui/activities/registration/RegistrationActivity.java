@@ -7,10 +7,11 @@ import android.os.Bundle;
 
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.StaticValues;
+import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
 import com.ibtikar.app.bokeh.ui.fragments.login.LoginFragment;
 import com.ibtikar.app.bokeh.ui.fragments.signup.SignupFragment;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class RegistrationActivity extends BaseActivity {
     Intent intent;
     int signupOrLogin;
 

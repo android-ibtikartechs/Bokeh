@@ -17,11 +17,12 @@ import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
 import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.ui.activities.Success.SuccessActivity;
+import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PaymentActivity extends AppCompatActivity implements PaymentMvpView {
+public class PaymentActivity extends BaseActivity implements PaymentMvpView {
 
     @BindView(R.id.tv_total_price)
     TextView tvTotalPrice;

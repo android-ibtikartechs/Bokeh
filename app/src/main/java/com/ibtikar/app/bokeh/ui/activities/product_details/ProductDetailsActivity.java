@@ -32,6 +32,7 @@ import com.ibtikar.app.bokeh.data.adapters.AdapterSliderGalleryProduct;
 import com.ibtikar.app.bokeh.data.adapters.AdapterSliderHome;
 import com.ibtikar.app.bokeh.data.models.GalleryProductImage;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
+import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
 import com.ibtikar.app.bokeh.ui.activities.registration.RegistrationActivity;
 import com.ibtikar.app.bokeh.ui.fragments.dialog_buy_options.DialogBuyOptionsFragment;
 import com.ibtikar.app.bokeh.utils.RxBus;
@@ -48,7 +49,7 @@ import butterknife.ButterKnife;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
-public class ProductDetailsActivity extends AppCompatActivity implements ProductDetailsMvpView {
+public class ProductDetailsActivity extends BaseActivity implements ProductDetailsMvpView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

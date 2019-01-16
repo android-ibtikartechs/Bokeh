@@ -23,7 +23,7 @@ public class LoginPresenter <V extends LoginMvpView> extends BasePresenter<V> im
             getMvpView().showToast("please fill the empty fields");
         else {*/
 
-        getMvpView().showToast(getDataManager().getBirthDate());
+        //getMvpView().showToast(getDataManager().getBirthDate());
             getMvpView().showProgressDialog("Login ...");
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 

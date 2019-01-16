@@ -14,10 +14,11 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
 import com.ibtikar.app.bokeh.ui.activities.country.CountrySelectionActivity;
 import com.ibtikar.app.bokeh.ui.activities.main.MainActivity;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 

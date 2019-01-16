@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
 import com.ibtikar.app.bokeh.ui.fragments.categories.CategoriesFragment;
 import com.ibtikar.app.bokeh.ui.fragments.search.SearchFragment;
 import com.ibtikar.app.bokeh.utils.RxBus;
@@ -32,7 +33,7 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CategorySearchActivity extends AppCompatActivity {
+public class CategorySearchActivity extends BaseActivity {
 
     @BindView(R.id.lout_search)
     LinearLayout loutSearch;

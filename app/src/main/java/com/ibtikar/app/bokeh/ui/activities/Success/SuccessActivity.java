@@ -8,11 +8,12 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.ibtikar.app.bokeh.R;
+import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
 import com.ibtikar.app.bokeh.ui.activities.country.CountrySelectionActivity;
 import com.ibtikar.app.bokeh.ui.activities.main.MainActivity;
 import com.ibtikar.app.bokeh.ui.activities.splash.SplashActivity;
 
-public class SuccessActivity extends AppCompatActivity {
+public class SuccessActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
