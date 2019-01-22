@@ -11,7 +11,6 @@ import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
 import com.ibtikar.app.bokeh.utils.retrofit.GetDataService;
 import com.ibtikar.app.bokeh.utils.retrofit.RetrofitClientInstance;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,7 +30,7 @@ public class HomePresenter <V extends HomeMvpView> extends BasePresenter<V> impl
         Log.d("", "loadItem: ");
 
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<ResponseHomeModel> call = service.getHomeData(getDataManager().getCountryId(), getDataManager().getUserId());
+        Call<ResponseHomeModel> call = service.getHomeData(getDataManager().getAreaId(), getDataManager().getUserId());
         call.enqueue(new Callback<ResponseHomeModel>() {
             @Override
             public void onResponse(Call<ResponseHomeModel> call, Response<ResponseHomeModel> response) {

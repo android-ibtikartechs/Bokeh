@@ -282,7 +282,7 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
         ((ProgressBar)rvCartItems.findViewHolderForLayoutPosition(itemPosition).itemView.findViewById(R.id.progress_bar_quantity)).setVisibility(View.GONE);
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar);
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
@@ -335,8 +335,10 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
 
     @Override
     public void showEmptyView() {
-        progressLinearLayout.showEmpty(getResources().getDrawable(R.drawable.cart_empty),"No Items", "No Items in yor cart yet");
-        btnBuy.setEnabled(false);
+        if (getActivity() != null) {
+            progressLinearLayout.showEmpty(getResources().getDrawable(R.drawable.cart_empty), "No Items", "No Items in yor cart yet");
+            btnBuy.setEnabled(false);
+        }
     }
 
 

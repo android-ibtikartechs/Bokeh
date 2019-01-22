@@ -20,6 +20,7 @@ public class AdapterAreaSpinner extends ArrayAdapter<ModelArea> {
 
     public AdapterAreaSpinner(@NonNull Context context, int resource, @NonNull List objects) {
         super(context, resource, objects);
+
         mContext = context;
         items = objects;
     }

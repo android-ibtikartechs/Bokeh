@@ -41,12 +41,46 @@
             android:layout_height="35dp"
             android:layout_marginTop="32dp"
             android:overlapAnchor="false"
+            android:visibility="gone"
             />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/ColorFoshiac"
             android:layout_marginTop="2dp"
+            android:visibility="gone"
+            ></LinearLayout>
+
+        <Spinner
+            android:id="@+id/cities_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="32dp"
+            android:overlapAnchor="false"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/ColorFoshiac"
+            android:layout_marginTop="2dp"
+
+            ></LinearLayout>
+
+        <Spinner
+            android:id="@+id/areas_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="32dp"
+            android:overlapAnchor="false"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/ColorFoshiac"
+            android:layout_marginTop="2dp"
+
             ></LinearLayout>
 
 

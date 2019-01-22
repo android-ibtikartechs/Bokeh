@@ -215,7 +215,7 @@ public class EditProfileFragment extends Fragment implements EditProfileMvpView 
     public void showDialogStatusOfUpdateProfile(String msg) {
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+            builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar);
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }

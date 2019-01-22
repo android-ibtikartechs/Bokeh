@@ -21,9 +21,10 @@ import android.widget.Toast;
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
-import com.ibtikar.app.bokeh.data.StaticValues;
-import com.ibtikar.app.bokeh.data.adapters.AdapterCountrySpinner;
-import com.ibtikar.app.bokeh.data.models.ModelCountry;
+import com.ibtikar.app.bokeh.data.adapters.AdapterAreaSpinner;
+import com.ibtikar.app.bokeh.data.adapters.AdapterCitySpinner;
+import com.ibtikar.app.bokeh.data.models.ModelArea;
+import com.ibtikar.app.bokeh.data.models.ModelCity;
 import com.ibtikar.app.bokeh.ui.activities.base.BaseActivity;
 import com.ibtikar.app.bokeh.ui.activities.main.MainActivity;
 
@@ -42,6 +43,18 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
 
     @BindView(R.id.load_progress_bar)
     ProgressBar loadingProgressBar;
+
+
+    @BindView(R.id.cities_spinner)
+    Spinner citiesSpinner;
+
+    @BindView(R.id.areas_spinner)
+    Spinner areasSpinner;
+
+    Integer selectedAreaId;
+    Integer selectedCityId;
+
+
 
 
 
@@ -105,14 +118,30 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
 
 
     @Override
-    public void populateCountriesListSpinner(List<ModelCountry> countriesList) {
-        AdapterCountrySpinner adapterCountrySpinner = new AdapterCountrySpinner(this, 0, countriesList);
+    public void populateCitiesListSpinner(List<ModelCity> citiesList) {
+     /*   AdapterCountrySpinner adapterCountrySpinner = new AdapterCountrySpinner(this, 0, countriesList);
         spinnerCountry.setAdapter(adapterCountrySpinner);
 
         spinnerCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                presenter.setSelectedCountry(countriesList.get(position).getId());
+                presenter.setSelectedArea(countriesList.get(position).getId());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });*/
+
+        AdapterCitySpinner adapterCitySpinner = new AdapterCitySpinner(this, 0, citiesList);
+        citiesSpinner.setAdapter(adapterCitySpinner);
+
+        citiesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setupAreasSpinner(citiesList.get(position).getAreas());
+                selectedCityId = citiesList.get(position).getId();
             }
 
             @Override
@@ -121,6 +150,28 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
             }
         });
 
+    }
+
+
+    private void setupAreasSpinner(List<ModelArea> list) {
+
+        AdapterAreaSpinner adapterAreaSpinner = new AdapterAreaSpinner(this, 0, list);
+        areasSpinner.setAdapter(adapterAreaSpinner);
+
+
+        areasSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(getActivity(), list.get(position).getName(), Toast.LENGTH_SHORT).show();
+                selectedAreaId = list.get(position).getId();
+                presenter.setSelectedArea(list.get(position).getId());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -142,7 +193,7 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
         {
             AlertDialog.Builder builder;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+                builder = new AlertDialog.Builder(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar);
             } else {
                 builder = new AlertDialog.Builder(this);
             }
@@ -181,7 +232,7 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
         {
             AlertDialog.Builder builder;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
+                builder = new AlertDialog.Builder(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar);
             } else {
                 builder = new AlertDialog.Builder(this);
             }
@@ -203,18 +254,17 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
                     .setNegativeButton(R.string.update_litter, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            presenter.loadCountriesList();
+                            presenter.loadCitiesList();
                         }
                     })
                     .setCancelable(false)
 
-                    .setIcon(android.R.drawable.ic_dialog_alert)
 
                     .show();
         }
 
         else
-            presenter.loadCountriesList();
+            presenter.loadCitiesList();
 
     }
 

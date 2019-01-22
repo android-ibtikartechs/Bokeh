@@ -1,9 +1,6 @@
 package com.ibtikar.app.bokeh.ui.fragments.dialog_buy_options;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -11,7 +8,6 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,20 +18,18 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.DataManager;
-import com.ibtikar.app.bokeh.data.StaticValues;
-import com.ibtikar.app.bokeh.data.adapters.AdapterAreaSpinner;
 import com.ibtikar.app.bokeh.data.adapters.AdapterCitySpinner;
+import com.ibtikar.app.bokeh.data.adapters.AdapterAreaSpinner;
 import com.ibtikar.app.bokeh.data.models.CartFragmentRefreshTrigger;
-import com.ibtikar.app.bokeh.data.models.ModelArea;
 import com.ibtikar.app.bokeh.data.models.ModelCity;
-import com.ibtikar.app.bokeh.ui.activities.registration.RegistrationActivity;
-import com.ibtikar.app.bokeh.ui.fragments.cart.CartPresenter;
+import com.ibtikar.app.bokeh.data.models.ModelArea;
 import com.ibtikar.app.bokeh.ui.fragments.dialog_after_add_to_cart.DialogAfterBuyFragment;
+import com.jakewharton.rxbinding.widget.RxTextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,6 +49,8 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
     @BindView(R.id.btnClose)
     ImageView btnClose;
 
+    @BindView(R.id.tv_alert_address_empty)
+    TextView tvAlertAddressEmpty;
 
 
     @BindView(R.id.btnApply)
@@ -157,10 +153,29 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
             @Override
             public void onClick(View v) {
                 //presenter.submitAndAddItem();
-                presenter.submitAndAddItem(deliveryOrPickup, selectedAreaId, selectedCityId, editTextAddress.getText().toString(), selectedDate, selectedTime);
 
+                RxTextView.textChanges(editTextAddress).subscribe(text -> {
+                    ((MvpApp) getActivity().getApplication())
+                            .bus()
+                            .send(new String(text.toString()));
+
+                    if (text.toString().isEmpty())
+                        tvAlertAddressEmpty.setVisibility(View.VISIBLE);
+                    else
+                        tvAlertAddressEmpty.setVisibility(View.GONE);
+                });
+
+                if (editTextAddress.getText().toString().isEmpty())
+                    tvAlertAddressEmpty.setVisibility(View.VISIBLE);
+                else {
+                    tvAlertAddressEmpty.setVisibility(View.GONE);
+                    presenter.submitAndAddItem(deliveryOrPickup, selectedAreaId, selectedCityId, editTextAddress.getText().toString(), selectedDate, selectedTime);
+                }
             }
         });
+
+
+
 
 
 
@@ -219,38 +234,38 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
     }
 
     private void setupAreasSpinner() {
-        List<ModelArea> list = new ArrayList<>();
-        List<ModelCity> cairoCities = new ArrayList<>();
+        List<ModelCity> list = new ArrayList<>();
+        List<ModelArea> cairoCities = new ArrayList<>();
 
-        cairoCities.add(new ModelCity(1, "Nasr City"));
-        cairoCities.add(new ModelCity(2, "El-Manial"));
-        cairoCities.add(new ModelCity(3, "Alf Maskan"));
-
-
-        List<ModelCity> gizaCities = new ArrayList<>();
-
-        gizaCities.add(new ModelCity(1, "6th of October"));
-        gizaCities.add(new ModelCity(2, "Maady"));
-        gizaCities.add(new ModelCity(3, "Mohandseen"));
+        cairoCities.add(new ModelArea(1, "Nasr City"));
+        cairoCities.add(new ModelArea(2, "El-Manial"));
+        cairoCities.add(new ModelArea(3, "Alf Maskan"));
 
 
-        List<ModelCity> alexandriaCities = new ArrayList<>();
+        List<ModelArea> gizaCities = new ArrayList<>();
 
-        alexandriaCities.add(new ModelCity(1, "El-Agamy"));
-        alexandriaCities.add(new ModelCity(2, "Sedy Beshr"));
-        alexandriaCities.add(new ModelCity(3, "Al-Asafra"));
+        gizaCities.add(new ModelArea(1, "6th of October"));
+        gizaCities.add(new ModelArea(2, "Maady"));
+        gizaCities.add(new ModelArea(3, "Mohandseen"));
 
-        list.add(new ModelArea(1, "Cairo", cairoCities));
-        list.add(new ModelArea(2, "Giza", gizaCities));
-        list.add(new ModelArea(3, "Alexandria", alexandriaCities));
 
-        AdapterAreaSpinner adapterAreaSpinner = new AdapterAreaSpinner(getContext(), 0, list);
+        List<ModelArea> alexandriaCities = new ArrayList<>();
+
+        alexandriaCities.add(new ModelArea(1, "El-Agamy"));
+        alexandriaCities.add(new ModelArea(2, "Sedy Beshr"));
+        alexandriaCities.add(new ModelArea(3, "Al-Asafra"));
+
+        list.add(new ModelCity(1, "Cairo", cairoCities));
+        list.add(new ModelCity(2, "Giza", gizaCities));
+        list.add(new ModelCity(3, "Alexandria", alexandriaCities));
+
+        AdapterCitySpinner adapterAreaSpinner = new AdapterCitySpinner(getContext(), 0, list);
         areaSpinner.setAdapter(adapterAreaSpinner);
 
         areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setupCitiesSpinner(list.get(position).getCities());
+                setupCitiesSpinner(list.get(position).getAreas());
 
             }
 
@@ -261,10 +276,10 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         });
     }
 
-    private void setupCitiesSpinner(List<ModelCity> list) {
+    private void setupCitiesSpinner(List<ModelArea> list) {
 
-        AdapterCitySpinner adapterCitySpinner = new AdapterCitySpinner(getContext(), 0, list);
-        citySpinner.setAdapter(adapterCitySpinner);
+        AdapterAreaSpinner adapterAreaSpinner = new AdapterAreaSpinner(getContext(), 0, list);
+        citySpinner.setAdapter(adapterAreaSpinner);
 
 
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -355,24 +370,24 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
     }
 
     @Override
-    public void showAreaListSpinner(List<ModelArea> list) {
+    public void showAreaListSpinner(List<ModelCity> list) {
 
     }
 
     @Override
-    public void showCityListSpinner(List<ModelCity> list) {
+    public void showCityListSpinner(List<ModelArea> list) {
 
     }
 
     @Override
-    public void setaupAreasSpinner(List<ModelArea> list) {
-        AdapterAreaSpinner adapterAreaSpinner = new AdapterAreaSpinner(getContext(), 0, list);
-        areaSpinner.setAdapter(adapterAreaSpinner);
+    public void setaupAreasSpinner(List<ModelCity> list) {
+        AdapterCitySpinner adapterCitySpinner = new AdapterCitySpinner(getContext(), 0, list);
+        areaSpinner.setAdapter(adapterCitySpinner);
 
         areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                setupCitiesSpinner(list.get(position).getCities());
+                setupCitiesSpinner(list.get(position).getAreas());
                 selectedAreaId = list.get(position).getId();
             }
 

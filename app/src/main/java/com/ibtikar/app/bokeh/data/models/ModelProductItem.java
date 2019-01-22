@@ -35,7 +35,7 @@ public class ModelProductItem {
     private String details;
     @SerializedName("Cities")
     @Expose
-    private List<ModelArea> Cities = null;
+    private List<ModelCity> Cities = null;
     @SerializedName("hasoffer")
     @Expose
     private Boolean hasoffer;
@@ -105,7 +105,7 @@ public class ModelProductItem {
      * @param sellername
      * @param offerStartTime
      */
-    public ModelProductItem(Integer id, String name, String image, Integer sellerid, String sellername, Integer categoryid, String category, String details,List<ModelArea> Cities, Boolean hasoffer, String offerImage, Integer price, Integer oprice, String offerStartDate, String offerStartTime, String offerEndDate, String offerEndTime, String discountPercentage, Boolean isSameDayDelivery, Boolean isLiked, List<GalleryProductImage> gallery, String createdAt) {
+    public ModelProductItem(Integer id, String name, String image, Integer sellerid, String sellername, Integer categoryid, String category, String details, List<ModelCity> Cities, Boolean hasoffer, String offerImage, Integer price, Integer oprice, String offerStartDate, String offerStartTime, String offerEndDate, String offerEndTime, String discountPercentage, Boolean isSameDayDelivery, Boolean isLiked, List<GalleryProductImage> gallery, String createdAt) {
         super();
         this.id = id;
         this.name = name;
@@ -131,11 +131,11 @@ public class ModelProductItem {
         this.Cities = Cities;
     }
 
-    public List<ModelArea> getCities() {
+    public List<ModelCity> getCities() {
         return Cities;
     }
 
-    public void setCities(List<ModelArea> cities) {
+    public void setCities(List<ModelCity> cities) {
         Cities = cities;
     }
 

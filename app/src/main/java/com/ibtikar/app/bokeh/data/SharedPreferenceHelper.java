@@ -97,7 +97,7 @@ public class SharedPreferenceHelper {
 
 
 
-    public void setCountryId(int countryId)
+    public void setAreaId(int countryId)
     {
         mSharedPreferences.edit().putInt(KEY_COUNTRY_ID, countryId).apply();
     }
@@ -107,7 +107,7 @@ public class SharedPreferenceHelper {
         return mSharedPreferences.getBoolean(KEY_IS_USER_LOGED_IN,false);
     }
 
-    public int getCountryId()
+    public int getAreaId()
     {
         return mSharedPreferences.getInt(KEY_COUNTRY_ID,64);
     }

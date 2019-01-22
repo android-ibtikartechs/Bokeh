@@ -5,6 +5,7 @@ import com.ibtikar.app.bokeh.data.models.responses.ResponseCartDetails;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCategoriesModel;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCheckStatusUpdate;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseChecout;
+import com.ibtikar.app.bokeh.data.models.responses.ResponseCitiesList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseCountriesList;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseDecreaseCartItemQuantity;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseDeleteCartItem;
@@ -43,6 +44,9 @@ public interface GetDataService {
 
     @GET("/rcountries")
     Call<ResponseCountriesList> getCountriesList();
+
+    @GET("/rcities")
+    Call<ResponseCitiesList> getCitiesList();
 
     @GET("/sellers/{country_id}")
     Call<ResponseShopsList> getShopsList(@Path("country_id") Integer countryId);

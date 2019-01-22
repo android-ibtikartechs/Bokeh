@@ -1,14 +1,10 @@
 package com.ibtikar.app.bokeh.ui.fragments.shops;
 
 import com.ibtikar.app.bokeh.data.DataManager;
-import com.ibtikar.app.bokeh.data.models.ModelShopItem;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseShopsList;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
 import com.ibtikar.app.bokeh.utils.retrofit.GetDataService;
 import com.ibtikar.app.bokeh.utils.retrofit.RetrofitClientInstance;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +23,7 @@ public class ShopsPresenter <V extends ShopsMvpView> extends BasePresenter<V> im
         getMvpView().showLoadingView();
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<ResponseShopsList> call = null;
-        call = service.getShopsList(getDataManager().getCountryId());
+        call = service.getShopsList(getDataManager().getAreaId());
         call.enqueue(new Callback<ResponseShopsList>() {
             @Override
             public void onResponse(Call<ResponseShopsList> call, Response<ResponseShopsList> response) {

@@ -1,8 +1,6 @@
 package com.ibtikar.app.bokeh.data;
 
-import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.data.db_helper.SQLiteHandler;
-import com.ibtikar.app.bokeh.utils.RxBus;
 
 public class DataManager {
     private SharedPreferenceHelper sharedPrefsHelper;
@@ -40,14 +38,14 @@ public class DataManager {
         //passNewCartCount(getCartItemsCount());
     }
 
-    public void setCountryId(int countryId)
+    public void setAreaId(int areaId)
     {
-        sharedPrefsHelper.setCountryId(countryId);
+        sharedPrefsHelper.setAreaId(areaId);
     }
 
-    public Integer getCountryId()
+    public Integer getAreaId()
     {
-        return sharedPrefsHelper.getCountryId();
+        return sharedPrefsHelper.getAreaId();
     }
 
 

@@ -2,9 +2,7 @@ package com.ibtikar.app.bokeh.ui.fragments.dialog_buy_options;
 
 import android.util.Log;
 
-import com.ibtikar.app.bokeh.MvpApp;
 import com.ibtikar.app.bokeh.data.DataManager;
-import com.ibtikar.app.bokeh.data.models.ModelArea;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseAddToCart;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;

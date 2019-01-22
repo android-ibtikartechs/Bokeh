@@ -23,11 +23,11 @@ public class SearchPresenter <V extends SearchMvpView> extends BasePresenter<V> 
             call.cancel();
 
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.getSearchResultFor(getDataManager().getTokenKey(),keyword,getDataManager().getCountryId(), getDataManager().getUserId());
+        call = service.getSearchResultFor(getDataManager().getTokenKey(),keyword,getDataManager().getAreaId(), getDataManager().getUserId());
         call.enqueue(new Callback<ResponseSearchResultList>() {
             @Override
             public void onResponse(Call<ResponseSearchResultList> call, Response<ResponseSearchResultList> response) {
-                System.out.println(getDataManager().getCountryId().toString());
+                System.out.println(getDataManager().getAreaId().toString());
                 getMvpView().addMoreToSearchResultAdapter(response.body().getList());
 
             }

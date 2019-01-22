@@ -5,8 +5,6 @@ import com.ibtikar.app.bokeh.data.StaticValues;
 import com.ibtikar.app.bokeh.data.models.LocationLatLong;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
 import com.ibtikar.app.bokeh.data.models.SortByBottomSheetPassingData;
-import com.ibtikar.app.bokeh.data.models.responses.ResponseFilter;
-import com.ibtikar.app.bokeh.data.models.responses.ResponseHomeModel;
 import com.ibtikar.app.bokeh.data.models.responses.ResponseProductList;
 import com.ibtikar.app.bokeh.ui.activities.base.BasePresenter;
 import com.ibtikar.app.bokeh.utils.AscendingComparator;
@@ -35,7 +33,7 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<ResponseProductList> call = null;
         if (listType == StaticValues.CATEGORY_TYPE)
-            call = service.getProductListForCategory(categoryId,getDataManager().getCountryId(), getDataManager().getUserId());
+            call = service.getProductListForCategory(categoryId,getDataManager().getAreaId(), getDataManager().getUserId());
         else if (listType == StaticValues.SHOPS_TYPE)
             call = service.getProductListForShop(categoryId, getDataManager().getUserId());
 
