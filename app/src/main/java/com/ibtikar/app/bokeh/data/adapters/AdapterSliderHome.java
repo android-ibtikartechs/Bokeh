@@ -12,6 +12,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ibtikar.app.bokeh.R;
 import com.ibtikar.app.bokeh.data.models.ModelProductItem;
+import com.ibtikar.app.bokeh.ui.activities.main.MainActivity;
+import com.ibtikar.app.bokeh.ui.activities.product_details.ProductDetailsActivity;
+import com.ibtikar.app.bokeh.utils.RxBus;
 
 import java.util.List;
 
@@ -31,21 +34,30 @@ public class AdapterSliderHome extends PagerAdapter {
 
         View view = layoutInflater.inflate(R.layout.slider_home_layout, container, false);
         ImageView im_slider = view.findViewById(R.id.im_slider);
+        /*
         if (position == 0)
             Glide.with(context).load("https://i.imgur.com/oOtzK7F.jpg").asBitmap().into(im_slider);
         else if (position ==1)
             Glide.with(context).load("https://i.imgur.com/s9FLtEA.jpg").asBitmap().into(im_slider);
+            */
 
-        //Glide.with(context).load(products.get(position).getOfferImage()).asBitmap().into(im_slider);
+
+        Glide.with(context).load(products.get(position).getOfferImage()).asBitmap().into(im_slider);
         //im_slider.setScaleType(ImageView.ScaleType.FIT_XY);
         container.addView(view);
 
         im_slider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent intent = new Intent(context, ProductActivity.class);
+              /* Intent intent = new Intent(context, ProductDetailsActivity.class);
                 intent.putExtra("id", products.get(position).getId());
                 context.startActivity(intent); */
+
+
+                RxBus.publish(products.get(position));
+                context.startActivity(new Intent(context, ProductDetailsActivity.class));
+                ((MainActivity) context).overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+
             }
         });
 

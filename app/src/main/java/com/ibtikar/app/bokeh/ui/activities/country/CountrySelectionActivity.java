@@ -142,6 +142,7 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 setupAreasSpinner(citiesList.get(position).getAreas());
                 selectedCityId = citiesList.get(position).getId();
+                presenter.setSelectedCity(selectedCityId);
             }
 
             @Override

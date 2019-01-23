@@ -18,8 +18,10 @@ public class ModelProductItem {
     @SerializedName("image")
     @Expose
     private String image;
+
     @SerializedName("sellerid")
     @Expose
+
     private Integer sellerid;
     @SerializedName("sellername")
     @Expose
@@ -39,7 +41,7 @@ public class ModelProductItem {
     @SerializedName("hasoffer")
     @Expose
     private Boolean hasoffer;
-    @SerializedName("offerimage")
+    @SerializedName("offer_image")
     @Expose
     private String offerImage;
     @SerializedName("price")

@@ -11,7 +11,8 @@ public class SharedPreferenceHelper {
     public static final String MY_PREFS = "MY_PREFS";
     SharedPreferences mSharedPreferences;
     private static final String CART_ITEMS_COUNT = "CART_ITEMS_COUNT";
-    private static final String KEY_COUNTRY_ID = "KEY_COUNTRY_ID";
+    private static final String KEY_AREA_ID = "KEY_AREA_ID";
+    private static final String KEY_CITY_ID = "KEY_CITY_ID";
 
     private static final String KEY_TOKEN = "KEY_TOKEN";
 
@@ -97,9 +98,14 @@ public class SharedPreferenceHelper {
 
 
 
-    public void setAreaId(int countryId)
+    public void setAreaId(int areaId)
     {
-        mSharedPreferences.edit().putInt(KEY_COUNTRY_ID, countryId).apply();
+        mSharedPreferences.edit().putInt(KEY_AREA_ID, areaId).apply();
+    }
+
+    public void setCityId(int cityId)
+    {
+        mSharedPreferences.edit().putInt(KEY_CITY_ID, cityId).apply();
     }
 
     public boolean getLoginStatus()
@@ -109,7 +115,12 @@ public class SharedPreferenceHelper {
 
     public int getAreaId()
     {
-        return mSharedPreferences.getInt(KEY_COUNTRY_ID,64);
+        return mSharedPreferences.getInt(KEY_AREA_ID,64);
+    }
+
+    public int getCityId()
+    {
+        return mSharedPreferences.getInt(KEY_CITY_ID,64);
     }
 
 

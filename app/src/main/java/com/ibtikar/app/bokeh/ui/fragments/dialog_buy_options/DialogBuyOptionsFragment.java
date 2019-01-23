@@ -346,6 +346,7 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         Date startDate = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(startDate);
+        c.add(Calendar.DATE, 1);
         startDate = c.getTime();
 
         Date endDate = new Date();

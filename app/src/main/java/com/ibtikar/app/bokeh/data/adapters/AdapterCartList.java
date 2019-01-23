@@ -92,7 +92,7 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
         //itemViewHolder.tvDeliveryTime.setText(modelCartItem.getDeliveryTime());
 
         if (modelCartItem.getDelivary().getTime()==1)
-            itemViewHolder.tvDeliveryTime.setText("1:00 am - 2:00 pm");
+            itemViewHolder.tvDeliveryTime.setText("10:00 am - 2:00 pm");
 
         else
             itemViewHolder.tvDeliveryTime.setText("4:00 pm - 11:30 pm");

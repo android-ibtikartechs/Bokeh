@@ -55,6 +55,11 @@ public class CountrySelectionPresenter <V extends CountrySelectionMvpView> exten
     }
 
     @Override
+    public void setSelectedCity(int selectedCityId) {
+        getDataManager().setCityId(selectedCityId);
+    }
+
+    @Override
     public void checkUpdateStatus(int currentVersionCode) {
         getMvpView().showLoadingProgress();
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);

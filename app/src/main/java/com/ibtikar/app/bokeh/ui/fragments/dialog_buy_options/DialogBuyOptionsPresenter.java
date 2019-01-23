@@ -31,7 +31,7 @@ public class DialogBuyOptionsPresenter <V extends DialogBuyOptionsMvpView> exten
             Call<ResponseAddToCart> call;
 
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-            call = service.addToCart(getDataManager().getTokenKey(), getDataManager().getUserId(), modelProductItem.getId(), deliveryDate, deliveryTime, deliveryOrPickup, areaId, cityId, textAddress);
+            call = service.addToCart(getDataManager().getTokenKey(), getDataManager().getUserId(), modelProductItem.getId(), deliveryDate, deliveryTime, deliveryOrPickup, getDataManager().getCityId(), getDataManager().getAreaId(), textAddress);
 
             call.enqueue(new Callback<ResponseAddToCart>() {
                 @Override
