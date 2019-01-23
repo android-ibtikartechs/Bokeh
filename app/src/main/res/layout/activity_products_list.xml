@@ -127,7 +127,7 @@
 
         </RelativeLayout>
 
-        <com.ibtikar.app.bokeh.ui_utilities.CustomRecyclerView
+        <com.am.app.bouqeh.ui_utilities.CustomRecyclerView
             android:id="@+id/rv_products"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

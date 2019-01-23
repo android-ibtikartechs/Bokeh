@@ -39,7 +39,7 @@
         android:animateLayoutChanges="true"
         />
 
-    <com.ibtikar.app.bokeh.ui_utilities.NonSwipeableViewPager
+    <com.am.app.bouqeh.ui_utilities.NonSwipeableViewPager
         android:id="@+id/view_pager_main"
         android:layout_width="0dp"
         android:layout_height="0dp"
