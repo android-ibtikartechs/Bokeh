@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +67,9 @@ public class SignupFragment extends BaseFragment implements SignupMvpView {
 
     @BindView(R.id.et_country_key)
     EditText etCountryKey;
+
+    @BindView(R.id.im_btn_close)
+    ImageView btnClose;
 
     ProgressDialog progressDialog;
 
@@ -140,6 +144,15 @@ public class SignupFragment extends BaseFragment implements SignupMvpView {
                 transaction.commit();
             }
         });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+                getActivity().overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_down);
+            }
+        });
+
         super.onViewCreated(view, savedInstanceState);
     }
 

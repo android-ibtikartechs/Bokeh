@@ -8,11 +8,37 @@
     android:gravity="center"
     >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_success"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="28sp"
+            android:textColor="@color/ColorFoshiac"
+            android:text="BOUQEH"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginTop="32dp"
         android:visibility="gone"
         >
 
@@ -83,41 +109,40 @@
     </android.support.v7.widget.CardView>
 
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginTop="64dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             >
 
-            <Button
-                android:id="@+id/btn_sign_up"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/shape_rounded_button"
-                android:textColor="@color/ColorWhite"
-                android:text="sign up"
-                android:textAllCaps="false"
-                />
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                ></LinearLayout>
+
+
 
             <Button
                 android:id="@+id/btn_login"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+
                 android:background="@drawable/shape_rounded_button"
                 android:textAllCaps="false"
                 android:text="log in"
                 android:textColor="@color/ColorWhite"
+                />
+
+            <Button
+                android:id="@+id/btn_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_rounded_button"
+                android:textColor="@color/ColorWhite"
+                android:text="sign up"
+                android:textAllCaps="false"
                 />
 
         </LinearLayout>

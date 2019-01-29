@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.am.app.bouqeh.MvpApp;
@@ -44,6 +45,9 @@ public class ForgetPasswordFragment extends BaseFragment implements ForgetPasswo
 
     @BindView(R.id.btn_resend_password)
     Button btnResendPassword;
+
+    @BindView(R.id.im_btn_close)
+    ImageView btnClose;
 
     ForgetPasswordPresenter presenter;
 
@@ -99,6 +103,14 @@ public class ForgetPasswordFragment extends BaseFragment implements ForgetPasswo
             @Override
             public void onClick(View v) {
                 presenter.resendPassword(etEmail.getText().toString());
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+                //getActivity().overridePendingTransition(R.anim.slide_from_top, R.anim.slide_to_down);
             }
         });
     }

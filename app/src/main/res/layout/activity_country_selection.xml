@@ -7,13 +7,7 @@
     android:background="@color/ColorWhite"
     tools:context=".ui.activities.country.CountrySelectionActivity">
 
-    <ProgressBar
-        android:id="@+id/load_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        />
+
 
     <LinearLayout
         android:id="@+id/lout_edit"
@@ -51,11 +45,20 @@
             android:visibility="gone"
             ></LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="City"
+            android:textSize="20sp"
+            android:textColor="@color/ColorFoshiac"
+            />
+
         <Spinner
             android:id="@+id/cities_spinner"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:layout_marginTop="32dp"
+
             android:overlapAnchor="false"
 
             />
@@ -67,11 +70,19 @@
 
             ></LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Area"
+            android:textSize="20sp"
+            android:textColor="@color/ColorFoshiac"
+            />
+
         <Spinner
             android:id="@+id/areas_spinner"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:layout_marginTop="32dp"
             android:overlapAnchor="false"
 
             />
@@ -93,7 +104,7 @@
         android:layout_height="230dp"
         android:layout_alignParentBottom="true"
         android:src="@drawable/flowers_footer"
-        android:scaleType="centerCrop"
+
         android:layout_marginBottom="-30dp"
         android:alpha="0.4"
         />
@@ -114,6 +125,16 @@
         android:text="Continue"
         android:textAllCaps="false"
         android:enabled="false"
+        />
+
+    <ProgressBar
+        android:id="@+id/load_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_continue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:visibility="gone"
         />
 
 </RelativeLayout>

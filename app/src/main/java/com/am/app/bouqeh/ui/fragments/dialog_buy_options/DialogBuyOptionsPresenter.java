@@ -31,7 +31,7 @@ public class DialogBuyOptionsPresenter <V extends DialogBuyOptionsMvpView> exten
             Call<ResponseAddToCart> call;
 
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-            call = service.addToCart(getDataManager().getTokenKey(), getDataManager().getUserId(), modelProductItem.getId(), deliveryDate, deliveryTime, deliveryOrPickup, getDataManager().getCityId(), getDataManager().getAreaId(), textAddress);
+            call = service.addToCart(getDataManager().getTokenKey(), getDataManager().getUserId(), modelProductItem.getId(), deliveryDate, deliveryTime, deliveryOrPickup, areaId, cityId, textAddress);
 
             call.enqueue(new Callback<ResponseAddToCart>() {
                 @Override
@@ -85,6 +85,26 @@ public class DialogBuyOptionsPresenter <V extends DialogBuyOptionsMvpView> exten
     @Override
     public void disposeRxSubscriber() {
         disposable.dispose(); //unsubscribe
+    }
+
+    @Override
+    public int getSelectedAreaId() {
+        return getDataManager().getAreaId();
+    }
+
+    @Override
+    public int getSelectedCityId() {
+        return getDataManager().getCityId();
+    }
+
+    @Override
+    public String getSelectedAreaName() {
+        return getDataManager().getAreaName();
+    }
+
+    @Override
+    public String getSelectedCityName() {
+        return getDataManager().getCityName();
     }
 
 

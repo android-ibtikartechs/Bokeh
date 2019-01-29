@@ -128,17 +128,83 @@
                     />
 
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp"
+                        >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="City: "
+                        />
+
+                        <TextView
+                            android:id="@+id/tv_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cairo"
+                            android:textColor="@color/ColorTextGray"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Area: "
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_area"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nasr City"
+                            android:textColor="@color/ColorTextGray"
+                            />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_btn_change_city_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/ColorFoshiac"
+                        android:text="change city, area"
+                        android:layout_marginTop="4dp"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lout_spinner_city_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    >
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:visibility="gone"
+
                     >
                     <TextView
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-                        android:text="Area: "
+                        android:text="City: "
                         />
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -173,12 +239,12 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:visibility="gone"
+
                     >
                     <TextView
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-                        android:text="City: "
+                        android:text="Area: "
                         />
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -208,6 +274,7 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_alert_address_empty"

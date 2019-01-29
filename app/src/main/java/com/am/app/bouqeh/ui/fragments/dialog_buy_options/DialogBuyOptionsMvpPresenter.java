@@ -7,4 +7,11 @@ public interface DialogBuyOptionsMvpPresenter <V extends DialogBuyOptionsMvpView
     void loadAreasSpinner();
 
     void disposeRxSubscriber();
+
+    int getSelectedAreaId();
+
+    int getSelectedCityId();
+
+    String getSelectedAreaName();
+    String getSelectedCityName();
 }

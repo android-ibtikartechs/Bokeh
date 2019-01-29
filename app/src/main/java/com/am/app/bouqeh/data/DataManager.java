@@ -58,6 +58,31 @@ public class DataManager {
         return sharedPrefsHelper.getCityId();
     }
 
+
+
+
+    public void setAreaName(String areaName)
+    {
+        sharedPrefsHelper.setAreaName(areaName);
+    }
+
+    public String getAreaName()
+    {
+        return sharedPrefsHelper.getAreaName();
+    }
+
+    public void setCityName(String cityName)
+    {
+        sharedPrefsHelper.setCityName(cityName);
+    }
+
+    public String getCityName()
+    {
+        return sharedPrefsHelper.getCityName();
+    }
+
+
+
     public void setUserName(String userName) {
         sharedPrefsHelper.setUserName(userName);
     }

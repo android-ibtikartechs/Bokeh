@@ -142,7 +142,7 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 setupAreasSpinner(citiesList.get(position).getAreas());
                 selectedCityId = citiesList.get(position).getId();
-                presenter.setSelectedCity(selectedCityId);
+                presenter.setSelectedCity(selectedCityId, citiesList.get(position).getName());
             }
 
             @Override
@@ -165,7 +165,7 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getActivity(), list.get(position).getName(), Toast.LENGTH_SHORT).show();
                 selectedAreaId = list.get(position).getId();
-                presenter.setSelectedArea(list.get(position).getId());
+                presenter.setSelectedArea(list.get(position).getId(), list.get(position).getName());
             }
 
             @Override

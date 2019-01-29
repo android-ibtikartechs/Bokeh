@@ -89,6 +89,20 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
     @BindView(R.id.et_text_address)
     EditText editTextAddress;
 
+    @BindView(R.id.tv_city)
+    TextView tvCity;
+
+    @BindView(R.id.tv_area)
+    TextView tvArea;
+
+    @BindView(R.id.tv_btn_change_city_area)
+    TextView btnChangeCityArea;
+
+    @BindView(R.id.lout_spinner_city_area)
+    LinearLayout loutSpinnerCityArea;
+
+    private boolean isCityAreaChanged;
+
     DialogBuyOptionsPresenter presenter;
 
     Handler mHandler;
@@ -131,6 +145,13 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
             progressBar.setVisibility(View.GONE);
         }
 
+        btnChangeCityArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeCityArea();
+            }
+        });
+
         DataManager dataManager = ((MvpApp) getActivity().getApplication()).getDataManager();
         presenter = new DialogBuyOptionsPresenter(dataManager);
         presenter.onAttach(this);
@@ -149,6 +170,13 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         });
 
         setupTabs();
+
+        selectedCityId = presenter.getSelectedAreaId();
+        selectedAreaId = presenter.getSelectedCityId();
+
+        tvArea.setText(presenter.getSelectedAreaName());
+        tvCity.setText(presenter.getSelectedCityName());
+
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,6 +214,11 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         if (behavior != null && behavior instanceof BottomSheetBehavior) {
             ((BottomSheetBehavior) behavior).setBottomSheetCallback(mBottomSheetBehaviorCallback);
         }
+    }
+
+    private void changeCityArea() {
+        loutSpinnerCityArea.setVisibility(View.VISIBLE);
+        isCityAreaChanged = true;
     }
 
     private void setupRadioGroupTime()
@@ -282,11 +315,13 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         citySpinner.setAdapter(adapterAreaSpinner);
 
 
+
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(getActivity(), list.get(position).getName(), Toast.LENGTH_SHORT).show();
                 selectedCityId = list.get(position).getId();
+                tvArea.setText(list.get(position).getName());
             }
 
             @Override
@@ -294,6 +329,30 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
 
             }
         });
+
+        citySpinner.setSelection(getPositionAreaById(list, presenter.getSelectedAreaId()));
+    }
+
+    private int getPositionAreaById(List<ModelArea> list, int selectedAreaId) {
+        for (int i = 0; i<list.size(); i++)
+        {
+            if (selectedAreaId == list.get(i).getId()) {
+                return i;
+            }
+        }
+        return 0;
+
+    }
+
+    private int getPositionCityById(List<ModelCity> list, int selectedAreaId) {
+        for (int i = 0; i<list.size(); i++)
+        {
+            if (selectedAreaId == list.get(i).getId()) {
+                return i;
+            }
+        }
+        return 0;
+
     }
 
 
@@ -385,11 +444,14 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
         AdapterCitySpinner adapterCitySpinner = new AdapterCitySpinner(getContext(), 0, list);
         areaSpinner.setAdapter(adapterCitySpinner);
 
+
+
         areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 setupCitiesSpinner(list.get(position).getAreas());
                 selectedAreaId = list.get(position).getId();
+                tvCity.setText(list.get(position).getName());
             }
 
             @Override
@@ -397,6 +459,7 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
 
             }
         });
+        areaSpinner.setSelection(getPositionCityById(list, presenter.getSelectedCityId()));
     }
 
     @Override

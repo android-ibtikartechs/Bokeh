@@ -50,13 +50,15 @@ public class CountrySelectionPresenter <V extends CountrySelectionMvpView> exten
     }
 
     @Override
-    public void setSelectedArea(int selectedCountryId) {
+    public void setSelectedArea(int selectedCountryId, String selectedAreaName) {
         getDataManager().setAreaId(selectedCountryId);
+        getDataManager().setAreaName(selectedAreaName);
     }
 
     @Override
-    public void setSelectedCity(int selectedCityId) {
+    public void setSelectedCity(int selectedCityId, String selectedCityName) {
         getDataManager().setCityId(selectedCityId);
+        getDataManager().setCityName(selectedCityName);
     }
 
     @Override
