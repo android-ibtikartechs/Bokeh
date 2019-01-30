@@ -39,6 +39,10 @@ public interface GetDataService {
     @GET("/occasion_products/{product_id}/{country_id}/{user}")
     Call<ResponseProductList> getProductListForCategory(@Path("product_id")Integer id, @Path("country_id") Integer countryId, @Path("user") Integer userId);
 
+    @GET("/occasion_products/{product_id}/{country_id}/{user}")
+    Call<ResponseProductList> getProductListForCategoryPagged(@Path("product_id")Integer id, @Path("country_id") Integer countryId, @Path("user") Integer userId, @Query("p") int page);
+
+
     @POST("/productslike")
     Call<ResponseSearchResultList> getSearchResultFor(@Query("_token") String token, @Query("keyword") String keyWord, @Query("country") Integer countryId, @Query("user") int userId);
 
@@ -53,6 +57,9 @@ public interface GetDataService {
 
     @GET("/seller_products/{seller_id}/{user_id}")
     Call<ResponseProductList> getProductListForShop(@Path("seller_id") Integer sellerId, @Path("user_id") int userId);
+
+    @GET("/seller_products/{seller_id}/{user_id}")
+    Call<ResponseProductList> getProductListForShopPagged(@Path("seller_id") Integer sellerId, @Path("user_id") int userId, @Query("p") int page);
 
 
     @POST("/addtocart")

@@ -161,7 +161,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
                 isLoading = true;
                 currentPage += 1;
 
-                presenter.loadNextPage(currentPage);
+                presenter.loadNextPage(currentPage, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0),false,null, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
             }
 
             @Override

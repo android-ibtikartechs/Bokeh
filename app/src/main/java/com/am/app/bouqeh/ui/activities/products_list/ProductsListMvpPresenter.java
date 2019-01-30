@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ProductsListMvpPresenter <V extends ProductsListMvpView> extends MvpPresenter<V> {
     void loadFirstPage(LocationLatLong locationLatLong, Integer categoryId, boolean isSort, SortByBottomSheetPassingData sortByBottomSheetPassingData, int listType);
-    void loadNextPage(int currentPage);
+    void loadNextPage(int currentPage, Integer categoryId, boolean isSort, SortByBottomSheetPassingData sortByBottomSheetPassingData, int listType);
 
     void loadFilteredData(List<ModelProductItem> list, int priceFrom, int priceTo);
 }
