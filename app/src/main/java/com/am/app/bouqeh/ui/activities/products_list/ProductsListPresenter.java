@@ -32,10 +32,19 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
         getMvpView().showLoadingView();
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<ResponseProductList> call = null;
-        if (listType == StaticValues.CATEGORY_TYPE)
-            call = service.getProductListForCategoryPagged(categoryId,getDataManager().getAreaId(), getDataManager().getUserId(), 1);
-        else if (listType == StaticValues.SHOPS_TYPE)
-            call = service.getProductListForShopPagged(categoryId, getDataManager().getUserId(),1);
+        if (listType == StaticValues.CATEGORY_TYPE) {
+            if (!isSort)
+                call = service.getProductListForCategoryPagged(categoryId, getDataManager().getAreaId(), getDataManager().getUserId(), 2, 1, 1);
+            else
+                call = service.getProductListForCategoryPagged(categoryId, getDataManager().getAreaId(), getDataManager().getUserId(), sortByBottomSheetPassingData.getSortByType(), sortByBottomSheetPassingData.getAscendingDeascending(), 1);
+        }
+
+        else if (listType == StaticValues.SHOPS_TYPE) {
+            if(!isSort)
+                call = service.getProductListForShopPagged(categoryId, getDataManager().getUserId(),2, 1, 1);
+            else
+                call = service.getProductListForShopPagged(categoryId, getDataManager().getUserId(),sortByBottomSheetPassingData.getSortByType(), sortByBottomSheetPassingData.getAscendingDeascending(), 1);
+        }
 
         call.enqueue(new Callback<ResponseProductList>() {
             @Override
@@ -203,10 +212,18 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<ResponseProductList> call = null;
         if (listType == StaticValues.CATEGORY_TYPE)
-            call = service.getProductListForCategoryPagged(categoryId,getDataManager().getAreaId(), getDataManager().getUserId(), currentPage);
-        else if (listType == StaticValues.SHOPS_TYPE)
-            call = service.getProductListForShopPagged(categoryId, getDataManager().getUserId(), currentPage);
-
+        {
+            if (!isSort)
+                call = service.getProductListForCategoryPagged(categoryId, getDataManager().getAreaId(), getDataManager().getUserId(), 2, 1, currentPage);
+            else
+                call = service.getProductListForCategoryPagged(categoryId, getDataManager().getAreaId(), getDataManager().getUserId(), sortByBottomSheetPassingData.getSortByType(), sortByBottomSheetPassingData.getAscendingDeascending(), currentPage);
+        }
+        else if (listType == StaticValues.SHOPS_TYPE) {
+            if(!isSort)
+                call = service.getProductListForShopPagged(categoryId, getDataManager().getUserId(),2, 1, currentPage);
+            else
+                call = service.getProductListForShopPagged(categoryId, getDataManager().getUserId(),sortByBottomSheetPassingData.getSortByType(), sortByBottomSheetPassingData.getAscendingDeascending(), currentPage);
+        }
         call.enqueue(new Callback<ResponseProductList>() {
             @Override
             public void onResponse(Call<ResponseProductList> call, Response<ResponseProductList> response) {

@@ -65,6 +65,9 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
 
     private static final int PAGE_START = 1;
 
+    SortByBottomSheetPassingData mSortByBottomSheetPassingData;
+    boolean isSorteRequired;
+
     private boolean isLoading = false;
     private boolean isLastPage = false;
     // limiting to 5 for this tutorial, since total pages in actual API is very large. Feel free to modify.
@@ -161,7 +164,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
                 isLoading = true;
                 currentPage += 1;
 
-                presenter.loadNextPage(currentPage, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0),false,null, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
+                presenter.loadNextPage(currentPage, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0),isSorteRequired,mSortByBottomSheetPassingData, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
             }
 
             @Override
@@ -315,6 +318,9 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     @Override
     public void onApplyClickListener(SortByBottomSheetPassingData sortByBottomSheetPassingData) {
         adapterProductsList.clear();
+        currentPage=1;
+        mSortByBottomSheetPassingData = sortByBottomSheetPassingData;
+        isSorteRequired = true;
         presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0), true, sortByBottomSheetPassingData, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
     }
 

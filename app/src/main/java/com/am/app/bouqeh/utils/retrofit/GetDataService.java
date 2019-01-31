@@ -39,8 +39,8 @@ public interface GetDataService {
     @GET("/occasion_products/{product_id}/{country_id}/{user}")
     Call<ResponseProductList> getProductListForCategory(@Path("product_id")Integer id, @Path("country_id") Integer countryId, @Path("user") Integer userId);
 
-    @GET("/occasion_products/{product_id}/{country_id}/{user}")
-    Call<ResponseProductList> getProductListForCategoryPagged(@Path("product_id")Integer id, @Path("country_id") Integer countryId, @Path("user") Integer userId, @Query("p") int page);
+    @GET("/occasion_products/{product_id}/{country_id}/{type_order}/{order}/{user}")
+    Call<ResponseProductList> getProductListForCategoryPagged(@Path("product_id")Integer id, @Path("country_id") Integer countryId, @Path("user") Integer userId, @Path("type_order") Integer typeOrder, @Path("order") Integer order,  @Query("p") int page);
 
 
     @POST("/productslike")
@@ -58,8 +58,8 @@ public interface GetDataService {
     @GET("/seller_products/{seller_id}/{user_id}")
     Call<ResponseProductList> getProductListForShop(@Path("seller_id") Integer sellerId, @Path("user_id") int userId);
 
-    @GET("/seller_products/{seller_id}/{user_id}")
-    Call<ResponseProductList> getProductListForShopPagged(@Path("seller_id") Integer sellerId, @Path("user_id") int userId, @Query("p") int page);
+    @GET("/seller_products/{seller_id}/{type_order}/{order}/{user}")
+    Call<ResponseProductList> getProductListForShopPagged(@Path("seller_id") Integer sellerId, @Path("user_id") int userId, @Path("type_order") Integer typeOrder, @Path("order") Integer order, @Query("p") int page);
 
 
     @POST("/addtocart")
