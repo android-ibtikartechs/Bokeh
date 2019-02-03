@@ -19,6 +19,10 @@
         <activity android:name="com.am.app.bouqeh.ui.activities.Success.SuccessActivity"></activity>
         <activity android:name="com.am.app.bouqeh.ui.activities.registration.RegistrationActivity" />
         <activity android:name="com.am.app.bouqeh.ui.activities.main.MainActivity" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="9182ac9fcca74fbffcbcf785b904b8371de95196"
+            />
         <activity android:name="com.am.app.bouqeh.ui.activities.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

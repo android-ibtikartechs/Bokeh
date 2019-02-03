@@ -300,6 +300,19 @@
                     android:layout_marginTop="4dp"
                     />
 
+                <EditText
+                    android:id="@+id/et_text_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@drawable/shape_tab_date_black"
+                    android:textCursorDrawable="@null"
+                    android:hint="Signature (optional)"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:maxLines="1"
+                    android:layout_marginTop="4dp"
+                    />
+
 
             </LinearLayout>
 

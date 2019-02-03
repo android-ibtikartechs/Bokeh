@@ -33,9 +33,11 @@ import com.am.app.bouqeh.ui.fragments.home.HomeFragment;
 import com.am.app.bouqeh.ui.fragments.shops.ShopsFragment;
 import com.am.app.bouqeh.ui_utilities.NonSwipeableViewPager;
 import com.am.app.bouqeh.ui_utilities.ViewPagerAdapter;
+import com.crashlytics.android.Crashlytics;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.fabric.sdk.android.Fabric;
 import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseActivity implements MainMvpView {
@@ -69,6 +71,9 @@ public class MainActivity extends BaseActivity implements MainMvpView {
         setContentView(R.layout.activity_main);
         mHandler = new Handler(Looper.getMainLooper());
         ButterKnife.bind(this);
+        Fabric.with(this, new Crashlytics());
+
+
 
         //toolbar.setLogo(R.drawable.logo_toolbar);
 

@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -319,8 +320,10 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     public void onApplyClickListener(SortByBottomSheetPassingData sortByBottomSheetPassingData) {
         adapterProductsList.clear();
         currentPage=1;
+        isLastPage = false;
         mSortByBottomSheetPassingData = sortByBottomSheetPassingData;
         isSorteRequired = true;
+        Log.d("", "onApplyClickListener: "+ currentPage);
         presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0), true, sortByBottomSheetPassingData, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
     }
 

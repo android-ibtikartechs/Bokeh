@@ -71,6 +71,9 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
     @BindView(R.id.rbtn_Delivery)
     RadioButton rbtnDelivery;
 
+    @BindView(R.id.et_text_message)
+    EditText etSignature;
+
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
@@ -197,7 +200,7 @@ public class DialogBuyOptionsFragment extends BottomSheetDialogFragment implemen
                     tvAlertAddressEmpty.setVisibility(View.VISIBLE);
                 else {
                     tvAlertAddressEmpty.setVisibility(View.GONE);
-                    presenter.submitAndAddItem(deliveryOrPickup, selectedAreaId, selectedCityId, editTextAddress.getText().toString(), selectedDate, selectedTime);
+                    presenter.submitAndAddItem(deliveryOrPickup, selectedAreaId, selectedCityId, editTextAddress.getText().toString(), selectedDate, selectedTime, etSignature.getText().toString());
                 }
             }
         });

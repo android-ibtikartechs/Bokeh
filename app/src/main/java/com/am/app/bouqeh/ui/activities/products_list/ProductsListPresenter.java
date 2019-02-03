@@ -1,5 +1,7 @@
 package com.am.app.bouqeh.ui.activities.products_list;
 
+import android.util.Log;
+
 import com.am.app.bouqeh.data.DataManager;
 import com.am.app.bouqeh.data.StaticValues;
 import com.am.app.bouqeh.data.models.LocationLatLong;
@@ -57,6 +59,7 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
                         getMvpView().showEmptyView(listType);
                     else
                     {
+                       /*
                         if (isSort) {
                         if (sortByBottomSheetPassingData.getAscendingDeascending() == StaticValues.SORT_ASCEND) {
                             if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_TITLE) {
@@ -85,6 +88,7 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
                             }
                         }
                     }
+                    */
 
                     getMvpView().addMoreToAdapter(list);
                         getMvpView().addLoadingFooter();
@@ -209,6 +213,8 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
 
     @Override
     public void loadNextPage(int currentPage, Integer categoryId, boolean isSort, SortByBottomSheetPassingData sortByBottomSheetPassingData, int listType) {
+        Log.d("", "loadNextPage: " + "current page: " + currentPage);
+
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<ResponseProductList> call = null;
         if (listType == StaticValues.CATEGORY_TYPE)
@@ -241,6 +247,7 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
                         getMvpView().setLastPageTrue();
                     else
                     {
+                        /*
                         if (isSort) {
                             if (sortByBottomSheetPassingData.getAscendingDeascending() == StaticValues.SORT_ASCEND) {
                                 if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_TITLE) {
@@ -269,6 +276,7 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
                                 }
                             }
                         }
+                        */
 
                         getMvpView().addMoreToAdapter(list);
                         getMvpView().addLoadingFooter();

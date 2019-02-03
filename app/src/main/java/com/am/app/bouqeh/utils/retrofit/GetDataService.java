@@ -58,12 +58,12 @@ public interface GetDataService {
     @GET("/seller_products/{seller_id}/{user_id}")
     Call<ResponseProductList> getProductListForShop(@Path("seller_id") Integer sellerId, @Path("user_id") int userId);
 
-    @GET("/seller_products/{seller_id}/{type_order}/{order}/{user}")
+    @GET("/seller_products/{seller_id}/{type_order}/{order}/{user_id}")
     Call<ResponseProductList> getProductListForShopPagged(@Path("seller_id") Integer sellerId, @Path("user_id") int userId, @Path("type_order") Integer typeOrder, @Path("order") Integer order, @Query("p") int page);
 
 
     @POST("/addtocart")
-    Call<ResponseAddToCart> addToCart(@Query("_token") String token, @Query("user") Integer userId, @Query("product") Integer productId, @Query("pdate") String deliveryDate, @Query("ptime") Integer deliveryTime, @Query("delivary") Integer deliveryOrPickup, @Query("pcity") Integer cityId, @Query("parea") Integer parea, @Query("paddress") String adderss);
+    Call<ResponseAddToCart> addToCart(@Query("_token") String token, @Query("user") Integer userId, @Query("product") Integer productId, @Query("pdate") String deliveryDate, @Query("ptime") Integer deliveryTime, @Query("delivary") Integer deliveryOrPickup, @Query("pcity") Integer cityId, @Query("parea") Integer parea, @Query("paddress") String adderss, @Query("psignature") String signature);
 
 
     @POST("/cartitems")
