@@ -112,14 +112,18 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
 
         Call<ResponseCartDetails> call;
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        Log.d("", "loadCartList: " + getDataManager().getTokenKey());
+        System.out.println("loadCartList: " + getDataManager().getTokenKey());
+        System.out.println("userId= " + getDataManager().getUserId());
         call = service.getCartDetails(getDataManager().getTokenKey(), getDataManager().getUserId());
 
         call.enqueue(new Callback<ResponseCartDetails>() {
             @Override
             public void onResponse(Call<ResponseCartDetails> call, Response<ResponseCartDetails> response) {
+                System.out.println( "onResponse: " + response.body().toString());
                 if (response.body().getList().size() > 0) {
                     getMvpView().showContent();
-                    Log.d("", "onResponse: " + response.body());
+
                     //System.out.println(response.body().getOrders().get(0).getProducts().get(0).getProductname());
                     getMvpView().addMoreToCartListAdapter(response.body().getList());
                     getMvpView().addMoreToReceiptList(response.body().getOrders());
@@ -132,6 +136,7 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
             @Override
             public void onFailure(Call<ResponseCartDetails> call, Throwable t) {
                 getMvpView().showErrorConnectionView();
+                System.out.println( "error: " + t.toString());
             }
         });
 

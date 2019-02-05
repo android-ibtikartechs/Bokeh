@@ -310,4 +310,50 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
         getMvpView().addMoreToAdapter(filteredList);
 
     }
+
+    @Override
+    public void loadFilteredDataFirstPage(Integer categoryId, int listType, int priceFrom, int priceTo) {
+
+        /*
+
+        getMvpView().showLoadingView();
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        Call<ResponseProductList> call = null;
+        if (listType == StaticValues.CATEGORY_TYPE) {
+            call = service.getProductListForCategoryPagged(categoryId, getDataManager().getAreaId(), getDataManager().getUserId(), sortByBottomSheetPassingData.getSortByType(), sortByBottomSheetPassingData.getAscendingDeascending(), 1);
+        }
+
+        else if (listType == StaticValues.SHOPS_TYPE) {
+                call = service.getProductListForShopPagged(categoryId, getDataManager().getUserId(),sortByBottomSheetPassingData.getSortByType(), sortByBottomSheetPassingData.getAscendingDeascending(), 1);
+        }
+
+        call.enqueue(new Callback<ResponseProductList>() {
+            @Override
+            public void onResponse(Call<ResponseProductList> call, Response<ResponseProductList> response) {
+                if (response.body().getStatus()) {
+                    AscendingComparator ascendingComparator;
+                    DeascendingComparator deascendingComparator;
+                    List<ModelProductItem> list = response.body().getProducts();
+                    if (list.size() == 0)
+                        getMvpView().showEmptyView(listType);
+                    else
+                    {
+
+                        getMvpView().addMoreToAdapter(list);
+                        getMvpView().addLoadingFooter();
+                        getMvpView().showContent();
+                    }
+                }
+                else
+                    getMvpView().showErrorConnectionView();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseProductList> call, Throwable t) {
+                getMvpView().showErrorConnectionView();
+            }
+        });
+*/
+
+    }
 }

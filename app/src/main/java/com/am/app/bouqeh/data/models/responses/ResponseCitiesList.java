@@ -14,6 +14,9 @@ public class ResponseCitiesList {
     @SerializedName("List")
     @Expose
     private List<ModelCity> list = null;
+    @SerializedName("token")
+    @Expose
+    private String token;
 
     /**
      * No args constructor for use in serialization
@@ -27,10 +30,19 @@ public class ResponseCitiesList {
      * @param status
      * @param list
      */
-    public ResponseCitiesList(Boolean status, List list) {
+    public ResponseCitiesList(Boolean status, List list, String token) {
         super();
         this.status = status;
         this.list = list;
+        this.token = token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
     }
 
     public Boolean getStatus() {

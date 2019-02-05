@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -29,6 +30,7 @@ import com.am.app.bouqeh.data.adapters.AdapterSliderHome;
 import com.am.app.bouqeh.data.models.OccasionItemModel;
 import com.am.app.bouqeh.data.models.ModelProductItem;
 import com.am.app.bouqeh.data.models.ModelShopItem;
+import com.am.app.bouqeh.ui.activities.message_to_admin.MessageToAdminActivity;
 import com.am.app.bouqeh.ui.activities.categories_search.CategorySearchActivity;
 import com.am.app.bouqeh.ui.activities.product_details.ProductDetailsActivity;
 import com.am.app.bouqeh.ui.activities.products_list.ProductsListActivity;
@@ -73,6 +75,9 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
     @BindView(R.id.progressActivity)
     ProgressLinearLayout progressLinearLayout;
+
+    @BindView(R.id.fb_send_message)
+    FloatingActionButton fbSendMessage;
 
     AdapterCategoriesList adapterCategoriesList;
 
@@ -153,6 +158,14 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        fbSendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MessageToAdminActivity.class));
+            }
+        });
+
 
         loutMore.setOnClickListener(new View.OnClickListener() {
             @Override

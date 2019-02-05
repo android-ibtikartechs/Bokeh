@@ -12,4 +12,6 @@ public interface ProductsListMvpPresenter <V extends ProductsListMvpView> extend
     void loadNextPage(int currentPage, Integer categoryId, boolean isSort, SortByBottomSheetPassingData sortByBottomSheetPassingData, int listType);
 
     void loadFilteredData(List<ModelProductItem> list, int priceFrom, int priceTo);
+
+    void loadFilteredDataFirstPage( Integer categoryId,  int listType, int priceFrom, int priceTo);
 }

@@ -10,6 +10,7 @@ import com.am.app.bouqeh.data.models.responses.ResponseCountriesList;
 import com.am.app.bouqeh.data.models.responses.ResponseDecreaseCartItemQuantity;
 import com.am.app.bouqeh.data.models.responses.ResponseDeleteCartItem;
 import com.am.app.bouqeh.data.models.responses.ResponseFilter;
+import com.am.app.bouqeh.data.models.responses.ResponseFilteredProductList;
 import com.am.app.bouqeh.data.models.responses.ResponseForgetPassword;
 import com.am.app.bouqeh.data.models.responses.ResponseHomeModel;
 import com.am.app.bouqeh.data.models.responses.ResponseIncreaseCartItemQuantity;
@@ -19,6 +20,7 @@ import com.am.app.bouqeh.data.models.responses.ResponseOrdersHistory;
 import com.am.app.bouqeh.data.models.responses.ResponseProductList;
 import com.am.app.bouqeh.data.models.responses.ResponseReceiteList;
 import com.am.app.bouqeh.data.models.responses.ResponseSearchResultList;
+import com.am.app.bouqeh.data.models.responses.ResponseSendMessageToAdmin;
 import com.am.app.bouqeh.data.models.responses.ResponseShopsList;
 import com.am.app.bouqeh.data.models.responses.ResponseUpdateProfile;
 import com.am.app.bouqeh.data.models.responses.ResponseWishList;
@@ -61,6 +63,10 @@ public interface GetDataService {
     @GET("/seller_products/{seller_id}/{type_order}/{order}/{user_id}")
     Call<ResponseProductList> getProductListForShopPagged(@Path("seller_id") Integer sellerId, @Path("user_id") int userId, @Path("type_order") Integer typeOrder, @Path("order") Integer order, @Query("p") int page);
 
+    /*
+    @POST("/occasion_products_filter")
+    Call<ResponseFilteredProductList> getFilteredProductList(@Query("_token") String token, @Query("occasion") int occasionId, @Query("area") int areaId, @Query(pricefrom));
+*/
 
     @POST("/addtocart")
     Call<ResponseAddToCart> addToCart(@Query("_token") String token, @Query("user") Integer userId, @Query("product") Integer productId, @Query("pdate") String deliveryDate, @Query("ptime") Integer deliveryTime, @Query("delivary") Integer deliveryOrPickup, @Query("pcity") Integer cityId, @Query("parea") Integer parea, @Query("paddress") String adderss, @Query("psignature") String signature);
@@ -118,5 +124,8 @@ public interface GetDataService {
 
     @POST("/forgetpassword")
     Call<ResponseForgetPassword> resendPassword(@Query("email") String emailAddress);
+
+    @POST("/sendhelp")
+    Call<ResponseSendMessageToAdmin> sendMessageToAdmin(@Query("name") String userName, @Query("email") String email, @Query("msg") String message);
 
 }

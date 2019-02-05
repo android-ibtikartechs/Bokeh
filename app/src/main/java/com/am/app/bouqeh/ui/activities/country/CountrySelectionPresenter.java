@@ -27,8 +27,11 @@ public class CountrySelectionPresenter <V extends CountrySelectionMvpView> exten
             @Override
             public void onResponse(Call<ResponseCitiesList> call, Response<ResponseCitiesList> response) {
                 //Log.d("", "onResponse: " + response.body().getList().get(0).getImage());
-                if (response.body().getStatus())
+                if (response.body().getStatus()) {
                     getMvpView().populateCitiesListSpinner(response.body().getList());
+                    getDataManager().setTokenKey(response.body().getToken());
+                    System.out.println("setTokenKey: " + response.body().getToken());
+                }
                 else
                 {
                   /*  List <ModelCity> list= new ArrayList<>();

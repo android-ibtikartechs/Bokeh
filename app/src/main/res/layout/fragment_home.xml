@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.home.HomeFragment">
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -203,4 +210,13 @@
     </LinearLayout>
 
     </com.vlonjatg.progressactivity.ProgressLinearLayout>
+
+
+
 </android.support.v4.widget.NestedScrollView>
+
+    <include
+        layout="@layout/view_message_floating_button"
+        />
+
+</android.support.design.widget.CoordinatorLayout>
