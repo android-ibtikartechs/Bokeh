@@ -11,8 +11,11 @@ import com.am.app.bouqeh.data.DataManager;
 import com.am.app.bouqeh.data.SharedPreferenceHelper;
 import com.am.app.bouqeh.data.db_helper.SQLiteHandler;
 import com.am.app.bouqeh.utils.RxBus;
+import com.crashlytics.android.Crashlytics;
 
 import java.util.Locale;
+
+import io.fabric.sdk.android.Fabric;
 
 public class MvpApp extends Application {
     DataManager dataManager;

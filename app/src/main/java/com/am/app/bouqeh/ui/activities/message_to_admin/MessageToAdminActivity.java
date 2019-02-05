@@ -19,6 +19,7 @@ import com.am.app.bouqeh.MvpApp;
 import com.am.app.bouqeh.R;
 import com.am.app.bouqeh.data.DataManager;
 import com.am.app.bouqeh.ui.activities.base.BaseActivity;
+import com.crashlytics.android.Crashlytics;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +54,9 @@ public class MessageToAdminActivity extends BaseActivity implements MessageToAdm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_to_admin);
+
+
+
 
         ButterKnife.bind(this);
 
