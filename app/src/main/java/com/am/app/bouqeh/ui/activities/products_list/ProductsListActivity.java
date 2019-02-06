@@ -52,6 +52,10 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
 
     NetworkChangeReceiver networkChangeReceiver;
 
+    FilterByPassingData filterByPassingData;
+
+    boolean isFilterRequired;
+
     AdapterProductsList adapterProductsList;
     StaggeredGridLayoutManager staggeredGridLayoutManager;
 
@@ -164,8 +168,11 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
             protected void loadMoreItems() {
                 isLoading = true;
                 currentPage += 1;
+                if (!isFilterRequired)
+                    presenter.loadNextPage(currentPage, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0),isSorteRequired,mSortByBottomSheetPassingData, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
+                else
+                    presenter.loadFilteredDataNextPage(currentPage, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID,0),intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE),filterByPassingData);
 
-                presenter.loadNextPage(currentPage, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0),isSorteRequired,mSortByBottomSheetPassingData, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
             }
 
             @Override
@@ -312,6 +319,8 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
         else
             progressLinearLayout.showEmpty(R.drawable.coming_soon_icon, "No items yet", "this shop have no items yet.");
 
+
+
         btnFilter.setEnabled(false);
         btnSortBy.setEnabled(false);
     }
@@ -323,6 +332,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
         isLastPage = false;
         mSortByBottomSheetPassingData = sortByBottomSheetPassingData;
         isSorteRequired = true;
+        isFilterRequired = false;
         Log.d("", "onApplyClickListener: "+ currentPage);
         presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0), true, sortByBottomSheetPassingData, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
     }
@@ -337,6 +347,13 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     public void onApplyClickListener(FilterByPassingData filterByPassingData) {
         //Toast.makeText(this, "filter done", Toast.LENGTH_SHORT).show();
         adapterProductsList.clear();
-        presenter.loadFilteredData(arrayList,filterByPassingData.getPriceFrom(), filterByPassingData.getPriceTo());
+        currentPage=1;
+        isLastPage = false;
+        isFilterRequired = true;
+        isSorteRequired = false;
+        this.filterByPassingData = filterByPassingData;
+        //presenter.loadFilteredData(arrayList,filterByPassingData.getPriceFrom(), filterByPassingData.getPriceTo());
+
+        presenter.loadFilteredDataFirstPage(intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID,0),intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE),filterByPassingData);
     }
 }

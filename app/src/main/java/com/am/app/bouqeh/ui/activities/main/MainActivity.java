@@ -23,7 +23,9 @@ import android.widget.TextView;
 import com.am.app.bouqeh.MvpApp;
 import com.am.app.bouqeh.R;
 import com.am.app.bouqeh.data.DataManager;
+import com.am.app.bouqeh.data.StaticValues;
 import com.am.app.bouqeh.data.models.BusAccountFragmentBackStack;
+import com.am.app.bouqeh.ui.activities.about_application.AboutApplicationActivity;
 import com.am.app.bouqeh.ui.activities.base.BaseActivity;
 import com.am.app.bouqeh.ui.activities.categories_search.CategorySearchActivity;
 import com.am.app.bouqeh.ui.fragments.account_fragment_container.AccountFragmentContainer;
@@ -225,16 +227,41 @@ public class MainActivity extends BaseActivity implements MainMvpView {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.action_search :
-                //startActivity(ShoppingCartActivity.getStartIntent(this));
                 startActivity(new Intent(MainActivity.this, CategorySearchActivity.class));
-               /* FragmentManager fm = getSupportFragmentManager();
-                SearchDialogFragment searchDialogFragment = new SearchDialogFragment();
-                searchDialogFragment.show(fm, "alert"); */
+                break;
+            case R.id.action_about_us:
+                intent = new Intent(MainActivity.this, AboutApplicationActivity.class);
+                intent.putExtra(StaticValues.KEY_TITLE_ABOUT_APPLICATION_ACTIVITY, item.getTitle());
+                intent.putExtra(StaticValues.KEY_TYPE_ABOUT_APPLICATION_ACTIVITY_CONTENT, StaticValues.FLAG_ABOUT_US_CONTENT);
+                startActivity(intent);
+                break;
+            case R.id.action_privacy_policy:
+                intent = new Intent(MainActivity.this, AboutApplicationActivity.class);
+                intent.putExtra(StaticValues.KEY_TITLE_ABOUT_APPLICATION_ACTIVITY, item.getTitle());
+                intent.putExtra(StaticValues.KEY_TYPE_ABOUT_APPLICATION_ACTIVITY_CONTENT, StaticValues.FLAG_PRIVACY_POLICY_CONTENT);
+                startActivity(intent);
+                break;
+
+            case R.id.action_terms_of_use:
+                intent = new Intent(MainActivity.this, AboutApplicationActivity.class);
+                intent.putExtra(StaticValues.KEY_TITLE_ABOUT_APPLICATION_ACTIVITY, item.getTitle());
+                intent.putExtra(StaticValues.KEY_TYPE_ABOUT_APPLICATION_ACTIVITY_CONTENT, StaticValues.FLAG_TERMS_INFO_CONTENT);
+                startActivity(intent);
+                break;
+            case R.id.action_contact_us:
+                intent = new Intent(MainActivity.this, AboutApplicationActivity.class);
+                intent.putExtra(StaticValues.KEY_TITLE_ABOUT_APPLICATION_ACTIVITY, item.getTitle());
+                intent.putExtra(StaticValues.KEY_TYPE_ABOUT_APPLICATION_ACTIVITY_CONTENT, StaticValues.FLAG_CONTACT_CONTENT);
+                startActivity(intent);
+                break;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

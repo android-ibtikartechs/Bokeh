@@ -8,7 +8,7 @@ public class ResponseSearchResultList {
     @SerializedName("status")
     @Expose
     private Boolean status;
-    @SerializedName("List")
+    @SerializedName("Result")
     @Expose
     private java.util.List<ModelProductItem> list = null;
 

@@ -21,4 +21,10 @@ public class StaticValues {
     public static final String KEY_ORDER_TOTAL_PRICE = "KEY_COUNTRY_ID";
     public static final int FLAG_ACCOUNT_SCREEN = 1001;
     public static final int FLAG_LOGIN_SCREEN = 1002;
+    public static final String KEY_TITLE_ABOUT_APPLICATION_ACTIVITY = "KEY_TITLE_ABOUT_APPLICATION_ACTIVITY";
+    public static final String KEY_TYPE_ABOUT_APPLICATION_ACTIVITY_CONTENT = "KEY_TYPE_ABOUT_APPLICATION_ACTIVITY_CONTENT";
+    public static final int FLAG_ABOUT_US_CONTENT = 1001;
+    public static final int FLAG_PRIVACY_POLICY_CONTENT = 1002;
+    public static final int FLAG_TERMS_INFO_CONTENT = 1003;
+    public static final int FLAG_CONTACT_CONTENT = 1004;
 }

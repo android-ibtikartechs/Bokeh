@@ -3,6 +3,7 @@ package com.am.app.bouqeh.ui.activities.products_list;
 import android.util.Log;
 
 import com.am.app.bouqeh.data.DataManager;
+import com.am.app.bouqeh.data.FilterByPassingData;
 import com.am.app.bouqeh.data.StaticValues;
 import com.am.app.bouqeh.data.models.LocationLatLong;
 import com.am.app.bouqeh.data.models.ModelProductItem;
@@ -312,27 +313,22 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
     }
 
     @Override
-    public void loadFilteredDataFirstPage(Integer categoryId, int listType, int priceFrom, int priceTo) {
-
-        /*
+    public void loadFilteredDataFirstPage(Integer categoryId, int listType, FilterByPassingData filterByPassingData) {
 
         getMvpView().showLoadingView();
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<ResponseProductList> call = null;
         if (listType == StaticValues.CATEGORY_TYPE) {
-            call = service.getProductListForCategoryPagged(categoryId, getDataManager().getAreaId(), getDataManager().getUserId(), sortByBottomSheetPassingData.getSortByType(), sortByBottomSheetPassingData.getAscendingDeascending(), 1);
+            call = service.getFilteredOccasionsProductList(categoryId, getDataManager().getAreaId(), getDataManager().getUserId(), filterByPassingData.getPriceFrom(), filterByPassingData.getPriceTo(), 1);
         }
 
         else if (listType == StaticValues.SHOPS_TYPE) {
-                call = service.getProductListForShopPagged(categoryId, getDataManager().getUserId(),sortByBottomSheetPassingData.getSortByType(), sortByBottomSheetPassingData.getAscendingDeascending(), 1);
-        }
+            call = service.getFilteredSellerProductList(categoryId, getDataManager().getUserId(),filterByPassingData.getPriceFrom(), filterByPassingData.getPriceTo(), 1);        }
 
         call.enqueue(new Callback<ResponseProductList>() {
             @Override
             public void onResponse(Call<ResponseProductList> call, Response<ResponseProductList> response) {
                 if (response.body().getStatus()) {
-                    AscendingComparator ascendingComparator;
-                    DeascendingComparator deascendingComparator;
                     List<ModelProductItem> list = response.body().getProducts();
                     if (list.size() == 0)
                         getMvpView().showEmptyView(listType);
@@ -353,7 +349,84 @@ public class ProductsListPresenter <V extends ProductsListMvpView> extends BaseP
                 getMvpView().showErrorConnectionView();
             }
         });
-*/
+
+
+    }
+
+    @Override
+    public void loadFilteredDataNextPage(int currentPage, Integer categoryId,  int listType, FilterByPassingData filterByPassingData)
+    {
+
+        Log.d("", "loadNextPage: " + "current page: " + currentPage);
+
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        Call<ResponseProductList> call = null;
+        if (listType == StaticValues.CATEGORY_TYPE)
+        {
+            call = service.getFilteredOccasionsProductList(categoryId, getDataManager().getAreaId(), getDataManager().getUserId(), filterByPassingData.getPriceFrom(), filterByPassingData.getPriceTo(), currentPage);
+        }
+        else if (listType == StaticValues.SHOPS_TYPE) {
+            call = service.getFilteredSellerProductList(categoryId, getDataManager().getUserId(),filterByPassingData.getPriceFrom(), filterByPassingData.getPriceTo(), currentPage);
+        }
+        call.enqueue(new Callback<ResponseProductList>() {
+            @Override
+            public void onResponse(Call<ResponseProductList> call, Response<ResponseProductList> response) {
+                if (response.body().getStatus()) {
+
+                    getMvpView().removeLoadingFooter();
+                    getMvpView().setIsLoadingFalse();
+
+                    List<ModelProductItem> list = response.body().getProducts();
+                    if (list.size() == 0)
+                        getMvpView().setLastPageTrue();
+                    else
+                    {
+                        /*
+                        if (isSort) {
+                            if (sortByBottomSheetPassingData.getAscendingDeascending() == StaticValues.SORT_ASCEND) {
+                                if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_TITLE) {
+                                    ascendingComparator = new AscendingComparator(StaticValues.SORT_TYPE_TITLE);
+                                    Collections.sort(list, ascendingComparator);
+                                } else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_PRICE) {
+                                    ascendingComparator = new AscendingComparator(StaticValues.SORT_TYPE_PRICE);
+                                    Collections.sort(list, ascendingComparator);
+                                } else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_NEWEST) {
+                                    ascendingComparator = new AscendingComparator(StaticValues.SORT_TYPE_NEWEST);
+                                    Collections.sort(list, ascendingComparator);
+                                }
+
+                            }
+
+                            if (sortByBottomSheetPassingData.getAscendingDeascending() == StaticValues.SORT_DEASCEND) {
+                                if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_TITLE) {
+                                    deascendingComparator = new DeascendingComparator(StaticValues.SORT_TYPE_TITLE);
+                                    Collections.sort(list, deascendingComparator);
+                                } else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_PRICE) {
+                                    deascendingComparator = new DeascendingComparator(StaticValues.SORT_TYPE_PRICE);
+                                    Collections.sort(list, deascendingComparator);
+                                } else if (sortByBottomSheetPassingData.getSortByType() == StaticValues.SORT_TYPE_NEWEST) {
+                                    deascendingComparator = new DeascendingComparator(StaticValues.SORT_TYPE_NEWEST);
+                                    Collections.sort(list, deascendingComparator);
+                                }
+                            }
+                        }
+                        */
+
+                        getMvpView().addMoreToAdapter(list);
+                        getMvpView().addLoadingFooter();
+                        //getMvpView().showContent();
+                    }
+                }
+                else
+                    getMvpView().showRetryAdapter();
+                //getMvpView().showErrorConnectionView();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseProductList> call, Throwable t) {
+                getMvpView().showRetryAdapter();
+            }
+        });
 
     }
 }

@@ -16,7 +16,8 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.message_to_admin.MessageToAdminActivity"></activity>
+        <activity android:name=".ui.activities.about_application.AboutApplicationActivity"></activity>
+        <activity android:name=".ui.activities.message_to_admin.MessageToAdminActivity" />
         <activity android:name=".ui.activities.Success.SuccessActivity" />
         <activity android:name=".ui.activities.registration.RegistrationActivity" />
         <activity android:name=".ui.activities.main.MainActivity" />

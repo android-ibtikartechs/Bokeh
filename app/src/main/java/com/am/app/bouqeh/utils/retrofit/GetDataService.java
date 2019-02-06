@@ -1,5 +1,6 @@
 package com.am.app.bouqeh.utils.retrofit;
 
+import com.am.app.bouqeh.data.models.responses.ResponseAboutApplication;
 import com.am.app.bouqeh.data.models.responses.ResponseAddToCart;
 import com.am.app.bouqeh.data.models.responses.ResponseCartDetails;
 import com.am.app.bouqeh.data.models.responses.ResponseCategoriesModel;
@@ -41,12 +42,15 @@ public interface GetDataService {
     @GET("/occasion_products/{product_id}/{country_id}/{user}")
     Call<ResponseProductList> getProductListForCategory(@Path("product_id")Integer id, @Path("country_id") Integer countryId, @Path("user") Integer userId);
 
-    @GET("/occasion_products/{product_id}/{country_id}/{type_order}/{order}/{user}")
-    Call<ResponseProductList> getProductListForCategoryPagged(@Path("product_id")Integer id, @Path("country_id") Integer countryId, @Path("user") Integer userId, @Path("type_order") Integer typeOrder, @Path("order") Integer order,  @Query("p") int page);
+    @GET("/occasion_products/{occasion_id}/{area_id}/{type_order}/{order}/{user}")
+    Call<ResponseProductList> getProductListForCategoryPagged(@Path("occasion_id")Integer id, @Path("area_id") Integer areaId, @Path("user") Integer userId, @Path("type_order") Integer typeOrder, @Path("order") Integer order,  @Query("p") int page);
+
+    @GET("/occasion_products_filterg/{occasion_id}/{area_id}/{price_from}/{price_to}/{user}")
+    Call<ResponseProductList> getFilteredOccasionsProductList(@Path("occasion_id")Integer id, @Path("area_id") Integer areaId, @Path("user") Integer userId, @Path("price_from") int priceFrom, @Path("price_to") int priceTo , @Query("p") int page);
 
 
-    @POST("/productslike")
-    Call<ResponseSearchResultList> getSearchResultFor(@Query("_token") String token, @Query("keyword") String keyWord, @Query("country") Integer countryId, @Query("user") int userId);
+    @POST("/search")
+    Call<ResponseSearchResultList> getSearchResultFor(@Query("_token") String token, @Query("keyword") String keyWord, @Query("area") Integer areaId, @Query("user") int userId);
 
     @GET("/rcountries")
     Call<ResponseCountriesList> getCountriesList();
@@ -63,10 +67,13 @@ public interface GetDataService {
     @GET("/seller_products/{seller_id}/{type_order}/{order}/{user_id}")
     Call<ResponseProductList> getProductListForShopPagged(@Path("seller_id") Integer sellerId, @Path("user_id") int userId, @Path("type_order") Integer typeOrder, @Path("order") Integer order, @Query("p") int page);
 
-    /*
-    @POST("/occasion_products_filter")
-    Call<ResponseFilteredProductList> getFilteredProductList(@Query("_token") String token, @Query("occasion") int occasionId, @Query("area") int areaId, @Query(pricefrom));
-*/
+    @GET("/seller_products_filterg/{seller_id}/{price_from}/{price_to}/{user}")
+    Call<ResponseProductList> getFilteredSellerProductList(@Path("seller_id")Integer id, @Path("user") Integer userId, @Path("price_from") int priceFrom, @Path("price_to") int priceTo , @Query("p") int page);
+
+
+
+
+
 
     @POST("/addtocart")
     Call<ResponseAddToCart> addToCart(@Query("_token") String token, @Query("user") Integer userId, @Query("product") Integer productId, @Query("pdate") String deliveryDate, @Query("ptime") Integer deliveryTime, @Query("delivary") Integer deliveryOrPickup, @Query("pcity") Integer cityId, @Query("parea") Integer parea, @Query("paddress") String adderss, @Query("psignature") String signature);
@@ -127,5 +134,20 @@ public interface GetDataService {
 
     @POST("/sendhelp")
     Call<ResponseSendMessageToAdmin> sendMessageToAdmin(@Query("name") String userName, @Query("email") String email, @Query("msg") String message);
+
+
+    @GET("/aboutinfo")
+    Call<ResponseAboutApplication> fetchAboutUsContent();
+
+    @GET("/privacyinfo")
+    Call<ResponseAboutApplication> fetchPrivacyContent();
+
+    @GET("/termsinfo")
+    Call<ResponseAboutApplication> fetchTermsInfoContent();
+
+    @GET("/contactinfo")
+    Call<ResponseAboutApplication> fetchContantContent();
+
+
 
 }

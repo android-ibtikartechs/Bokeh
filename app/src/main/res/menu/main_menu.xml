@@ -6,4 +6,26 @@
         android:icon="@drawable/ic_search"
         android:title="Cart"
         app:showAsAction="always"/>
+
+    <item
+    android:id="@+id/action_about_us"
+    android:title="About Us"
+
+    />
+
+    <item
+        android:id="@+id/action_privacy_policy"
+        android:title="Privacy Policy"
+        />
+
+    <item
+        android:id="@+id/action_terms_of_use"
+        android:title="Terms of Use"
+        />
+
+    <item
+        android:id="@+id/action_contact_us"
+        android:title="Contact Us"
+        />
+
 </menu>
