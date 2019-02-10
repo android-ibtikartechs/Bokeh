@@ -25,15 +25,12 @@ public class AboutApplicationActivity extends AppCompatActivity implements About
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
     @BindView(R.id.progressActivity)
     ProgressLinearLayout progressLinearLayout;
-
     @BindView(R.id.web_view_content)
     WebView webViewContent;
 
     AboutApplicationPresenter presenter;
-
     Intent intent;
 
     @Override
@@ -41,6 +38,7 @@ public class AboutApplicationActivity extends AppCompatActivity implements About
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_application);
         ButterKnife.bind(this);
+
         intent = getIntent();
         setupActionBar(intent.getStringExtra(StaticValues.KEY_TITLE_ABOUT_APPLICATION_ACTIVITY));
 
@@ -84,7 +82,6 @@ public class AboutApplicationActivity extends AppCompatActivity implements About
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 // TODO Auto-generated method stub
-
                 return false;
             }
         });

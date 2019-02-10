@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.am.app.bouqeh.utils.ImageHelper;
 import com.bumptech.glide.Glide;
 import com.am.app.bouqeh.R;
 import com.am.app.bouqeh.data.models.GalleryProductImage;
@@ -29,7 +30,18 @@ public class AdapterSliderGalleryProduct extends PagerAdapter {
 
         View view = layoutInflater.inflate(R.layout.slider_gallery_product, container, false);
         ImageView im_slider = view.findViewById(R.id.im_slider);
-        Glide.with(context).load(products.get(position).getImage()).asBitmap().into(im_slider);
+        //Glide.with(context).load(products.get(position).getImage()).asBitmap().into(im_slider);
+        (new ImageHelper() {
+            @Override
+            protected void mOnException() {
+
+            }
+
+            @Override
+            protected void mOnResourceReady() {
+            }
+        }).loadImage(context, im_slider,products.get(position).getImage());
+
         //im_slider.setScaleType(ImageView.ScaleType.FIT_XY);
         container.addView(view);
 

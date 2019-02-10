@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.am.app.bouqeh.utils.ImageHelper;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.am.app.bouqeh.R;
@@ -68,6 +69,19 @@ public class AdapterShopsList extends RecyclerView.Adapter<RecyclerView.ViewHold
                 Glide.with(context)
                         .load(shopsListItem.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(itemViewHolder.imShop);
+
+                (new ImageHelper() {
+                    @Override
+                    protected void mOnException() {
+
+                    }
+
+                    @Override
+                    protected void mOnResourceReady() {
+                    }
+                }).loadImage(context, itemViewHolder.imShop,shopsListItem.getImage());
+
+
             }
 
             itemViewHolder.tvTitle.setText(shopsListItem.getName());

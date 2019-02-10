@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.am.app.bouqeh.utils.ImageHelper;
 import com.bumptech.glide.Glide;
 import com.am.app.bouqeh.R;
 import com.am.app.bouqeh.data.models.ModelProductItem;
@@ -41,7 +42,20 @@ public class AdapterSliderHome extends PagerAdapter {
             */
 
 
-        Glide.with(context).load(products.get(position).getOfferImage()).asBitmap().into(im_slider);
+       // Glide.with(context).load(products.get(position).getOfferImage()).asBitmap().into(im_slider);
+
+        (new ImageHelper() {
+            @Override
+            protected void mOnException() {
+
+            }
+
+            @Override
+            protected void mOnResourceReady() {
+
+            }
+        }).loadImage(context, im_slider,products.get(position).getOfferImage());
+
         //im_slider.setScaleType(ImageView.ScaleType.FIT_XY);
         container.addView(view);
 

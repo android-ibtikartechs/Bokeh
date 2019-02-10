@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.am.app.bouqeh.utils.ImageHelper;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.am.app.bouqeh.R;
@@ -61,9 +62,20 @@ public class AdapterCategoriesList extends RecyclerView.Adapter<RecyclerView.Vie
 
         if (!(categoriesListItem.getImage().equals("") || categoriesListItem.getImage() == null ))
         {
-            Glide.with(context)
-                    .load(categoriesListItem.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(itemViewHolder.imCategory);
+
+
+            (new ImageHelper() {
+                @Override
+                protected void mOnException() {
+
+                }
+
+                @Override
+                protected void mOnResourceReady() {
+                }
+            }).loadImage(context, itemViewHolder.imCategory,categoriesListItem.getImage());
+
+
         }
 /*
         else if (categoriesListItem.getImBitmab() != null)

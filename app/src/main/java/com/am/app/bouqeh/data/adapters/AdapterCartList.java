@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.am.app.bouqeh.utils.ImageHelper;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -69,21 +70,18 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         if (!(modelCartItem.getProductInfo().getImage().equals("") || modelCartItem.getProductInfo().getImage() == null ))
         {
-            Glide.with(context)
-                    .load(modelCartItem.getProductInfo().getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            return false;
-                        }
+            (new ImageHelper() {
+                @Override
+                protected void mOnException() {
 
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            itemViewHolder.progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-                    })
-                    .into(itemViewHolder.imProduct);
+                }
+
+                @Override
+                protected void mOnResourceReady() {
+                    itemViewHolder.progressBar.setVisibility(View.GONE);
+                }
+            }).loadImage(context, itemViewHolder.imProduct,modelCartItem.getProductInfo().getImage());
+
         }
 
         itemViewHolder.tvProductName.setText(modelCartItem.getProductInfo().getName());

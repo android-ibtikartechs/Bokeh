@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.am.app.bouqeh.utils.ImageHelper;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -52,21 +53,19 @@ public class AdapterFeaturedItems extends RecyclerView.Adapter<RecyclerView.View
 
         if (!(modelProductItem.getImage().equals("") || modelProductItem.getImage() == null ))
         {
-            Glide.with(context)
-                    .load(modelProductItem.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .listener(new RequestListener<String, GlideDrawable>() {
-                        @Override
-                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                            return false;
-                        }
 
-                        @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                            itemViewHolder.progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-                    })
-                    .into(itemViewHolder.imItem);
+            (new ImageHelper() {
+                @Override
+                protected void mOnException() {
+
+                }
+
+                @Override
+                protected void mOnResourceReady() {
+                    itemViewHolder.progressBar.setVisibility(View.GONE);
+                }
+            }).loadImage(context, itemViewHolder.imItem,modelProductItem.getImage());
+
         }
 
 

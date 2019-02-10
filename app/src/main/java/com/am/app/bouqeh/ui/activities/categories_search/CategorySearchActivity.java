@@ -50,15 +50,11 @@ public class CategorySearchActivity extends BaseActivity {
         ButterKnife.bind(this);
         setupActionBar();
 
-        //aCompTvSearch.setHint("\uD83D\uDD0D   Search on Bokeh");
         setupRxListener();
 
         aCompTvSearch.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-
-
-
 
                 if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                         actionId == EditorInfo.IME_ACTION_DONE ||
@@ -71,30 +67,9 @@ public class CategorySearchActivity extends BaseActivity {
                             .send(new String(aCompTvSearch.getText().toString()));
                     return true;
                 }
-
-
                 return false;
             }
         });
-
-/*
-        aCompTvSearch.setOnFocusChangeListener(new View.OnFocusChangeListener()
-        {
-            @Override
-            public void onFocusChange(View arg0, boolean gotfocus)
-            {
-                // TODO Auto-generated method stub
-                if(gotfocus)
-                {
-                    aCompTvSearch.setCompoundDrawables(null, null, null, null);
-                }
-                else if(!gotfocus)
-                {
-                    if(aCompTvSearch.getText().length()==0)
-                        aCompTvSearch.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_search, 0, 0, 0);
-                }
-            }
-        });*/
 
         aCompTvSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,14 +97,7 @@ public class CategorySearchActivity extends BaseActivity {
             }
         });
 
-
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        /*
-         * When this container fragment is created, we fill it with our first
-         * "real" fragment
-         */
         transaction.setCustomAnimations(0,0);
         transaction.replace(R.id.categories_search_fragment_container, new CategoriesFragment());
         transaction.commit();
@@ -139,11 +107,6 @@ public class CategorySearchActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-                /*
-                 * When this container fragment is created, we fill it with our first
-                 * "real" fragment
-                 */
                 aCompTvSearch.setEnabled(true);
                 transaction.setCustomAnimations(0,0);
                 transaction.replace(R.id.categories_search_fragment_container, new SearchFragment(),"search_fragment");
@@ -234,5 +197,12 @@ public class CategorySearchActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        hideKeyboard();
+        super.onDestroy();
     }
 }

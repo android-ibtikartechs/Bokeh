@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.am.app.bouqeh.utils.ImageHelper;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.am.app.bouqeh.R;
@@ -79,9 +80,21 @@ public class AdapterProductsList  extends CustomRecyclerView.Adapter<RecyclerVie
 
                 if (!(modelProductItem.getImage().equals("") || modelProductItem.getImage() == null ))
                 {
-                    Glide.with(context)
+                 /*   Glide.with(context)
                             .load(modelProductItem.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .into(itemVH.imProduct);
+                            .into(itemVH.imProduct);*/
+
+                    (new ImageHelper() {
+                        @Override
+                        protected void mOnException() {
+
+                        }
+
+                        @Override
+                        protected void mOnResourceReady() {
+
+                        }
+                    }).loadImage(context, ((ItemVH) holder).imProduct,modelProductItem.getImage());
                 }
 
                 itemVH.tvPrice.setText(modelProductItem.getPrice().toString());

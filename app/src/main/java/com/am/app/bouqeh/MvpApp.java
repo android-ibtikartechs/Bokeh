@@ -20,12 +20,13 @@ import io.fabric.sdk.android.Fabric;
 public class MvpApp extends Application {
     DataManager dataManager;
     private RxBus bus;
-
+    private static MvpApp instace;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instace = this;
         SharedPreferenceHelper sharedPrefsHelper = new SharedPreferenceHelper(getApplicationContext());
         SQLiteHandler sqliteHandler = new SQLiteHandler(getApplicationContext());
         bus = new RxBus();
@@ -72,6 +73,11 @@ public class MvpApp extends Application {
         }
 
         return new ContextWrapper(context);
+    }
+
+    public static MvpApp getInstance()
+    {
+        return instace;
     }
 
 }
