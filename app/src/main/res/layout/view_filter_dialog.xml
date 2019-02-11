@@ -28,7 +28,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/ColorTextBlack"
-                android:text="Filter"
+                android:text="@string/filter_button"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 />
@@ -38,7 +38,7 @@
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_rounded_button"
-                android:text="Apply"
+                android:text="@string/apply"
                 android:textAllCaps="false"
                 android:textColor="@color/ColorWhite"
                 />
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/ColorTextBlack"
-            android:text="Price"
+            android:text="@string/price_label"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             />
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:textCursorDrawable="@null"
-                    android:hint="From"
+                    android:hint="@string/price_from_hint"
                     android:textColorHint="#B4B4B4"
                     android:maxLines="1"
                     android:inputType="number"
@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:textCursorDrawable="@null"
-                    android:hint="to"
+                    android:hint="@string/price_to_hint"
                     android:textColorHint="#B4B4B4"
                     android:maxLines="1"
                     android:inputType="number"
@@ -152,7 +152,7 @@
             android:layout_margin="10dp"
             android:buttonTint="@color/ColorFoshiac"
             android:checked="true"
-            android:text="any"
+            android:text="@string/any"
             android:textColor="@color/ColorTextBlack"
             android:textSize="18sp" />
 
@@ -162,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:buttonTint="@color/ColorFoshiac"
-                android:text="same day delivery"
+                android:text="@string/same_day_delivery_option"
                 android:textColor="@color/ColorTextBlack"
                 android:textSize="18sp" />
         </RadioGroup>

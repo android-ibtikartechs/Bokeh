@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/ColorTextBlack"
-                    android:text="Seller"
+                    android:text="@string/seller_label"
                     />
 
                 <TextView
@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/ColorTextBlack"
                     android:textStyle="bold"
-                    android:text="Shop Name"
+                    tools:text="Shop Name"
                     />
 
                 <LinearLayout
@@ -141,7 +141,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="EGP"
+                        android:text="@string/unit_egp"
                         android:layout_marginStart="8dp"
                         android:textSize="12sp"
                         android:layout_gravity="bottom"
@@ -178,7 +178,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="55dp"
-            ></WebView>
+            />
 
     </LinearLayout>
 

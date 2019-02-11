@@ -37,14 +37,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Name"
+                        android:text="@string/name_hint"
                         android:textColor="@color/ColorTextGray"
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Email Address"
+                        android:text="@string/email_address_hint"
                         android:textColor="@color/ColorTextGray"
                         android:layout_marginTop="8dp"
                         />
@@ -52,7 +52,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mobile Number"
+                        android:text="@string/mobile_number_label"
                         android:textColor="@color/ColorTextGray"
                         android:layout_marginTop="8dp"
                         />
@@ -70,7 +70,7 @@
                         android:id="@+id/tv_user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ahmed Yehya"
+                        tools:text="Ahmed Yehya"
                         android:textColor="@color/ColorTextBlack"
                         />
 
@@ -78,7 +78,7 @@
                         android:id="@+id/tv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ahmedyehya1992@gmail.com"
+                        tools:text="ahmedyehya1992@gmail.com"
                         android:textColor="@color/ColorTextBlack"
                         android:layout_marginTop="8dp"
                         />
@@ -87,7 +87,7 @@
                         android:id="@+id/tv_mob_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+201150412349"
+                        tools:text="+201150412349"
                         android:textColor="@color/ColorTextBlack"
                         android:layout_marginTop="8dp"
                         />
@@ -140,7 +140,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_my_orders"
-                android:text="My orders"
+                android:text="@string/my_orders_button"
                 android:drawablePadding="16dp"
                 />
 
@@ -174,7 +174,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_like_fill_gray"
-                android:text="My Wish list"
+                android:text="@string/my_wish_list_button"
                 android:drawablePadding="16dp"
                 />
 
@@ -207,7 +207,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/lock"
-                android:text="Change Password"
+                android:text="@string/change_password_button"
                 android:drawablePadding="16dp"
                 />
 
@@ -224,7 +224,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_rounded_button"
             android:textColor="@color/ColorWhite"
-            android:text="log out"
+            android:text="@string/log_out_button"
             android:textAllCaps="false"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"

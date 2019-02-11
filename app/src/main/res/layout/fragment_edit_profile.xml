@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@null"
                 android:layout_marginTop="32dp"
-                android:hint="First Name"
+                android:hint="@string/first_name_hint"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:inputType="textPersonName"
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@null"
                 android:layout_marginTop="16dp"
-                android:hint="Last Name"
+                android:hint="@string/last_name_hint"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:inputType="textPersonName"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@null"
                 android:layout_marginTop="16dp"
-                android:hint="Email address"
+                android:hint="@string/email_address_hint"
                 android:textColor="@color/ColorTextGray"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:textCursorDrawable="@null"
                 android:layout_marginTop="16dp"
-                android:hint="Date of Birth"
+                android:hint="@string/date_of_birth_hint"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:inputType="textEmailAddress"
@@ -104,14 +104,13 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
-
                 >
 
                 <EditText
+                    android:id="@+id/et_country_key"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textCursorDrawable="@null"
-                    android:freezesText="true"
                     android:text="+2"
                     android:inputType="number"
                     />
@@ -121,7 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textCursorDrawable="@null"
-                    android:hint="Mobile number"
+                    android:hint="@string/mobile_number_label"
                     android:layout_marginStart="16dp"
                     android:inputType="number"
                     />
@@ -135,7 +134,7 @@
                 android:background="@drawable/shape_rounded_button"
                 android:textColor="@color/ColorWhite"
                 android:textAllCaps="false"
-                android:text="update"
+                android:text="@string/update_button"
                 android:layout_marginTop="64dp"
 
 

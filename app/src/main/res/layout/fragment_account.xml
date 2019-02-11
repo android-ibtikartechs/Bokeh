@@ -15,19 +15,17 @@
         android:gravity="center"
         android:orientation="vertical"
         >
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/logo_success"
             />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="28sp"
             android:textColor="@color/ColorFoshiac"
-            android:text="BOUQEH"
+            android:text="@string/bouqeh_logo_capital_letters"
             android:textStyle="bold"
             />
 
@@ -62,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:textColor="@color/ColorWhite"
-                android:text="Connect with Facebook"
+                android:text="@string/connect_with_facebook"
                 android:textSize="16sp"
                 />
 
@@ -100,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="48dp"
                 android:textColor="@color/ColorTextBlack"
-                android:text="Connect with Google"
+                android:text="@string/connect_with_google"
                 android:textSize="16sp"
                 />
 
@@ -130,7 +128,7 @@
 
                 android:background="@drawable/shape_rounded_button"
                 android:textAllCaps="false"
-                android:text="log in"
+                android:text="@string/log_in_button"
                 android:textColor="@color/ColorWhite"
                 />
 
@@ -141,7 +139,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/shape_rounded_button"
                 android:textColor="@color/ColorWhite"
-                android:text="sign up"
+                android:text="@string/sign_up_button"
                 android:textAllCaps="false"
                 />
 

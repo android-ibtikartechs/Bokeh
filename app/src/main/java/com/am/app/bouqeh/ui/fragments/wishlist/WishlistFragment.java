@@ -246,9 +246,9 @@ public class WishlistFragment extends BaseFragment implements WishListMvpView, A
 
     @Override
     public void showErrorConnectionView() {
-        progressLinearLayout.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), "No Connection",
-                "We could not establish a connection with our servers. Try again when you are connected to the interne.",
-                "Try Again", new View.OnClickListener() {
+        progressLinearLayout.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), getString(R.string.no_connection_title),
+                getString(R.string.connection_error_message),
+                getString(R.string.try_again_button), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         presenter.loadFirstPage();
@@ -269,6 +269,6 @@ public class WishlistFragment extends BaseFragment implements WishListMvpView, A
 
     @Override
     public void showEmptyView() {
-        progressLinearLayout.showEmpty(R.drawable.wishlist_empty, "No items yet", "No Items in your wishes list yet");
+        progressLinearLayout.showEmpty(R.drawable.wishlist_empty, getString(R.string.no_items_yet), getString(R.string.no_items_wishlist));
     }
 }

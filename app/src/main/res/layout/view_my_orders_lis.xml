@@ -53,7 +53,7 @@
                 android:layout_height="match_parent"
 
 
-                android:background="@color/ColorGrayLine"></LinearLayout>
+                android:background="@color/ColorGrayLine"/>
         </LinearLayout>
 
 

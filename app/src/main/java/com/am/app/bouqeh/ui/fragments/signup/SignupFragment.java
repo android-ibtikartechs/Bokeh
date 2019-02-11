@@ -127,7 +127,7 @@ public class SignupFragment extends BaseFragment implements SignupMvpView {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.signup(etFirstName.getText().toString(),ryLastName.getText().toString(),etCountryKey.getText().toString()+etMobNumber.getText().toString(), etEmailAddress.getText().toString(), etPassword.getText().toString(), etConfirmPassword.getText().toString());
+                presenter.signup(etFirstName.getText().toString(),ryLastName.getText().toString(),etCountryKey.getText().toString(), etMobNumber.getText().toString(), etEmailAddress.getText().toString(), etPassword.getText().toString(), etConfirmPassword.getText().toString());
             }
         });
         return view;
@@ -157,9 +157,9 @@ public class SignupFragment extends BaseFragment implements SignupMvpView {
     }
 
     @Override
-    public void showProgressDialog(String title) {
+    public void showProgressDialog(int resourceIdTitle) {
         progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage(title);
+        progressDialog.setMessage(getString(resourceIdTitle));
         progressDialog.show();
     }
 
@@ -189,7 +189,7 @@ public class SignupFragment extends BaseFragment implements SignupMvpView {
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
-        builder.setMessage("Success registration, activation link have sent to your email, please active your account then login")
+        builder.setMessage(R.string.success_registration_message)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -213,7 +213,7 @@ public class SignupFragment extends BaseFragment implements SignupMvpView {
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
-        builder.setMessage("your account is not activated, do you want to resend activation link on your email")
+        builder.setMessage(R.string.account_not_activated)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
@@ -241,7 +241,7 @@ public class SignupFragment extends BaseFragment implements SignupMvpView {
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
-        builder.setMessage("this user existed already, do you want to login")
+        builder.setMessage(R.string.user_existed)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -264,14 +264,14 @@ public class SignupFragment extends BaseFragment implements SignupMvpView {
 
 
     @Override
-    public void showDialogStatusOfSendingActivation(String msg) {
+    public void showDialogStatusOfSendingActivation(int resourceIdmsg) {
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar);
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
-        builder.setMessage(msg)
+        builder.setMessage(resourceIdmsg)
                 .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -284,7 +284,7 @@ public class SignupFragment extends BaseFragment implements SignupMvpView {
     }
 
     @Override
-    public void showToast(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    public void showToast(int resourceIdMessage) {
+        Toast.makeText(getActivity(), resourceIdMessage, Toast.LENGTH_SHORT).show();
     }
 }

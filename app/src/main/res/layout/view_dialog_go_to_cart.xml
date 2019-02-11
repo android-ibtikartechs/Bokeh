@@ -3,9 +3,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="5dp"
-    android:background="@color/ColorWhite"
-    >
+    android:background="@color/ColorWhite">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -17,7 +17,7 @@
         android:id="@+id/tv_product_name"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Product Name"
+        tools:text="Product Name"
         android:textColor="@color/ColorTextBlack"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/ColorTextBlack"
-            android:text="has been added to your cart"
+            android:text="@string/has_been_added_to_your_cart"
             android:layout_marginStart="8dp"
             />
 
@@ -47,7 +47,7 @@
             android:padding="5dp"
             android:layout_height="30dp"
             android:background="@drawable/shape_rounded_button"
-            android:text="OK"
+            android:text="@string/ok"
             android:textAllCaps="false"
             android:textColor="@color/ColorWhite"
             />

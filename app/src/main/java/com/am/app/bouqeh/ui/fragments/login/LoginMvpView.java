@@ -3,7 +3,7 @@ package com.am.app.bouqeh.ui.fragments.login;
 import com.am.app.bouqeh.ui.activities.base.MvpView;
 
 public interface LoginMvpView extends MvpView {
-    void showProgressDialog(String title);
+    void showProgressDialog(int resourceIdTitle);
     void hideProgressDialog();
     void afterLoginSuccess();
 
@@ -11,8 +11,8 @@ public interface LoginMvpView extends MvpView {
     void showDialogInvalidData();
 
     void showDialogRequestActivation();
-    void showDialogStatusOfSendingActivation(String msg);
+    void showDialogStatusOfSendingActivation(int resourceIdMessage);
 
-    void showToast(String message);
+    void showToast(int resourceIdMessage);
 
 }

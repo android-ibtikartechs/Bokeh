@@ -3,15 +3,15 @@ package com.am.app.bouqeh.ui.fragments.signup;
 import com.am.app.bouqeh.ui.activities.base.MvpView;
 
 public interface SignupMvpView extends MvpView {
-    void showProgressDialog(String title);
+    void showProgressDialog(int resourceIdTitle);
     void hideProgressDialog();
     void afterSignUpSuccess();
 
     void showDialogRequestActivation();
     void showDialogThisUserExistedAlredy();
-    void showDialogStatusOfSendingActivation(String msg);
+    void showDialogStatusOfSendingActivation(int resourceIdMsg);
 
 
 
-    void showToast(String message);
+    void showToast(int resourceIdMessage);
 }

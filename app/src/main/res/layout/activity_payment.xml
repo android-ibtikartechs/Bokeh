@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="45.00"
+                tools:text="45.00"
                 android:textColor="@color/ColorFoshiac"
                 android:textSize="64sp"
                 android:textStyle="bold"
@@ -40,7 +40,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EGP"
+                android:text="@string/unit_egp"
                 android:textColor="@color/ColorFoshiac"
                 android:textSize="32sp"
                 android:textStyle="bold"
@@ -70,7 +70,7 @@
                         android:layout_margin="10dp"
                         android:buttonTint="@color/ColorFoshiac"
                         android:checked="true"
-                        android:text="Cash on Delivery"
+                        android:text="@string/cash_on_delivery_option"
                         android:textColor="@color/ColorTextBlack"
                         android:textSize="18sp" />
 
@@ -80,7 +80,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:buttonTint="@color/ColorGrayLine"
-                        android:text="Payment Online"
+                        android:text="@string/payment_online_option"
                         android:textColor="@color/ColorGrayLine"
                         android:textSize="18sp"
                         android:enabled="false"

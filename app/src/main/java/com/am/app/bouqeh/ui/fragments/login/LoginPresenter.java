@@ -1,5 +1,6 @@
 package com.am.app.bouqeh.ui.fragments.login;
 
+import com.am.app.bouqeh.R;
 import com.am.app.bouqeh.data.DataManager;
 import com.am.app.bouqeh.data.models.responses.ResponseLogin;
 import com.am.app.bouqeh.ui.activities.base.BasePresenter;
@@ -22,7 +23,7 @@ public class LoginPresenter <V extends LoginMvpView> extends BasePresenter<V> im
         else {*/
 
         //getMvpView().showToast(getDataManager().getBirthDate());
-            getMvpView().showProgressDialog("Login ...");
+            getMvpView().showProgressDialog(R.string.login_loadin_progress);
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 
             Call<ResponseLogin> call = service.loginUser(getDataManager().getTokenKey(), email, password);
@@ -64,7 +65,7 @@ public class LoginPresenter <V extends LoginMvpView> extends BasePresenter<V> im
 
     @Override
     public void resendActivation(String Email) {
-        getMvpView().showProgressDialog("Sending activation link...");
+        getMvpView().showProgressDialog(R.string.send_activ_link_loading_progress);
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 
         Call<ResponseLogin> call = service.resendActivationLink(getDataManager().getTokenKey(), Email);
@@ -74,10 +75,10 @@ public class LoginPresenter <V extends LoginMvpView> extends BasePresenter<V> im
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
                 getMvpView().hideProgressDialog();
                 if (response.body().getStatus())
-                    getMvpView().showDialogStatusOfSendingActivation("activation link has been sent to your email");
+                    getMvpView().showDialogStatusOfSendingActivation(R.string.activation_sent);
 
                 else
-                    getMvpView().showDialogStatusOfSendingActivation("Unknown wrong, please try again");
+                    getMvpView().showDialogStatusOfSendingActivation(R.string.unknown_wrong);
             }
 
             @Override

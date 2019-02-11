@@ -1,5 +1,6 @@
 package com.am.app.bouqeh.ui.fragments.signup;
 
+import com.am.app.bouqeh.R;
 import com.am.app.bouqeh.data.DataManager;
 import com.am.app.bouqeh.data.models.responses.ResponseLogin;
 import com.am.app.bouqeh.ui.activities.base.BasePresenter;
@@ -18,10 +19,10 @@ public class SignUpPresenter <V extends SignupMvpView> extends BasePresenter<V> 
     }
 
     @Override
-    public void signup(String firstName, String lastName, String mobNum, String email, String password, String confirmPassword) {
-        if (checkValues(firstName, lastName, mobNum,email,password,confirmPassword))
+    public void signup(String firstName, String lastName, String countryKey, String mobNum, String email, String password, String confirmPassword) {
+        if (checkValues(firstName, lastName, countryKey, mobNum,email,password,confirmPassword))
         {
-            getMvpView().showProgressDialog("sign up ...");
+            getMvpView().showProgressDialog(R.string.sign_up_loading_progress);
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 
             Call<ResponseLogin> call = service.signupUser(getDataManager().getTokenKey(), firstName,lastName,mobNum,email, 0, "",password);
@@ -47,7 +48,7 @@ public class SignUpPresenter <V extends SignupMvpView> extends BasePresenter<V> 
 
     @Override
     public void resendActivation(String Email) {
-        getMvpView().showProgressDialog("Sending activation link...");
+        getMvpView().showProgressDialog(R.string.sending_activ_link_loading_progress);
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 
         Call<ResponseLogin> call = service.resendActivationLink(getDataManager().getTokenKey(), Email);
@@ -57,10 +58,10 @@ public class SignUpPresenter <V extends SignupMvpView> extends BasePresenter<V> 
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
                 getMvpView().hideProgressDialog();
                 if (response.body().getStatus())
-                    getMvpView().showDialogStatusOfSendingActivation("activation link has been sent to your email");
+                    getMvpView().showDialogStatusOfSendingActivation(R.string.activation_sent);
 
                 else
-                    getMvpView().showDialogStatusOfSendingActivation("Unknown wrong, please try again");
+                    getMvpView().showDialogStatusOfSendingActivation(R.string.unknown_wrong);
             }
 
             @Override
@@ -70,20 +71,20 @@ public class SignUpPresenter <V extends SignupMvpView> extends BasePresenter<V> 
         });
     }
 
-    boolean checkValues(String firstName, String lastName, String mobNum, String email, String password, String confirmPassword)
+    boolean checkValues(String firstName, String lastName, String countryKey, String mobNum, String email, String password, String confirmPassword)
     {
-        if (firstName.isEmpty() ||  lastName.isEmpty() || email.isEmpty() || mobNum.isEmpty() || confirmPassword.isEmpty() || password.isEmpty()) {
-            getMvpView().showToast("please fill empty fields");
+        if (firstName.isEmpty() ||  lastName.isEmpty() || email.isEmpty() || countryKey.isEmpty() || mobNum.isEmpty() || confirmPassword.isEmpty() || password.isEmpty()) {
+            getMvpView().showToast(R.string.fill_fields);
             return false;
         }
 
         else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            getMvpView().showToast("email form is not valid");
+            getMvpView().showToast(R.string.email_form_not_valid);
             return false;
         }
         else if (!password.equals(confirmPassword))
         {
-            getMvpView().showToast("password fields not match");
+            getMvpView().showToast(R.string.password_fields);
             return false;
         }
         else

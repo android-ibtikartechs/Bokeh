@@ -40,23 +40,38 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Delivery"
+                    android:text="@string/delivery_fees_label"
                     android:layout_alignParentStart="true"
                     android:textSize="16sp"
                     android:textColor="@color/ColorWhite"
                     />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp"
+                    >
 
                 <TextView
                     android:id="@+id/tv_delivery_fees"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="15 EGP"
+                    android:text="15"
                     android:textColor="@color/ColorWhite"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="16dp"
                     android:textSize="16sp"
                     />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/ColorWhite"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/unit_egp"
+                        />
+
+                </LinearLayout>
 
 
             </RelativeLayout>
@@ -71,25 +86,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Subtotal"
+                    android:text="@string/subtotal_label"
                     android:textStyle="bold"
                     android:textColor="@color/ColorWhite"
                     android:layout_alignParentStart="true"
                     android:textSize="16sp"
                     />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp"
+                    >
+
                 <TextView
                     android:id="@+id/tv_subtotal_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="15 EGP"
+                    android:text="15"
                     android:textColor="@color/ColorWhite"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="16dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/ColorWhite"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/unit_egp"
+                        />
+
+                </LinearLayout>
 
 
             </RelativeLayout>

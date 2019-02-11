@@ -6,17 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.am.app.bouqeh.utils.LocaleHelper;
+
 public class BaseActivity extends AppCompatActivity implements MvpView {
     @Override
     protected void attachBaseContext(Context newBase) {
-       /* String lang_code = "ar"; //load it from SharedPref
-        Locale locale = new Locale(lang_code);
-        MyContextWrapper myContextWrapper = new MyContextWrapper(newBase);
-        Context context = myContextWrapper.wrap(newBase,lang_code);
-        super.attachBaseContext(context); */
-
-        //Context context = LanguageHelper.updateLanguage(newBase, "ar");
-        super.attachBaseContext(newBase);
+        super.attachBaseContext(LocaleHelper.onAttach(newBase, "en"));
     }
 
     @Override

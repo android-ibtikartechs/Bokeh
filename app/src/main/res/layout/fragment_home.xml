@@ -78,7 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/ColorTextBlack"
-                        android:text="SHOP BY OCCASION"
+                        android:text="@string/shop_by_occasion_label"
                         android:textStyle="bold"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
@@ -99,7 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/ColorTextBlack"
-                        android:text="view more"
+                        android:text="@string/view_more_button"
 
                         android:textSize="14sp"
                         />
@@ -109,6 +109,7 @@
                             android:src="@drawable/ic_expand_more"
                             android:layout_marginStart="4dp"
                             android:layout_marginEnd="8dp"
+                            android:rotationY="@integer/angle_rtl_180"
                             />
                     </LinearLayout>
 
@@ -144,7 +145,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/ColorTextBlack"
-                        android:text="FEATURED ITEMS"
+                        android:text="@string/featured_items_label"
                         android:textStyle="bold"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
@@ -186,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/ColorTextBlack"
-                    android:text="FEATURED SHOPS"
+                    android:text="@string/featured_shops_label"
                     android:textStyle="bold"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"

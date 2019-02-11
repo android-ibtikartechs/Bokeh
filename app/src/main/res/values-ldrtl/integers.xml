@@ -2,5 +2,5 @@
 <resources>
     <integer name="slide_animation_duration">500</integer>
     <integer name="vertical_slide_animation_duration">500</integer>
-    <integer name="angle_rtl_180">0</integer>
+    <integer name="angle_rtl_180">180</integer>
 </resources>

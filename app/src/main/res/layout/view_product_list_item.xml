@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/ColorWhite"
-                    android:text="Same Day delivery"
+                    android:text="@string/same_day_delivery_option"
                     android:textSize="12sp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
@@ -114,7 +114,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="EGP"
+                    android:text="@string/unit_egp"
                     android:layout_marginStart="4dp"
                     android:textSize="10sp"
                     android:layout_gravity="bottom"

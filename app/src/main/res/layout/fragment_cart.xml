@@ -68,7 +68,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order total"
+            android:text="@string/order_total_label"
             android:textStyle="bold"
             android:textSize="24sp"
             android:layout_marginStart="16dp"
@@ -82,22 +82,23 @@
             android:layout_marginEnd="16dp"
             android:layout_centerVertical="true"
             >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="EGP"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                />
+
             <TextView
                 android:id="@+id/tvOrderTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="45.00"
+                tools:text="45.00"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="8dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/unit_egp"
+                android:textStyle="bold"
+                android:textSize="16sp"
                 />
 
         </LinearLayout>
@@ -107,7 +108,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="* Delivery charges may vary during checkout"
+        android:text="@string/delivery_hint"
         android:layout_marginStart="8dp"
         android:textSize="12sp"
         android:layout_marginTop="8dp"

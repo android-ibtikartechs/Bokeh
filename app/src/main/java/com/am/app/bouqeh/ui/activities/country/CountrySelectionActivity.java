@@ -1,5 +1,6 @@
 package com.am.app.bouqeh.ui.activities.country;
 
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -198,14 +199,14 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
             } else {
                 builder = new AlertDialog.Builder(this);
             }
-            builder.setMessage("Sorry, your current version of Bouqeh is no longer supported, A new version is available. Click on the \"OK\" button to update to the latest version of Bouqeh")
+            builder.setMessage(R.string.force_update_message)
                     .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // continue with delete
                             final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
                             try {
                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                            } catch (android.content.ActivityNotFoundException anfe) {
+                            } catch (ActivityNotFoundException anfe) {
                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                             }
 
@@ -237,14 +238,14 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
             } else {
                 builder = new AlertDialog.Builder(this);
             }
-            builder.setMessage("A new version is available. Click on the \"OK\" button to update to the latest version of Bouqeh")
+            builder.setMessage(R.string.update_available)
                     .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // continue with delete
                             final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
                             try {
                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                            } catch (android.content.ActivityNotFoundException anfe) {
+                            } catch (ActivityNotFoundException anfe) {
                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                             }
 

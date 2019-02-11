@@ -1,14 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Bouqeh</string>
-    <string name="home">Home</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="ok">OK</string>
-    <string name="close">close</string>
-    <string name="close_app">close app</string>
-    <string name="update_litter">update litter</string>
-    <string name="city_lable">City</string>
+    <string name="home">الرئيسية</string>
+    <string name="ok">موافق</string>
+    <string name="close">إغلاق</string>
+    <string name="close_app">إغلاق التطبيق</string>
+    <string name="update_litter">التحديث لاحقا</string>
+    <string name="city_lable">المدينة</string>
     <string name="search_on_bokeh">Search on Bokeh</string>
     <string name="area_label">Area</string>
     <string name="continue_button">Continue</string>
@@ -56,7 +54,7 @@
     <string name="item_options_title">Item Options</string>
     <string name="submit_button">Submit</string>
     <string name="shipping_options_label">Shipping options</string>
-    <string name="delivery_option">Delivery</string>
+    <string name="delivery_option">توصيل</string>
     <string name="shipping_to_label">Shipping to</string>
     <string name="city_label_edit">City:</string>
     <string name="area_label_edit">Area:</string>

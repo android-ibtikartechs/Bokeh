@@ -7,5 +7,5 @@ public interface MessageToAdminMvpView extends MvpView {
     void showSnacBarFailedSent();
     void showLoadStatus();
     void hideLoadStatus();
-    void showToast(String message);
+    void showToast(int resourceMessage);
 }

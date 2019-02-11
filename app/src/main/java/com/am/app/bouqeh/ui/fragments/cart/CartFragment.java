@@ -285,7 +285,7 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
-        builder.setMessage("Sorry ,you are only allowed to purchase a maximum " + maximumQuantity + " quantity of " + "\"" + productName + "\"" + ", during the current promotion")
+        builder.setMessage(getString(R.string.maximum_quantity) + maximumQuantity + getString(R.string.quantity_of) + "\"" + productName + "\"" + getString(R.string.during))
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
@@ -311,9 +311,9 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
 
     @Override
     public void showErrorConnectionView() {
-        progressLinearLayout.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), "No Connection",
-                "We could not establish a connection with our servers. Try again when you are connected to the interne.",
-                "Try Again", new View.OnClickListener() {
+        progressLinearLayout.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), getString(R.string.no_connection_title),
+                getString(R.string.connection_error_message),
+                getString(R.string.try_again_button), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         presenter.loadCartList();
@@ -335,7 +335,7 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     @Override
     public void showEmptyView() {
         if (getActivity() != null) {
-            progressLinearLayout.showEmpty(getResources().getDrawable(R.drawable.cart_empty), "No Items", "No Items in yor cart yet");
+            progressLinearLayout.showEmpty(getResources().getDrawable(R.drawable.cart_empty), getString(R.string.no_items_yet), getString(R.string.no_items_cart));
             btnBuy.setEnabled(false);
         }
     }
@@ -347,9 +347,9 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
         {
             ((ProgressBar)rvCartItems.findViewHolderForLayoutPosition(i).itemView.findViewById(R.id.progress_bar_quantity)).setVisibility(View.GONE);
         }
-        progressLoutReceipt.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), "No Connection",
-                "We could not establish a connection with our servers. Try again when you are connected to the interne.",
-                "Try Again", new View.OnClickListener() {
+        progressLoutReceipt.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), getString(R.string.no_connection_title),
+                getString(R.string.connection_error_message),
+                getString(R.string.try_again_button), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0), false, null, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));

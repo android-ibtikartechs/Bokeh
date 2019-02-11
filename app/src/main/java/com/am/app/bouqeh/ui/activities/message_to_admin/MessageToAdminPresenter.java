@@ -1,5 +1,6 @@
 package com.am.app.bouqeh.ui.activities.message_to_admin;
 
+import com.am.app.bouqeh.R;
 import com.am.app.bouqeh.data.DataManager;
 import com.am.app.bouqeh.data.models.responses.ResponseSendMessageToAdmin;
 import com.am.app.bouqeh.ui.activities.base.BasePresenter;
@@ -43,7 +44,7 @@ public class MessageToAdminPresenter <V extends MessageToAdminMvpView> extends B
         }
 
         else
-            getMvpView().showToast("please fill all fields");
+            getMvpView().showToast(R.string.fill_fields);
 
     }
 }

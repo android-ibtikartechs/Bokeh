@@ -2,7 +2,8 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/ColorTextBlack"
-                android:text="Item Options"
+                android:text="@string/item_options_title"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 />
@@ -45,7 +46,7 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_rounded_button"
-                android:text="Submit"
+                android:text="@string/submit_button"
                 android:textAllCaps="false"
                 android:textColor="@color/ColorWhite"
                 />
@@ -87,7 +88,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Shipping options"
+                android:text="@string/shipping_options_label"
                 android:layout_marginStart="4dp"
                 />
         </LinearLayout>
@@ -107,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/ColorFoshiac"
                 android:checked="true"
-                android:text="Delivery"
+                android:text="@string/delivery_option"
                 android:textColor="@color/ColorTextBlack"
                  />
 
@@ -123,7 +124,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Shipping to"
+                    android:text="@string/shipping_to_label"
 
                     />
 
@@ -141,14 +142,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="City: "
+                        android:text="@string/city_label_edit"
                         />
 
                         <TextView
                             android:id="@+id/tv_city"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Cairo"
+                            tools:text="Cairo"
                             android:textColor="@color/ColorTextGray"
                             />
 
@@ -162,14 +163,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Area: "
+                            android:text="@string/area_label_edit"
                             />
 
                         <TextView
                             android:id="@+id/tv_area"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Nasr City"
+                            tools:text="Nasr City"
                             android:textColor="@color/ColorTextGray"
                             />
 
@@ -180,7 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/ColorFoshiac"
-                        android:text="change city, area"
+                        android:text="@string/change_city_area_button"
                         android:layout_marginTop="4dp"
                         />
 
@@ -204,7 +205,7 @@
                     <TextView
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-                        android:text="City: "
+                        android:text="@string/city_label_edit"
                         />
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -244,7 +245,7 @@
                     <TextView
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-                        android:text="Area: "
+                        android:text="@string/area_label_edit"
                         />
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -281,7 +282,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/ColorRed"
-                    android:text="* please enter your address"
+                    android:text="@string/forget_enter_address"
                     android:layout_marginTop="8dp"
                     android:visibility="gone"
                     />
@@ -293,7 +294,7 @@
                     android:layout_height="35dp"
                     android:background="@drawable/shape_tab_date_black"
                     android:textCursorDrawable="@null"
-                    android:hint="Address"
+                    android:hint="@string/address_hint"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     android:maxLines="1"
@@ -306,7 +307,7 @@
                     android:layout_height="35dp"
                     android:background="@drawable/shape_tab_date_black"
                     android:textCursorDrawable="@null"
-                    android:hint="Signature (optional)"
+                    android:hint="@string/signature_hint"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     android:maxLines="1"
@@ -322,7 +323,7 @@
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/ColorFoshiac"
                 android:checked="false"
-                android:text="Pickup"
+                android:text="@string/pickup_option"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/ColorTextBlack"
                  />
@@ -348,7 +349,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delivery / pickup date"
+                android:text="@string/delivery_pickup_date"
                 android:layout_marginStart="4dp"
                 />
         </LinearLayout>
@@ -391,7 +392,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Delivery / pickup time between:"
+                android:text="@string/delivery_pickup_time_between"
                 android:layout_marginStart="4dp"
                 />
         </LinearLayout>

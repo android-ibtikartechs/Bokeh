@@ -282,9 +282,9 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
 
     @Override
     public void showErrorConnectionView() {
-        progressLinearLayout.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), "No Connection",
-                "We could not establish a connection with our servers. Try again when you are connected to the interne.",
-                "Try Again", new View.OnClickListener() {
+        progressLinearLayout.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), getString(R.string.no_connection_title),
+                getString(R.string.connection_error_message),
+                getString(R.string.try_again_button), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0), false, null, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE));
@@ -315,9 +315,9 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
     @Override
     public void showEmptyView(int categoryOrShop) {
         if (categoryOrShop == StaticValues.CATEGORY_TYPE)
-            progressLinearLayout.showEmpty(R.drawable.category_empty_icon, "No items yet", "No Items in this category yet.");
+            progressLinearLayout.showEmpty(R.drawable.category_empty_icon, getString(R.string.no_items_yet), getString(R.string.no_items_category));
         else
-            progressLinearLayout.showEmpty(R.drawable.coming_soon_icon, "No items yet", "this shop have no items yet.");
+            progressLinearLayout.showEmpty(R.drawable.coming_soon_icon, getString(R.string.no_items_yet), getString(R.string.no_items_shop));
 
 
 

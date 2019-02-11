@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/lout_container"
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout android:id="@+id/lout_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="140dp"
     android:layout_marginStart="1.75dp"
     android:layout_marginEnd="1.75dp"
     android:layout_marginBottom="1.75dp"
     android:layout_marginTop="1.75dp"
     android:background="@color/ColorWhite"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
 
 
@@ -33,7 +33,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wedding"
+            tools:text="Wedding"
             android:layout_marginTop="5dp"
             android:textColor="@color/ColorTextBlack"
             android:gravity="center_horizontal"

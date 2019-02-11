@@ -17,8 +17,8 @@ public class EditProfilePresenter <V extends EditProfileMvpView> extends BasePre
     }
 
     @Override
-    public void ubdateData(String firstName, String lastName, String mobNum, String birthDate, Integer gender) {
-        if (checkValues(firstName, lastName, mobNum,gender,birthDate));
+    public void ubdateData(String firstName, String lastName, String countryKey, String mobNum, String birthDate, Integer gender) {
+        if (checkValues(firstName, lastName, countryKey, mobNum,gender,birthDate));
         {
             getMvpView().showProgressDialog("update profile...");
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
@@ -28,7 +28,7 @@ public class EditProfilePresenter <V extends EditProfileMvpView> extends BasePre
                 @Override
                 public void onResponse(Call<ResponseUpdateProfile> call, Response<ResponseUpdateProfile> response) {
                     getMvpView().hideProgressDialog();
-                    if (checkValues(firstName, lastName, mobNum, gender, birthDate))
+                    if (checkValues(firstName, lastName, countryKey, mobNum, gender, birthDate))
                     {
                         if (response.body().getStatus()) {
                             getDataManager().setFirstName(response.body().getUser().getFirst());
@@ -59,9 +59,9 @@ public class EditProfilePresenter <V extends EditProfileMvpView> extends BasePre
         getMvpView().populateUserData(getDataManager().getUserEmail(), getDataManager().getFirstName(), getDataManager().getLastName(), getDataManager().getUserMobNum(), getDataManager().getBirthDate(),getDataManager().getGender());
     }
 
-    boolean checkValues(String firstName, String lastName, String mobNum, int gender, String birthDate)
+    boolean checkValues(String firstName, String lastName, String countryKey, String mobNum, int gender, String birthDate)
     {
-        if (firstName.isEmpty() ||  lastName.isEmpty() || mobNum.isEmpty() || birthDate.isEmpty()) {
+        if (firstName.isEmpty() ||  lastName.isEmpty() || countryKey.isEmpty() || mobNum.isEmpty() || birthDate.isEmpty()) {
             getMvpView().showToast("please fill empty fields");
             return false;
         }

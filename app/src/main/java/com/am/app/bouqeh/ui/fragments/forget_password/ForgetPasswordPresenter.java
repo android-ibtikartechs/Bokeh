@@ -1,5 +1,6 @@
 package com.am.app.bouqeh.ui.fragments.forget_password;
 
+import com.am.app.bouqeh.R;
 import com.am.app.bouqeh.data.DataManager;
 import com.am.app.bouqeh.data.models.responses.ResponseForgetPassword;
 import com.am.app.bouqeh.ui.activities.base.BasePresenter;
@@ -20,9 +21,9 @@ public class ForgetPasswordPresenter <V extends ForgetPasswordMvpView> extends B
     @Override
     public void resendPassword(String email) {
         if (email.isEmpty())
-            getMvpView().showToast("please enter your email address");
+            getMvpView().showToast(R.string.enter_email);
         else {
-            getMvpView().showProgressDialog("resend password ...");
+            getMvpView().showProgressDialog(R.string.resend_password_loading_wait);
             GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
             Call<ResponseForgetPassword> call = service.resendPassword(email);
 
@@ -41,7 +42,7 @@ public class ForgetPasswordPresenter <V extends ForgetPasswordMvpView> extends B
 
                 @Override
                 public void onFailure(Call<ResponseForgetPassword> call, Throwable t) {
-                    getMvpView().showToast("Unknown error");
+                    getMvpView().showToast(R.string.unknown_error);
                 }
             });
         }

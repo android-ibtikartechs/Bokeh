@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/ColorWhite"
             android:textSize="64sp"
-            android:text="Success"
+            android:text="@string/success_text"
             android:layout_marginTop="16sp"
             />
 
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/ColorWhite"
             android:textSize="32sp"
-            android:text="We have received your order and make on it."
+            android:text="@string/received_order"
             android:layout_marginTop="16dp"
             android:padding="8dp"
             android:gravity="center"

@@ -295,9 +295,9 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, AdapterCa
 
     @Override
     public void showErrorConnectionView() {
-        progressLinearLayout.showError(getActivity().getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), "No Connection",
-                "We could not establish a connection with our servers. Try again when you are connected to the interne.",
-                "Try Again", new View.OnClickListener() {
+        progressLinearLayout.showError(getActivity().getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), getString(R.string.no_connection_title),
+                getString(R.string.connection_error_message),
+                getString(R.string.try_again_button), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         presenter.loadHomeData();

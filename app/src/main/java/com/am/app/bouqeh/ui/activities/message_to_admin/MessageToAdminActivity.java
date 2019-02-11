@@ -97,14 +97,14 @@ public class MessageToAdminActivity extends BaseActivity implements MessageToAdm
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayUseLogoEnabled(false);
-        actionBar.setTitle("Help");
+        actionBar.setTitle(R.string.help_activity_title);
 
     }
 
     @Override
     public void showSnacBarSuccessSent() {
         Snackbar snackbar = Snackbar
-                .make(mainLout, "Message sent, Thank you for sending us", Snackbar.LENGTH_LONG);
+                .make(mainLout, R.string.thanks_for_sending, Snackbar.LENGTH_LONG);
         snackbar.show();
 
         snackbar.addCallback(new Snackbar.Callback() {
@@ -120,8 +120,8 @@ public class MessageToAdminActivity extends BaseActivity implements MessageToAdm
     @Override
     public void showSnacBarFailedSent() {
         Snackbar snackbar = Snackbar
-                .make(mainLout, "Error Connection", Snackbar.LENGTH_LONG)
-                .setAction("Try Again", new View.OnClickListener() {
+                .make(mainLout, R.string.short_error_connection_message, Snackbar.LENGTH_LONG)
+                .setAction(getString(R.string.try_again_button), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         presenter.sendMessage(etName.getText().toString(), etEmailAddress.getText().toString(), etMessage.getText().toString());
@@ -143,8 +143,8 @@ public class MessageToAdminActivity extends BaseActivity implements MessageToAdm
     }
 
     @Override
-    public void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void showToast(int resourceMessage) {
+        Toast.makeText(this, resourceMessage, Toast.LENGTH_SHORT).show();
     }
 
 

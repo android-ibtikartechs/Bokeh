@@ -69,6 +69,9 @@ public class EditProfileFragment extends Fragment implements EditProfileMvpView 
     @BindView(R.id.et_mob_num)
     EditText etMobileNumber;
 
+    @BindView(R.id.et_country_key)
+    EditText etCountryKey;
+
     int selectedGender = 0;
 
     final int DATE_DIALOG_ID = 999;
@@ -146,7 +149,7 @@ public class EditProfileFragment extends Fragment implements EditProfileMvpView 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.ubdateData(etFirstName.getText().toString(), etLastName.getText().toString(), etMobileNumber.getText().toString(), etDateOfBirth.getText().toString(), selectedGender);
+                presenter.ubdateData(etFirstName.getText().toString(), etLastName.getText().toString(), etCountryKey.getText().toString(), etMobileNumber.getText().toString(), etDateOfBirth.getText().toString(), selectedGender);
             }
         });
 

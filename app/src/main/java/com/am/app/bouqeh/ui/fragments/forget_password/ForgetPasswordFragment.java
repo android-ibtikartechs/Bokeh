@@ -116,9 +116,9 @@ public class ForgetPasswordFragment extends BaseFragment implements ForgetPasswo
     }
 
     @Override
-    public void showProgressDialog(String title) {
+    public void showProgressDialog(int resourceTitle) {
         progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage(title);
+        progressDialog.setMessage(getString(resourceTitle));
         progressDialog.show();
     }
 
@@ -135,7 +135,7 @@ public class ForgetPasswordFragment extends BaseFragment implements ForgetPasswo
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
-        builder.setMessage("password has sent to your email")
+        builder.setMessage(R.string.password_sent)
 
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
@@ -156,7 +156,7 @@ public class ForgetPasswordFragment extends BaseFragment implements ForgetPasswo
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
-        builder.setMessage("Invalid data")
+        builder.setMessage(R.string.invalid_data)
 
                 .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                     @Override
@@ -170,7 +170,7 @@ public class ForgetPasswordFragment extends BaseFragment implements ForgetPasswo
     }
 
     @Override
-    public void showToast(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    public void showToast(int resoursemessage) {
+        Toast.makeText(getActivity(), resoursemessage, Toast.LENGTH_SHORT).show();
     }
 }

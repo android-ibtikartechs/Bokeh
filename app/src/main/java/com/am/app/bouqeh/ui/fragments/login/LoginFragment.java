@@ -156,9 +156,9 @@ public class LoginFragment extends Fragment implements LoginMvpView {
     }
 
     @Override
-    public void showProgressDialog(String title) {
+    public void showProgressDialog(int resourceIdTitle) {
         progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage(title);
+        progressDialog.setMessage(getString(resourceIdTitle));
         progressDialog.show();
     }
 
@@ -183,7 +183,7 @@ public class LoginFragment extends Fragment implements LoginMvpView {
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
-        builder.setMessage("password is incorrect, do you want to resend password to your email")
+        builder.setMessage(R.string.password_incorrect)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
@@ -215,7 +215,7 @@ public class LoginFragment extends Fragment implements LoginMvpView {
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
-        builder.setMessage("Invalid data")
+        builder.setMessage(getString(R.string.invalid_data))
 
                 .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                     @Override
@@ -237,7 +237,7 @@ public class LoginFragment extends Fragment implements LoginMvpView {
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
-        builder.setMessage("your account is not activated, do you want to resend activation link on your email")
+        builder.setMessage(R.string.account_not_activated)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
@@ -257,14 +257,14 @@ public class LoginFragment extends Fragment implements LoginMvpView {
     }
 
     @Override
-    public void showDialogStatusOfSendingActivation(String msg) {
+    public void showDialogStatusOfSendingActivation(int resourceIdMessage) {
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             builder = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar);
         } else {
             builder = new AlertDialog.Builder(getActivity());
         }
-        builder.setMessage(msg)
+        builder.setMessage(resourceIdMessage)
                 .setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -274,10 +274,12 @@ public class LoginFragment extends Fragment implements LoginMvpView {
 
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+
+
     }
 
     @Override
-    public void showToast(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    public void showToast(int resourceIdMessage) {
+        Toast.makeText(getActivity(), resourceIdMessage, Toast.LENGTH_SHORT).show();
     }
 }

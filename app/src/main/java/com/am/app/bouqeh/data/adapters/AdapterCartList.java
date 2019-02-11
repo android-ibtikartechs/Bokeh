@@ -95,10 +95,10 @@ public class AdapterCartList extends RecyclerView.Adapter<RecyclerView.ViewHolde
             itemViewHolder.tvDeliveryTime.setText("4:00 pm - 11:30 pm");
 
         if (modelCartItem.getDelivary().getType() == 1)
-            itemViewHolder.tvDeliveryOrPickup.setText("Delivery");
+            itemViewHolder.tvDeliveryOrPickup.setText(context.getString(R.string.delivery_option));
 
         else
-            itemViewHolder.tvDeliveryOrPickup.setText("Pickup");
+            itemViewHolder.tvDeliveryOrPickup.setText(context.getString(R.string.pickup_option));
 
         itemViewHolder.tvSellerName.setText(modelCartItem.getProductInfo().getSellername());
         itemViewHolder.tvPrice.setText(modelCartItem.getProductInfo().getPrice().toString());

@@ -16,12 +16,13 @@ import com.am.app.bouqeh.MvpApp;
 import com.am.app.bouqeh.R;
 import com.am.app.bouqeh.data.DataManager;
 import com.am.app.bouqeh.data.StaticValues;
+import com.am.app.bouqeh.ui.activities.base.BaseActivity;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AboutApplicationActivity extends AppCompatActivity implements AboutApplicationMvpView {
+public class AboutApplicationActivity extends BaseActivity implements AboutApplicationMvpView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -94,8 +95,8 @@ public class AboutApplicationActivity extends AppCompatActivity implements About
     @Override
     public void showErrorConnectionView() {
         progressLinearLayout.showError(getResources().getDrawable(R.drawable.ic_if_icon_131_cloud_error_314829), "No Connection",
-                "We could not establish a connection with our servers. Try again when you are connected to the interne.",
-                "Try Again", new View.OnClickListener() {
+                getString(R.string.connection_error_message),
+                getString(R.string.try_again_button), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         presenter.loadContent(intent.getIntExtra(StaticValues.KEY_TYPE_ABOUT_APPLICATION_ACTIVITY_CONTENT, StaticValues.FLAG_ABOUT_US_CONTENT));

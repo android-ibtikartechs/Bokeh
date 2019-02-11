@@ -35,6 +35,7 @@ import com.am.app.bouqeh.ui.fragments.dialog_buy_options.DialogBuyOptionsFragmen
 import com.am.app.bouqeh.utils.RxBus;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -144,128 +145,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         this.modelProductItem = modelProductItem;
         setupActionBar(modelProductItem.getName());
         if (modelProductItem.getGallery().size() == 0 || modelProductItem.getGallery() == null) {
-            List<GalleryProductImage> list = new List<GalleryProductImage>() {
-                @Override
-                public int size() {
-                    return 0;
-                }
-
-                @Override
-                public boolean isEmpty() {
-                    return false;
-                }
-
-                @Override
-                public boolean contains(Object o) {
-                    return false;
-                }
-
-                @NonNull
-                @Override
-                public Iterator<GalleryProductImage> iterator() {
-                    return null;
-                }
-
-                @NonNull
-                @Override
-                public Object[] toArray() {
-                    return new Object[0];
-                }
-
-                @NonNull
-                @Override
-                public <T> T[] toArray(@NonNull T[] a) {
-                    return null;
-                }
-
-                @Override
-                public boolean add(GalleryProductImage galleryProductImage) {
-                    return false;
-                }
-
-                @Override
-                public boolean remove(Object o) {
-                    return false;
-                }
-
-                @Override
-                public boolean containsAll(@NonNull Collection<?> c) {
-                    return false;
-                }
-
-                @Override
-                public boolean addAll(@NonNull Collection<? extends GalleryProductImage> c) {
-                    return false;
-                }
-
-                @Override
-                public boolean addAll(int index, @NonNull Collection<? extends GalleryProductImage> c) {
-                    return false;
-                }
-
-                @Override
-                public boolean removeAll(@NonNull Collection<?> c) {
-                    return false;
-                }
-
-                @Override
-                public boolean retainAll(@NonNull Collection<?> c) {
-                    return false;
-                }
-
-                @Override
-                public void clear() {
-
-                }
-
-                @Override
-                public GalleryProductImage get(int index) {
-                    return null;
-                }
-
-                @Override
-                public GalleryProductImage set(int index, GalleryProductImage element) {
-                    return null;
-                }
-
-                @Override
-                public void add(int index, GalleryProductImage element) {
-
-                }
-
-                @Override
-                public GalleryProductImage remove(int index) {
-                    return null;
-                }
-
-                @Override
-                public int indexOf(Object o) {
-                    return 0;
-                }
-
-                @Override
-                public int lastIndexOf(Object o) {
-                    return 0;
-                }
-
-                @NonNull
-                @Override
-                public ListIterator<GalleryProductImage> listIterator() {
-                    return null;
-                }
-
-                @NonNull
-                @Override
-                public ListIterator<GalleryProductImage> listIterator(int index) {
-                    return null;
-                }
-
-                @NonNull
-                @Override
-                public List<GalleryProductImage> subList(int fromIndex, int toIndex) {
-                    return null;
-                }
-            };
+            List<GalleryProductImage> list = new ArrayList<>();
             list.add(new GalleryProductImage(modelProductItem.getImage()));
             addListToSlider(list);
         }
@@ -318,7 +198,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         } else {
             builder = new AlertDialog.Builder(this);
         }
-        builder.setMessage("you aren't login yet, do you want to login?")
+        builder.setMessage(R.string.not_loged_in_yet)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete

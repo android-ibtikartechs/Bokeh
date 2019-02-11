@@ -29,7 +29,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/ColorTextBlack"
-                    android:text="Sort"
+                    android:text="@string/sort_button"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
                     />
@@ -39,7 +39,7 @@
                     android:layout_width="55dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_rounded_button"
-                    android:text="Apply"
+                    android:text="@string/apply"
                     android:textAllCaps="false"
                     android:textColor="@color/ColorWhite"
                     />
@@ -83,7 +83,7 @@
                     android:background="@drawable/selector_sort_radio_btn"
                     android:button="@android:color/transparent"
                     android:checked="true"
-                    android:text="Ascending"
+                    android:text="@string/ascending_button"
                     android:gravity="center"
                     android:textColor="@drawable/selector_text_sort_radio_btn"
                     />
@@ -97,7 +97,7 @@
                     android:background="@drawable/selector_sort_radio_btn"
                     android:button="@android:color/transparent"
                     android:padding="8dp"
-                    android:text="Descending"
+                    android:text="@string/descending_button"
                     android:textColor="@drawable/selector_text_sort_radio_btn"
                     />
 
@@ -127,7 +127,7 @@
                     android:background="@drawable/selector_sort_radio_btn"
                     android:button="@android:color/transparent"
                     android:checked="true"
-                    android:text="Title"
+                    android:text="@string/title_sort_button"
                     android:textColor="@drawable/selector_text_sort_radio_btn"
                     />
 
@@ -139,7 +139,7 @@
                     android:gravity="center"
                     android:background="@drawable/selector_sort_radio_btn"
                     android:button="@android:color/transparent"
-                    android:text="Price"
+                    android:text="@string/price_label"
                     android:textColor="@drawable/selector_text_sort_radio_btn"
                     />
 
@@ -151,7 +151,7 @@
                     android:gravity="center"
                     android:background="@drawable/selector_sort_radio_btn"
                     android:button="@android:color/transparent"
-                    android:text="Newest"
+                    android:text="@string/newest_sort_button"
                     android:textColor="@drawable/selector_text_sort_radio_btn"
                     />
 
