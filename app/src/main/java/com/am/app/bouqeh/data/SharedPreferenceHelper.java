@@ -28,6 +28,9 @@ public class SharedPreferenceHelper {
     private static final String KEY_USER_ID = "KEY_USER_ID";
 
     private static final String KEY_IS_USER_LOGED_IN = "KEY_IS_USER_LOGED_IN";
+
+    private static final String KEY_SELECTED_LANGUAGE = "KEY_SELECTED_LANGUAGE";
+
     private Context context;
 
     public SharedPreferenceHelper(Context context) {
@@ -74,6 +77,12 @@ public class SharedPreferenceHelper {
     public void setBirthDate(String birthDate) {
         mSharedPreferences.edit().putString(KEY_BIRTH_DATE, birthDate).apply();
     }
+
+    public void setSelectedLanguage(String lang) {
+        mSharedPreferences.edit().putString(KEY_SELECTED_LANGUAGE, lang).apply();
+    }
+
+
 
     public void setGender(int gender) {
         // if gender flag == 1 --> gender is man
@@ -183,6 +192,11 @@ public class SharedPreferenceHelper {
     public int getGender(){
         return mSharedPreferences.getInt(KEY_GENDER,1);
     }
+
+    public String getSelectedLanguage(){
+        return mSharedPreferences.getString(KEY_SELECTED_LANGUAGE,"en");
+    }
+
 
     public void plusOneCartItems()
     {

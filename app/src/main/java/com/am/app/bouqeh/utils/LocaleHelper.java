@@ -8,6 +8,8 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
+import com.am.app.bouqeh.MvpApp;
+
 import java.util.Locale;
 
 public class LocaleHelper {
@@ -40,16 +42,18 @@ public class LocaleHelper {
     }
 
     private static String getPersistedData(Context context, String defaultLanguage) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString(SELECTED_LANGUAGE, defaultLanguage);
+        //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return MvpApp.getInstance().getDataManager().getSelectedLanguage();
     }
 
     private static void persist(Context context, String language) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+       /* SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = preferences.edit();
 
         editor.putString(SELECTED_LANGUAGE, language);
-        editor.apply();
+        editor.apply();*/
+
+        MvpApp.getInstance().getDataManager().setSelectedLanguage(language);
     }
 
     @TargetApi(Build.VERSION_CODES.N)

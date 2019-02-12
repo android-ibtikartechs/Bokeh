@@ -66,9 +66,19 @@ public class DataManager {
         sharedPrefsHelper.setAreaName(areaName);
     }
 
+    public void setSelectedLanguage(String lang)
+    {
+        sharedPrefsHelper.setSelectedLanguage(lang);
+    }
+
     public String getAreaName()
     {
         return sharedPrefsHelper.getAreaName();
+    }
+
+    public String getSelectedLanguage()
+    {
+        return sharedPrefsHelper.getSelectedLanguage();
     }
 
     public void setCityName(String cityName)
