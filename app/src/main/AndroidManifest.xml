@@ -32,9 +32,34 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="bouqeh.page.link"
+                    android:scheme="https"
+                    android:pathPrefix="/82AY"
+                    />
+            </intent-filter>
+
+
         </activity>
         <activity android:name=".ui.activities.country.CountrySelectionActivity" />
-        <activity android:name=".ui.activities.products_list.ProductsListActivity" />
+        <activity android:name=".ui.activities.products_list.ProductsListActivity" >
+
+            <intent-filter >
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="bouqeh.page.link"
+                    android:scheme="https"
+                    android:pathPrefix="/82AY"
+                    />
+            </intent-filter>
+        </activity>
 
         <receiver
             android:name=".utils.NetworkChangeReceiver"

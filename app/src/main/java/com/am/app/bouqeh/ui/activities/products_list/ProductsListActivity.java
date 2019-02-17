@@ -1,8 +1,10 @@
 package com.am.app.bouqeh.ui.activities.products_list;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -23,6 +25,7 @@ import com.am.app.bouqeh.data.models.ModelProductItem;
 import com.am.app.bouqeh.data.models.SortByBottomSheetPassingData;
 import com.am.app.bouqeh.ui.activities.base.BaseActivity;
 import com.am.app.bouqeh.ui.activities.product_details.ProductDetailsActivity;
+import com.am.app.bouqeh.ui.activities.splash.SplashActivity;
 import com.am.app.bouqeh.ui.fragments.dialog_filter.FilterDialogFragment;
 import com.am.app.bouqeh.ui.fragments.dialog_sort_by.SortByDialogFragment;
 import com.am.app.bouqeh.ui_utilities.CustomRecyclerView;
@@ -30,10 +33,15 @@ import com.am.app.bouqeh.ui_utilities.paginationStaggardScrollListener;
 import com.am.app.bouqeh.utils.NetworkChangeReceiver;
 import com.am.app.bouqeh.utils.PaginationAdapterCallback;
 import com.am.app.bouqeh.utils.RxBus;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -130,6 +138,43 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
         DataManager dataManager = ((MvpApp) getApplication()).getDataManager();
         presenter = new ProductsListPresenter(dataManager);
         presenter.onAttach(this);
+
+
+        FirebaseDynamicLinks.getInstance()
+                .getDynamicLink(getIntent())
+                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+                    @Override
+                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                        // Get deep link from result (may be null if no link is found)
+                        Uri deepLink = null;
+                        if (pendingDynamicLinkData != null) {
+                            deepLink = pendingDynamicLinkData.getLink();
+                            String categoryId = deepLink.getLastPathSegment();
+
+
+                            presenter.loadFirstPage(locationLatLong, 38,false,null, StaticValues.CATEGORY_TYPE );
+
+                        }
+
+
+
+
+                        // Handle the deep link. For example, open the linked
+                        // content, or apply promotional credit to the user's
+                        // account.
+                        // ...
+
+                        // ...
+
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("", "getDynamicLink:onFailure", e);
+
+                    }
+                });
 
 
         presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0),false,null, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE) );
