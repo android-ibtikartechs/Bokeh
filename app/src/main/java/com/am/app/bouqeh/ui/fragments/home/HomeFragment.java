@@ -36,6 +36,7 @@ import com.am.app.bouqeh.ui.activities.product_details.ProductDetailsActivity;
 import com.am.app.bouqeh.ui.activities.products_list.ProductsListActivity;
 import com.am.app.bouqeh.ui.fragments.base.BaseFragment;
 import com.am.app.bouqeh.utils.RxBus;
+import com.crashlytics.android.Crashlytics;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;

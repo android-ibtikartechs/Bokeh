@@ -66,9 +66,9 @@ public class AdapterShopsList extends RecyclerView.Adapter<RecyclerView.ViewHold
             final ModelShopItem shopsListItem = arrayList.get(position);
             itemViewHolder = (LinearListItemViewHolder) holder;
             if (!(shopsListItem.getImage().equals("") || shopsListItem.getImage() == null)) {
-                Glide.with(context)
+               /* Glide.with(context)
                         .load(shopsListItem.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(itemViewHolder.imShop);
+                        .into(itemViewHolder.imShop);*/
 
                 (new ImageHelper() {
                     @Override

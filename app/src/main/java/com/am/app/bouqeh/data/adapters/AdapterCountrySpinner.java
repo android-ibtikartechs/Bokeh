@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.am.app.bouqeh.utils.ImageHelper;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.am.app.bouqeh.R;
@@ -48,9 +49,18 @@ public class AdapterCountrySpinner extends ArrayAdapter<ModelCountry> {
 
         if (!(country.getImage().equals("") || country.getImage() == null ))
         {
-            Glide.with(mContext)
-                    .load(country.getImage()).diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imFlag);
+
+            (new ImageHelper() {
+                @Override
+                protected void mOnException() {
+
+                }
+
+                @Override
+                protected void mOnResourceReady() {
+
+                }
+            }).loadImage(mContext,imFlag,country.getImage());
         }
         tvCity.setText(country.getTitle());
 

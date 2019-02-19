@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.am.app.bouqeh.MvpApp;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -17,6 +18,7 @@ public abstract class ImageHelper  {
     public void loadImage(Context context, ImageView imageView, String url)
     {
         context = checkContextNull(context);
+
         Glide.with(context)
                 .load(url).diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .listener(new RequestListener<String, GlideDrawable>() {
@@ -34,6 +36,7 @@ public abstract class ImageHelper  {
                 })
                 .thumbnail(0.01f)
                 .into(imageView);
+
     }
 
 
@@ -46,4 +49,6 @@ public abstract class ImageHelper  {
         else
             return context;
     }
+
+
 }

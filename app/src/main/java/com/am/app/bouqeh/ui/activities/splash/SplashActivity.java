@@ -19,6 +19,7 @@ import com.am.app.bouqeh.data.StaticValues;
 import com.am.app.bouqeh.ui.activities.base.BaseActivity;
 import com.am.app.bouqeh.ui.activities.country.CountrySelectionActivity;
 import com.am.app.bouqeh.ui.activities.products_list.ProductsListActivity;
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -36,6 +37,7 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+/*
         FirebaseDynamicLinks.getInstance()
                 .getDynamicLink(getIntent())
                 .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
@@ -71,7 +73,7 @@ public class SplashActivity extends BaseActivity {
                     }
                 });
 
-
+*/
 
         init();
 

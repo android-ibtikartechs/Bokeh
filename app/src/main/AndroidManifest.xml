@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.am.app.bouqeh">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,6 +16,7 @@
         android:roundIcon="@mipmap/splash_logo"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
+        tools:node="replace"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activities.about_application.AboutApplicationActivity"></activity>
         <activity android:name=".ui.activities.message_to_admin.MessageToAdminActivity" />
@@ -73,6 +75,19 @@
         <activity android:name=".ui.activities.categories_search.CategorySearchActivity" />
         <activity android:name=".ui.activities.product_details.ProductDetailsActivity" />
         <activity android:name=".ui.activities.payment.PaymentActivity" />
+
+        <activity
+
+            android:name="io.paysky.ui.activity.payment.PaymentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+
+            android:name="io.card.payment.CardIOActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
