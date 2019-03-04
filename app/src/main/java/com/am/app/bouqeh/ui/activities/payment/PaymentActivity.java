@@ -67,8 +67,9 @@ public class PaymentActivity extends BaseActivity implements PaymentMvpView {
         payButton.setProduction(false);
         payButton.setMerchantId("42143");
         payButton.setTerminalId("73299056");
-        payButton.setAmount(Double.valueOf(totalPrice)); // Amount
-        payButton.setCurrencyCode(818); // Currency Code [Optional]
+        payButton.setAmount(Float.valueOf(totalPrice)); // Amount
+        // 818 egp
+        payButton.setCurrencyCode(826); // Currency Code [Optional]
         payButton.setMerchantSecureHash("63616133323632652D636439312D346435312D623832312D643665666539653633626638"); // Merchant secure hash
         payButton.setTransactionReferenceNumber("1");
 
@@ -85,7 +86,8 @@ public class PaymentActivity extends BaseActivity implements PaymentMvpView {
 
                     @Override
                     public void onCardTransactionSuccess(SuccessfulCardTransaction cardTransaction) {
-                        Log.d("", "onCardTransactionSuccess: " + cardTransaction.SystemReference);
+                        Log.d("", "onCardTransactionSuccess: ");
+
 
                     }
 
