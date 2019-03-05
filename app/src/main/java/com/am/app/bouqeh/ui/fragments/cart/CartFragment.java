@@ -89,6 +89,8 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
 
     Handler mHandler;
 
+    String referenceNumber;
+
 
 
     // TODO: Rename and change types of parameters
@@ -154,6 +156,7 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PaymentActivity.class);
                 intent.putExtra(StaticValues.KEY_ORDER_TOTAL_PRICE, orderTotalPrice);
+                intent.putExtra(StaticValues.KEY_REFERENCE_NUMBER, referenceNumber);
                 startActivity(intent);
                 getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
             }
@@ -307,6 +310,11 @@ public class CartFragment extends BaseFragment implements CartMvpView, AdapterCa
     @Override
     public void deleteItemFromCartList(int position) {
         adapterCartList.remove(position);
+    }
+
+    @Override
+    public void setReferenceNumber(String referenceNumber) {
+        this.referenceNumber = referenceNumber;
     }
 
     @Override

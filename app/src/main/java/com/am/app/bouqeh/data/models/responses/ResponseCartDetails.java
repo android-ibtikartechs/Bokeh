@@ -21,6 +21,11 @@ public class ResponseCartDetails {
     @Expose
     private Integer grandTtoal;
 
+    @SerializedName("ReferenceNumber")
+    @Expose
+    private String referenceNumber;
+
+
     /**
      * No args constructor for use in serialization
      *
@@ -35,12 +40,13 @@ public class ResponseCartDetails {
      * @param list
      * @param grandTtoal
      */
-    public ResponseCartDetails(Boolean status, List<ModelCartListItem> list, List<ModelReciptList> orders, Integer grandTtoal) {
+    public ResponseCartDetails(Boolean status, List<ModelCartListItem> list, List<ModelReciptList> orders, Integer grandTtoal, String referenceNumber) {
         super();
         this.status = status;
         this.list = list;
         this.orders = orders;
         this.grandTtoal = grandTtoal;
+        this.referenceNumber = referenceNumber;
     }
 
     public Boolean getStatus() {
@@ -73,5 +79,13 @@ public class ResponseCartDetails {
 
     public void setGrandTtoal(Integer grandTtoal) {
         this.grandTtoal = grandTtoal;
+    }
+
+    public void setReferenceNumber(String referenceNumber) {
+        this.referenceNumber = referenceNumber;
+    }
+
+    public String getReferenceNumber() {
+        return referenceNumber;
     }
 }

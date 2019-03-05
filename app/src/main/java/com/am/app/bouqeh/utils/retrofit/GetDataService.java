@@ -105,7 +105,7 @@ public interface GetDataService {
 
 
     @POST("/checkout")
-    Call<ResponseChecout> checoutOrder(@Query("_token") String token, @Query("user") Integer userId, @Query("paytype") Integer payType);
+    Call<ResponseChecout> checoutOrder(@Query("_token") String token, @Query("user") Integer userId, @Query("paytype") Integer payType, @Query("reference_number") String referenceNumber);
 
     @POST("/ulogin")
     Call<ResponseLogin> loginUser(@Query("_token") String token, @Query("email") String email, @Query("password") String password);

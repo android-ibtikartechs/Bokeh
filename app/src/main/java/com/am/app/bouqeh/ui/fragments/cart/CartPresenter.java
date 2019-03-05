@@ -128,6 +128,7 @@ public class CartPresenter <V extends CartMvpView> extends BasePresenter<V> impl
                     getMvpView().addMoreToCartListAdapter(response.body().getList());
                     getMvpView().addMoreToReceiptList(response.body().getOrders());
                     getMvpView().setOrderTotalTxtView(response.body().getGrandTtoal().toString());
+                    getMvpView().setReferenceNumber(response.body().getReferenceNumber());
                 }
                 else
                     getMvpView().showEmptyView();

@@ -15,6 +15,7 @@ public interface CartMvpView extends MvpView {
     void showAlertDialogExcedeMaximumQuantityOfCartItem(int itemPosition, Integer maximumQuantity, String productName);
     void reloadOrdersInformation (Integer OrderTotal, List<ModelReciptList> reciptList);
     void deleteItemFromCartList(int position);
+    void setReferenceNumber(String referenceNumber);
 
 
 

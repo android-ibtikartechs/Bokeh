@@ -19,11 +19,11 @@ public class PaymentPresenter <V extends PaymentMvpView> extends BasePresenter<V
 
 
     @Override
-    public void checout(int payType) {
+    public void checout(int payType, String referenceNumber) {
         getMvpView().showLoading();
         Call<ResponseChecout> call;
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        call = service.checoutOrder(getDataManager().getTokenKey(), getDataManager().getUserId(),payType);
+        call = service.checoutOrder(getDataManager().getTokenKey(), getDataManager().getUserId(),payType, referenceNumber);
 
         call.enqueue(new Callback<ResponseChecout>() {
             @Override

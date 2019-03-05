@@ -27,4 +27,5 @@ public class StaticValues {
     public static final int FLAG_PRIVACY_POLICY_CONTENT = 1002;
     public static final int FLAG_TERMS_INFO_CONTENT = 1003;
     public static final int FLAG_CONTACT_CONTENT = 1004;
+    public static final String KEY_REFERENCE_NUMBER = "KEY_REFERENCE_NUMBER";
 }

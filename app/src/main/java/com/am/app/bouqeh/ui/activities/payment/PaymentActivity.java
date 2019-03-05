@@ -48,6 +48,7 @@ public class PaymentActivity extends BaseActivity implements PaymentMvpView {
 
     PayButton payButton = new PayButton(this);
 
+    String referenceNumber;
 
 
 
@@ -64,6 +65,7 @@ public class PaymentActivity extends BaseActivity implements PaymentMvpView {
         ButterKnife.bind(this);
         Intent intent = getIntent();
         String totalPrice = intent.getStringExtra(StaticValues.KEY_ORDER_TOTAL_PRICE);
+        referenceNumber = intent.getStringExtra(StaticValues.KEY_REFERENCE_NUMBER);
         payButton.setProduction(false);
         payButton.setMerchantId("42143");
         payButton.setTerminalId("73299056");
@@ -71,7 +73,9 @@ public class PaymentActivity extends BaseActivity implements PaymentMvpView {
         // 818 egp
         payButton.setCurrencyCode(826); // Currency Code [Optional]
         payButton.setMerchantSecureHash("63616133323632652D636439312D346435312D623832312D643665666539653633626638"); // Merchant secure hash
-        payButton.setTransactionReferenceNumber("1");
+        payButton.setTransactionReferenceNumber(referenceNumber);
+
+
 
 
 
@@ -87,8 +91,12 @@ public class PaymentActivity extends BaseActivity implements PaymentMvpView {
                     @Override
                     public void onCardTransactionSuccess(SuccessfulCardTransaction cardTransaction) {
                         Log.d("", "onCardTransactionSuccess: ");
-
-
+                        Log.d("", "ReceiptNumber: " + cardTransaction.ReceiptNumber);
+                        Log.d("", "SystemReference: " + cardTransaction.SystemReference);
+                        Log.d("", "NetworkReference: " + cardTransaction.NetworkReference);
+                        Log.d("", "ActionCode: " + cardTransaction.ActionCode);
+                        Log.d("", "AuthCode: " + cardTransaction.AuthCode);
+                        presenter.checout(pType, referenceNumber);
                     }
 
                     @Override
@@ -120,7 +128,7 @@ public class PaymentActivity extends BaseActivity implements PaymentMvpView {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.checout(pType);
+                presenter.checout(pType, referenceNumber);
             }
         });
 
