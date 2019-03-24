@@ -22,6 +22,16 @@ public class DataManager {
         //passNewCartCount(getCartItemsCount());
     }
 
+    public void setFirebaseToken(String firebaseToken)
+    {
+        sharedPrefsHelper.setFirebaseToken(firebaseToken);
+    }
+
+    public String getFirebaseToken()
+    {
+       return sharedPrefsHelper.getFirebaseToken();
+    }
+
     public int getCartItemsCount (){
         return sharedPrefsHelper.getCartItemsCount();
     }

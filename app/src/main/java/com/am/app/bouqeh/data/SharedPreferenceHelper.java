@@ -31,6 +31,8 @@ public class SharedPreferenceHelper {
 
     private static final String KEY_SELECTED_LANGUAGE = "KEY_SELECTED_LANGUAGE";
 
+    private static final String KEY_FIREBASE_TOKEN = "KEY_FIREBASE_TOKEN";
+
     private Context context;
 
     public SharedPreferenceHelper(Context context) {
@@ -47,6 +49,13 @@ public class SharedPreferenceHelper {
     public void setUserName(String userName) {
         mSharedPreferences.edit().putString(KEY_USER_NAME, userName).apply();
     }
+
+    public void setFirebaseToken(String firebaseToken)
+    {
+        mSharedPreferences.edit().putString(KEY_FIREBASE_TOKEN, firebaseToken).apply();
+    }
+
+
 
     public void setToken(String tokenKey){
         mSharedPreferences.edit().putString(KEY_TOKEN, tokenKey).apply();
@@ -127,6 +136,11 @@ public class SharedPreferenceHelper {
     public void setCityName(String cityName)
     {
         mSharedPreferences.edit().putString(KEY_CITY_NAME, cityName).apply();
+    }
+
+    public String getFirebaseToken()
+    {
+        return mSharedPreferences.getString(KEY_FIREBASE_TOKEN, null);
     }
 
     public boolean getLoginStatus()

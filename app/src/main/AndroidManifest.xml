@@ -95,6 +95,15 @@
             android:screenOrientation="portrait"
             android:configChanges="orientation"
             android:theme="@style/AppTheme" />
+
+        <service android:name=".utils.firebase_utils.FirebaseInstanceIDService"
+            android:stopWithTask="false"
+            >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>
