@@ -3,6 +3,7 @@ package com.am.app.bouqeh.ui.activities.product_details;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -78,7 +79,8 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
     Button btnAddToCart;
 
     boolean likeSwitch;
-
+    private Uri dynamicLink = null;
+    private static final String TAG = "DynamicLinks";
     ProductDetailsPresenter presenter;
 
 
@@ -101,6 +103,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
             @Override
             public void onClick(View v) {
                 presenter.addToCart();
+
             }
         });
 
@@ -292,4 +295,6 @@ public class ProductDetailsActivity extends BaseActivity implements ProductDetai
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
+
+
 }

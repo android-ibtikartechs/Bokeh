@@ -101,7 +101,7 @@ public class PaymentActivity extends BaseActivity implements PaymentMvpView {
 
                     @Override
                     public void onWalletTransactionSuccess(SuccessfulWalletTransaction walletTransaction) {
-
+                        Log.d("", "onWalletTransactionSuccess: ");
                     }
 
                     @Override

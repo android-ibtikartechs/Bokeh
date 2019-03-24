@@ -139,7 +139,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
         presenter = new ProductsListPresenter(dataManager);
         presenter.onAttach(this);
 
-
+/*
         FirebaseDynamicLinks.getInstance()
                 .getDynamicLink(getIntent())
                 .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
@@ -175,7 +175,7 @@ public class ProductsListActivity extends BaseActivity implements ProductsListMv
 
                     }
                 });
-
+        */
 
         presenter.loadFirstPage(locationLatLong, intent.getIntExtra(StaticValues.KEY_SHOP_OR_CATEGORY_ID, 0),false,null, intent.getIntExtra(StaticValues.KEY_LIST_TYPE,StaticValues.SHOPS_TYPE) );
 
