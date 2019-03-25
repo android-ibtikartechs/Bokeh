@@ -24,6 +24,8 @@
         <activity android:name=".ui.activities.registration.RegistrationActivity" />
         <activity android:name=".ui.activities.main.MainActivity" />
 
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9182ac9fcca74fbffcbcf785b904b8371de95196" />
@@ -48,6 +50,16 @@
 
 
         </activity>
+
+
+        <service android:name=".utils.firebaseutils.FirebaseInstanceIDService"
+            android:stopWithTask="false"
+            >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity android:name=".ui.activities.country.CountrySelectionActivity" />
         <activity android:name=".ui.activities.products_list.ProductsListActivity" >
 
@@ -89,6 +101,7 @@
             android:configChanges="orientation"
             android:theme="@style/AppTheme" />
 
+
         <activity
 
             android:name="io.card.payment.DataEntryActivity"
@@ -96,12 +109,11 @@
             android:configChanges="orientation"
             android:theme="@style/AppTheme" />
 
-        <service android:name=".utils.firebase_utils.FirebaseInstanceIDService"
-            android:stopWithTask="false"
-            >
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
+
+        <service android:name="com.google.firebase.components.ComponentDiscoveryService" >
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
         </service>
 
     </application>

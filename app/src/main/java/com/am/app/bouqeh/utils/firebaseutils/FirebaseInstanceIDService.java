@@ -1,12 +1,10 @@
-package com.am.app.bouqeh.utils.firebase_utils;
+package com.am.app.bouqeh.utils.firebaseutils;
 
 import android.content.Intent;
 import android.util.Log;
 
 import com.am.app.bouqeh.MvpApp;
 import com.am.app.bouqeh.ui.activities.main.MainActivity;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -47,7 +45,7 @@ public class FirebaseInstanceIDService extends FirebaseMessagingService {
         }
         */
 
-        Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
+        Log.d(TAG, "Data Payload: " + remoteMessage.getData().toString());
         sendPushNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
         super.onMessageReceived(remoteMessage);
     }

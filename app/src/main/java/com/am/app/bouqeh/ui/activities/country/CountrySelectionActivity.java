@@ -8,7 +8,9 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +30,11 @@ import com.am.app.bouqeh.data.models.ModelArea;
 import com.am.app.bouqeh.data.models.ModelCity;
 import com.am.app.bouqeh.ui.activities.base.BaseActivity;
 import com.am.app.bouqeh.ui.activities.main.MainActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.List;
 
@@ -89,6 +96,29 @@ public class CountrySelectionActivity extends BaseActivity implements CountrySel
         }
         int versionNumber = pinfo.versionCode;
         presenter.checkUpdateStatus(versionNumber);
+
+
+        FirebaseApp.initializeApp(this);
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("", "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        //String msg = getString(R.string.msg_token_fmt, token);
+                        //Log.d("", msg);
+                        Log.d("", "Firebase Token: " + token);
+                        Toast.makeText(CountrySelectionActivity.this, token, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
     private void setupCountrySpinner() {

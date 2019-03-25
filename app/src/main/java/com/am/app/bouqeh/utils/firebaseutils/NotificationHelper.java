@@ -1,4 +1,4 @@
-package com.am.app.bouqeh.utils.firebase_utils;
+package com.am.app.bouqeh.utils.firebaseutils;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
