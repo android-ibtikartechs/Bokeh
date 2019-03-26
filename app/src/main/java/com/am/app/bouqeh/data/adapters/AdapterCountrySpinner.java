@@ -22,10 +22,15 @@ public class AdapterCountrySpinner extends ArrayAdapter<ModelCountry> {
     private final Context mContext;
     private final List<ModelCountry> items;
 
-    public AdapterCountrySpinner(@NonNull Context context, int resource, @NonNull List objects) {
+    public AdapterCountrySpinner(@NonNull Context context, int resource,  @NonNull List objects) {
         super(context, resource, objects);
         mContext = context;
         items = objects;
+    }
+
+    @Override
+    public void setDropDownViewResource(int resource) {
+        super.setDropDownViewResource(resource);
     }
 
     @Override

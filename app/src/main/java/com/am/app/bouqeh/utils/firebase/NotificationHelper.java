@@ -1,4 +1,4 @@
-package com.am.app.bouqeh.utils.firebaseutils;
+package com.am.app.bouqeh.utils.firebase;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -21,6 +21,7 @@ import java.net.URL;
 import java.util.Date;
 
 public class NotificationHelper {
+
     private Context mContext;
     private NotificationManager mNotificationManager;
     private NotificationCompat.Builder mBuilder;
@@ -49,7 +50,7 @@ public class NotificationHelper {
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         mBuilder = new NotificationCompat.Builder(mContext);
-        mBuilder.setSmallIcon(R.mipmap.ic_launcher);
+        mBuilder.setSmallIcon(R.mipmap.splash_logo);
         mBuilder.setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(false)
@@ -95,13 +96,13 @@ public class NotificationHelper {
         mBuilder = new NotificationCompat.Builder(mContext);
 
 
-        mBuilder.setSmallIcon(R.mipmap.ic_launcher).setTicker(title).setWhen(0)
+        mBuilder.setSmallIcon(R.mipmap.splash_logo).setTicker(title).setWhen(0)
                 .setAutoCancel(true)
                 .setContentIntent(resultPendingIntent)
                 .setContentTitle(title)
                 .setStyle(bigPictureStyle)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.ic_launcher))
+                .setSmallIcon(R.mipmap.splash_logo)
+                .setLargeIcon(BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.splash_logo))
                 .setContentText(message)
                 .build();
 

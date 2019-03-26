@@ -66,7 +66,7 @@ public class MvpApp extends Application {
                 config.locale = locale;
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                context = context.createConfigurationContext(config);
+                context = this.createConfigurationContext(config);
             } else {
                 context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
             }

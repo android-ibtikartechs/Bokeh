@@ -17,6 +17,7 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         tools:node="replace"
+
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activities.about_application.AboutApplicationActivity"></activity>
         <activity android:name=".ui.activities.message_to_admin.MessageToAdminActivity" />
@@ -25,7 +26,6 @@
         <activity android:name=".ui.activities.main.MainActivity" />
 
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9182ac9fcca74fbffcbcf785b904b8371de95196" />
@@ -36,44 +36,21 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <intent-filter >
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:host="bouqeh.page.link"
-                    android:scheme="https"
-                    android:pathPrefix="/82AY"
-                    />
-            </intent-filter>
-
-
         </activity>
 
-
-        <service android:name=".utils.firebaseutils.FirebaseInstanceIDService"
-            android:stopWithTask="false"
-            >
+        <service
+            android:name=".utils.firebase.FirebaseInstanceIDService"
+            android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".ui.activities.country.CountrySelectionActivity" />
-        <activity android:name=".ui.activities.products_list.ProductsListActivity" >
 
-            <intent-filter >
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:host="bouqeh.page.link"
-                    android:scheme="https"
-                    android:pathPrefix="/82AY"
-                    />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.activities.country.CountrySelectionActivity" />
+        <activity android:name=".ui.activities.products_list.ProductsListActivity" />
+
+
 
         <receiver
             android:name=".utils.NetworkChangeReceiver"

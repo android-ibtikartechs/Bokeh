@@ -1,4 +1,4 @@
-package com.am.app.bouqeh.utils.firebaseutils;
+package com.am.app.bouqeh.utils.firebase;
 
 import android.content.Intent;
 import android.util.Log;
@@ -13,46 +13,42 @@ import org.json.JSONObject;
 
 public class FirebaseInstanceIDService extends FirebaseMessagingService {
 
+    private static final String TAG = "FirebaseIIDService";
 
-    private static final String TAG = "MyFirebaseMsgService";
 
     @Override
     public void onNewToken(String newToken) {
-
-        //Getting registration token
         storeToken(newToken);
-        //Displaying token on logcat
-        Log.d(TAG, "Refreshed token: " + newToken);
-
-        //calling the method store token and passing token
-        //storeToken(refreshedToken);
+        Log.d(TAG, "Refreshed token: " + ((MvpApp) getApplication()).getDataManager().getFirebaseToken());
+        //super.onNewToken(newToken);
     }
 
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-/*
-        if (remoteMessage.getData().size() > 0) {
-
+       /* if (remoteMessage.getData().size() > 0) {
+            Log.e(TAG, "Data Payload: " + remoteMessage.getData().toString());
             try {
                 JSONObject json = new JSONObject(remoteMessage.getData().toString());
                 sendPushNotification(json);
             } catch (Exception e) {
                 Log.e(TAG, "Exception: " + e.getMessage());
             }
+        }*/
 
-
-        }
-        */
-
-        Log.d(TAG, "Data Payload: " + remoteMessage.getData().toString());
         sendPushNotification(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
         super.onMessageReceived(remoteMessage);
     }
 
-    //this method will display the notification
-    //We are passing the JSONObject that is received from
-    //firebase cloud messaging
+    private void storeToken(String token) {
+        //we will save the token in sharedpreferences later
+        Log.d("", "storeToken: " + ((MvpApp) getApplication()).getDataManager().getFirebaseToken());
+        ((MvpApp) getApplication()).getDataManager().setFirebaseToken(token);
+
+
+    }
+
+
     private void sendPushNotification(JSONObject json) {
         //optionally we can display the json into log
         Log.e(TAG, "Notification JSON " + json.toString());
@@ -88,13 +84,6 @@ public class FirebaseInstanceIDService extends FirebaseMessagingService {
         }
     }
 
-
-    private void storeToken(String token) {
-        //we will save the token in sharedpreferences later
-        //SharedPrefManager.getInstance(getApplicationContext()).saveDeviceToken(token);
-        ((MvpApp) getApplication()).getDataManager().setFirebaseToken(token);
-    }
-
     public void sendPushNotification(String title, String message)
     {
         NotificationHelper notificationHelper = new NotificationHelper(getApplicationContext());
@@ -105,5 +94,6 @@ public class FirebaseInstanceIDService extends FirebaseMessagingService {
         notificationHelper.showSmallNotification(title, message, intent);
 
     }
+
 
 }
